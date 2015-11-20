@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
+  <display-name>mizzrec</display-name>
+	<servlet>
+		<servlet-name>mizzrec</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/config/master-config.xml</param-value>
+		</init-param>
+		<load-on-startup>0</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>mizzrec</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+	<security-constraint>
+	    <web-resource-collection>
+	      <web-resource-name>Some Resource</web-resource-name>
+	      <url-pattern>/</url-pattern>
+	      <http-method>GET</http-method>
+	      <http-method>POST</http-method>
+	    </web-resource-collection>
+		<auth-constraint>
+	      <role-name>*</role-name>
+	    </auth-constraint>
+	</security-constraint>
+	<security-constraint><!--Exclude css and images here -->
+	   <web-resource-collection>
+	      <web-resource-name>Exclude from Security</web-resource-name>
+	      <url-pattern>/img/*</url-pattern><!-- No security for images -->
+	      <url-pattern>/css/*</url-pattern><!-- No security for css -->
+	      <url-pattern>/js/*</url-pattern><!-- No security for js -->
+	      <url-pattern>/fonts/*</url-pattern><!-- No security for fonts -->
+	      <url-pattern>/auth/register</url-pattern><!-- No security for auth -->
+	      <url-pattern>/auth/forgot_password</url-pattern><!-- No security for auth -->
+	      <url-pattern>/auth/reset_password/*</url-pattern><!-- No security for auth -->
+	   </web-resource-collection>
+	</security-constraint>
+	<security-role>
+  	<description>Administrator</description>
+  	    <role-name>admin</role-name>
+    </security-role>
+	<security-role>
+  	<description>Staff</description>
+  	    <role-name>staff</role-name>
+    </security-role>
+	<security-role>
+  	<description>Manager</description>
+  	    <role-name>manager</role-name>
+    </security-role>
+	<login-config>
+    <auth-method>FORM</auth-method>
+    <form-login-config>
+      <form-login-page>/WEB-INF/jsp/login.jsp</form-login-page>
+      <form-error-page>/WEB-INF/jsp/error.jsp</form-error-page>
+    </form-login-config>
+  </login-config>
+	<resource-ref>
+		  <description>
+		    Resource reference to a factory for javax.mail.Session
+		    instances that may be used for sending electronic mail
+		    messages, preconfigured to connect to the appropriate
+		    SMTP server.
+		  </description>
+		  <res-ref-name>
+		    mail/Session
+		  </res-ref-name>
+		  <res-type>
+		    javax.mail.Session
+		  </res-type>
+		  <res-auth>
+		    Container
+		  </res-auth>
+	</resource-ref>
+</web-app>

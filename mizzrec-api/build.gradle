@@ -1,0 +1,30 @@
+/**
+* Created providedCompile without war plugin as referenced from this blog post:
+* http://blog.codeaholics.org/2012/emulating-mavens-provided-scope-in-gradle/
+*/
+
+configurations {
+	provided
+}
+
+sourceSets {
+	main.compileClasspath += configurations.provided
+	test.compileClasspath += configurations.provided
+	test.runtimeClasspath += configurations.provided	
+}
+
+eclipse.classpath.plusConfigurations += [configurations.provided]
+
+jar {
+	manifest {
+		attributes 'Implementation-Title': 'Leeward Associates', 'Implementation-Version': project.version
+	}
+}
+
+dependencies {
+	compile (
+		[group: 'commons-codec', name: 'commons-codec', version: commonsCodecVersion],
+		[group: 'commons-collections', name: 'commons-collections', version: '3.2'],
+		[group: 'org.springframework', name: 'spring-jdbc', version: springVersion],
+	)
+}
