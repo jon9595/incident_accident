@@ -47,7 +47,7 @@ sudo service mysql restart
 
 # Import bootstrap SQL
 echo importing database objects
-#mysql -uroot -p12345678 iaf < /vagrant/sql/create.sql
+mysql -uroot -p12345678 incident_accident < /vagrant/sql/create.sql
 
 # setup hosts file
 #VHOST=$(cat <<EOF
