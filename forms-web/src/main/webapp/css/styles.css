@@ -1,0 +1,369 @@
+/* Sticky footer styles
+-------------------------------------------------- */
+
+html,
+body {
+  height: 100%;
+  /* The html and body elements cannot have any padding or margin. */
+  background: #111 url('../images/bg.png') repeat center top;
+  font-family: Helvetica, Arial, sans-serif;
+  text-transform: none;
+}
+
+/* Wrapper for page content to push down footer */
+#wrap {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  /* Negative indent footer by its height */
+  margin: 0 auto -60px;
+  /* Pad bottom by footer height */
+  padding: 0 0 60px;
+}
+
+/* Set the fixed height of the footer here */
+#footer {
+  height: 60px;
+  background-color: #f5f5f5;
+}
+
+
+/* Custom page CSS
+-------------------------------------------------- */
+/* Not required for template or sticky footer method. */
+
+#wrap > .container {
+  padding: 60px 15px 0;
+}
+.container .credit {
+  margin: 20px 0;
+}
+
+#footer > .container {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+code {
+  font-size: 80%;
+}
+
+
+
+/* Custom navbar CSS
+-------------------------------------------------- */
+a.navbar-brand {
+  margin-top: 10px;
+  margin-right: 15px;
+  margin-left: 5px;
+  display: inline-block;
+  height: 33px;
+  width: 183px;
+  background: url('../images/mizzourec-logo.png') no-repeat 0 0;
+}
+
+a.navbar-brand:hover {
+  background-position: 0 -34px;
+}
+
+@media screen and (max-width: 250px) {
+
+  a.navbar-brand {
+    margin-top: 10px;
+    margin-right: 15px;
+    margin-left: 5px;
+    display: inline-block;
+    height: 33px;
+    width: 150px;
+    background: url('../images/mizzourec-logo.png') no-repeat 0 0;
+  }
+
+}
+
+#content {
+  color: #fff;
+}
+
+/* Custom form CSS
+-------------------------------------------------- */
+.form-signin
+{
+    max-width: 330px;
+    padding: 15px;
+    margin: 0 auto;
+}
+.form-signin .form-signin-heading, .form-signin .checkbox
+{
+    margin-bottom: 10px;
+}
+.form-signin .checkbox
+{
+    font-weight: normal;
+}
+.form-signin .form-control
+{
+    position: relative;
+    font-size: 16px;
+    height: auto;
+    padding: 10px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.form-signin .form-control:focus
+{
+    z-index: 2;
+}
+.form-signin input[type="text"]
+{
+    margin-bottom: -1px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.form-signin input[type="password"]
+{
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+.account-wall
+{
+    margin-top: 20px;
+    padding: 40px 0px 20px 0px;
+    background-color: #f7f7f7;
+    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+}
+.login-title
+{
+    color: #fff;
+    font-size: 28px;
+    font-weight: 400;
+    display: block;
+}
+.profile-img
+{
+    width: 90px;
+    margin: 0 auto 10px;
+    display: block !important;
+    color:  #bbb;
+}
+.need-help
+{
+    margin-top: 10px;
+}
+.new-account
+{
+    display: block;
+    margin-top: 10px;
+}
+
+#remember-me {
+  color: #555;
+}
+
+.btn-golden {
+  color: #ffffff;
+  background-color: #d79b13;
+  border-color: #ccc;
+}
+
+.form-horizontal {
+  color: #555;
+}
+
+.padding-none {
+  padding: 0px !important;
+}
+.padding {
+  padding: 10px !important;
+}
+.padding-sm {
+  padding: 5px !important;
+}
+.padding-lg {
+  padding: 22px !important;
+}
+.padding-xl {
+  padding: 40px !important;
+}
+.padding-top-none {
+  padding-top: 0px !important;
+}
+.padding-top {
+  padding-top: 10px !important;
+}
+.padding-top-sm {
+  padding-top: 5px !important;
+}
+.padding-top-lg {
+  padding-top: 22px !important;
+}
+.padding-top-xl {
+  padding-top: 40px !important;
+}
+.padding-right-none {
+  padding-right: 0px !important;
+}
+.padding-right {
+  padding-right: 10px !important;
+}
+.padding-right-sm {
+  padding-right: 5px !important;
+}
+.padding-right-lg {
+  padding-right: 22px !important;
+}
+.padding-right-xl {
+  padding-right: 40px !important;
+}
+.padding-bottom-none {
+  padding-bottom: 0px !important;
+}
+.padding-bottom {
+  padding-bottom: 10px !important;
+}
+.padding-bottom-sm {
+  padding-bottom: 5px !important;
+}
+.padding-bottom-lg {
+  padding-bottom: 22px !important;
+}
+.padding-bottom-xl {
+  padding-bottom: 40px !important;
+}
+.padding-left-none {
+  padding-left: 0px !important;
+}
+.padding-left {
+  padding-left: 10px !important;
+}
+.padding-left-sm {
+  padding-left: 5px !important;
+}
+.padding-left-lg {
+  padding-left: 22px !important;
+}
+.padding-left-xl {
+  padding-left: 40px !important;
+}
+.margin-none {
+  margin: 0px !important;
+}
+.margin {
+  margin: 10px !important;
+}
+.margin-sm {
+  margin: 5px !important;
+}
+.margin-md {
+  margin: 15px !important;
+}
+.margin-lg {
+  margin: 22px !important;
+}
+.margin-xl {
+  margin: 40px !important;
+}
+.margin-top-none {
+  margin-top: 0px !important;
+}
+.margin-top {
+  margin-top: 10px !important;
+}
+.margin-top-sm {
+  margin-top: 5px !important;
+}
+.margin-top-md {
+  margin-top: 15px !important;
+}
+.margin-top-lg {
+  margin-top: 22px !important;
+}
+.margin-top-xl {
+  margin-top: 40px !important;
+}
+.margin-right-none {
+  margin-right: 0px !important;
+}
+.margin-right {
+  margin-right: 10px !important;
+}
+.margin-right-sm {
+  margin-right: 5px !important;
+}
+.margin-right-md {
+  margin-right: 15px !important;
+}
+.margin-right-lg {
+  margin-right: 22px !important;
+}
+.margin-right-xl {
+  margin-right: 40px !important;
+}
+.margin-bottom-none {
+  margin-bottom: 0px !important;
+}
+.margin-bottom {
+  margin-bottom: 10px !important;
+}
+.margin-bottom-sm {
+  margin-bottom: 5px !important;
+}
+.margin-bottom-md {
+  margin-bottom: 15px !important;
+}
+.margin-bottom-lg {
+  margin-bottom: 22px !important;
+}
+.margin-bottom-xl {
+  margin-bottom: 40px !important;
+}
+.margin-left-none {
+  margin-left: 0px !important;
+}
+.margin-left {
+  margin-left: 10px !important;
+}
+.margin-left-sm {
+  margin-left: 5px !important;
+}
+.margin-left-md {
+  margin-left: 15px !important;
+}
+.margin-left-lg {
+  margin-left: 22px !important;
+}
+.margin-left-xl {
+  margin-left: 40px !important;
+}
+
+.form-container
+{
+    margin: 20px auto 0;
+    padding: 40px 20px;
+    background-color: #f7f7f7;
+    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+}
+
+.display-inline {
+  display: inline !important;
+}
+
+.display-block {
+  display: block !important;
+}
+
+.display-inline-block {
+  display: inline-block !important;
+}
+
+.fieldset {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 10px 5px 0px 10px;
+  margin: auto 0;
+}

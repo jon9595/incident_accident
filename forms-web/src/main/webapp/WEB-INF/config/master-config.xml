@@ -6,6 +6,6 @@
            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
            
 	<!-- Imports the configuration of the different infrastructure systems of the application -->
-	<import resource="ihb-config.xml" />
+	<import resource="iaf-config.xml" />
 	<import resource="data-access-config.xml" />
 </beans>

@@ -3,6 +3,7 @@ package edu.mizzou.incidentaccident.api.models;
 import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.sql.Time;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
