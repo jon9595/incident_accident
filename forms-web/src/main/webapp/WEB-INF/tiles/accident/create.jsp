@@ -1,3 +1,6 @@
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="html" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <link href="${pageContext.request.contextPath}/css/checkbox-radio.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/jquery.datetimepicker.css"/ >
 <script src="${pageContext.request.contextPath}/js/jquery.datetimepicker.full.min.js"></script>
@@ -22,7 +25,7 @@
    
   });
 </script>
-<<jsp:include page=""/>
+<jsp:include page=""/>
 
 <div class="container-fluid" id="content">
     <div class="page-header padding-top-xl">
@@ -30,12 +33,17 @@
     </div>
     <div class="row">
         <div class="col-md-12 col-lg-12">
-              <form class="form-horizontal">
+              <html:form method="post" modelAttribute="accidentForm" action="${pageContext.request.contextPath}/accident/create" class="form-horizontal" >
               <jsp:include page="/WEB-INF/jsp/modules/demographics.jsp"/>
-
               <jsp:include page="/WEB-INF/jsp/modules/membership-status.jsp"/>
-
-              </form>
+				<div class="form-container padding-bottom-none">
+	                <div class="form-group">
+	                  <div class="col-sm-11 col-md-5 col-lg-3 pull-right margin-bottom-lg">
+	                    <input type="submit" class="btn btn-large padding-left-xl padding-right-xl" value="Submit Changes">
+	                  </div>
+					</div>
+				</div>              
+              </html:form>
         </div>
     </div>
 </div>

@@ -15,6 +15,7 @@ public class DemographicsModel implements Serializable {
     private static Logger log = LoggerFactory.getLogger(DemographicsModel.class);
     private Integer id;
     private Date date;
+    private Date time;
     private String name;
     private String gender;
     private Date birthDate;
@@ -42,7 +43,15 @@ public class DemographicsModel implements Serializable {
     }
 
 
-    public String getName() {
+    public Date getTime() {
+		return time;
+	}
+
+	public void setTime(Date time) {
+		this.time = time;
+	}
+
+	public String getName() {
         return this.name;
     }
 
