@@ -15,17 +15,17 @@ public class ProgramActivityInvolvedModel implements Serializable {
     private static Logger log = LoggerFactory.getLogger(ProgramActivityInvolvedModel.class);
     private Integer id;
     private Time time;
-    private String informalActivity;
+    private boolean informalActivity;
     private String infActDesc;
-    private String clubRecSports;
+    private boolean clubRecSports;
     private String clubRecTeamName;
-    private String swimTeamPractice;
+    private boolean swimTeamPractice;
     private String swimTeamName;
-    private String interAthletics;
-    private String tigerxPt;
+    private boolean interAthletics;
+    private boolean tigerxPt;
     private String tigerxPrgName;
     private String tigerxPtInstructor;
-    private String specEvt;
+    private boolean specEvt;
     private String specEvtGroup;
 
 	
@@ -47,11 +47,11 @@ public class ProgramActivityInvolvedModel implements Serializable {
     }
 
 
-    public String getInformalActivity() {
+    public boolean isInformalActivity() {
         return this.informalActivity;
     }
 
-    public void setInformalActivity(String informalActivity) {
+    public void setInformalActivity(boolean informalActivity) {
         this.informalActivity = informalActivity;
     }
 
@@ -65,11 +65,11 @@ public class ProgramActivityInvolvedModel implements Serializable {
     }
 
 
-    public String getClubRecSports() {
+    public boolean isClubRecSports() {
         return this.clubRecSports;
     }
 
-    public void setClubRecSports(String clubRecSports) {
+    public void setClubRecSports(boolean clubRecSports) {
         this.clubRecSports = clubRecSports;
     }
 
@@ -83,11 +83,11 @@ public class ProgramActivityInvolvedModel implements Serializable {
     }
 
 
-    public String getSwimTeamPractice() {
+    public boolean isSwimTeamPractice() {
         return this.swimTeamPractice;
     }
 
-    public void setSwimTeamPractice(String swimTeamPractice) {
+    public void setSwimTeamPractice(boolean swimTeamPractice) {
         this.swimTeamPractice = swimTeamPractice;
     }
 
@@ -101,20 +101,20 @@ public class ProgramActivityInvolvedModel implements Serializable {
     }
 
 
-    public String getInterAthletics() {
+    public boolean isInterAthletics() {
         return this.interAthletics;
     }
 
-    public void setInterAthletics(String interAthletics) {
+    public void setInterAthletics(boolean interAthletics) {
         this.interAthletics = interAthletics;
     }
 
 
-    public String getTigerxPt() {
+    public boolean isTigerxPt() {
         return this.tigerxPt;
     }
 
-    public void setTigerxPt(String tigerxPt) {
+    public void setTigerxPt(boolean tigerxPt) {
         this.tigerxPt = tigerxPt;
     }
 
@@ -137,11 +137,11 @@ public class ProgramActivityInvolvedModel implements Serializable {
     }
 
 
-    public String getSpecEvt() {
+    public boolean isSpecEvt() {
         return this.specEvt;
     }
 
-    public void setSpecEvt(String specEvt) {
+    public void setSpecEvt(boolean specEvt) {
         this.specEvt = specEvt;
     }
 

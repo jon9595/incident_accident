@@ -56,15 +56,15 @@ public class MembershipStatusDAO implements DBConstants {
             .append(")");
         Object[] args = {
             bean.getId(), 
-            bean.getStudent(), 
+            bean.isStudent()?"Y":"N", 
             bean.getStudentId(), 
-            bean.getFacultyStaff(), 
-            bean.getAlumni(), 
-            bean.getGuest(), 
-            bean.getTigerXpress(), 
-            bean.getStopOutStudent(), 
-            bean.getHouseHoldAdult(), 
-            bean.getOther(), 
+            bean.isFacultyStaff()?"Y":"N", 
+            bean.isAlumni()?"Y":"N", 
+            bean.isGuest()?"Y":"N", 
+            bean.isTigerXpress()?"Y":"N", 
+            bean.isStopOutStudent()?"Y":"N", 
+            bean.isHouseHoldAdult()?"Y":"N", 
+            bean.isOther()?"Y":"N", 
             bean.getOtherExplain()};
         int numRows = getTemplate().update(sInsertStmt.toString(), args);
         return getAutoIncrementKey();
@@ -91,15 +91,15 @@ public class MembershipStatusDAO implements DBConstants {
         sUpdateStmt.append( sWhereStmt );
         Object[] args = {
             bean.getId(), 
-            bean.getStudent(), 
+            bean.isStudent()?"Y":"N", 
             bean.getStudentId(), 
-            bean.getFacultyStaff(), 
-            bean.getAlumni(), 
-            bean.getGuest(), 
-            bean.getTigerXpress(), 
-            bean.getStopOutStudent(), 
-            bean.getHouseHoldAdult(), 
-            bean.getOther(), 
+            bean.isFacultyStaff()?"Y":"N", 
+            bean.isAlumni()?"Y":"N", 
+            bean.isGuest()?"Y":"N", 
+            bean.isTigerXpress()?"Y":"N", 
+            bean.isStopOutStudent()?"Y":"N", 
+            bean.isHouseHoldAdult()?"Y":"N", 
+            bean.isOther()?"Y":"N", 
             bean.getOtherExplain()};
         int numRows = getTemplate().update(sUpdateStmt.toString(), args);
         return numRows;
@@ -125,15 +125,15 @@ public class MembershipStatusDAO implements DBConstants {
             public MembershipStatusModel mapRow(ResultSet rs, int rowNum) throws SQLException {
                 MembershipStatusModel model = new MembershipStatusModel();
                     model.setId(rs.getInt("id"));
-                    model.setStudent(rs.getString("student"));
+                    model.setStudent("Y".equals(rs.getString("student"))?true:false);
                     model.setStudentId(rs.getString("student_id"));
-                    model.setFacultyStaff(rs.getString("faculty_staff"));
-                    model.setAlumni(rs.getString("alumni"));
-                    model.setGuest(rs.getString("guest"));
-                    model.setTigerXpress(rs.getString("tiger_xpress"));
-                    model.setStopOutStudent(rs.getString("stop_out_student"));
-                    model.setHouseHoldAdult(rs.getString("house_hold_adult"));
-                    model.setOther(rs.getString("other"));
+                    model.setFacultyStaff("Y".equals(rs.getString("faculty_staff"))?true:false);
+                    model.setAlumni("Y".equals(rs.getString("alumni"))?true:false);
+                    model.setGuest("Y".equals(rs.getString("guest"))?true:false);
+                    model.setTigerXpress("Y".equals(rs.getString("tiger_xpress"))?true:false);
+                    model.setStopOutStudent("Y".equals(rs.getString("stop_out_student"))?true:false);
+                    model.setHouseHoldAdult("Y".equals(rs.getString("house_hold_adult"))?true:false);
+                    model.setOther("Y".equals(rs.getString("other"))?true:false);
                     model.setOtherExplain(rs.getString("other_explain"));
                 return model;
             }
@@ -160,15 +160,15 @@ public class MembershipStatusDAO implements DBConstants {
             public MembershipStatusModel mapRow(ResultSet rs, int rowNum) throws SQLException {
                 MembershipStatusModel model = new MembershipStatusModel();
                     model.setId(rs.getInt("id"));
-                    model.setStudent(rs.getString("student"));
+                    model.setStudent("Y".equals(rs.getString("student"))?true:false);
                     model.setStudentId(rs.getString("student_id"));
-                    model.setFacultyStaff(rs.getString("faculty_staff"));
-                    model.setAlumni(rs.getString("alumni"));
-                    model.setGuest(rs.getString("guest"));
-                    model.setTigerXpress(rs.getString("tiger_xpress"));
-                    model.setStopOutStudent(rs.getString("stop_out_student"));
-                    model.setHouseHoldAdult(rs.getString("house_hold_adult"));
-                    model.setOther(rs.getString("other"));
+                    model.setFacultyStaff("Y".equals(rs.getString("faculty_staff"))?true:false);
+                    model.setAlumni("Y".equals(rs.getString("alumni"))?true:false);
+                    model.setGuest("Y".equals(rs.getString("guest"))?true:false);
+                    model.setTigerXpress("Y".equals(rs.getString("tiger_xpress"))?true:false);
+                    model.setStopOutStudent("Y".equals(rs.getString("stop_out_student"))?true:false);
+                    model.setHouseHoldAdult("Y".equals(rs.getString("house_hold_adult"))?true:false);
+                    model.setOther("Y".equals(rs.getString("other"))?true:false);
                     model.setOtherExplain(rs.getString("other_explain"));
                 return model;
             }

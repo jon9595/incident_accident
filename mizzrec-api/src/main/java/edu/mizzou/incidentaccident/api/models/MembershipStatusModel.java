@@ -13,16 +13,17 @@ public class MembershipStatusModel implements Serializable {
 
     private static Logger log = LoggerFactory.getLogger(MembershipStatusModel.class);
     private Integer id;
-    private String student;
+    private boolean student;
     private String studentId;
-    private String facultyStaff;
-    private String alumni;
-    private String guest;
-    private String tigerXpress;
-    private String stopOutStudent;
-    private String houseHoldAdult;
-    private String other;
+    private boolean facultyStaff;
+    private boolean alumni;
+    private boolean guest;
+    private boolean tigerXpress;
+    private boolean stopOutStudent;
+    private boolean houseHoldAdult;
+    private boolean other;
     private String otherExplain;
+    private String[] membership;
 
 	
     public Integer getId() {
@@ -33,16 +34,6 @@ public class MembershipStatusModel implements Serializable {
         this.id = id;
     }
 
-
-    public String getStudent() {
-        return this.student;
-    }
-
-    public void setStudent(String student) {
-        this.student = student;
-    }
-
-
     public String getStudentId() {
         return this.studentId;
     }
@@ -52,70 +43,71 @@ public class MembershipStatusModel implements Serializable {
     }
 
 
-    public String getFacultyStaff() {
-        return this.facultyStaff;
-    }
+    public boolean isStudent() {
+		return student;
+	}
 
-    public void setFacultyStaff(String facultyStaff) {
-        this.facultyStaff = facultyStaff;
-    }
+	public void setStudent(boolean student) {
+		this.student = student;
+	}
 
+	public boolean isFacultyStaff() {
+		return facultyStaff;
+	}
 
-    public String getAlumni() {
-        return this.alumni;
-    }
+	public void setFacultyStaff(boolean facultyStaff) {
+		this.facultyStaff = facultyStaff;
+	}
 
-    public void setAlumni(String alumni) {
-        this.alumni = alumni;
-    }
+	public boolean isAlumni() {
+		return alumni;
+	}
 
+	public void setAlumni(boolean alumni) {
+		this.alumni = alumni;
+	}
 
-    public String getGuest() {
-        return this.guest;
-    }
+	public boolean isGuest() {
+		return guest;
+	}
 
-    public void setGuest(String guest) {
-        this.guest = guest;
-    }
+	public void setGuest(boolean guest) {
+		this.guest = guest;
+	}
 
+	public boolean isTigerXpress() {
+		return tigerXpress;
+	}
 
-    public String getTigerXpress() {
-        return this.tigerXpress;
-    }
+	public void setTigerXpress(boolean tigerXpress) {
+		this.tigerXpress = tigerXpress;
+	}
 
-    public void setTigerXpress(String tigerXpress) {
-        this.tigerXpress = tigerXpress;
-    }
+	public boolean isStopOutStudent() {
+		return stopOutStudent;
+	}
 
+	public void setStopOutStudent(boolean stopOutStudent) {
+		this.stopOutStudent = stopOutStudent;
+	}
 
-    public String getStopOutStudent() {
-        return this.stopOutStudent;
-    }
+	public boolean isHouseHoldAdult() {
+		return houseHoldAdult;
+	}
 
-    public void setStopOutStudent(String stopOutStudent) {
-        this.stopOutStudent = stopOutStudent;
-    }
+	public void setHouseHoldAdult(boolean houseHoldAdult) {
+		this.houseHoldAdult = houseHoldAdult;
+	}
 
+	public boolean isOther() {
+		return other;
+	}
 
-    public String getHouseHoldAdult() {
-        return this.houseHoldAdult;
-    }
+	public void setOther(boolean other) {
+		this.other = other;
+	}
 
-    public void setHouseHoldAdult(String houseHoldAdult) {
-        this.houseHoldAdult = houseHoldAdult;
-    }
-
-
-    public String getOther() {
-        return this.other;
-    }
-
-    public void setOther(String other) {
-        this.other = other;
-    }
-
-
-    public String getOtherExplain() {
+	public String getOtherExplain() {
         return this.otherExplain;
     }
 
@@ -124,9 +116,58 @@ public class MembershipStatusModel implements Serializable {
     }
 
 
-
+    private void resetBooleans() {
+        student = false;
+        facultyStaff = false;
+        alumni = false;
+        guest = false;
+        tigerXpress = false;
+        stopOutStudent = false;
+        houseHoldAdult = false;
+        other = false;
+    }
 	
-    @Override
+    public String[] getMembership() {
+		return membership;
+	}
+
+	public void setMembership(String[] membership) {
+		this.resetBooleans();
+		for (String member : membership) {
+			switch (member) {
+			case "student":
+				this.student = true;
+				break;
+			case "facultyStaff":
+				this.facultyStaff = true;
+				break;
+			case "alumni":
+				this.alumni = true;
+				break;
+			case "guest":
+				this.guest = true;
+				break;
+			case "tigerXpress":
+				this.tigerXpress = true;
+				break;
+			case "stopOutStudent":
+				this.stopOutStudent = true;
+				break;
+			case "houseHoldAdult":
+				
+				break;
+			case "other":
+				this.other = true;
+				break;
+
+			default:
+				break;
+			}
+		}
+		this.membership = membership;
+	}
+
+	@Override
     public String toString() {
         StringBuffer sb = new StringBuffer();
         Field[] fields = this.getClass().getDeclaredFields();
