@@ -36,6 +36,7 @@
               <html:form method="post" modelAttribute="accidentForm" action="${pageContext.request.contextPath}/accident/create" class="form-horizontal" >
               <jsp:include page="/WEB-INF/jsp/modules/demographics.jsp"/>
               <jsp:include page="/WEB-INF/jsp/modules/membership-status.jsp"/>
+              <jsp:include page="/WEB-INF/jsp/modules/program-activity.jsp"/>
 				<div class="form-container padding-bottom-none">
 	                <div class="form-group">
 	                  <div class="col-sm-11 col-md-5 col-lg-3 pull-right margin-bottom-lg">

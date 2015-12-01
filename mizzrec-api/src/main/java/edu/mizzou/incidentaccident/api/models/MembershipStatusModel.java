@@ -132,6 +132,7 @@ public class MembershipStatusModel implements Serializable {
 	}
 
 	public void setMembership(String[] membership) {
+		this.membership = membership;
 		this.resetBooleans();
 		for (String member : membership) {
 			switch (member) {

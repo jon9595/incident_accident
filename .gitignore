@@ -1,3 +1,7 @@
 .vagrant/
 .gradle/
 /build/
+/forms-web/bin/
+/forms-web/build/
+/mizzrec-api/bin/
+/mizzrec-api/build/

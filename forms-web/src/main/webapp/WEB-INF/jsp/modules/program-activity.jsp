@@ -6,70 +6,70 @@
                   <div class="form-group">
                     <div class="col-md-12 columns-3"> 
                       <span class="additional-info-wrap margin-bottom-sm">
-                        <label class="checkbox-inline" for="pa-informal">
-                         <input type="checkbox" name="program-activity" id="pa-informal" value="pa-informal">
+                        <label class="checkbox-inline" for="informalActivity">
+                         <html:checkbox path="programActivity.programActivity" id="informalActivity" value="informalActivity"/>
                          Informal Activity (General Recreation, Pickup sports, Lap Swim, etc.)
                         </label>
                        <div class="additional-info hide">
-                        <input type="text" id="pa-informal-xplain" name="pa-informal-xplain" placeholder="Explain" class="form-control" disabled="">
+                        <html:input type="text" id="infActDesc" path="programActivity.infActDesc" placeholder="Explain" class="form-control" disabled=""/>
                        </div>
                      </span> 
 
                       <span class="additional-info-wrap margin-bottom-sm">
-                        <label class="checkbox-inline" for="pa-swim">
-                         <input type="checkbox" name="program-activity" id="pa-swim" value="pa-swim">
+                        <label class="checkbox-inline" for="swimTeamPractice">
+                         <html:checkbox path="programActivity.programActivity" id="swimTeamPractice" value="swimTeamPractice"/>
                          Swim Team Practice
                         </label>
                        <div class="additional-info hide">
-                        <input type="text" id="pa-swim-team" name="pa-swim-team" placeholder="Swim Team Name" class="form-control" disabled="">
+                        <html:input type="text" id="swimTeamName" path="programActivity.swimTeamName" placeholder="Swim Team Name" class="form-control" disabled=""/>
                        </div>
                      </span> 
 
                       <span class="additional-info-wrap margin-bottom-sm">
-                        <label class="checkbox-inline" for="pa-spec-evt">
-                         <input type="checkbox" name="program-activity" id="pa-spec-evt" value="pa-spec-evt">
+                        <label class="checkbox-inline" for="specEvt">
+                         <html:checkbox path="programActivity.programActivity" id="specEvt" value="specEvt"/>
                          Special Event
                         </label>
                        <div class="additional-info hide">
-                        <input type="text" id="pa-spec-evt-gp-name" name="pa-spec-evt-gp-name" placeholder="Group Name" class="form-control" disabled="">
+                        <html:input type="text" id="specEvtGroup" path="programActivity.specEvtGroup" placeholder="Group Name" class="form-control" disabled=""/>
                        </div>
                      </span> 
 
                       <span class="additional-info-wrap margin-bottom-sm">
-                        <label class="checkbox-inline" for="pa-club">
-                         <input type="checkbox" name="program-activity" id="pa-club" value="pa-club">
+                        <label class="checkbox-inline" for="clubRecSports">
+                         <html:checkbox path="programActivity.programActivity" id="clubRecSports" value="clubRecSports"/>
                          Club
                         </label>
                        <div class="additional-info hide">
-                        <input type="text" id="pa-club-team" name="pa-club-team" placeholder="Club Team Name" class="form-control" disabled="">
+                        <html:input type="text" id="clubRecTeamName" path="programActivity.clubRecTeamName" placeholder="Club Team Name" class="form-control" disabled=""/>
                        </div>
                      </span> 
 
                      <span class="additional-info-wrap margin-bottom-sm">
-                       <label class="checkbox-inline" for="pa-tigerx">
-                         <input type="checkbox" name="program-activity" id="pa-tigerx" value="pa-tigerx">
+                       <label class="checkbox-inline" for="tigerxPt">
+                         <html:checkbox path="programActivity.programActivity" id="tigerxPt" value="tigerxPt"/>
                          Tiger X
                        </label> 
                        <div class="additional-info hide">
-                         <input type="text" id="pa-tigerx-program" name="pa-tigerx-program" placeholder="Program Name" class="form-control" disabled="">
+                         <html:input type="text" id="tigerxPrgName" path="programActivity.tigerxPrgName" placeholder="Program Name" class="form-control" disabled=""/>
                        </div>
                        <div class="additional-info hide">
-                         <input type="text" id="pa-tigerx-instructor" name="pa-tigerx-instructor" placeholder="Instructor Name" class="form-control margin-top-sm" disabled="">
+                         <html:input type="text" id="tigerxPtInstructor" path="programActivity.tigerxPtInstructor" placeholder="Instructor Name" class="form-control margin-top-sm" disabled=""/>
                        </div>
                      </span>
 
-                      <label class="checkbox-inline" for="pa-inter-coll">
-                       <input type="checkbox" name="program-activity" id="pa-inter-coll" value="pa-inter-coll">
+                      <label class="checkbox-inline" for="interAthletics">
+                       <html:checkbox path="programActivity.programActivity" id="interAthletics" value="interAthletics"/>
                        Intercollegiate Athletics
                       </label>
 
                       <span class="additional-info-wrap margin-bottom-sm">
-                        <label class="checkbox-inline" for="pa-rec">
-                         <input type="checkbox" name="program-activity" id="pa-rec" value="pa-rec">
+                        <label class="checkbox-inline" for="recSports">
+                         <html:checkbox path="programActivity.programActivity" id="recSports" value="recSports"/>
                          Rec Sports
                         </label>
                        <div class="additional-info hide">
-                        <input type="text" id="pa-rec-team" name="pa-rec-team" placeholder="Rec Team Name" class="form-control" disabled="">
+                        <html:input type="text" id="recTeamName" path="programActivity.recTeamName" placeholder="Rec Team Name" class="form-control" disabled=""/>
                        </div>
                      </span> 
 

@@ -63,17 +63,17 @@ public class ProgramActivityInvolvedDAO implements DBConstants {
         Object[] args = {
             bean.getId(), 
             bean.getTime(), 
-            bean.getInformalActivity(), 
+            bean.isInformalActivity(), 
             bean.getInfActDesc(), 
-            bean.getClubRecSports(), 
+            bean.isClubRecSports(), 
             bean.getClubRecTeamName(), 
-            bean.getSwimTeamPractice(), 
+            bean.isSwimTeamPractice(), 
             bean.getSwimTeamName(), 
-            bean.getInterAthletics(), 
-            bean.getTigerxPt(), 
+            bean.isInterAthletics(), 
+            bean.isTigerxPt(), 
             bean.getTigerxPrgName(), 
             bean.getTigerxPtInstructor(), 
-            bean.getSpecEvt(), 
+            bean.isSpecEvt(), 
             bean.getSpecEvtGroup()};
         int numRows = getTemplate().update(sInsertStmt.toString(), args);
         return getAutoIncrementKey();
@@ -104,17 +104,17 @@ public class ProgramActivityInvolvedDAO implements DBConstants {
         Object[] args = {
             bean.getId(), 
             bean.getTime(), 
-            bean.getInformalActivity(), 
+            bean.isInformalActivity(), 
             bean.getInfActDesc(), 
-            bean.getClubRecSports(), 
+            bean.isClubRecSports(), 
             bean.getClubRecTeamName(), 
-            bean.getSwimTeamPractice(), 
+            bean.isSwimTeamPractice(), 
             bean.getSwimTeamName(), 
-            bean.getInterAthletics(), 
-            bean.getTigerxPt(), 
+            bean.isInterAthletics(), 
+            bean.isTigerxPt(), 
             bean.getTigerxPrgName(), 
             bean.getTigerxPtInstructor(), 
-            bean.getSpecEvt(), 
+            bean.isSpecEvt(), 
             bean.getSpecEvtGroup()};
         int numRows = getTemplate().update(sUpdateStmt.toString(), args);
         return numRows;
@@ -144,17 +144,17 @@ public class ProgramActivityInvolvedDAO implements DBConstants {
                 ProgramActivityInvolvedModel model = new ProgramActivityInvolvedModel();
                     model.setId(rs.getInt("id"));
                     model.setTime(rs.getTime("time"));
-                    model.setInformalActivity(rs.getString("informal_activity"));
+                    model.setInformalActivity("Y".equals(rs.getString("informal_activity"))?true:false);
                     model.setInfActDesc(rs.getString("inf_act_desc"));
-                    model.setClubRecSports(rs.getString("club_rec_sports"));
+                    model.setClubRecSports("Y".equals(rs.getString("club_rec_sports"))?true:false);
                     model.setClubRecTeamName(rs.getString("club_rec_team_name"));
-                    model.setSwimTeamPractice(rs.getString("swim_team_practice"));
+                    model.setSwimTeamPractice("Y".equals(rs.getString("swim_team_practice"))?true:false);
                     model.setSwimTeamName(rs.getString("swim_team_name"));
-                    model.setInterAthletics(rs.getString("inter_athletics"));
-                    model.setTigerxPt(rs.getString("tigerx_pt"));
+                    model.setInterAthletics("Y".equals(rs.getString("inter_athletics"))?true:false);
+                    model.setTigerxPt("Y".equals(rs.getString("tigerx_pt"))?true:false);
                     model.setTigerxPrgName(rs.getString("tigerx_prg_name"));
                     model.setTigerxPtInstructor(rs.getString("tigerx_pt_instructor"));
-                    model.setSpecEvt(rs.getString("spec_evt"));
+                    model.setSpecEvt("Y".equals(rs.getString("spec_evt"))?true:false);
                     model.setSpecEvtGroup(rs.getString("spec_evt_group"));
                 return model;
             }
@@ -185,17 +185,17 @@ public class ProgramActivityInvolvedDAO implements DBConstants {
                 ProgramActivityInvolvedModel model = new ProgramActivityInvolvedModel();
                     model.setId(rs.getInt("id"));
                     model.setTime(rs.getTime("time"));
-                    model.setInformalActivity(rs.getString("informal_activity"));
+                    model.setInformalActivity("Y".equals(rs.getString("informal_activity"))?true:false);
                     model.setInfActDesc(rs.getString("inf_act_desc"));
-                    model.setClubRecSports(rs.getString("club_rec_sports"));
+                    model.setClubRecSports("Y".equals(rs.getString("club_rec_sports"))?true:false);
                     model.setClubRecTeamName(rs.getString("club_rec_team_name"));
-                    model.setSwimTeamPractice(rs.getString("swim_team_practice"));
+                    model.setSwimTeamPractice("Y".equals(rs.getString("swim_team_practice"))?true:false);
                     model.setSwimTeamName(rs.getString("swim_team_name"));
-                    model.setInterAthletics(rs.getString("inter_athletics"));
-                    model.setTigerxPt(rs.getString("tigerx_pt"));
+                    model.setInterAthletics("Y".equals(rs.getString("inter_athletics"))?true:false);
+                    model.setTigerxPt("Y".equals(rs.getString("tigerx_pt"))?true:false);
                     model.setTigerxPrgName(rs.getString("tigerx_prg_name"));
                     model.setTigerxPtInstructor(rs.getString("tigerx_pt_instructor"));
-                    model.setSpecEvt(rs.getString("spec_evt"));
+                    model.setSpecEvt("Y".equals(rs.getString("spec_evt"))?true:false);
                     model.setSpecEvtGroup(rs.getString("spec_evt_group"));
                 return model;
             }

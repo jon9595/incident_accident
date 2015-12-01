@@ -19,6 +19,8 @@ public class ProgramActivityInvolvedModel implements Serializable {
     private String infActDesc;
     private boolean clubRecSports;
     private String clubRecTeamName;
+    private boolean recSports;
+    private String recTeamName;
     private boolean swimTeamPractice;
     private String swimTeamName;
     private boolean interAthletics;
@@ -27,6 +29,7 @@ public class ProgramActivityInvolvedModel implements Serializable {
     private String tigerxPtInstructor;
     private boolean specEvt;
     private String specEvtGroup;
+    private String[] programActivity;
 
 	
     public Integer getId() {
@@ -83,7 +86,23 @@ public class ProgramActivityInvolvedModel implements Serializable {
     }
 
 
-    public boolean isSwimTeamPractice() {
+    public boolean isRecSports() {
+		return recSports;
+	}
+
+	public void setRecSports(boolean recSports) {
+		this.recSports = recSports;
+	}
+
+	public String getRecTeamName() {
+		return recTeamName;
+	}
+
+	public void setRecTeamName(String recTeamName) {
+		this.recTeamName = recTeamName;
+	}
+
+	public boolean isSwimTeamPractice() {
         return this.swimTeamPractice;
     }
 
@@ -155,9 +174,61 @@ public class ProgramActivityInvolvedModel implements Serializable {
     }
 
 
+    private void resetBooleans() {
+        informalActivity = false;
+        clubRecSports = false;
+        recSports = false;
+        swimTeamPractice = false;
+        interAthletics = false;
+        tigerxPt = false;
+        specEvt = false;
+    }
 
 	
-    @Override
+    public String[] getProgramActivity() {
+		return programActivity;
+	}
+
+	public void setProgramActivity(String[] programActivity) {
+		this.programActivity = programActivity;
+		this.resetBooleans();
+		for (String ap : programActivity) {
+			switch (ap) {
+			case "informalActivity":
+				this.informalActivity = true;
+				break;
+
+			case "clubRecSports":
+				this.clubRecSports = true;
+				break;
+
+			case "recSports":
+				this.recSports = true;
+				break;
+
+			case "swimTeamPractice":
+				this.swimTeamPractice = true;
+				break;
+
+			case "interAthletics":
+				this.interAthletics = true;
+				break;
+
+			case "tigerxPt":
+				this.tigerxPt = true;
+				break;
+
+			case "specEvt":
+				this.specEvt = true;
+				break;
+
+			default:
+				break;
+			}
+		}
+	}
+
+	@Override
     public String toString() {
         StringBuffer sb = new StringBuffer();
         Field[] fields = this.getClass().getDeclaredFields();
