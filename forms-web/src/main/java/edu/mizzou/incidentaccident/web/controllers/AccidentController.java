@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import edu.mizzou.incidentaccident.api.models.AccidentModel;
 import edu.mizzou.incidentaccident.api.services.AccidentService;
+import edu.mizzou.incidentaccident.api.services.LocationsService;
 import edu.mizzou.incidentaccident.web.validators.AccidentValidator;
 
 @Controller
@@ -22,12 +23,16 @@ public class AccidentController {
 	AccidentService accidentService;
 	
 	@Autowired
+	LocationsService locationsService;
+
+	@Autowired
 	AccidentValidator accidentValidator;
 	
 	
 	@RequestMapping(value="/create", method=RequestMethod.GET)
 	public String createAccidentForm(ModelMap map) {
 		map.addAttribute("accidentForm", new AccidentModel());
+		map.addAttribute("locations", locationsService.getLocations());
 		return "accident.create";
 	}
 

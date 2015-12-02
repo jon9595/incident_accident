@@ -60,17 +60,17 @@ public class ProgramActivityInvolvedDAO implements DBConstants {
             .append(")");
         Object[] args = {
             bean.getTime(), 
-            bean.isInformalActivity(), 
+            bean.isInformalActivity()?"Y":"N", 
             bean.getInfActDesc(), 
-            bean.isClubRecSports(), 
+            bean.isClubRecSports()?"Y":"N", 
             bean.getClubRecTeamName(), 
-            bean.isSwimTeamPractice(), 
+            bean.isSwimTeamPractice()?"Y":"N", 
             bean.getSwimTeamName(), 
-            bean.isInterAthletics(), 
-            bean.isTigerxPt(), 
+            bean.isInterAthletics()?"Y":"N", 
+            bean.isTigerxPt()?"Y":"N", 
             bean.getTigerxPrgName(), 
             bean.getTigerxPtInstructor(), 
-            bean.isSpecEvt(), 
+            bean.isSpecEvt()?"Y":"N", 
             bean.getSpecEvtGroup()};
         int numRows = getTemplate().update(sInsertStmt.toString(), args);
         return getAutoIncrementKey();
@@ -99,17 +99,17 @@ public class ProgramActivityInvolvedDAO implements DBConstants {
         sUpdateStmt.append( sWhereStmt );
         Object[] args = {
             bean.getTime(), 
-            bean.isInformalActivity(), 
+            bean.isInformalActivity()?"Y":"N", 
             bean.getInfActDesc(), 
-            bean.isClubRecSports(), 
+            bean.isClubRecSports()?"Y":"N", 
             bean.getClubRecTeamName(), 
-            bean.isSwimTeamPractice(), 
+            bean.isSwimTeamPractice()?"Y":"N", 
             bean.getSwimTeamName(), 
-            bean.isInterAthletics(), 
-            bean.isTigerxPt(), 
+            bean.isInterAthletics()?"Y":"N", 
+            bean.isTigerxPt()?"Y":"N", 
             bean.getTigerxPrgName(), 
             bean.getTigerxPtInstructor(), 
-            bean.isSpecEvt(), 
+            bean.isSpecEvt()?"Y":"N", 
             bean.getSpecEvtGroup(),
             bean.getId()};
         int numRows = getTemplate().update(sUpdateStmt.toString(), args);

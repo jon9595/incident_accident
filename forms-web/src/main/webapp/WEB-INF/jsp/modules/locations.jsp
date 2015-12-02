@@ -1,0 +1,1 @@
+http://stackoverflow.com/questions/2117557/how-to-iterate-an-arraylist-inside-a-hashmap-using-jstl
