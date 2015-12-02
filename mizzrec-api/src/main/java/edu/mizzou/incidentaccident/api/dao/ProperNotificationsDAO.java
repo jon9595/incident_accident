@@ -30,8 +30,7 @@ public class ProperNotificationsDAO implements DBConstants {
     public int addProperNotifications(ProperNotificationsModel bean) {
         StringBuffer sInsertStmt = new StringBuffer(200);
         sInsertStmt.append( "INSERT INTO " + PROPER_NOTIFICATIONS + " (")
-            .append(" id " )
-            .append(", mupd_officer_name " )
+            .append(" mupd_officer_name " )
             .append(", mupd_officer_called " )
             .append(", mupd_officer_arrived " )
             .append(", mupd_officer_case_nbr " )
@@ -51,8 +50,7 @@ public class ProperNotificationsDAO implements DBConstants {
             .append(", res_life_cont_email_sent " )
             .append(", res_life_cont_date_sent " )
             .append(") VALUES ( ")
-            .append(", ?")
-            .append(", ?")
+            .append(" ?")
             .append(", ?")
             .append(", ?")
             .append(", ?")
@@ -73,7 +71,6 @@ public class ProperNotificationsDAO implements DBConstants {
             .append(", ?")
             .append(")");
         Object[] args = {
-            bean.getId(), 
             bean.getMupdOfficerName(), 
             bean.getMupdOfficerCalled(), 
             bean.getMupdOfficerArrived(), 
@@ -102,8 +99,7 @@ public class ProperNotificationsDAO implements DBConstants {
         StringBuffer sUpdateStmt = new StringBuffer(200);
         sUpdateStmt.append("UPDATE " + PROPER_NOTIFICATIONS)
         .append(" SET ")
-        .append(" id = ? " )
-        .append(", mupd_officer_name = ? " )
+        .append(" mupd_officer_name = ? " )
         .append(", mupd_officer_called = ? " )
         .append(", mupd_officer_arrived = ? " )
         .append(", mupd_officer_case_nbr = ? " )
@@ -126,7 +122,6 @@ public class ProperNotificationsDAO implements DBConstants {
         sWhereStmt.append(" WHERE id = ?");
         sUpdateStmt.append( sWhereStmt );
         Object[] args = {
-            bean.getId(), 
             bean.getMupdOfficerName(), 
             bean.getMupdOfficerCalled(), 
             bean.getMupdOfficerArrived(), 
@@ -145,7 +140,8 @@ public class ProperNotificationsDAO implements DBConstants {
             bean.getRptReviewerPosition(), 
             bean.getRptReviewerDate(), 
             bean.getResLifeContEmailSent(), 
-            bean.getResLifeContDateSent()};
+            bean.getResLifeContDateSent(),
+            bean.getId()};
         int numRows = getTemplate().update(sUpdateStmt.toString(), args);
         return numRows;
     }

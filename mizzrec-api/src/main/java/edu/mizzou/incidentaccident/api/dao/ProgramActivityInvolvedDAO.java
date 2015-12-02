@@ -30,8 +30,7 @@ public class ProgramActivityInvolvedDAO implements DBConstants {
     public int addProgramActivityInvolved(ProgramActivityInvolvedModel bean) {
         StringBuffer sInsertStmt = new StringBuffer(200);
         sInsertStmt.append( "INSERT INTO " + PROGRAM_ACTIVITY_INVOLVED + " (")
-            .append(" id " )
-            .append(", time " )
+            .append(" time " )
             .append(", informal_activity " )
             .append(", inf_act_desc " )
             .append(", club_rec_sports " )
@@ -45,8 +44,7 @@ public class ProgramActivityInvolvedDAO implements DBConstants {
             .append(", spec_evt " )
             .append(", spec_evt_group " )
             .append(") VALUES ( ")
-            .append(", ?")
-            .append(", ?")
+            .append(" ?")
             .append(", ?")
             .append(", ?")
             .append(", ?")
@@ -61,7 +59,6 @@ public class ProgramActivityInvolvedDAO implements DBConstants {
             .append(", ?")
             .append(")");
         Object[] args = {
-            bean.getId(), 
             bean.getTime(), 
             bean.isInformalActivity(), 
             bean.getInfActDesc(), 
@@ -84,8 +81,7 @@ public class ProgramActivityInvolvedDAO implements DBConstants {
         StringBuffer sUpdateStmt = new StringBuffer(200);
         sUpdateStmt.append("UPDATE " + PROGRAM_ACTIVITY_INVOLVED)
         .append(" SET ")
-        .append(" id = ? " )
-        .append(", time = ? " )
+        .append(" time = ? " )
         .append(", informal_activity = ? " )
         .append(", inf_act_desc = ? " )
         .append(", club_rec_sports = ? " )
@@ -102,7 +98,6 @@ public class ProgramActivityInvolvedDAO implements DBConstants {
         sWhereStmt.append(" WHERE id = ?");
         sUpdateStmt.append( sWhereStmt );
         Object[] args = {
-            bean.getId(), 
             bean.getTime(), 
             bean.isInformalActivity(), 
             bean.getInfActDesc(), 
@@ -115,7 +110,8 @@ public class ProgramActivityInvolvedDAO implements DBConstants {
             bean.getTigerxPrgName(), 
             bean.getTigerxPtInstructor(), 
             bean.isSpecEvt(), 
-            bean.getSpecEvtGroup()};
+            bean.getSpecEvtGroup(),
+            bean.getId()};
         int numRows = getTemplate().update(sUpdateStmt.toString(), args);
         return numRows;
     }

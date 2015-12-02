@@ -38,3 +38,16 @@ function setcheckboxes() {
 	  }        
 	});
 }
+
+function setcheckboxstate() {
+	//Show additional info text box when relevant checkbox checked
+	$('.additional-info-wrap input[type=checkbox]').each(function() {
+	  if($(this).is(':checked')) {
+		  $(this).closest('.checkbox-inline, .checkbox').toggleClass('checked');
+	      $(this).closest('.additional-info-wrap').find('.additional-info').removeClass('hide').find('input,select').removeAttr('disabled');
+	  }
+	  else {
+	      $(this).closest('.additional-info-wrap').find('.additional-info').addClass('hide').find('input,select').val('').attr('disabled','disabled');
+	  }
+	});
+}

@@ -5,6 +5,7 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/jquery.datetimepicker.css"/ >
 <script src="${pageContext.request.contextPath}/js/jquery.datetimepicker.full.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/mizrec.js"></script>
+<script src="${pageContext.request.contextPath}/js/mask/jquery.mask.js"></script>
 <script type="text/javascript">
   $(document).ready(function(){
     $('#date').datetimepicker({
@@ -22,7 +23,8 @@
       format:'H:i'
     }); 
     setcheckboxes();
-   
+    setcheckboxstate();
+    $('.phone').mask('000-000-0000');
   });
 </script>
 <jsp:include page=""/>

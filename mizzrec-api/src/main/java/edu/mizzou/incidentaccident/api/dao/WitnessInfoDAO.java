@@ -30,18 +30,15 @@ public class WitnessInfoDAO implements DBConstants {
     public int addWitnessInfo(WitnessInfoModel bean) {
         StringBuffer sInsertStmt = new StringBuffer(200);
         sInsertStmt.append( "INSERT INTO " + WITNESS_INFO + " (")
-            .append(" id " )
-            .append(", name " )
+            .append(" name " )
             .append(", phone " )
             .append(", signature " )
             .append(") VALUES ( ")
-            .append(", ?")
-            .append(", ?")
+            .append(" ?")
             .append(", ?")
             .append(", ?")
             .append(")");
         Object[] args = {
-            bean.getId(), 
             bean.getName(), 
             bean.getPhone(), 
             bean.getSignature()};
@@ -54,18 +51,17 @@ public class WitnessInfoDAO implements DBConstants {
         StringBuffer sUpdateStmt = new StringBuffer(200);
         sUpdateStmt.append("UPDATE " + WITNESS_INFO)
         .append(" SET ")
-        .append(" id = ? " )
-        .append(", name = ? " )
+        .append(" name = ? " )
         .append(", phone = ? " )
         .append(", signature = ? " ); 
         StringBuffer sWhereStmt = new StringBuffer(100);
         sWhereStmt.append(" WHERE id = ?");
         sUpdateStmt.append( sWhereStmt );
         Object[] args = {
-            bean.getId(), 
             bean.getName(), 
             bean.getPhone(), 
-            bean.getSignature()};
+            bean.getSignature(),
+            bean.getId()};
         int numRows = getTemplate().update(sUpdateStmt.toString(), args);
         return numRows;
     }

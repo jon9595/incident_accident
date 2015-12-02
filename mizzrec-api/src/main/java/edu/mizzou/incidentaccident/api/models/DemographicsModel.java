@@ -9,6 +9,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import edu.mizzou.incidentaccident.api.common.util.DateUtil;
+import edu.mizzou.incidentaccident.api.constants.AppConstants;
+
 
 public class DemographicsModel implements Serializable {
 
@@ -34,6 +37,14 @@ public class DemographicsModel implements Serializable {
     }
 
 
+    public String getDateStr() {
+    	return DateUtil.format(this.date, AppConstants.DATE_FORMAT_PATTERN_MDY);
+    }
+
+    public void setDateStr(String date) {
+        this.date = DateUtil.parse(date, AppConstants.DATE_FORMAT_PATTERN_MDY);
+    }
+
     public Date getDate() {
         return this.date;
     }
@@ -42,6 +53,13 @@ public class DemographicsModel implements Serializable {
         this.date = date;
     }
 
+    public String getTimeStr() {
+		return DateUtil.format(this.time, AppConstants.DATE_FORMAT_PATTERN_HM);
+	}
+
+	public void setTimeStr(String time) {
+		this.time = DateUtil.parse(time, AppConstants.DATE_FORMAT_PATTERN_HM);
+	}
 
     public Date getTime() {
 		return time;
@@ -77,6 +95,13 @@ public class DemographicsModel implements Serializable {
         this.birthDate = birthDate;
     }
 
+    public String getBirthDateStr() {
+        return DateUtil.format(this.birthDate, AppConstants.DATE_FORMAT_PATTERN_MDY);
+    }
+
+    public void setBirthDateStr(String birthDate) {
+        this.birthDate = DateUtil.parse(birthDate, AppConstants.DATE_FORMAT_PATTERN_MDY);
+    }
 
     public String getEmail() {
         return this.email;

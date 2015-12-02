@@ -9,12 +9,14 @@
 	                <div class="form-group">
 	                  <label for="date" class="col-sm-2 col-md-2 col-lg-2 control-label">Date of Accident:</label>
 	                  <div class="col-sm-11 col-md-5 col-lg-3">
-	                    <html:input id="date" type="text" class="form-control margin-bottom-md" path="demographics.date"/>
+	                    <span style="color: red;"><html:errors path="demographics.date" cssClass="err" /></span>
+	                    <html:input id="date" type="text" class="form-control margin-bottom-md" path="demographics.dateStr"/>
 	                  </div>
 	
 	                  <label for="time" class="col-sm-2 col-md-2 col-lg-2 control-label">Time of Accident:</label>
 	                  <div class="col-sm-11 col-md-5 col-lg-3">
-	                    <html:input id="time" type="text" class="form-control margin-bottom-md" path="demographics.time"/>
+	                    <span style="color: red;"><html:errors path="demographics.time" cssClass="err" /></span>
+	                    <html:input id="time" type="text" class="form-control margin-bottom-md" path="demographics.timeStr"/>
 	                  </div>
 	
 	                </div>
@@ -22,11 +24,13 @@
 	
 	                  <label for="name" class="col-sm-1 col-md-1 control-label">Name:</label>
 	                  <div class="col-sm-11 col-md-5">
+	                    <span style="color: red;"><html:errors path="demographics.name" cssClass="err" /></span>
 	                    <html:input type="text" class="form-control margin-bottom-md" id="name" placeholder="Name" path="demographics.name"/>
 	                  </div>
 	
 	                  <label for="address" class="col-sm-1 col-md-1 control-label">Address:</label>
 	                  <div class="col-sm-11 col-md-5">
+	                    <span style="color: red;"><html:errors path="demographics.address" cssClass="err" /></span>
 	                    <html:input type="text" class="form-control" id="address" placeholder="Address" path="demographics.address"/>
 	                  </div>
 	
@@ -36,12 +40,14 @@
 	
 	                  <label for="email" class="col-sm-1 col-md-1 control-label">Email:</label>
 	                  <div class="col-sm-11 col-md-5">
+	                    <span style="color: red;"><html:errors path="demographics.email" cssClass="err" /></span>
 	                    <html:input type="email" class="form-control margin-bottom-md" id="email" placeholder="Email" path="demographics.email"/>
 	                  </div>
 	
 	                  <label for="phone" class="col-sm-1 col-md-1 control-label">Phone:</label>
 	                  <div class="col-sm-11 col-md-5">
-	                    <html:input type="text" class="form-control" id="phone" placeholder="Phone" path="demographics.phone"/>
+	                    <span style="color: red;"><html:errors path="demographics.phone" cssClass="err" /></span>
+	                    <html:input type="text" class="form-control phone" id="phone" placeholder="Phone" path="demographics.phone"/>
 	                  </div>
 	
 	                </div>
@@ -57,6 +63,7 @@
 	                     <html:radiobutton id="female" value="F" path="demographics.gender"/>
 	                     Female
 	                     </label> 
+						 <span style="color: red;"><html:errors path="demographics.gender" cssClass="err" /></span>
 	                   </div>
 	
 	                   <label class="col-sm-2 col-md-2 col-lg-1 control-label" for="res-life">Res Life Student</label> 
@@ -69,12 +76,14 @@
 	                     <html:radiobutton id="res-life-n" value="N" path="demographics.resLifeStudent"/>
 	                     No
 	                     </label> 
+						 <span style="color: red;"><html:errors path="demographics.resLifeStudent" cssClass="err" /></span>
 	                   </div>
 	
 	
 	                  <label for="dob" class="col-sm-1 col-md-1 col-lg-1 control-label">Birth Date:</label>
 	                  <div class="col-sm-11 col-md-5 col-lg-3">
-	                    <html:input id="dob" type="text" class="form-control" path="demographics.birthDate"/>
+	                    <span style="color: red;"><html:errors path="demographics.birthDate" cssClass="err" /></span>
+	                    <html:input id="dob" type="text" class="form-control" path="demographics.birthDateStr"/>
 	                  </div>
 	
 	                </div>

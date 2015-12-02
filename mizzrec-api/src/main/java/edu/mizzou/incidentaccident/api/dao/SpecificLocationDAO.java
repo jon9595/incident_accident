@@ -30,20 +30,17 @@ public class SpecificLocationDAO implements DBConstants {
     public int addSpecificLocation(SpecificLocationModel bean) {
         StringBuffer sInsertStmt = new StringBuffer(200);
         sInsertStmt.append( "INSERT INTO " + SPECIFIC_LOCATION + " (")
-            .append(" id " )
-            .append(", spec_equip_piece " )
+            .append(" spec_equip_piece " )
             .append(", spec_equip_piece_desc " )
             .append(", other " )
             .append(", other_desc " )
             .append(") VALUES ( ")
-            .append(", ?")
-            .append(", ?")
+            .append(" ?")
             .append(", ?")
             .append(", ?")
             .append(", ?")
             .append(")");
         Object[] args = {
-            bean.getId(), 
             bean.getSpecEquipPiece(), 
             bean.getSpecEquipPieceDesc(), 
             bean.getOther(), 
@@ -57,8 +54,7 @@ public class SpecificLocationDAO implements DBConstants {
         StringBuffer sUpdateStmt = new StringBuffer(200);
         sUpdateStmt.append("UPDATE " + SPECIFIC_LOCATION)
         .append(" SET ")
-        .append(" id = ? " )
-        .append(", spec_equip_piece = ? " )
+        .append(" spec_equip_piece = ? " )
         .append(", spec_equip_piece_desc = ? " )
         .append(", other = ? " )
         .append(", other_desc = ? " ); 
@@ -66,11 +62,11 @@ public class SpecificLocationDAO implements DBConstants {
         sWhereStmt.append(" WHERE id = ?");
         sUpdateStmt.append( sWhereStmt );
         Object[] args = {
-            bean.getId(), 
             bean.getSpecEquipPiece(), 
             bean.getSpecEquipPieceDesc(), 
             bean.getOther(), 
-            bean.getOtherDesc()};
+            bean.getOtherDesc(),
+            bean.getId()};
         int numRows = getTemplate().update(sUpdateStmt.toString(), args);
         return numRows;
     }

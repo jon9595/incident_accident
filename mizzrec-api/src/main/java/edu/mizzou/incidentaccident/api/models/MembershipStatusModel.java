@@ -3,6 +3,7 @@ package edu.mizzou.incidentaccident.api.models;
 import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -128,6 +129,32 @@ public class MembershipStatusModel implements Serializable {
     }
 	
     public String[] getMembership() {
+    	ArrayList<String> list = new ArrayList<String>();
+    	if (student) {
+			list.add("student");
+		}
+    	if (facultyStaff) {
+			list.add("facultyStaff");
+		}
+    	if (alumni) {
+			list.add("alumni");
+		}
+    	if (guest) {
+			list.add("guest");
+		}
+    	if (tigerXpress) {
+			list.add("tigerXpress");
+		}
+    	if (stopOutStudent) {
+			list.add("stopOutStudent");
+		}
+    	if (houseHoldAdult) {
+			list.add("houseHoldAdult");
+		}
+    	if (other) {
+			list.add("other");
+		}
+    	membership = list.toArray(new String[list.size()]);
 		return membership;
 	}
 

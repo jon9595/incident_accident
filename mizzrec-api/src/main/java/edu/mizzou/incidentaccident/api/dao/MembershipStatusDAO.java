@@ -30,8 +30,7 @@ public class MembershipStatusDAO implements DBConstants {
     public int addMembershipStatus(MembershipStatusModel bean) {
         StringBuffer sInsertStmt = new StringBuffer(200);
         sInsertStmt.append( "INSERT INTO " + MEMBERSHIP_STATUS + " (")
-            .append(" id " )
-            .append(", student " )
+            .append(" student " )
             .append(", student_id " )
             .append(", faculty_staff " )
             .append(", alumni " )
@@ -42,8 +41,7 @@ public class MembershipStatusDAO implements DBConstants {
             .append(", other " )
             .append(", other_explain " )
             .append(") VALUES ( ")
-            .append(", ?")
-            .append(", ?")
+            .append(" ?")
             .append(", ?")
             .append(", ?")
             .append(", ?")
@@ -55,7 +53,6 @@ public class MembershipStatusDAO implements DBConstants {
             .append(", ?")
             .append(")");
         Object[] args = {
-            bean.getId(), 
             bean.isStudent()?"Y":"N", 
             bean.getStudentId(), 
             bean.isFacultyStaff()?"Y":"N", 
@@ -75,8 +72,7 @@ public class MembershipStatusDAO implements DBConstants {
         StringBuffer sUpdateStmt = new StringBuffer(200);
         sUpdateStmt.append("UPDATE " + MEMBERSHIP_STATUS)
         .append(" SET ")
-        .append(" id = ? " )
-        .append(", student = ? " )
+        .append(" student = ? " )
         .append(", student_id = ? " )
         .append(", faculty_staff = ? " )
         .append(", alumni = ? " )
@@ -90,7 +86,6 @@ public class MembershipStatusDAO implements DBConstants {
         sWhereStmt.append(" WHERE id = ?");
         sUpdateStmt.append( sWhereStmt );
         Object[] args = {
-            bean.getId(), 
             bean.isStudent()?"Y":"N", 
             bean.getStudentId(), 
             bean.isFacultyStaff()?"Y":"N", 
@@ -100,7 +95,8 @@ public class MembershipStatusDAO implements DBConstants {
             bean.isStopOutStudent()?"Y":"N", 
             bean.isHouseHoldAdult()?"Y":"N", 
             bean.isOther()?"Y":"N", 
-            bean.getOtherExplain()};
+            bean.getOtherExplain(),
+            bean.getId()};
         int numRows = getTemplate().update(sUpdateStmt.toString(), args);
         return numRows;
     }

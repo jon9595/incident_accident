@@ -30,8 +30,7 @@ public class AccidentDAO implements DBConstants {
     public int addAccident(AccidentModel bean) {
         StringBuffer sInsertStmt = new StringBuffer(200);
         sInsertStmt.append( "INSERT INTO " + ACCIDENT + " (")
-            .append(" id " )
-            .append(", demographics " )
+            .append(" demographics " )
             .append(", membership_status " )
             .append(", program_activity " )
             .append(", responder_acct " )
@@ -45,8 +44,7 @@ public class AccidentDAO implements DBConstants {
             .append(", specific_location " )
             .append(", created_by " )
             .append(") VALUES ( ")
-            .append(", ?")
-            .append(", ?")
+            .append(" ?")
             .append(", ?")
             .append(", ?")
             .append(", ?")
@@ -61,19 +59,18 @@ public class AccidentDAO implements DBConstants {
             .append(", ?")
             .append(")");
         Object[] args = {
-            bean.getId(), 
-            bean.getDemographics(), 
-            bean.getMembershipStatus(), 
-            bean.getProgramActivity(), 
-            bean.getResponderAcct(), 
-            bean.getMemberAcct(), 
-            bean.getRefusalOfCare(), 
-            bean.getWitnessOne(), 
-            bean.getWitnessTwo(), 
-            bean.getProperNotifications(), 
+            bean.getDemographicsId(), 
+            bean.getMembershipStatusId(), 
+            bean.getProgramActivityId(), 
+            bean.getResponderAcctId(), 
+            bean.getMemberAcctId(), 
+            bean.getRefusalOfCareId(), 
+            bean.getWitnessOneId(), 
+            bean.getWitnessTwoId(), 
+            bean.getProperNotificationsId(), 
             bean.getOtherInjDesc(), 
-            bean.getSpecInjLocation(), 
-            bean.getSpecificLocation(),
+            bean.getSpecInjLocationId(), 
+            bean.getSpecificLocationId(),
             bean.getCreatedBy()};
         int numRows = getTemplate().update(sInsertStmt.toString(), args);
         return getAutoIncrementKey();
@@ -101,18 +98,18 @@ public class AccidentDAO implements DBConstants {
         sWhereStmt.append(" WHERE id = ?");
         sUpdateStmt.append( sWhereStmt );
         Object[] args = {
-            bean.getDemographics(), 
-            bean.getMembershipStatus(), 
-            bean.getProgramActivity(), 
-            bean.getResponderAcct(), 
-            bean.getMemberAcct(), 
-            bean.getRefusalOfCare(), 
-            bean.getWitnessOne(), 
-            bean.getWitnessTwo(), 
-            bean.getProperNotifications(), 
+            bean.getDemographicsId(), 
+            bean.getMembershipStatusId(), 
+            bean.getProgramActivityId(), 
+            bean.getResponderAcctId(), 
+            bean.getMemberAcctId(), 
+            bean.getRefusalOfCareId(), 
+            bean.getWitnessOneId(), 
+            bean.getWitnessTwoId(), 
+            bean.getProperNotificationsId(), 
             bean.getOtherInjDesc(), 
-            bean.getSpecInjLocation(), 
-            bean.getSpecificLocation(),
+            bean.getSpecInjLocationId(), 
+            bean.getSpecificLocationId(),
             bean.getModifiedBy(),
             bean.getId()};
         int numRows = getTemplate().update(sUpdateStmt.toString(), args);

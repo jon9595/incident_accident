@@ -33,7 +33,7 @@ public class AccountDescriptionDAO implements DBConstants {
             .append(" id " )
             .append(", acct_desc " )
             .append(") VALUES ( ")
-            .append(", ?")
+            .append(" ?")
             .append(", ?")
             .append(")");
         Object[] args = {

@@ -3,9 +3,11 @@
 
             <div class="form-container padding-bottom-none">
                 <fieldset><legend>Program or Activity Involved</legend>
+	              <span style="color: red;"><html:errors path="programActivity.programActivity" cssClass="err" /></span>
                   <div class="form-group">
                     <div class="col-md-12 columns-3"> 
                       <span class="additional-info-wrap margin-bottom-sm">
+						<span style="color: red;"><html:errors path="programActivity.infActDesc" cssClass="err" /></span>
                         <label class="checkbox-inline" for="informalActivity">
                          <html:checkbox path="programActivity.programActivity" id="informalActivity" value="informalActivity"/>
                          Informal Activity (General Recreation, Pickup sports, Lap Swim, etc.)
@@ -16,6 +18,7 @@
                      </span> 
 
                       <span class="additional-info-wrap margin-bottom-sm">
+						<span style="color: red;"><html:errors path="programActivity.swimTeamName" cssClass="err" /></span>
                         <label class="checkbox-inline" for="swimTeamPractice">
                          <html:checkbox path="programActivity.programActivity" id="swimTeamPractice" value="swimTeamPractice"/>
                          Swim Team Practice
@@ -26,6 +29,7 @@
                      </span> 
 
                       <span class="additional-info-wrap margin-bottom-sm">
+						<span style="color: red;"><html:errors path="programActivity.specEvtGroup" cssClass="err" /></span>
                         <label class="checkbox-inline" for="specEvt">
                          <html:checkbox path="programActivity.programActivity" id="specEvt" value="specEvt"/>
                          Special Event
@@ -36,6 +40,7 @@
                      </span> 
 
                       <span class="additional-info-wrap margin-bottom-sm">
+						<span style="color: red;"><html:errors path="programActivity.clubRecTeamName" cssClass="err" /></span>
                         <label class="checkbox-inline" for="clubRecSports">
                          <html:checkbox path="programActivity.programActivity" id="clubRecSports" value="clubRecSports"/>
                          Club
@@ -46,6 +51,8 @@
                      </span> 
 
                      <span class="additional-info-wrap margin-bottom-sm">
+						<span style="color: red;"><html:errors path="programActivity.tigerxPrgName" cssClass="err" /></span>
+						<span style="color: red;"><html:errors path="programActivity.tigerxPtInstructor" cssClass="err" /></span>
                        <label class="checkbox-inline" for="tigerxPt">
                          <html:checkbox path="programActivity.programActivity" id="tigerxPt" value="tigerxPt"/>
                          Tiger X
@@ -64,6 +71,7 @@
                       </label>
 
                       <span class="additional-info-wrap margin-bottom-sm">
+						<span style="color: red;"><html:errors path="programActivity.recTeamName" cssClass="err" /></span>
                         <label class="checkbox-inline" for="recSports">
                          <html:checkbox path="programActivity.programActivity" id="recSports" value="recSports"/>
                          Rec Sports

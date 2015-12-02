@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.sql.Time;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -186,6 +188,29 @@ public class ProgramActivityInvolvedModel implements Serializable {
 
 	
     public String[] getProgramActivity() {
+    	ArrayList<String> list = new ArrayList<String>();
+    	if (informalActivity) {
+			list.add("informalActivity");
+		}
+    	if (clubRecSports) {
+			list.add("clubRecSports");
+		}
+    	if (recSports) {
+			list.add("recSports");
+		}
+    	if (swimTeamPractice) {
+			list.add("swimTeamPractice");
+		}
+    	if (interAthletics) {
+			list.add("interAthletics");
+		}
+    	if (tigerxPt) {
+			list.add("tigerxPt");
+		}
+    	if (specEvt) {
+			list.add("specEvt");
+		}
+    	programActivity = list.toArray(new String[list.size()]);
 		return programActivity;
 	}
 

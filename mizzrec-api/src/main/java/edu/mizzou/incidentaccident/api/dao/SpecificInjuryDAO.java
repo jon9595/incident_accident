@@ -33,7 +33,7 @@ public class SpecificInjuryDAO implements DBConstants {
             .append(" id " )
             .append(", description " )
             .append(") VALUES ( ")
-            .append(", ?")
+            .append(" ?")
             .append(", ?")
             .append(")");
         Object[] args = {

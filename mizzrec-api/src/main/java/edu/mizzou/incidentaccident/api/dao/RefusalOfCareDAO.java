@@ -30,18 +30,15 @@ public class RefusalOfCareDAO implements DBConstants {
     public int addRefusalOfCare(RefusalOfCareModel bean) {
         StringBuffer sInsertStmt = new StringBuffer(200);
         sInsertStmt.append( "INSERT INTO " + REFUSAL_OF_CARE + " (")
-            .append(" id " )
-            .append(", member_sig " )
+            .append(" member_sig " )
             .append(", staff_sig " )
             .append(", date " )
             .append(") VALUES ( ")
-            .append(", ?")
-            .append(", ?")
+            .append(" ?")
             .append(", ?")
             .append(", ?")
             .append(")");
         Object[] args = {
-            bean.getId(), 
             bean.getMemberSig(), 
             bean.getStaffSig(), 
             bean.getDate()};
@@ -54,18 +51,17 @@ public class RefusalOfCareDAO implements DBConstants {
         StringBuffer sUpdateStmt = new StringBuffer(200);
         sUpdateStmt.append("UPDATE " + REFUSAL_OF_CARE)
         .append(" SET ")
-        .append(" id = ? " )
-        .append(", member_sig = ? " )
+        .append(" member_sig = ? " )
         .append(", staff_sig = ? " )
         .append(", date = ? " ); 
         StringBuffer sWhereStmt = new StringBuffer(100);
         sWhereStmt.append(" WHERE id = ?");
         sUpdateStmt.append( sWhereStmt );
         Object[] args = {
-            bean.getId(), 
             bean.getMemberSig(), 
             bean.getStaffSig(), 
-            bean.getDate()};
+            bean.getDate(),
+            bean.getId()};
         int numRows = getTemplate().update(sUpdateStmt.toString(), args);
         return numRows;
     }

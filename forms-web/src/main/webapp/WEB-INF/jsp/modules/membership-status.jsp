@@ -3,7 +3,7 @@
 
             <div class="form-container padding-bottom-none">
                 <fieldset><legend>Membership Status</legend>
-                
+	              <span style="color: red;"><html:errors path="membershipStatus.membership" cssClass="err" /></span>                
 						<div class="form-group">
 							<div class="col-md-12 columns">
 								<label class="checkbox-inline" for="student">
@@ -37,6 +37,7 @@
 							</div>
 							<div class="col-md-9 columns">
 							        <span class="additional-info-wrap">
+						  	                <span style="color: red;"><html:errors path="membershipStatus.otherExplain" cssClass="err" /></span>                
 								        <label class="checkbox-inline" for="other">
 									        <html:checkbox path="membershipStatus.membership" id="other" value="other"/>
 									        Other

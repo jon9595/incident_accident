@@ -30,8 +30,7 @@ public class DemographicsDAO implements DBConstants {
     public int addDemographics(DemographicsModel bean) {
         StringBuffer sInsertStmt = new StringBuffer(200);
         sInsertStmt.append( "INSERT INTO " + DEMOGRAPHICS + " (")
-            .append(" id " )
-            .append(", date " )
+            .append(" date " )
             .append(", name " )
             .append(", gender " )
             .append(", birth_date " )
@@ -40,8 +39,7 @@ public class DemographicsDAO implements DBConstants {
             .append(", address " )
             .append(", res_life_student " )
             .append(") VALUES ( ")
-            .append(", ?")
-            .append(", ?")
+            .append(" ?")
             .append(", ?")
             .append(", ?")
             .append(", ?")
@@ -51,7 +49,6 @@ public class DemographicsDAO implements DBConstants {
             .append(", ?")
             .append(")");
         Object[] args = {
-            bean.getId(), 
             bean.getDate(), 
             bean.getName(), 
             bean.getGender(), 
@@ -81,8 +78,7 @@ public class DemographicsDAO implements DBConstants {
         StringBuffer sWhereStmt = new StringBuffer(100);
         sWhereStmt.append(" WHERE id = ?");
         sUpdateStmt.append( sWhereStmt );
-        Object[] args = {
-            bean.getId(), 
+        Object[] args = { 
             bean.getDate(), 
             bean.getName(), 
             bean.getGender(), 
@@ -90,7 +86,8 @@ public class DemographicsDAO implements DBConstants {
             bean.getEmail(), 
             bean.getPhone(), 
             bean.getAddress(), 
-            bean.getResLifeStudent()};
+            bean.getResLifeStudent(),
+            bean.getId()};
         int numRows = getTemplate().update(sUpdateStmt.toString(), args);
         return numRows;
     }
