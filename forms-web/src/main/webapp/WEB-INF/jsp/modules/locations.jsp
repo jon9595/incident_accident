@@ -10,8 +10,8 @@
 	                    <div class="form-group">
 	                      <div class="col-md-12 columns"> 
 <c:forEach items="${locations.value}" var="location">
-                        <label class="checkbox-inline" for="${location.id}">
-                        <html:checkbox path="locations" id="${location.id}" value="${location.id}"/>
+                        <label class="checkbox-inline" for="location-${location.id}">
+                        <html:checkbox path="locations" id="location-${location.id}" value="${location.id}"/>
                         ${location.subLocation}
                         </label>
 </c:forEach>

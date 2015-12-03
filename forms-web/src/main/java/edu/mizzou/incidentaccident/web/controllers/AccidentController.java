@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import edu.mizzou.incidentaccident.api.models.AccidentModel;
 import edu.mizzou.incidentaccident.api.services.AccidentService;
+import edu.mizzou.incidentaccident.api.services.InjuryLocationsService;
 import edu.mizzou.incidentaccident.api.services.LocationsService;
 import edu.mizzou.incidentaccident.web.validators.AccidentValidator;
 
@@ -26,6 +27,9 @@ public class AccidentController {
 	LocationsService locationsService;
 
 	@Autowired
+	InjuryLocationsService injuryLocationsService;
+	
+	@Autowired
 	AccidentValidator accidentValidator;
 	
 	
@@ -33,6 +37,7 @@ public class AccidentController {
 	public String createAccidentForm(ModelMap map) {
 		map.addAttribute("accidentForm", new AccidentModel());
 		map.addAttribute("locationsMap", locationsService.getLocations());
+		map.addAttribute("injuryLocationsMap", injuryLocationsService.getInjuryLocations());
 		return "accident.create";
 	}
 
@@ -42,6 +47,7 @@ public class AccidentController {
 		if (result.hasErrors()) {
 			map.addAttribute("accidentForm", accident);
 			map.addAttribute("locationsMap", locationsService.getLocations());
+			map.addAttribute("injuryLocationsMap", injuryLocationsService.getInjuryLocations());
 			return "accident.create";
 		} else {
 			accident.setCreatedBy(request.getUserPrincipal().getName());

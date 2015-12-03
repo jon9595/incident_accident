@@ -10,11 +10,13 @@
   $(document).ready(function(){
     $('#date').datetimepicker({
       timepicker:false,
+      scrollInput:false,
       format:'m/d/Y'
     });
 
     $('#dob').datetimepicker({
       timepicker:false,
+      scrollInput:false,
       format:'m/d/Y'
     });
 
@@ -40,6 +42,7 @@
               <jsp:include page="/WEB-INF/jsp/modules/membership-status.jsp"/>
               <jsp:include page="/WEB-INF/jsp/modules/program-activity.jsp"/>
               <jsp:include page="/WEB-INF/jsp/modules/locations.jsp"/>
+              <jsp:include page="/WEB-INF/jsp/modules/injury-locations.jsp"/>
 				<div class="form-container padding-bottom-none">
 	                <div class="form-group">
 	                  <div class="col-sm-11 col-md-5 col-lg-3 pull-right margin-bottom-lg">

@@ -41,6 +41,7 @@ public class AccidentModel implements Serializable {
     private SpecificLocationModel specificLocation;
     
     private String[] locations;
+    private String[] injurylocations;
     private String otherInjDesc;
     private String createdBy;
     private String modifiedBy;
@@ -316,6 +317,14 @@ public class AccidentModel implements Serializable {
 
 	public void setLocations(String[] locations) {
 		this.locations = locations;
+	}
+
+	public String[] getInjurylocations() {
+		return injurylocations;
+	}
+
+	public void setInjurylocations(String[] injurylocations) {
+		this.injurylocations = injurylocations;
 	}
 
 	public String getOtherInjDesc() {
