@@ -39,7 +39,8 @@ public class AccidentModel implements Serializable {
     private ProperNotificationsModel properNotifications;
     private SpecificInjuryModel specInjLocation;
     private SpecificLocationModel specificLocation;
-
+    
+    private String[] locations;
     private String otherInjDesc;
     private String createdBy;
     private String modifiedBy;
@@ -309,6 +310,14 @@ public class AccidentModel implements Serializable {
 
 
 
+	public String[] getLocations() {
+		return locations;
+	}
+
+	public void setLocations(String[] locations) {
+		this.locations = locations;
+	}
+
 	public String getOtherInjDesc() {
 		return otherInjDesc;
 	}
@@ -342,8 +351,6 @@ public class AccidentModel implements Serializable {
 	public void setSpecificLocation(SpecificLocationModel specificLocation) {
 		this.specificLocation = specificLocation;
 	}
-
-
 
 	public String getCreatedBy() {
 		return createdBy;

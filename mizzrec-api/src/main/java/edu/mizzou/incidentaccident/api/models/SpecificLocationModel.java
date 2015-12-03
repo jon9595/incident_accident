@@ -13,9 +13,9 @@ public class SpecificLocationModel implements Serializable {
 
     private static Logger log = LoggerFactory.getLogger(SpecificLocationModel.class);
     private Integer id;
-    private String specEquipPiece;
+    private boolean specEquipPiece;
     private String specEquipPieceDesc;
-    private String other;
+    private boolean other;
     private String otherDesc;
 
 	
@@ -28,11 +28,11 @@ public class SpecificLocationModel implements Serializable {
     }
 
 
-    public String getSpecEquipPiece() {
+    public boolean isSpecEquipPiece() {
         return this.specEquipPiece;
     }
 
-    public void setSpecEquipPiece(String specEquipPiece) {
+    public void setSpecEquipPiece(boolean specEquipPiece) {
         this.specEquipPiece = specEquipPiece;
     }
 
@@ -46,11 +46,11 @@ public class SpecificLocationModel implements Serializable {
     }
 
 
-    public String getOther() {
+    public boolean isOther() {
         return this.other;
     }
 
-    public void setOther(String other) {
+    public void setOther(boolean other) {
         this.other = other;
     }
 

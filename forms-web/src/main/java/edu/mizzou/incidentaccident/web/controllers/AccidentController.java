@@ -32,7 +32,7 @@ public class AccidentController {
 	@RequestMapping(value="/create", method=RequestMethod.GET)
 	public String createAccidentForm(ModelMap map) {
 		map.addAttribute("accidentForm", new AccidentModel());
-		map.addAttribute("locations", locationsService.getLocations());
+		map.addAttribute("locationsMap", locationsService.getLocations());
 		return "accident.create";
 	}
 
@@ -41,6 +41,7 @@ public class AccidentController {
 		accidentValidator.validate(accident, result);
 		if (result.hasErrors()) {
 			map.addAttribute("accidentForm", accident);
+			map.addAttribute("locationsMap", locationsService.getLocations());
 			return "accident.create";
 		} else {
 			accident.setCreatedBy(request.getUserPrincipal().getName());

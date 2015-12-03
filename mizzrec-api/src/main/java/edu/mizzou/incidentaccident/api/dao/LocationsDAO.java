@@ -108,7 +108,7 @@ public class LocationsDAO implements DBConstants {
 		        "id" +
 		        ", location" +
 		        ", sub_location" +
-		        " from " + LOCATIONS + " order by location, sublocation";
+		        " from " + LOCATIONS + " order by location, sub_location";
 
 		List<LocationsModel> locations = getTemplate().query(sqlString, new RowMapper<LocationsModel>() {
 		            public LocationsModel mapRow(ResultSet rs, int rowNum) throws SQLException {

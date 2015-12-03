@@ -5,6 +5,7 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 import edu.mizzou.incidentaccident.api.models.AccidentModel;
+import edu.mizzou.incidentaccident.web.common.util.ValidationUtils;
 
 @Component
 public class AccidentValidator implements Validator {
@@ -24,6 +25,15 @@ public class AccidentValidator implements Validator {
 		dv.validate(accident.getDemographics(), errors);
 		msv.validate(accident.getMembershipStatus(), errors);
 		pav.validate(accident.getProgramActivity(), errors);
+		if (accident.getLocations().length == 0) {
+			errors.rejectValue("locations", "required", null, "Location is required.");
+		}
+		if (accident.getSpecificLocation().isSpecEquipPiece()) {
+			ValidationUtils.rejectIfEmptyOrWhitespace(errors, "specificLocation.specEquipPieceDesc", "required", "Please specify equipment piece.");
+		}
+		if (accident.getSpecificLocation().isOther()) {
+			ValidationUtils.rejectIfEmptyOrWhitespace(errors, "specificLocation.otherDesc", "required", "Please specify other.");
+		}
 	}
 
 }

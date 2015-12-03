@@ -3,6 +3,7 @@ package edu.mizzou.incidentaccident.api.constants;
 public interface DBConstants {
 
 	public static final String ACCIDENT = "accident";
+	public static final String ACCIDENT_LOCATION = "accident_location";
 	public static final String ACCOUNT_DESCRIPTION = "account_description";
 	public static final String DEMOGRAPHICS = "demographics";
 	public static final String LOCATIONS = "locations";

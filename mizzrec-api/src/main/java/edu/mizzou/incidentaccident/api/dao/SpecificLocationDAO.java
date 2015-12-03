@@ -41,9 +41,9 @@ public class SpecificLocationDAO implements DBConstants {
             .append(", ?")
             .append(")");
         Object[] args = {
-            bean.getSpecEquipPiece(), 
+            bean.isSpecEquipPiece()?"Y":"N", 
             bean.getSpecEquipPieceDesc(), 
-            bean.getOther(), 
+            bean.isOther()?"Y":"N", 
             bean.getOtherDesc()};
         int numRows = getTemplate().update(sInsertStmt.toString(), args);
         return getAutoIncrementKey();
@@ -62,9 +62,9 @@ public class SpecificLocationDAO implements DBConstants {
         sWhereStmt.append(" WHERE id = ?");
         sUpdateStmt.append( sWhereStmt );
         Object[] args = {
-            bean.getSpecEquipPiece(), 
+            bean.isSpecEquipPiece()?"Y":"N", 
             bean.getSpecEquipPieceDesc(), 
-            bean.getOther(), 
+            bean.isOther()?"Y":"N", 
             bean.getOtherDesc(),
             bean.getId()};
         int numRows = getTemplate().update(sUpdateStmt.toString(), args);
@@ -85,9 +85,9 @@ public class SpecificLocationDAO implements DBConstants {
             public SpecificLocationModel mapRow(ResultSet rs, int rowNum) throws SQLException {
                 SpecificLocationModel model = new SpecificLocationModel();
                     model.setId(rs.getInt("id"));
-                    model.setSpecEquipPiece(rs.getString("spec_equip_piece"));
+                    model.setSpecEquipPiece("Y".equals(rs.getString("spec_equip_piece"))?true:false);
                     model.setSpecEquipPieceDesc(rs.getString("spec_equip_piece_desc"));
-                    model.setOther(rs.getString("other"));
+                    model.setOther("Y".equals(rs.getString("other"))?true:false);
                     model.setOtherDesc(rs.getString("other_desc"));
                 return model;
             }
@@ -108,9 +108,9 @@ public class SpecificLocationDAO implements DBConstants {
             public SpecificLocationModel mapRow(ResultSet rs, int rowNum) throws SQLException {
                 SpecificLocationModel model = new SpecificLocationModel();
                     model.setId(rs.getInt("id"));
-                    model.setSpecEquipPiece(rs.getString("spec_equip_piece"));
+                    model.setSpecEquipPiece("Y".equals(rs.getString("spec_equip_piece"))?true:false);
                     model.setSpecEquipPieceDesc(rs.getString("spec_equip_piece_desc"));
-                    model.setOther(rs.getString("other"));
+                    model.setOther("Y".equals(rs.getString("other"))?true:false);
                     model.setOtherDesc(rs.getString("other_desc"));
                 return model;
             }

@@ -19,13 +19,13 @@ label.radio-inline.checked, label.checkbox-inline.checked {
   margin-left: 0;
 }
 .columns label.radio-inline, .columns label.checkbox-inline {
-  min-width: 190px;
+  min-width: 200px;
   vertical-align: top;
   width: 25%;
 }
 
 .columns-3 label.radio-inline, .columns-3 label.checkbox-inline {
-  min-width: 190px;
+  min-width: 200px;
   vertical-align: top;
   width: 30%;
 }

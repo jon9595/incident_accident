@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import edu.mizzou.incidentaccident.api.dao.AccidentDAO;
+import edu.mizzou.incidentaccident.api.dao.AccidentLocationDAO;
 import edu.mizzou.incidentaccident.api.dao.AccountDescriptionDAO;
 import edu.mizzou.incidentaccident.api.dao.DemographicsDAO;
 import edu.mizzou.incidentaccident.api.dao.MembershipStatusDAO;
@@ -19,6 +20,7 @@ import edu.mizzou.incidentaccident.api.dao.RefusalOfCareDAO;
 import edu.mizzou.incidentaccident.api.dao.SpecificInjuryDAO;
 import edu.mizzou.incidentaccident.api.dao.SpecificLocationDAO;
 import edu.mizzou.incidentaccident.api.dao.WitnessInfoDAO;
+import edu.mizzou.incidentaccident.api.models.AccidentLocationModel;
 import edu.mizzou.incidentaccident.api.models.AccidentModel;
  
  
@@ -30,6 +32,8 @@ public class AccidentService {
 	 
     @Autowired
     private AccidentDAO accidentDao;
+    @Autowired
+    private AccidentLocationDAO accidentLocationDao;
     @Autowired
     private DemographicsDAO demographicsDao;
     @Autowired
@@ -118,10 +122,15 @@ public class AccidentService {
 //    	if (accident.getSpecInjLocation() != null) {
 //    		accident.setSpecInjLocationId(specificInjuryDao.addSpecificInjury(accident.getSpecInjLocation()));
 //		}
-//    	if (accident.getSpecificLocation() != null) {
-//    		accident.setSpecificLocationId(specificLocationDao.addSpecificLocation(accident.getSpecificLocation()));
-//		}
+    	if (accident.getSpecificLocation() != null && (accident.getSpecificLocation().isSpecEquipPiece() || accident.getSpecificLocation().isOther())) {
+    		accident.setSpecificLocationId(specificLocationDao.addSpecificLocation(accident.getSpecificLocation()));
+		}
     	int id = accidentDao.addAccident(accident);
+    	if (accident.getLocations() != null && accident.getLocations().length > 0) {
+			for (String location  : accident.getLocations()) {
+				accidentLocationDao.addAccidentLocation(new AccidentLocationModel(id, new Integer(location)));
+			}
+		}
         return id;
     }
 
