@@ -42,6 +42,7 @@ public class AccidentModel implements Serializable {
     
     private String[] locations;
     private String[] injurylocations;
+    private String[] accidentDetails;
     
     private int[] nonSubInj;
     private String otherInjDesc;
@@ -327,6 +328,14 @@ public class AccidentModel implements Serializable {
 
 	public void setInjurylocations(String[] injurylocations) {
 		this.injurylocations = injurylocations;
+	}
+
+	public String[] getAccidentDetails() {
+		return accidentDetails;
+	}
+
+	public void setAccidentDetails(String[] accidentDetails) {
+		this.accidentDetails = accidentDetails;
 	}
 
 	public String getOtherInjDesc() {

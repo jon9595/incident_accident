@@ -4,7 +4,7 @@
 
     <div class="form-container padding-bottom-none">
         <fieldset><legend>Injury Location</legend>
-          <div class="row margin-left-sm">
+          <div class="row margin-left-sm padding-left-lg padding-right-lg">
           <c:forEach items="${injuryLocationsMap}" var="injMap">
           <c:choose>
           	<c:when test="${fn:length(injMap.value)==1}">
@@ -44,6 +44,17 @@
           	</c:otherwise>
           </c:choose>
           </c:forEach>
+          </div>
+          <div class="row margin-left-sm padding-left-lg padding-right-lg">
+		  <div class="col-md-12">
+          	<div class="form-group">
+          		<html:hidden path="specInjLocation.id"/>
+				<label for="spec-inj-location">
+				Specific Injury Location
+				</label>
+				<html:textarea path="specInjLocation.description" class="form-control margin-bottom-md" id="spec-inj-location" rows="5"/>
+          	</div>
+          </div>
           </div>
         </fieldset>
     </div>

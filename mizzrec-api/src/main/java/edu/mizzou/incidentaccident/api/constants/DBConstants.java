@@ -4,6 +4,8 @@ public interface DBConstants {
 
 	public static final String ACCIDENT = "accident";
 	public static final String ACCIDENT_LOCATION = "accident_location";
+	public static final String ACCIDENT_DETAIL_DESCRIPTION = "accident_detail_description";
+	public static final String ACCIDENT_DETAILS = "accident_details";
 	public static final String ACCIDENT_INJURY_LOCATION = "accident_injury_location";
 	public static final String ACCOUNT_DESCRIPTION = "account_description";
 	public static final String DEMOGRAPHICS = "demographics";

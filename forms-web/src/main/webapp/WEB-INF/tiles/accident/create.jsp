@@ -43,6 +43,8 @@
               <jsp:include page="/WEB-INF/jsp/modules/program-activity.jsp"/>
               <jsp:include page="/WEB-INF/jsp/modules/locations.jsp"/>
               <jsp:include page="/WEB-INF/jsp/modules/injury-locations.jsp"/>
+              <jsp:include page="/WEB-INF/jsp/modules/accident-details.jsp"/>
+              <jsp:include page="/WEB-INF/jsp/modules/accident-accounts.jsp"/>
 				<div class="form-container padding-bottom-none">
 	                <div class="form-group">
 	                  <div class="col-sm-11 col-md-5 col-lg-3 pull-right margin-bottom-lg">
