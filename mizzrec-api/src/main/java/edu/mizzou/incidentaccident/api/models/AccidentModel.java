@@ -42,6 +42,8 @@ public class AccidentModel implements Serializable {
     
     private String[] locations;
     private String[] injurylocations;
+    
+    private int[] nonSubInj;
     private String otherInjDesc;
     private String createdBy;
     private String modifiedBy;
@@ -332,6 +334,14 @@ public class AccidentModel implements Serializable {
 	}
 
 
+
+	public int[] getNonSubInj() {
+		return nonSubInj;
+	}
+
+	public void setNonSubInj(int[] nonSubInj) {
+		this.nonSubInj = nonSubInj;
+	}
 
 	public void setOtherInjDesc(String otherInjDesc) {
 		this.otherInjDesc = otherInjDesc;

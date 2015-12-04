@@ -1,7 +1,7 @@
 package edu.mizzou.incidentaccident.api.services;
  
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,10 +28,13 @@ public class InjuryLocationsService {
         return injuryLocationsDao.getInjuryLocationsList();
     }
 
-    public HashMap<String, List<InjuryLocationsModel>> getInjuryLocations() {
+    public Map<String, List<InjuryLocationsModel>> getInjuryLocations() {
         return injuryLocationsDao.getInjuryLocations();
     }
-
+    
+    public List<InjuryLocationsModel> getInjuryLocationsWithoutSub() {
+    	return injuryLocationsDao.getInjuryLocationsWithoutSub();
+    }
 
     public InjuryLocationsModel getInjuryLocations(Integer id) {
         return injuryLocationsDao.getInjuryLocations(id);

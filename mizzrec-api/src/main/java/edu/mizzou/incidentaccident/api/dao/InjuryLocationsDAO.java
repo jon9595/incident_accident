@@ -5,6 +5,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -102,8 +104,25 @@ public class InjuryLocationsDAO implements DBConstants {
             }
         });
     }
+    
+    public List<InjuryLocationsModel> getInjuryLocationsWithoutSub() {
+        String sqlString = "select " +
+        "id" +
+        ", location" +
+        ", sub_location" +
+        " from " + INJURY_LOCATIONS + " where sub_location is null";
+        return getTemplate().query(sqlString, new RowMapper<InjuryLocationsModel>() {
+            public InjuryLocationsModel mapRow(ResultSet rs, int rowNum) throws SQLException {
+                InjuryLocationsModel model = new InjuryLocationsModel();
+                    model.setId(rs.getInt("id"));
+                    model.setLocation(rs.getString("location"));
+                    model.setSubLocation(rs.getString("sub_location"));
+                return model;
+            }
+        });
+    }
 
-    public HashMap<String, List<InjuryLocationsModel>> getInjuryLocations() {
+    public Map<String, List<InjuryLocationsModel>> getInjuryLocations() {
         String sqlString = "select " +
                 "id" +
                 ", location" +
@@ -133,7 +152,8 @@ public class InjuryLocationsDAO implements DBConstants {
 			list.add(location);
 		}
 		map.put(locationHdr, list);
-		return map;
+		TreeMap<String, List<InjuryLocationsModel>> tm = new TreeMap<String, List<InjuryLocationsModel>>(map);
+		return tm;
     }
 
     public int deleteInjuryLocations(Integer id) {

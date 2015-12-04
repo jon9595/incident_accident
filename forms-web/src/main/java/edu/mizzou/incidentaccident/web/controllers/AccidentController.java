@@ -1,5 +1,8 @@
 package edu.mizzou.incidentaccident.web.controllers;
 
+import java.util.Iterator;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import edu.mizzou.incidentaccident.api.models.AccidentModel;
+import edu.mizzou.incidentaccident.api.models.InjuryLocationsModel;
 import edu.mizzou.incidentaccident.api.services.AccidentService;
 import edu.mizzou.incidentaccident.api.services.InjuryLocationsService;
 import edu.mizzou.incidentaccident.api.services.LocationsService;
@@ -43,6 +47,7 @@ public class AccidentController {
 
 	@RequestMapping(value="/create", method=RequestMethod.POST)
 	public String saveAccidentForm(@ModelAttribute("accidentForm") AccidentModel accident, BindingResult result, ModelMap map, HttpServletRequest request) {
+		setInjuryLocationsWithOutSubs(accident);
 		accidentValidator.validate(accident, result);
 		if (result.hasErrors()) {
 			map.addAttribute("accidentForm", accident);
@@ -54,6 +59,16 @@ public class AccidentController {
 			accidentService.addAccident(accident);
 			return "redirect:/";
 		}
+	}
+	
+	private void setInjuryLocationsWithOutSubs(AccidentModel accident) {
+		List<InjuryLocationsModel> list = injuryLocationsService.getInjuryLocationsWithoutSub();
+		int[] injNonSub = new int[list.size()];
+		int loop = 0;
+		for (InjuryLocationsModel ilm : list) {
+			injNonSub[loop++] = ilm.getId();
+		}
+		accident.setNonSubInj(injNonSub);
 	}
 
 }
