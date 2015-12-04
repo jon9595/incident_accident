@@ -6,17 +6,18 @@
 	                  <span class="text-muted">Accidents resulting from or directly related to the Department of Recreation Services' programs and premises are to be reported on this 
 	                  form.</span>
 	                  </div>
+	                <button onclick="javascript:setcurrenttime('date', 'time');return false;" class="btn btn-large">Set current date</button>
 	                <div class="form-group">
 	                  <label for="date" class="col-sm-2 col-md-2 col-lg-2 control-label">Date of Accident:</label>
 	                  <div class="col-sm-11 col-md-5 col-lg-3">
 	                    <span style="color: red;"><html:errors path="demographics.date" cssClass="err" /></span>
-	                    <html:input id="date" type="text" class="form-control margin-bottom-md" path="demographics.dateStr"/>
+	                    <html:input id="date" type="text" class="form-control margin-bottom-md date" path="demographics.dateStr"/>
 	                  </div>
 	
 	                  <label for="time" class="col-sm-2 col-md-2 col-lg-2 control-label">Time of Accident:</label>
 	                  <div class="col-sm-11 col-md-5 col-lg-3">
 	                    <span style="color: red;"><html:errors path="demographics.time" cssClass="err" /></span>
-	                    <html:input id="time" type="text" class="form-control margin-bottom-md" path="demographics.timeStr"/>
+	                    <html:input id="time" type="text" class="form-control margin-bottom-md time" path="demographics.timeStr"/>
 	                  </div>
 	
 	                </div>
@@ -83,7 +84,7 @@
 	                  <label for="dob" class="col-sm-1 col-md-1 col-lg-1 control-label">Birth Date:</label>
 	                  <div class="col-sm-11 col-md-5 col-lg-3">
 	                    <span style="color: red;"><html:errors path="demographics.birthDate" cssClass="err" /></span>
-	                    <html:input id="dob" type="text" class="form-control" path="demographics.birthDateStr"/>
+	                    <html:input id="dob" type="text" class="form-control date" path="demographics.birthDateStr"/>
 	                  </div>
 	
 	                </div>

@@ -51,3 +51,23 @@ function setcheckboxstate() {
 	  }
 	});
 }
+
+function setcurrenttime(dateObj, timeObj) {
+	var now = new Date();
+
+	var day = now.getDate();
+	var month = now.getMonth() + 1;
+	var year = now.getFullYear();
+	var hour   = now.getHours();
+	var minute = now.getMinutes();
+
+	if (month < 10) month = "0" + month;
+	if (day < 10) day = "0" + day;
+	if (hour   < 10) { hour   = "0" + hour;   }
+    if (minute < 10) { minute = "0" + minute; }
+	
+    var todayDt = month + "/" + day + "/" + year;
+    var todayTime = hour + ":" + minute;
+    $('#'+dateObj).val(todayDt);
+    $('#'+timeObj).val(todayTime);   
+}

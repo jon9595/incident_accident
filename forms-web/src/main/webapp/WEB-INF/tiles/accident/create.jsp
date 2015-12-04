@@ -8,25 +8,22 @@
 <script src="${pageContext.request.contextPath}/js/mask/jquery.mask.js"></script>
 <script type="text/javascript">
   $(document).ready(function(){
-    $('#date').datetimepicker({
+    $('.date').datetimepicker({
       timepicker:false,
       scrollInput:false,
       format:'m/d/Y'
     });
 
-    $('#dob').datetimepicker({
-      timepicker:false,
-      scrollInput:false,
-      format:'m/d/Y'
-    });
-
-    $('#time').datetimepicker({
-      datepicker:false,
-      format:'H:i'
-    }); 
+    $('.time').datetimepicker({
+        datepicker:false,
+        format:'H:i'
+      }); 
+    
     setcheckboxes();
     setcheckboxstate();
     $('.phone').mask('000-000-0000');
+    $('.date').attr('autocomplete', 'off');
+    $('.time').attr('autocomplete', 'off');
   });
 </script>
 <jsp:include page=""/>
@@ -45,6 +42,8 @@
               <jsp:include page="/WEB-INF/jsp/modules/injury-locations.jsp"/>
               <jsp:include page="/WEB-INF/jsp/modules/accident-details.jsp"/>
               <jsp:include page="/WEB-INF/jsp/modules/accident-accounts.jsp"/>
+              <jsp:include page="/WEB-INF/jsp/modules/refusal-of-care.jsp"/>
+              <jsp:include page="/WEB-INF/jsp/modules/proper-notifications.jsp"/>
 				<div class="form-container padding-bottom-none">
 	                <div class="form-group">
 	                  <div class="col-sm-11 col-md-5 col-lg-3 pull-right margin-bottom-lg">

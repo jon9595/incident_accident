@@ -9,6 +9,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import edu.mizzou.incidentaccident.api.common.util.DateUtil;
+import edu.mizzou.incidentaccident.api.constants.AppConstants;
+
 
 public class RefusalOfCareModel implements Serializable {
 
@@ -17,7 +20,8 @@ public class RefusalOfCareModel implements Serializable {
     private byte[] memberSig;
     private byte[] staffSig;
     private Date date;
-
+    private String memberSignature;
+    private String staffSignature;
 	
     public Integer getId() {
         return this.id;
@@ -46,6 +50,14 @@ public class RefusalOfCareModel implements Serializable {
     }
 
 
+    public String getDateStr() {
+        return DateUtil.format(this.date, AppConstants.DATE_FORMAT_PATTERN_MDY);
+    }
+
+    public void setDateStr(String date) {
+        this.date = DateUtil.parse(date, AppConstants.DATE_FORMAT_PATTERN_MDY);
+    }
+
     public Date getDate() {
         return this.date;
     }
@@ -54,10 +66,23 @@ public class RefusalOfCareModel implements Serializable {
         this.date = date;
     }
 
+    public String getMemberSignature() {
+		return memberSignature;
+	}
 
+	public void setMemberSignature(String memberSignature) {
+		this.memberSignature = memberSignature;
+	}
 
-	
-    @Override
+	public String getStaffSignature() {
+		return staffSignature;
+	}
+
+	public void setStaffSignature(String staffSignature) {
+		this.staffSignature = staffSignature;
+	}
+
+	@Override
     public String toString() {
         StringBuffer sb = new StringBuffer();
         Field[] fields = this.getClass().getDeclaredFields();
