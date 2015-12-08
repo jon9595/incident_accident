@@ -68,6 +68,11 @@ public class DemographicsModel implements Serializable {
 	public void setTime(Date time) {
 		this.time = time;
 	}
+	
+	public String getDateTime() {
+		Date dt = DateUtil.addTime(this.date, this.time);
+		return DateUtil.format(dt, AppConstants.DATE_FORMAT_PATTERN_MDYHMA);
+	}
 
 	public String getName() {
         return this.name;

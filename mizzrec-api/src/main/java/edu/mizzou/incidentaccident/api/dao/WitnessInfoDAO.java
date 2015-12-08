@@ -81,7 +81,7 @@ public class WitnessInfoDAO implements DBConstants {
                     model.setId(rs.getInt("id"));
                     model.setName(rs.getString("name"));
                     model.setPhone(rs.getString("phone"));
-                    model.setSignature(rs.getBytes("signature"));
+                    model.setSig(rs.getBytes("signature"));
                 return model;
             }
         });
@@ -102,7 +102,7 @@ public class WitnessInfoDAO implements DBConstants {
                     model.setId(rs.getInt("id"));
                     model.setName(rs.getString("name"));
                     model.setPhone(rs.getString("phone"));
-                    model.setSignature(rs.getBytes("signature"));
+                    model.setSig(rs.getBytes("signature"));
                 return model;
             }
         });

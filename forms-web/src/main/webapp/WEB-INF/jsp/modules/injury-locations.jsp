@@ -4,6 +4,7 @@
 
     <div class="form-container padding-bottom-none">
         <fieldset><legend>Injury Location</legend>
+	      <span style="color: red;"><html:errors path="injurylocations" cssClass="err" /></span>                
           <div class="row margin-left-sm padding-left-lg padding-right-lg">
           <c:forEach items="${injuryLocationsMap}" var="injMap">
           <c:choose>
@@ -25,8 +26,8 @@
                       <div class="form-group">
                         <span class="additional-checked-info-wrap margin-bottom-sm">
                           <label class="checkbox-inline" for="il-${injMap.key}">
-                           <input type="checkbox" name="injury-location" id="il-${injMap.key}" value="il-${injMap.key}"/>
-                           ${injMap.key}
+                           <html:checkbox path="injurylocationHdr" id="il-${injMap.key}" class="injury-chkbox" value="il-${injMap.key}"/>
+                           ${injMap.key}<span class="spn-injury-chkbox hidden"><br/>Please select one below:</span>
                           </label>
                          <div class="additional-checked-info padding-top-lg padding-bottom-lg hide">
                            <div class="columns-2"> 

@@ -1,6 +1,5 @@
 package edu.mizzou.incidentaccident.web.controllers;
 
-import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import edu.mizzou.incidentaccident.api.models.AccidentModel;
 import edu.mizzou.incidentaccident.api.models.InjuryLocationsModel;
 import edu.mizzou.incidentaccident.api.services.AccidentDetailDescriptionService;
-import edu.mizzou.incidentaccident.api.services.AccidentDetailsService;
 import edu.mizzou.incidentaccident.api.services.AccidentService;
 import edu.mizzou.incidentaccident.api.services.InjuryLocationsService;
 import edu.mizzou.incidentaccident.api.services.LocationsService;
@@ -66,6 +64,12 @@ public class AccidentController {
 			accidentService.addAccident(accident);
 			return "redirect:/";
 		}
+	}
+	
+	@RequestMapping(value="/list")
+	public String getAccidentList(ModelMap map) {
+		map.addAttribute("accidents", accidentService.getAccidentList());
+		return "accident.list";
 	}
 	
 	private void setInjuryLocationsWithOutSubs(AccidentModel accident) {

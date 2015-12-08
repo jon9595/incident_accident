@@ -22,8 +22,17 @@
     setcheckboxes();
     setcheckboxstate();
     $('.phone').mask('000-000-0000');
+    $('.date').mask('00/00/0000');
+    $('.time').mask('00:00');
     $('.date').attr('autocomplete', 'off');
     $('.time').attr('autocomplete', 'off');
+    $('.injury-chkbox').click(function(){
+    	if($(this).is(':checked')){
+    		$(this).next().removeClass('hidden');
+    	} else {
+    		$(this).next().addClass('hidden');
+    	}
+    });
   });
 </script>
 <jsp:include page=""/>
@@ -43,11 +52,13 @@
               <jsp:include page="/WEB-INF/jsp/modules/accident-details.jsp"/>
               <jsp:include page="/WEB-INF/jsp/modules/accident-accounts.jsp"/>
               <jsp:include page="/WEB-INF/jsp/modules/refusal-of-care.jsp"/>
+              <jsp:include page="/WEB-INF/jsp/modules/accident-witness.jsp"/>
               <jsp:include page="/WEB-INF/jsp/modules/proper-notifications.jsp"/>
+              <jsp:include page="/WEB-INF/jsp/modules/report-completion.jsp"/>
 				<div class="form-container padding-bottom-none">
 	                <div class="form-group">
 	                  <div class="col-sm-11 col-md-5 col-lg-3 pull-right margin-bottom-lg">
-	                    <input type="submit" class="btn btn-large padding-left-xl padding-right-xl" value="Submit Changes">
+	                    <input type="submit" class="btn btn-large padding-left-xl padding-right-xl" value="Save Report">
 	                  </div>
 					</div>
 				</div>              

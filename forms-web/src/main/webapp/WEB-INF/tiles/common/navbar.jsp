@@ -15,7 +15,7 @@
           <li class="dropdown">
           	<a href="#" class="dropdown-toggle" data-toggle="dropdown">Accident Reports <b class="caret"></b></a>
           	<ul class="dropdown-menu">
-          	 	<li><a href="${pageContext.request.contextPath}/accident/"><i class="fa fa-files-o fa-fw"></i>&nbsp;View Reports</a></li>
+          	 	<li><a href="${pageContext.request.contextPath}/accident/list"><i class="fa fa-files-o fa-fw"></i>&nbsp;View Reports</a></li>
 	            <li class="divider"></li>
           		<li><a href="${pageContext.request.contextPath}/accident/create"><i class="fa fa-file-text-o fa-fw"></i>&nbsp; Create New Report</a></li>
           	</ul>

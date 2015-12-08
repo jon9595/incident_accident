@@ -39,6 +39,7 @@ public class ProperNotificationsDAO implements DBConstants {
             .append(", ems_called " )
             .append(", ems_arrived " )
             .append(", prof_staff_contacted " )
+            .append(", prof_staff_name " )
             .append(", prof_staff_called " )
             .append(", prof_staff_arrived " )
             .append(", report_completed_by " )
@@ -69,6 +70,7 @@ public class ProperNotificationsDAO implements DBConstants {
             .append(", ?")
             .append(", ?")
             .append(", ?")
+            .append(", ?")
             .append(")");
         Object[] args = {
             bean.getMupdOfficerName(), 
@@ -80,6 +82,7 @@ public class ProperNotificationsDAO implements DBConstants {
             bean.getEmsCalled(), 
             bean.getEmsArrived(), 
             bean.getProfStaffContacted(), 
+            bean.getProfStaffName(),
             bean.getProfStaffCalled(), 
             bean.getProfStaffArrived(), 
             bean.getReportCompletedBy(), 
@@ -108,6 +111,7 @@ public class ProperNotificationsDAO implements DBConstants {
         .append(", ems_called = ? " )
         .append(", ems_arrived = ? " )
         .append(", prof_staff_contacted = ? " )
+        .append(", prof_staff_name = ? " )
         .append(", prof_staff_called = ? " )
         .append(", prof_staff_arrived = ? " )
         .append(", report_completed_by = ? " )
@@ -131,6 +135,7 @@ public class ProperNotificationsDAO implements DBConstants {
             bean.getEmsCalled(), 
             bean.getEmsArrived(), 
             bean.getProfStaffContacted(), 
+            bean.getProfStaffName(),
             bean.getProfStaffCalled(), 
             bean.getProfStaffArrived(), 
             bean.getReportCompletedBy(), 
@@ -159,6 +164,7 @@ public class ProperNotificationsDAO implements DBConstants {
         ", ems_called" +
         ", ems_arrived" +
         ", prof_staff_contacted" +
+        ", prof_staff_name" +
         ", prof_staff_called" +
         ", prof_staff_arrived" +
         ", report_completed_by" +
@@ -184,6 +190,7 @@ public class ProperNotificationsDAO implements DBConstants {
                     model.setEmsCalled(rs.getTime("ems_called"));
                     model.setEmsArrived(rs.getTime("ems_arrived"));
                     model.setProfStaffContacted(rs.getString("prof_staff_contacted"));
+                    model.setProfStaffName(rs.getString("prof_staff_name"));
                     model.setProfStaffCalled(rs.getTime("prof_staff_called"));
                     model.setProfStaffArrived(rs.getTime("prof_staff_arrived"));
                     model.setReportCompletedBy(rs.getString("report_completed_by"));
@@ -213,6 +220,7 @@ public class ProperNotificationsDAO implements DBConstants {
         ", ems_called" +
         ", ems_arrived" +
         ", prof_staff_contacted" +
+        ", prof_staff_name" +
         ", prof_staff_called" +
         ", prof_staff_arrived" +
         ", report_completed_by" +
@@ -237,6 +245,7 @@ public class ProperNotificationsDAO implements DBConstants {
                     model.setEmsCalled(rs.getTime("ems_called"));
                     model.setEmsArrived(rs.getTime("ems_arrived"));
                     model.setProfStaffContacted(rs.getString("prof_staff_contacted"));
+                    model.setProfStaffName(rs.getString("prof_staff_name"));
                     model.setProfStaffCalled(rs.getTime("prof_staff_called"));
                     model.setProfStaffArrived(rs.getTime("prof_staff_arrived"));
                     model.setReportCompletedBy(rs.getString("report_completed_by"));

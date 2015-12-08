@@ -11,6 +11,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import edu.mizzou.incidentaccident.api.common.util.DateUtil;
 import edu.mizzou.incidentaccident.api.constants.DBConstants;
 import edu.mizzou.incidentaccident.api.models.DemographicsModel;
 
@@ -49,7 +50,7 @@ public class DemographicsDAO implements DBConstants {
             .append(", ?")
             .append(")");
         Object[] args = {
-            bean.getDate(), 
+            DateUtil.addTime(bean.getDate(), bean.getTime()), 
             bean.getName(), 
             bean.getGender(), 
             bean.getBirthDate(), 
@@ -79,7 +80,7 @@ public class DemographicsDAO implements DBConstants {
         sWhereStmt.append(" WHERE id = ?");
         sUpdateStmt.append( sWhereStmt );
         Object[] args = { 
-            bean.getDate(), 
+            DateUtil.addTime(bean.getDate(), bean.getTime()), 
             bean.getName(), 
             bean.getGender(), 
             bean.getBirthDate(), 
@@ -111,6 +112,7 @@ public class DemographicsDAO implements DBConstants {
                 DemographicsModel model = new DemographicsModel();
                     model.setId(rs.getInt("id"));
                     model.setDate(rs.getTimestamp("date")!=null?new java.util.Date(rs.getTimestamp("date").getTime()):null);
+                    model.setTime(DateUtil.getTime(rs.getTimestamp("date")!=null?new java.util.Date(rs.getTimestamp("date").getTime()):null));
                     model.setName(rs.getString("name"));
                     model.setGender(rs.getString("gender"));
                     model.setBirthDate(rs.getDate("birth_date")!=null?new java.util.Date(rs.getDate("birth_date").getTime()):null);
@@ -142,6 +144,7 @@ public class DemographicsDAO implements DBConstants {
                 DemographicsModel model = new DemographicsModel();
                     model.setId(rs.getInt("id"));
                     model.setDate(rs.getTimestamp("date")!=null?new java.util.Date(rs.getTimestamp("date").getTime()):null);
+                    model.setTime(DateUtil.getTime(rs.getTimestamp("date")!=null?new java.util.Date(rs.getTimestamp("date").getTime()):null));
                     model.setName(rs.getString("name"));
                     model.setGender(rs.getString("gender"));
                     model.setBirthDate(rs.getDate("birth_date")!=null?new java.util.Date(rs.getDate("birth_date").getTime()):null);

@@ -15,7 +15,9 @@ public class WitnessInfoModel implements Serializable {
     private Integer id;
     private String name;
     private String phone;
-    private byte[] signature;
+    private byte[] sig;
+    private String signature;
+    private String className;
 
 	
     public Integer getId() {
@@ -45,18 +47,33 @@ public class WitnessInfoModel implements Serializable {
     }
 
 
-    public byte[] getSignature() {
+    public byte[] getSig() {
+        return this.sig;
+    }
+
+    public void setSig(byte[] signature) {
+        this.sig = signature;
+    }
+
+    public String getSignature() {
         return this.signature;
     }
 
-    public void setSignature(byte[] signature) {
+    public void setSignature(String signature) {
         this.signature = signature;
     }
 
 
-
 	
-    @Override
+    public String getClassName() {
+		return className;
+	}
+
+	public void setClassName(String className) {
+		this.className = className;
+	}
+
+	@Override
     public String toString() {
         StringBuffer sb = new StringBuffer();
         Field[] fields = this.getClass().getDeclaredFields();

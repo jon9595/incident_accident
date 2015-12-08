@@ -50,6 +50,24 @@ function setcheckboxstate() {
 	      $(this).closest('.additional-info-wrap').find('.additional-info').addClass('hide').find('input,select').val('').attr('disabled','disabled');
 	  }
 	});
+	
+	$('.additional-checked-info-wrap input[type=checkbox]').each(function() {
+		  if($(this).is(':checked')) {
+			  $(this).closest('.checkbox-inline, .checkbox').toggleClass('checked');
+		      $(this).closest('.additional-checked-info-wrap').find('.additional-checked-info').removeClass('hide').find('input,select').removeAttr('disabled');
+		  }
+		  else {
+		  	if(!$(this).hasClass('yes-no')) {
+		      $(this).closest('.additional-checked-info-wrap').find('.additional-checked-info').addClass('hide').find('input[type=checkbox]').attr('checked',false).attr('disabled','disabled');
+		  	}
+		  }
+	});
+
+	$('input[type=radio]').each(function() {
+		  if($(this).is(':checked')) {
+			  $(this).closest('.radio-inline, .radio').addClass('checked');
+		  }
+	});
 }
 
 function setcurrenttime(dateObj, timeObj) {

@@ -372,3 +372,12 @@ a.navbar-brand:hover {
     border-bottom: 5px solid #e8a713;
     border-radius: 0px 0px 5px 5px;
 }
+
+.table {
+	color: #f0ad4e;
+}
+
+.table-bordered>thead>tr>th, .table-bordered>tbody>tr>th, .table-bordered>tfoot>tr>th, .table-bordered>thead>tr>td, .table-bordered>tbody>tr>td, .table-bordered>tfoot>tr>td
+{
+	border: 1px solid #f0ad4e !important;
+}

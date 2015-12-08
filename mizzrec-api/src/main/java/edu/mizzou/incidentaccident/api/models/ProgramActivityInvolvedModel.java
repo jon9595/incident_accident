@@ -252,6 +252,32 @@ public class ProgramActivityInvolvedModel implements Serializable {
 			}
 		}
 	}
+	
+	public String getProgramActivityDesc() {
+		StringBuffer sb = new StringBuffer();
+    	if (informalActivity) {
+			sb.append("Informal Activity").append(" - ").append(getInfActDesc());
+		}
+    	if (clubRecSports) {
+			sb.append("Club Sports").append(" - ").append(getClubRecTeamName());
+		}
+    	if (recSports) {
+			sb.append("Rec Sports").append(" - ").append(getRecTeamName());
+		}
+    	if (swimTeamPractice) {
+			sb.append("Swim Team Practice").append(" - ").append(getSwimTeamName());
+		}
+    	if (interAthletics) {
+			sb.append("Intercollegiate Athletics");
+		}
+    	if (tigerxPt) {
+			sb.append("Tiger X").append(" - ").append(getTigerxPrgName()).append("; ").append(getTigerxPtInstructor());
+		}
+    	if (specEvt) {
+			sb.append("Special Event").append(" - ").append(getSpecEvtGroup());
+		}
+    	return sb.toString();
+	}
 
 	@Override
     public String toString() {
