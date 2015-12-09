@@ -3,6 +3,7 @@ package edu.mizzou.incidentaccident.api.models;
 import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.HashMap;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -15,6 +16,12 @@ public class InjuryLocationsModel implements Serializable {
     private Integer id;
     private String location;
     private String subLocation;
+    private static HashMap<String, String> sublocations = new HashMap<String, String>();
+    
+    static {
+    	sublocations.put("L", "Left");
+    	sublocations.put("R", "Right");
+    }
 
 	
     public Integer getId() {
@@ -43,7 +50,14 @@ public class InjuryLocationsModel implements Serializable {
         this.subLocation = subLocation;
     }
 
-
+    public String getInjuryDescription() {
+    	StringBuffer sb = new StringBuffer();
+    	sb.append(this.getLocation());
+    	if (StringUtils.isNotBlank(getSubLocation())) {
+			sb.append(" - ").append(sublocations.get(getSubLocation()));
+		}
+    	return sb.toString();
+    }
 
 	
     @Override

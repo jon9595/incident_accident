@@ -15,7 +15,6 @@ public class AccidentDetailDescriptionModel implements Serializable, Comparable<
     private Integer id;
     private String description;
 
-	
     public Integer getId() {
         return this.id;
     }

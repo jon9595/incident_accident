@@ -259,21 +259,39 @@ public class ProgramActivityInvolvedModel implements Serializable {
 			sb.append("Informal Activity").append(" - ").append(getInfActDesc());
 		}
     	if (clubRecSports) {
+    		if (!sb.toString().isEmpty()) {
+				sb.append("\n");
+			}
 			sb.append("Club Sports").append(" - ").append(getClubRecTeamName());
 		}
     	if (recSports) {
+    		if (!sb.toString().isEmpty()) {
+				sb.append("\n");
+			}
 			sb.append("Rec Sports").append(" - ").append(getRecTeamName());
 		}
     	if (swimTeamPractice) {
+    		if (!sb.toString().isEmpty()) {
+				sb.append("\n");
+			}
 			sb.append("Swim Team Practice").append(" - ").append(getSwimTeamName());
 		}
     	if (interAthletics) {
+    		if (!sb.toString().isEmpty()) {
+				sb.append("\n");
+			}
 			sb.append("Intercollegiate Athletics");
 		}
     	if (tigerxPt) {
+    		if (!sb.toString().isEmpty()) {
+				sb.append("\n");
+			}
 			sb.append("Tiger X").append(" - ").append(getTigerxPrgName()).append("; ").append(getTigerxPtInstructor());
 		}
     	if (specEvt) {
+    		if (!sb.toString().isEmpty()) {
+				sb.append("\n");
+			}
 			sb.append("Special Event").append(" - ").append(getSpecEvtGroup());
 		}
     	return sb.toString();

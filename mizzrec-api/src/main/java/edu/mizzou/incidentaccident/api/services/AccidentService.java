@@ -10,9 +10,14 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import edu.mizzou.incidentaccident.api.dao.AccidentDAO;
+import edu.mizzou.incidentaccident.api.dao.AccidentDetailDescriptionDAO;
+import edu.mizzou.incidentaccident.api.dao.AccidentDetailsDAO;
+import edu.mizzou.incidentaccident.api.dao.AccidentInjuryLocationDAO;
 import edu.mizzou.incidentaccident.api.dao.AccidentLocationDAO;
 import edu.mizzou.incidentaccident.api.dao.AccountDescriptionDAO;
 import edu.mizzou.incidentaccident.api.dao.DemographicsDAO;
+import edu.mizzou.incidentaccident.api.dao.InjuryLocationsDAO;
+import edu.mizzou.incidentaccident.api.dao.LocationsDAO;
 import edu.mizzou.incidentaccident.api.dao.MembershipStatusDAO;
 import edu.mizzou.incidentaccident.api.dao.ProgramActivityInvolvedDAO;
 import edu.mizzou.incidentaccident.api.dao.ProperNotificationsDAO;
@@ -20,6 +25,9 @@ import edu.mizzou.incidentaccident.api.dao.RefusalOfCareDAO;
 import edu.mizzou.incidentaccident.api.dao.SpecificInjuryDAO;
 import edu.mizzou.incidentaccident.api.dao.SpecificLocationDAO;
 import edu.mizzou.incidentaccident.api.dao.WitnessInfoDAO;
+import edu.mizzou.incidentaccident.api.models.AccidentDetailDescriptionModel;
+import edu.mizzou.incidentaccident.api.models.AccidentDetailsModel;
+import edu.mizzou.incidentaccident.api.models.AccidentInjuryLocationModel;
 import edu.mizzou.incidentaccident.api.models.AccidentLocationModel;
 import edu.mizzou.incidentaccident.api.models.AccidentModel;
  
@@ -52,7 +60,16 @@ public class AccidentService {
     private SpecificInjuryDAO specificInjuryDao;
     @Autowired
     private SpecificLocationDAO specificLocationDao;
-    
+    @Autowired
+    private InjuryLocationsDAO injuryLocationsDao;
+    @Autowired
+    private AccidentInjuryLocationDAO accidentInjuryLocationDao;
+    @Autowired
+    private AccidentDetailDescriptionDAO accidentDetailDescriptionDao;
+    @Autowired
+    private LocationsDAO locationsDao;
+    @Autowired
+    private AccidentDetailsDAO accidentDetailsDao;
 	 
 
     public List<AccidentModel> getAccidentList() {
@@ -69,6 +86,9 @@ public class AccidentService {
 			accident.setProperNotifications(properNotificationsDao.getProperNotifications(accident.getProperNotificationsId()));
 			accident.setSpecInjLocation(specificInjuryDao.getSpecificInjury(accident.getSpecInjLocationId()));
 			accident.setSpecificLocation(specificLocationDao.getSpecificLocation(accident.getSpecificLocationId()));
+			accident.setAccidentLocations(locationsDao.getLocationsListForAccident(accident.getId()));
+			accident.setInjuryLocations(injuryLocationsDao.getInjuryLocationsForAccident(accident.getId()));
+			accident.setAccidentDetailDescriptions(accidentDetailDescriptionDao.getAccidentDetailDescriptionListForAccident(accident.getId()));
 		}
         return accidents;
     }
@@ -87,6 +107,9 @@ public class AccidentService {
 		accident.setProperNotifications(properNotificationsDao.getProperNotifications(accident.getProperNotificationsId()));
 		accident.setSpecInjLocation(specificInjuryDao.getSpecificInjury(accident.getSpecInjLocationId()));
 		accident.setSpecificLocation(specificLocationDao.getSpecificLocation(accident.getSpecificLocationId()));
+		accident.setAccidentLocations(locationsDao.getLocationsListForAccident(accident.getId()));
+		accident.setInjuryLocations(injuryLocationsDao.getInjuryLocationsForAccident(accident.getId()));
+		accident.setAccidentDetailDescriptions(accidentDetailDescriptionDao.getAccidentDetailDescriptionListForAccident(accident.getId()));
     	return accident;
     }
     
@@ -129,6 +152,16 @@ public class AccidentService {
     	if (accident.getLocations() != null && accident.getLocations().length > 0) {
 			for (String location  : accident.getLocations()) {
 				accidentLocationDao.addAccidentLocation(new AccidentLocationModel(id, new Integer(location)));
+			}
+		}
+    	if (accident.getAccidentDetails()!=null && accident.getAccidentDetails().length > 0) {
+			for (String accLoc : accident.getAccidentDetails()) {
+				accidentDetailsDao.addAccidentDetails(new AccidentDetailsModel(id, new Integer(accLoc)));
+			}
+		}
+    	if (accident.getInjurylocations()!=null && accident.getInjurylocations().length > 0) {
+    		for (String injLoc : accident.getInjurylocations()) {
+        		accidentInjuryLocationDao.addAccidentInjuryLocation(new AccidentInjuryLocationModel(id, new Integer(injLoc)));
 			}
 		}
         return id;
@@ -177,6 +210,18 @@ public class AccidentService {
 				accidentLocationDao.addAccidentLocation(new AccidentLocationModel(accident.getId(), new Integer(location)));
 			}
 		}
+    	accidentDetailsDao.deleteAccidentDetails(accident.getId());
+    	if (accident.getAccidentDetails()!=null && accident.getAccidentDetails().length > 0) {
+			for (String accLoc : accident.getAccidentDetails()) {
+				accidentDetailsDao.addAccidentDetails(new AccidentDetailsModel(accident.getId(), new Integer(accLoc)));
+			}
+		}
+    	accidentInjuryLocationDao.deleteAccidentInjuryLocation(accident.getId());
+    	if (accident.getInjurylocations()!=null && accident.getInjurylocations().length > 0) {
+    		for (String injLoc : accident.getInjurylocations()) {
+        		accidentInjuryLocationDao.addAccidentInjuryLocation(new AccidentInjuryLocationModel(accident.getId(), new Integer(injLoc)));
+			}
+		}
         return numrows;
     }
 
@@ -218,6 +263,9 @@ public class AccidentService {
         	if (accident.getSpecificLocation() != null) {
         		specificLocationDao.deleteSpecificLocation(accident.getSpecificLocationId());
     		}
+        	accidentLocationDao.deleteAccidentLocation(accident.getId());
+        	accidentDetailsDao.deleteAccidentDetails(accident.getId());
+        	accidentInjuryLocationDao.deleteAccidentInjuryLocation(accident.getId());
 		}
     	int numrows = accidentDao.deleteAccident(id);
         return numrows;

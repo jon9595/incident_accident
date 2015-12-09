@@ -42,7 +42,8 @@
     </div>
     <div class="row">
         <div class="col-md-12 col-lg-12">
-              <html:form method="post" modelAttribute="accidentForm" action="${pageContext.request.contextPath}/accident/create" class="form-horizontal" >
+              <html:form method="post" modelAttribute="accidentForm" action="${pageContext.request.contextPath}/accident/edit" class="form-horizontal" >
+              <html:hidden path="id"/>
               <jsp:include page="/WEB-INF/jsp/modules/demographics.jsp"/>
               <jsp:include page="/WEB-INF/jsp/modules/membership-status.jsp"/>
               <jsp:include page="/WEB-INF/jsp/modules/program-activity.jsp"/>
@@ -54,13 +55,13 @@
               <jsp:include page="/WEB-INF/jsp/modules/accident-witness.jsp"/>
               <jsp:include page="/WEB-INF/jsp/modules/proper-notifications.jsp"/>
               <jsp:include page="/WEB-INF/jsp/modules/report-completion.jsp"/>
-				<div class="form-container padding-bottom-none">
-	                <div class="form-group">
-	                  <div class="col-sm-11 col-md-5 col-lg-3 pull-right margin-bottom-lg">
-	                    <input type="submit" class="btn btn-large padding-left-xl padding-right-xl" value="Save Report">
-	                  </div>
-					</div>
-				</div>              
+              <%--
+			    <div class="col-md-12 col-lg-12">
+			        <div class="display-container" style="padding-top:10px; padding-bottom:10px;">
+						<input type="submit" class="btn btn-large padding-left-xl padding-right-xl" value="Save Report">
+			        </div>
+			    </div>
+               --%>
               </html:form>
         </div>
     </div>

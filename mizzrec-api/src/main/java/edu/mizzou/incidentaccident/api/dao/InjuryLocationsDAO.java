@@ -105,6 +105,25 @@ public class InjuryLocationsDAO implements DBConstants {
         });
     }
     
+    public List<InjuryLocationsModel> getInjuryLocationsForAccident(Integer accidentId) {
+        String sqlString = "select " +
+                "id" +
+                ", location" +
+                ", sub_location" +
+                " from " + INJURY_LOCATIONS +
+                " where id in (select injury_locations_id from " + ACCIDENT_INJURY_LOCATION + " where accident_id = ?)";
+        Object[] args = {accidentId};
+        return getTemplate().query(sqlString, args, new RowMapper<InjuryLocationsModel>() {
+            public InjuryLocationsModel mapRow(ResultSet rs, int rowNum) throws SQLException {
+                InjuryLocationsModel model = new InjuryLocationsModel();
+                    model.setId(rs.getInt("id"));
+                    model.setLocation(rs.getString("location"));
+                    model.setSubLocation(rs.getString("sub_location"));
+                return model;
+            }
+        });
+    }
+    
     public List<InjuryLocationsModel> getInjuryLocationsWithoutSub() {
         String sqlString = "select " +
         "id" +

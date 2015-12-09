@@ -195,6 +195,56 @@ public class MembershipStatusModel implements Serializable {
 		this.membership = membership;
 	}
 
+	public String getMembershipStatus() {
+		StringBuffer sb = new StringBuffer();
+    	if (this.student) {
+			sb.append("Student");
+		}
+    	if (this.facultyStaff) {
+    		if (!sb.toString().isEmpty()) {
+				sb.append(" ");
+			}
+			sb.append("Faculty/Staff");
+		}
+    	if (this.alumni) {
+    		if (!sb.toString().isEmpty()) {
+				sb.append(" ");
+			}
+			sb.append("Alumni");
+		}
+    	if (this.guest) {
+    		if (!sb.toString().isEmpty()) {
+				sb.append(" ");
+			}
+			sb.append("Guest");
+		}
+    	if (this.tigerXpress) {
+    		if (!sb.toString().isEmpty()) {
+				sb.append(" ");
+			}
+			sb.append("Tiger Express");
+		}
+    	if (this.stopOutStudent) {
+    		if (!sb.toString().isEmpty()) {
+				sb.append(" ");
+			}
+			sb.append("Stop-Out Student");
+		}
+    	if (this.houseHoldAdult) {
+    		if (!sb.toString().isEmpty()) {
+				sb.append(" ");
+			}
+			sb.append("Household Adult");
+		}
+    	if (this.other) {
+    		if (!sb.toString().isEmpty()) {
+				sb.append(" ");
+			}
+			sb.append("Other");
+		}		
+		return sb.toString();
+	}
+	
 	@Override
     public String toString() {
         StringBuffer sb = new StringBuffer();

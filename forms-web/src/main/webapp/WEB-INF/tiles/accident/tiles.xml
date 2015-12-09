@@ -7,8 +7,16 @@
 		<put-attribute name="content" value="/WEB-INF/tiles/accident/create.jsp"/>
 	</definition>
 
+	<definition name="accident.edit" extends="mainLayout">
+		<put-attribute name="content" value="/WEB-INF/tiles/accident/edit.jsp"/>
+	</definition>
+
 	<definition name="accident.list" extends="mainLayout">
 		<put-attribute name="content" value="/WEB-INF/tiles/accident/list.jsp"/>
+	</definition>
+
+	<definition name="accident.view" extends="mainLayout">
+		<put-attribute name="content" value="/WEB-INF/tiles/accident/view.jsp"/>
 	</definition>
 
 </tiles-definitions>

@@ -14,8 +14,17 @@ public class AccidentInjuryLocationModel implements Serializable {
     private static Logger log = LoggerFactory.getLogger(AccidentInjuryLocationModel.class);
     private Integer accidentId;
     private Integer injuryLocationsId;
+    
+    public AccidentInjuryLocationModel() {
+    	
+    }
+    
 
-	
+    public AccidentInjuryLocationModel(Integer accidentId, Integer locationId) {
+    	setAccidentId(accidentId);
+    	setInjuryLocationsId(locationId);
+    }
+
     public Integer getAccidentId() {
         return this.accidentId;
     }

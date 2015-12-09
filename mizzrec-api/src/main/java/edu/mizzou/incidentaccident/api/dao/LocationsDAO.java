@@ -103,6 +103,25 @@ public class LocationsDAO implements DBConstants {
         });
     }
     
+    public List<LocationsModel> getLocationsListForAccident(Integer accidentId) {
+        String sqlString = "select " +
+            "id" +
+            ", location" +
+            ", sub_location" +
+            " from " + LOCATIONS +
+            " where id in (select location_id from " + ACCIDENT_LOCATION + " where accident_id = ?)";
+        	Object[] args = {accidentId};
+            return getTemplate().query(sqlString, args, new RowMapper<LocationsModel>() {
+                public LocationsModel mapRow(ResultSet rs, int rowNum) throws SQLException {
+                    LocationsModel model = new LocationsModel();
+                        model.setId(rs.getInt("id"));
+                        model.setLocation(rs.getString("location"));
+                        model.setSubLocation(rs.getString("sub_location"));
+                    return model;
+                }
+            });
+    }
+    
     public HashMap<String, List<LocationsModel>> getLocations() {
 		String sqlString = "select " +
 		        "id" +

@@ -97,6 +97,23 @@ public class AccidentDetailDescriptionDAO implements DBConstants {
     }
 
 
+    public List<AccidentDetailDescriptionModel> getAccidentDetailDescriptionListForAccident(Integer accidentId) {
+    String sqlString = "select " +
+        "id" +
+        ", description" +
+        " from " + ACCIDENT_DETAIL_DESCRIPTION +
+        " where id in (select acc_det_desc_id from " + ACCIDENT_DETAILS + " where accident_id = ?)";
+    	Object[] args = {accidentId};
+    	return getTemplate().query(sqlString, args, new RowMapper<AccidentDetailDescriptionModel>() {
+            public AccidentDetailDescriptionModel mapRow(ResultSet rs, int rowNum) throws SQLException {
+                AccidentDetailDescriptionModel model = new AccidentDetailDescriptionModel();
+                    model.setId(rs.getInt("id"));
+                    model.setDescription(rs.getString("description"));
+                return model;
+            }
+        });
+    }
+
     public int deleteAccidentDetailDescription(Integer id) {
         StringBuffer sDeleteStmt = new StringBuffer(200);
         sDeleteStmt.append("DELETE FROM " + ACCIDENT_DETAIL_DESCRIPTION);

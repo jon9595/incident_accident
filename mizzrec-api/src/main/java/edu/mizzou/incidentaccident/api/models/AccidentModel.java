@@ -3,6 +3,7 @@ package edu.mizzou.incidentaccident.api.models;
 import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -39,6 +40,10 @@ public class AccidentModel implements Serializable {
     private ProperNotificationsModel properNotifications;
     private SpecificInjuryModel specInjLocation;
     private SpecificLocationModel specificLocation;
+    
+    private List<LocationsModel> accidentLocations;
+    private List<InjuryLocationsModel> injuryLocations;
+    private List<AccidentDetailDescriptionModel> accidentDetailDescriptions;
     
     private String[] locations;
     private String[] injurylocations;
@@ -164,6 +169,9 @@ public class AccidentModel implements Serializable {
 	}
 
 
+	public String getEmsContacted() {
+		return (properNotifications!=null && "Y".equals(properNotifications.getEmsContacted()))?"Yes":"No";
+	}
 
 	public Integer getProperNotificationsId() {
 		return properNotificationsId;
@@ -387,6 +395,91 @@ public class AccidentModel implements Serializable {
 
 	public void setSpecificLocation(SpecificLocationModel specificLocation) {
 		this.specificLocation = specificLocation;
+	}
+	
+	public String getAccidentLocationDesc() {
+		StringBuffer sb = new StringBuffer();
+		List<LocationsModel> al = getAccidentLocations();
+		if (al != null) {
+			for (LocationsModel alm : al) {
+				if (!sb.toString().isEmpty()) {
+					sb.append("\n");
+				}
+				sb.append(alm.getLocation()).append(" - ").append(alm.getSubLocation());
+			}
+		}
+		return sb.toString();
+	}
+
+	public List<LocationsModel> getAccidentLocations() {
+		return accidentLocations;
+	}
+
+	public void setAccidentLocations(List<LocationsModel> accidentLocations) {
+		this.accidentLocations = accidentLocations;
+		String[] locations = new String[accidentLocations.size()];
+		int loop = 0;
+		for (LocationsModel alm : accidentLocations) {
+			locations[loop++] = String.valueOf(alm.getId());
+		}
+		setLocations(locations);
+	}
+	
+	public String getInjuryLocationsDesc() {
+		StringBuffer sb = new StringBuffer();
+		List<InjuryLocationsModel> al = getInjuryLocations();
+		if (al != null) {
+			for (InjuryLocationsModel alm : al) {
+				if (!sb.toString().isEmpty()) {
+					sb.append("\n");
+				}
+				sb.append(alm.getInjuryDescription());
+			}
+		}
+		return sb.toString();
+	}
+
+	public List<InjuryLocationsModel> getInjuryLocations() {
+		return injuryLocations;
+	}
+
+	public void setInjuryLocations(List<InjuryLocationsModel> injuryLocations) {
+		this.injuryLocations = injuryLocations;
+		String[] inj = new String[injuryLocations.size()];
+		int loop = 0;
+		for (InjuryLocationsModel ilm : injuryLocations) {
+			inj[loop++] = String.valueOf(ilm.getId());
+		}
+		setInjurylocations(inj);
+	}
+
+	public String getAccidentDetailsDesc() {
+		StringBuffer sb = new StringBuffer();
+		List<AccidentDetailDescriptionModel> al = getAccidentDetailDescriptions();
+		if (al != null) {
+			for (AccidentDetailDescriptionModel alm : al) {
+				if (!sb.toString().isEmpty()) {
+					sb.append("\n");
+				}
+				sb.append(alm.getDescription());
+			}
+		}
+		return sb.toString();
+	}
+
+	public List<AccidentDetailDescriptionModel> getAccidentDetailDescriptions() {
+		return accidentDetailDescriptions;
+	}
+
+	public void setAccidentDetailDescriptions(
+			List<AccidentDetailDescriptionModel> accidentDetailDescriptions) {
+		this.accidentDetailDescriptions = accidentDetailDescriptions;
+		String[] inj = new String[accidentDetailDescriptions.size()];
+		int loop = 0;
+		for (AccidentDetailDescriptionModel addm : accidentDetailDescriptions) {
+			inj[loop++] = String.valueOf(addm.getId());
+		}
+		setAccidentDetails(inj);
 	}
 
 	public String getCreatedBy() {

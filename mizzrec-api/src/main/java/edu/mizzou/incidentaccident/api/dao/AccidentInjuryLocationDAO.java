@@ -33,7 +33,7 @@ public class AccidentInjuryLocationDAO implements DBConstants {
             .append(" accident_id " )
             .append(", injury_locations_id " )
             .append(") VALUES ( ")
-            .append(", ?")
+            .append(" ?")
             .append(", ?")
             .append(")");
         Object[] args = {
@@ -55,7 +55,8 @@ public class AccidentInjuryLocationDAO implements DBConstants {
         sUpdateStmt.append( sWhereStmt );
         Object[] args = {
             bean.getAccidentId(), 
-            bean.getInjuryLocationsId()};
+            bean.getInjuryLocationsId(),
+            bean.getAccidentId()};
         int numRows = getTemplate().update(sUpdateStmt.toString(), args);
         return numRows;
     }

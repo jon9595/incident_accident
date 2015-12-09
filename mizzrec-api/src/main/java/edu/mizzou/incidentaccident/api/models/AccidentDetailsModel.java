@@ -15,6 +15,14 @@ public class AccidentDetailsModel implements Serializable {
     private Integer accidentId;
     private Integer accDetDescId;
 
+    public AccidentDetailsModel () {
+    	
+    }
+
+    public AccidentDetailsModel (Integer accidentId, Integer descId) {
+    	setAccidentId(accidentId);
+    	setAccDetDescId(descId);
+    }
 	
     public Integer getAccidentId() {
         return this.accidentId;
