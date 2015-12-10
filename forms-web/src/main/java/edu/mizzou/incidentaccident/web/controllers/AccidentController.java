@@ -64,7 +64,7 @@ public class AccidentController {
 		} else {
 			accident.setCreatedBy(request.getUserPrincipal().getName());
 			accidentService.addAccident(accident);
-			return "redirect:/list";
+			return "redirect:/accident/list";
 		}
 	}
 	
@@ -90,7 +90,7 @@ public class AccidentController {
 		} else {
 			accident.setModifiedBy(request.getUserPrincipal().getName());
 			accidentService.updateAccident(accident);
-			return "redirect:/list";
+			return "redirect:/accident/list";
 		}
 	}
 

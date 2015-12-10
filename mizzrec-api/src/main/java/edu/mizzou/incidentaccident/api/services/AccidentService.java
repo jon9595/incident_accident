@@ -148,6 +148,12 @@ public class AccidentService {
     	if (accident.getSpecificLocation() != null && (accident.getSpecificLocation().isSpecEquipPiece() || accident.getSpecificLocation().isOther())) {
     		accident.setSpecificLocationId(specificLocationDao.addSpecificLocation(accident.getSpecificLocation()));
 		}
+    	if (accident.getWitnessOne()!=null) {
+			accident.setWitnessOneId(witnessInfoDao.addWitnessInfo(accident.getWitnessOne()));
+		}
+    	if (accident.getWitnessTwo()!=null) {
+			accident.setWitnessTwoId(witnessInfoDao.addWitnessInfo(accident.getWitnessTwo()));
+		}
     	int id = accidentDao.addAccident(accident);
     	if (accident.getLocations() != null && accident.getLocations().length > 0) {
 			for (String location  : accident.getLocations()) {
@@ -170,39 +176,81 @@ public class AccidentService {
 	 
     @Transactional(propagation=Propagation.REQUIRED)
     public int updateAccident(AccidentModel accident) {
-    	int numrows = accidentDao.updateAccident(accident);
     	if (accident.getDemographics()!=null) {
+    		accident.getDemographics().setId(accident.getDemographicsId());
         	demographicsDao.updateDemographics(accident.getDemographics());
 		}
     	if (accident.getMembershipStatus() != null) {
+    		accident.getMembershipStatus().setId(accident.getMembershipStatusId());
     		membershipStatusDao.updateMembershipStatus(accident.getMembershipStatus());
 		}
     	if (accident.getProgramActivity() != null) {
+    		accident.getProgramActivity().setId(accident.getProgramActivityId());
     		programActivityInvolvedDao.updateProgramActivityInvolved(accident.getProgramActivity());
 		}
     	if (accident.getResponderAcct() != null) {
-    		accountDescriptionDao.updateAccountDescription(accident.getResponderAcct());
+    		if (accident.getResponderAcctId() == 0) {
+    			accident.setResponderAcctId(accountDescriptionDao.addAccountDescription(accident.getResponderAcct()));
+			} else {
+	    		accident.getResponderAcct().setId(accident.getResponderAcctId());
+	    		accountDescriptionDao.updateAccountDescription(accident.getResponderAcct());
+			}
 		}
     	if (accident.getMemberAcct() != null) {
-    		accountDescriptionDao.updateAccountDescription(accident.getMemberAcct());
+    		if (accident.getMemberAcctId() == 0) {
+    			accident.setMemberAcctId(accountDescriptionDao.addAccountDescription(accident.getMemberAcct()));
+			} else {
+	    		accident.getMemberAcct().setId(accident.getMemberAcctId());
+	    		accountDescriptionDao.updateAccountDescription(accident.getMemberAcct());
+			}
 		}
     	if (accident.getRefusalOfCare() != null) {
-    		refusalOfCareDao.updateRefusalOfCare(accident.getRefusalOfCare());
+    		if (accident.getRefusalOfCareId() == 0) {
+    			accident.setRefusalOfCareId(refusalOfCareDao.addRefusalOfCare(accident.getRefusalOfCare()));
+			} else {
+				accident.getRefusalOfCare().setId(accident.getRefusalOfCareId());
+	    		refusalOfCareDao.updateRefusalOfCare(accident.getRefusalOfCare());
+			}
 		}
     	if (accident.getWitnessOne() != null) {
-    		witnessInfoDao.updateWitnessInfo(accident.getWitnessOne());
+    		if (accident.getWitnessOneId() == 0) {
+				accident.setWitnessOneId(witnessInfoDao.addWitnessInfo(accident.getWitnessOne()));
+			} else {
+				accident.getWitnessOne().setId(accident.getWitnessOneId());
+	    		witnessInfoDao.updateWitnessInfo(accident.getWitnessOne());
+			}
 		}
     	if (accident.getWitnessTwo() != null) {
-    		witnessInfoDao.updateWitnessInfo(accident.getWitnessTwo());
+    		if (accident.getWitnessTwoId() == 0) {
+				accident.setWitnessTwoId(witnessInfoDao.addWitnessInfo(accident.getWitnessTwo()));
+			} else {
+				accident.getWitnessTwo().setId(accident.getWitnessTwoId());
+	    		witnessInfoDao.updateWitnessInfo(accident.getWitnessTwo());
+			}
 		}
     	if (accident.getProperNotifications() != null) {
-    		properNotificationsDao.updateProperNotifications(accident.getProperNotifications());
+    		if (accident.getProperNotificationsId() == 0) {
+    			accident.setProperNotificationsId(properNotificationsDao.addProperNotifications(accident.getProperNotifications()));
+			} else {
+				accident.getProperNotifications().setId(accident.getProperNotificationsId());
+	    		properNotificationsDao.updateProperNotifications(accident.getProperNotifications());
+			}
 		}
     	if (accident.getSpecInjLocation() != null) {
-    		specificInjuryDao.updateSpecificInjury(accident.getSpecInjLocation());
+    		if (accident.getSpecInjLocationId() == 0) {
+    			accident.setSpecInjLocationId(specificInjuryDao.addSpecificInjury(accident.getSpecInjLocation()));
+			} else {
+				accident.getSpecInjLocation().setId(accident.getSpecInjLocationId());
+	    		specificInjuryDao.updateSpecificInjury(accident.getSpecInjLocation());
+			}
 		}
     	if (accident.getSpecificLocation() != null) {
-    		specificLocationDao.updateSpecificLocation(accident.getSpecificLocation());
+    		if (accident.getSpecificLocationId() == 0) {
+    			accident.setSpecificLocationId(specificLocationDao.addSpecificLocation(accident.getSpecificLocation()));
+			} else {
+				accident.getSpecificLocation().setId(accident.getSpecificLocationId());
+	    		specificLocationDao.updateSpecificLocation(accident.getSpecificLocation());
+			}
 		}
     	accidentLocationDao.deleteAccidentLocation(accident.getId());
     	if (accident.getLocations() != null && accident.getLocations().length > 0) {
@@ -222,6 +270,7 @@ public class AccidentService {
         		accidentInjuryLocationDao.addAccidentInjuryLocation(new AccidentInjuryLocationModel(accident.getId(), new Integer(injLoc)));
 			}
 		}
+    	int numrows = accidentDao.updateAccident(accident);
         return numrows;
     }
 

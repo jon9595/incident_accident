@@ -67,8 +67,7 @@ public class DemographicsDAO implements DBConstants {
         StringBuffer sUpdateStmt = new StringBuffer(200);
         sUpdateStmt.append("UPDATE " + DEMOGRAPHICS)
         .append(" SET ")
-        .append(" id = ? " )
-        .append(", date = ? " )
+        .append(" date = ? " )
         .append(", name = ? " )
         .append(", gender = ? " )
         .append(", birth_date = ? " )
