@@ -422,3 +422,16 @@ pre {
     margin-right: 15px;
     padding: 10px;
 }
+.noscreen {
+	display: none;
+}
+
+@media print {
+	.btn {display:none;}
+	.noscreen {
+		display: block;
+	}
+	.noprint {
+		display: none;
+	}
+} 

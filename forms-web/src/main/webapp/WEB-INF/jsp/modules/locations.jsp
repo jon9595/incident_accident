@@ -36,7 +36,7 @@
 						<span style="color: red;"><html:errors path="specificLocation.otherDesc" cssClass="err" /></span>                
                         <span class="additional-info-wrap">
                            <label class="checkbox-inline" for="add-other">
-                             <html:checkbox path="specificLocation.other" id="add-other" class="checkbox"/>
+                             <html:checkbox path="specificLocation.other" id="add-other"/>
                              Other
                            </label> 
                            <div class="additional-info hide">

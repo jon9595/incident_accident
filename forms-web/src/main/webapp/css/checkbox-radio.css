@@ -55,7 +55,7 @@ label.radio-inline.checked, label.checkbox-inline.checked {
 }
 
 .additional-info-wrap {
-  margin: 0 2% 0 0;
+/**  margin: 0 2% 0 0; */
   min-width: 190px;
   position: relative;
   vertical-align: top;

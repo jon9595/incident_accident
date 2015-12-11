@@ -409,6 +409,20 @@ public class AccidentModel implements Serializable {
 				sb.append(alm.getLocation()).append(" - ").append(alm.getSubLocation());
 			}
 		}
+		if (this.specificLocation != null) {
+			if (this.specificLocation.isSpecEquipPiece()) {
+				if (!sb.toString().isEmpty()) {
+					sb.append("\n");
+				}
+				sb.append("Specific Location: ").append(this.specificLocation.getSpecEquipPieceDesc());
+			}
+			if (this.specificLocation.isOther()) {
+				if (!sb.toString().isEmpty()) {
+					sb.append("\n");
+				}
+				sb.append("Other: ").append(this.specificLocation.getOtherDesc());
+			}
+		}
 		return sb.toString();
 	}
 
@@ -436,6 +450,12 @@ public class AccidentModel implements Serializable {
 				}
 				sb.append(alm.getInjuryDescription());
 			}
+		}
+		if (this.specInjLocation !=null && StringUtils.isNotBlank(this.specInjLocation.getDescription())) {
+			if (!sb.toString().isEmpty()) {
+				sb.append("\n");
+			}
+			sb.append("Specific Injury Location: ").append(this.specInjLocation.getDescription());
 		}
 		return sb.toString();
 	}

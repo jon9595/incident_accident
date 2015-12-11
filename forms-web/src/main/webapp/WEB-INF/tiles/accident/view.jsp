@@ -3,11 +3,14 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 
-<div class="page-header padding-top-md">
+<div class="page-header padding-top-md noprint">
+  <h1>Accident Report - ${accident.demographics.name}</h1>
+</div>
+<div class="page-header margin-top-none margin-bottom-none padding-top-none padding-bottom-none noscreen">
   <h1>Accident Report - ${accident.demographics.name}</h1>
 </div>
 <div class="row">
-    <div class="col-md-12 col-lg-12">
+    <div class="col-md-12 col-lg-12 noprint">
         <div class="display-container" style="padding-top:10px; padding-bottom:10px;">
         <button class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/accident/edit/${accident.id}';">Edit Report</button>
         </div>
@@ -187,7 +190,7 @@
         </fieldset>
 		</div>
      </div>
-    <div class="col-md-12 col-lg-12">
+    <div class="col-md-12 col-lg-12 noprint">
         <div class="display-container" style="padding-top:10px; padding-bottom:10px;">
         <button class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/accident/edit/${accident.id}';">Edit Report</button>
         </div>
