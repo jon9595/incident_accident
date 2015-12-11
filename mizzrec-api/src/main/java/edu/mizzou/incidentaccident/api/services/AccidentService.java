@@ -87,7 +87,7 @@ public class AccidentService {
 			accident.setSpecInjLocation(specificInjuryDao.getSpecificInjury(accident.getSpecInjLocationId()));
 			accident.setSpecificLocation(specificLocationDao.getSpecificLocation(accident.getSpecificLocationId()));
 			accident.setAccidentLocations(locationsDao.getLocationsListForAccident(accident.getId()));
-			accident.setInjuryLocations(injuryLocationsDao.getInjuryLocationsForAccident(accident.getId()));
+			accident.setInjuryAccidentLocations(injuryLocationsDao.getInjuryLocationsForAccident(accident.getId()));
 			accident.setAccidentDetailDescriptions(accidentDetailDescriptionDao.getAccidentDetailDescriptionListForAccident(accident.getId()));
 		}
         return accidents;
@@ -108,7 +108,7 @@ public class AccidentService {
 		accident.setSpecInjLocation(specificInjuryDao.getSpecificInjury(accident.getSpecInjLocationId()));
 		accident.setSpecificLocation(specificLocationDao.getSpecificLocation(accident.getSpecificLocationId()));
 		accident.setAccidentLocations(locationsDao.getLocationsListForAccident(accident.getId()));
-		accident.setInjuryLocations(injuryLocationsDao.getInjuryLocationsForAccident(accident.getId()));
+		accident.setInjuryAccidentLocations(injuryLocationsDao.getInjuryLocationsForAccident(accident.getId()));
 		accident.setAccidentDetailDescriptions(accidentDetailDescriptionDao.getAccidentDetailDescriptionListForAccident(accident.getId()));
     	return accident;
     }

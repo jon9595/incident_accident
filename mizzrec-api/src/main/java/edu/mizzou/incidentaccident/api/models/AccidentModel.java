@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.List;
+import java.util.TreeSet;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -42,7 +43,7 @@ public class AccidentModel implements Serializable {
     private SpecificLocationModel specificLocation;
     
     private List<LocationsModel> accidentLocations;
-    private List<InjuryLocationsModel> injuryLocations;
+    private List<InjuryLocationsModel> injuryAccidentLocations;
     private List<AccidentDetailDescriptionModel> accidentDetailDescriptions;
     
     private String[] locations;
@@ -427,7 +428,7 @@ public class AccidentModel implements Serializable {
 	
 	public String getInjuryLocationsDesc() {
 		StringBuffer sb = new StringBuffer();
-		List<InjuryLocationsModel> al = getInjuryLocations();
+		List<InjuryLocationsModel> al = getInjuryAccidentLocations();
 		if (al != null) {
 			for (InjuryLocationsModel alm : al) {
 				if (!sb.toString().isEmpty()) {
@@ -439,17 +440,20 @@ public class AccidentModel implements Serializable {
 		return sb.toString();
 	}
 
-	public List<InjuryLocationsModel> getInjuryLocations() {
-		return injuryLocations;
+	public List<InjuryLocationsModel> getInjuryAccidentLocations() {
+		return injuryAccidentLocations;
 	}
 
-	public void setInjuryLocations(List<InjuryLocationsModel> injuryLocations) {
-		this.injuryLocations = injuryLocations;
-		String[] inj = new String[injuryLocations.size()];
+	public void setInjuryAccidentLocations(List<InjuryLocationsModel> injuryLocations) {
+		this.injuryAccidentLocations = injuryLocations;
+		String[] inj = new String[injuryAccidentLocations.size()];
+		TreeSet<String> injHdr = new TreeSet<String>();
 		int loop = 0;
-		for (InjuryLocationsModel ilm : injuryLocations) {
+		for (InjuryLocationsModel ilm : injuryAccidentLocations) {
 			inj[loop++] = String.valueOf(ilm.getId());
+			injHdr.add("il-"+ilm.getLocation());
 		}
+		setInjurylocationHdr(injHdr.toArray(new String[injHdr.size()]));
 		setInjurylocations(inj);
 	}
 

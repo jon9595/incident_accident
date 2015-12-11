@@ -55,7 +55,8 @@ public class SpecificInjuryDAO implements DBConstants {
         sUpdateStmt.append( sWhereStmt );
         Object[] args = {
             bean.getId(), 
-            bean.getDescription()};
+            bean.getDescription(),
+            bean.getId()};
         int numRows = getTemplate().update(sUpdateStmt.toString(), args);
         return numRows;
     }

@@ -55,7 +55,8 @@ public class AccountDescriptionDAO implements DBConstants {
         sUpdateStmt.append( sWhereStmt );
         Object[] args = {
             bean.getId(), 
-            bean.getAcctDesc()};
+            bean.getAcctDesc(),
+            bean.getId()};
         int numRows = getTemplate().update(sUpdateStmt.toString(), args);
         return numRows;
     }

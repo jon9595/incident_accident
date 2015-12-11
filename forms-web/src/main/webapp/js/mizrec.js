@@ -40,10 +40,11 @@ function setcheckboxes() {
 }
 
 function setcheckboxstate() {
+
 	//Show additional info text box when relevant checkbox checked
 	$('.additional-info-wrap input[type=checkbox]').each(function() {
 	  if($(this).is(':checked')) {
-		  $(this).closest('.checkbox-inline, .checkbox').toggleClass('checked');
+		  $(this).closest('.checkbox-inline, .checkbox').addClass('checked');
 	      $(this).closest('.additional-info-wrap').find('.additional-info').removeClass('hide').find('input,select').removeAttr('disabled');
 	  }
 	  else {
@@ -53,7 +54,7 @@ function setcheckboxstate() {
 	
 	$('.additional-checked-info-wrap input[type=checkbox]').each(function() {
 		  if($(this).is(':checked')) {
-			  $(this).closest('.checkbox-inline, .checkbox').toggleClass('checked');
+			  $(this).closest('.checkbox-inline, .checkbox').addClass('checked');
 		      $(this).closest('.additional-checked-info-wrap').find('.additional-checked-info').removeClass('hide').find('input,select').removeAttr('disabled');
 		  }
 		  else {
@@ -63,11 +64,33 @@ function setcheckboxstate() {
 		  }
 	});
 
+/*	var loop = 0;
+	$('.checkbox-inline .yes-no').each(function(){
+		if (++loop < 3) {
+			$.each(this.attributes, function(){
+				if(this.specified) {
+					alert(this.name + ":" + this.value);
+				}
+			});
+		}
+	});
+*/	
 	$('input[type=radio]').each(function() {
 		  if($(this).is(':checked')) {
 			  $(this).closest('.radio-inline, .radio').addClass('checked');
+		  } else {
+			  $(this).closest('.radio-inline, .radio').removeClass('checked');
 		  }
 	});
+	
+	$('input[type=checkbox]').each(function() {
+			if ($(this).is(':checked')) {
+				  $(this).closest('.checkbox-inline, .checkbox').addClass('checked');
+			} else {
+				  $(this).closest('.checkbox-inline, .checkbox').removeClass('checked');
+			}
+		});
+
 }
 
 function setcurrenttime(dateObj, timeObj) {
