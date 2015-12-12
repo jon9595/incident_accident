@@ -79,8 +79,8 @@ public class RefusalOfCareDAO implements DBConstants {
             public RefusalOfCareModel mapRow(ResultSet rs, int rowNum) throws SQLException {
                 RefusalOfCareModel model = new RefusalOfCareModel();
                     model.setId(rs.getInt("id"));
-                    model.setMemberSig(rs.getBytes("member_sig"));
-                    model.setStaffSig(rs.getBytes("staff_sig"));
+                    model.setMemberSig(rs.getInt("member_sig"));
+                    model.setStaffSig(rs.getInt("staff_sig"));
                     model.setDate(rs.getDate("date")!=null?new java.util.Date(rs.getDate("date").getTime()):null);
                 return model;
             }
@@ -100,8 +100,8 @@ public class RefusalOfCareDAO implements DBConstants {
             public RefusalOfCareModel mapRow(ResultSet rs, int rowNum) throws SQLException {
                 RefusalOfCareModel model = new RefusalOfCareModel();
                     model.setId(rs.getInt("id"));
-                    model.setMemberSig(rs.getBytes("member_sig"));
-                    model.setStaffSig(rs.getBytes("staff_sig"));
+                    model.setMemberSig(rs.getInt("member_sig"));
+                    model.setStaffSig(rs.getInt("staff_sig"));
                     model.setDate(rs.getDate("date")!=null?new java.util.Date(rs.getDate("date").getTime()):null);
                 return model;
             }

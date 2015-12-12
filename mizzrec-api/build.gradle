@@ -26,5 +26,6 @@ dependencies {
 		[group: 'commons-codec', name: 'commons-codec', version: commonsCodecVersion],
 		[group: 'commons-collections', name: 'commons-collections', version: '3.2'],
 		[group: 'org.springframework', name: 'spring-jdbc', version: springVersion],
+		[group: 'com.google.code.gson', name: 'gson', version: '1.7.1']
 	)
 }

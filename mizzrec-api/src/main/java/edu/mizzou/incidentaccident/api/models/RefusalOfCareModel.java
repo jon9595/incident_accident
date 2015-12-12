@@ -17,11 +17,13 @@ public class RefusalOfCareModel implements Serializable {
 
     private static Logger log = LoggerFactory.getLogger(RefusalOfCareModel.class);
     private Integer id;
-    private byte[] memberSig;
-    private byte[] staffSig;
+    private Integer memberSig;
+    private Integer staffSig;
     private Date date;
     private String memberSignature;
     private String staffSignature;
+    private String output;
+    private String output2;
 	
     public Integer getId() {
         return this.id;
@@ -31,26 +33,23 @@ public class RefusalOfCareModel implements Serializable {
         this.id = id;
     }
 
+    public Integer getMemberSig() {
+		return memberSig;
+	}
 
-    public byte[] getMemberSig() {
-        return this.memberSig;
-    }
+	public void setMemberSig(Integer memberSig) {
+		this.memberSig = memberSig;
+	}
 
-    public void setMemberSig(byte[] memberSig) {
-        this.memberSig = memberSig;
-    }
+	public Integer getStaffSig() {
+		return staffSig;
+	}
 
+	public void setStaffSig(Integer staffSig) {
+		this.staffSig = staffSig;
+	}
 
-    public byte[] getStaffSig() {
-        return this.staffSig;
-    }
-
-    public void setStaffSig(byte[] staffSig) {
-        this.staffSig = staffSig;
-    }
-
-
-    public String getDateStr() {
+	public String getDateStr() {
         return DateUtil.format(this.date, AppConstants.DATE_FORMAT_PATTERN_MDY);
     }
 

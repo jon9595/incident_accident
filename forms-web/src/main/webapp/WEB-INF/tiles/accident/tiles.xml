@@ -19,4 +19,8 @@
 		<put-attribute name="content" value="/WEB-INF/tiles/accident/view.jsp"/>
 	</definition>
 
+	<definition name="accident.signature" extends="mainLayout">
+		<put-attribute name="content" value="/WEB-INF/tiles/accident/signature2.jsp"/>
+	</definition>
+
 </tiles-definitions>

@@ -1,6 +1,20 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="html" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+ <link href="${pageContext.request.contextPath}/js/signature-pad/jquery.signaturepad.css" rel="stylesheet">
+ <!--[if lt IE 9]><script src="${pageContext.request.contextPath}/js/signature-pad/flashcanvas.js"></script><![endif]-->
+ <script src="${pageContext.request.contextPath}/js/signature-pad/jquery.signaturepad.js" type="text/javascript"></script>
+ <script src="${pageContext.request.contextPath}/js/signature-pad/json2.min.js" type="text/javascript"></script>
 
+ <script>
+    $(document).ready(function() {
+    	var mbr = $('#memberCanvas').signaturePad({drawOnly:true, lineTop:80});
+    	var sft = $('#staffCanvas').signaturePad({drawOnly:true, lineTop:80});
+    	$('#spnMbr').click(function(){
+    		mbr.clearCanvas();
+    	});
+    });
+  </script>
+  
     <div class="form-container padding-bottom-none">
         <fieldset><legend>Refusal of Care <small class="text-muted">(If guest refuses medical care)</small></legend>
         <p class="text-muted">The staff of MizzouRec has informed the injured party that they have a suspected medical injury.  At this time, 
@@ -11,20 +25,35 @@
           <div class="row margin-left-sm margin-right-sm">
 		  <div class="col-md-12">
           	<div class="form-group">
-          		<div class="col-md-9">
+          		<div class="col-md-6 sigPad margin-right-xl" id="memberCanvas">
 				<label for="refusalCare">
-				Member Signature
+				Member Signature:  <span id="spnMbr">Clear</span>
 				</label>
-				<html:textarea path="refusalOfCare.memberSignature" class="form-control col-md-6 margin-bottom-md" id="refusalCare" rows="5"/>
+					<div class="sig sigWrapper">
+					<canvas class="pad" width="458" height="85" id="refusalCare"></canvas>
+					<html:hidden path="refusalOfCare.memberSignature" class="output"/>
+					</div>
           		</div>
-          		<div class="col-md-3">
-				<label for="memberRefusalDate">
-				Date
-				</label>
-				<html:input type="text" path="refusalOfCare.dateStr" class="form-control col-md-3 margin-bottom-md date" id="memberRefusalDate"/>
-          		</div>
+				<div class="col-md-6 sigPad" id="staffCanvas">
+					<label for="staffSig">
+					Staff Signature:
+					</label>
+					<div class="sig sigWrapper">
+					<canvas class="pad" width="458" height="85" id="staffSig"></canvas>
+					<html:hidden path="refusalOfCare.staffSignature" class="output"/>
+					</div>
+				</div>
           	</div>
           </div>
+   		<div class="col-md-3">
+   		<div class="form-group">
+			<label for="memberRefusalDate">
+			Date:
+			</label>
+			<html:input type="text" path="refusalOfCare.dateStr" class="form-control col-md-3 margin-bottom-md date" id="memberRefusalDate"/>
+   		</div>
+		</div>
+          
           </div>
         </fieldset>
 	</div>
