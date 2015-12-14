@@ -7,10 +7,24 @@
 
  <script>
     $(document).ready(function() {
-    	var mbr = $('#memberCanvas').signaturePad({drawOnly:true, lineTop:80});
-    	var sft = $('#staffCanvas').signaturePad({drawOnly:true, lineTop:80});
+		var mbrSig = $('#refusalOfCareMemberSignature').val();
+		var stfSig = $('#refusalOfCareStaffSignature').val();
+    	var mbr = $('#memberCanvas').signaturePad({drawOnly:true, lineTop:80, validateFields:false});
+    	var sft = $('#staffCanvas').signaturePad({drawOnly:true, lineTop:80, validateFields:false});
+
+		if(mbrSig != '') {
+        	mbr.regenerate(mbrSig);
+    	}
+    	
+    	if(stfSig != '') {
+        	sft.regenerate(stfSig);
+    	}
+    	
     	$('#spnMbr').click(function(){
     		mbr.clearCanvas();
+    	});
+    	$('#staffMbr').click(function(){
+    		sft.clearCanvas();
     	});
     });
   </script>
@@ -27,20 +41,21 @@
           	<div class="form-group">
           		<div class="col-md-6 sigPad margin-right-xl" id="memberCanvas">
 				<label for="refusalCare">
-				Member Signature:  <span id="spnMbr">Clear</span>
+				Member Signature:  &nbsp;&nbsp;<span id="spnMbr" class="sigClear">Clear</span>
 				</label>
 					<div class="sig sigWrapper">
 					<canvas class="pad" width="458" height="85" id="refusalCare"></canvas>
-					<html:hidden path="refusalOfCare.memberSignature" class="output"/>
+					<html:hidden path="refusalOfCare.memberSignature" class="output" id="refusalOfCareMemberSignature"/>
 					</div>
           		</div>
 				<div class="col-md-6 sigPad" id="staffCanvas">
 					<label for="staffSig">
-					Staff Signature:
+					Staff Signature:   &nbsp;&nbsp;<span id="staffMbr" class="sigClear">Clear</span>
 					</label>
 					<div class="sig sigWrapper">
 					<canvas class="pad" width="458" height="85" id="staffSig"></canvas>
-					<html:hidden path="refusalOfCare.staffSignature" class="output"/>
+					<html:hidden path="refusalOfCare.staffSignature" class="output" id="refusalOfCareStaffSignature"/>
+					<span style="color: red;"><html:errors path="refusalOfCare.staffSignature" cssClass="err" /></span>
 					</div>
 				</div>
           	</div>
@@ -51,6 +66,7 @@
 			Date:
 			</label>
 			<html:input type="text" path="refusalOfCare.dateStr" class="form-control col-md-3 margin-bottom-md date" id="memberRefusalDate"/>
+   			<span style="color: red;"><html:errors path="refusalOfCare.dateStr" cssClass="err" /></span>
    		</div>
 		</div>
           

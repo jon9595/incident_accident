@@ -16,6 +16,7 @@ public class AccidentValidator implements Validator {
 	ProgramActivityValidator pav = new ProgramActivityValidator();
 	ProperNotificationsValidator pnv = new ProperNotificationsValidator();
 	WitnessInfoValidator wiv = new WitnessInfoValidator();
+	RefusalOfCareValidator rocv = new RefusalOfCareValidator();
 	
 	@Override
 	public boolean supports(Class<?> clazz) {
@@ -45,6 +46,8 @@ public class AccidentValidator implements Validator {
 		}
 		wiv.validate(accident.getWitnessOne(), errors);
 		wiv.validate(accident.getWitnessTwo(), errors);
+		rocv.validate(accident.getRefusalOfCare(), errors);
+		
 	}
 
 }

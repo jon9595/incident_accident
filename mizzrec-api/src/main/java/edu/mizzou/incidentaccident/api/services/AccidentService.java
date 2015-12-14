@@ -1,7 +1,13 @@
 package edu.mizzou.incidentaccident.api.services;
  
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.List;
 
+import javax.imageio.ImageIO;
+
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import edu.mizzou.incidentaccident.api.common.util.SignatureToImage;
 import edu.mizzou.incidentaccident.api.dao.AccidentDAO;
 import edu.mizzou.incidentaccident.api.dao.AccidentDetailDescriptionDAO;
 import edu.mizzou.incidentaccident.api.dao.AccidentDetailsDAO;
@@ -30,6 +37,7 @@ import edu.mizzou.incidentaccident.api.models.AccidentDetailsModel;
 import edu.mizzou.incidentaccident.api.models.AccidentInjuryLocationModel;
 import edu.mizzou.incidentaccident.api.models.AccidentLocationModel;
 import edu.mizzou.incidentaccident.api.models.AccidentModel;
+import edu.mizzou.incidentaccident.api.models.SignaturesModel;
  
  
 @Service("accidentService")
@@ -130,7 +138,10 @@ public class AccidentService {
     	if (accident.getMemberAcct() != null) {
     		accident.setMemberAcctId(accountDescriptionDao.addAccountDescription(accident.getMemberAcct()));
 		}
-    	if (accident.getRefusalOfCare() != null) {
+    	if (accident.getRefusalOfCare() != null && StringUtils.isNotBlank(accident.getRefusalOfCare().getMemberSignature())) {
+    		SignaturesModel memberSig = new SignaturesModel();
+    		memberSig.setJsonData(accident.getRefusalOfCare().getMemberSignature());
+    		ss
     		accident.setRefusalOfCareId(refusalOfCareDao.addRefusalOfCare(accident.getRefusalOfCare()));
 		}
     	if (accident.getWitnessOne() != null) {
@@ -320,5 +331,24 @@ public class AccidentService {
         return numrows;
     }
 
+    private byte[] generateSignatureImage(String jsonData) {
+    	byte[] binData = null;
+		ByteArrayOutputStream os = new ByteArrayOutputStream();
+    	try {
+        	BufferedImage bi = SignatureToImage.convertJsonToImage(jsonData);
+    		if (bi !=null) {
+    			ImageIO.write(bi, "jpg", os);
+    			binData = os.toByteArray();
+    		}
+		} catch (Exception e) {
+			log.error("Exception converting json data to image: " + e.getMessage(), e);
+		} finally {
+			try {
+				os.close();
+			} catch (IOException e) {
+			}
+		}
+		return binData;
+    }
 	 
 }

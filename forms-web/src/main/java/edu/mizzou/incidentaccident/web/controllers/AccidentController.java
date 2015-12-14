@@ -62,6 +62,7 @@ public class AccidentController {
 		setInjuryLocationsWithOutSubs(accident);
 		accidentValidator.validate(accident, result);
 		if (result.hasErrors()) {
+			map.addAttribute("errMsg", "Please fix belows errors before submitting.");
 			map.addAttribute("accidentForm", accident);
 			map.addAttribute("locationsMap", locationsService.getLocations());
 			map.addAttribute("injuryLocationsMap", injuryLocationsService.getInjuryLocations());
@@ -88,6 +89,7 @@ public class AccidentController {
 		setInjuryLocationsWithOutSubs(accident);
 		accidentValidator.validate(accident, result);
 		if (result.hasErrors()) {
+			map.addAttribute("errMsg", "Please fix belows errors before submitting.");
 			map.addAttribute("accidentForm", accident);
 			map.addAttribute("locationsMap", locationsService.getLocations());
 			map.addAttribute("injuryLocationsMap", injuryLocationsService.getInjuryLocations());

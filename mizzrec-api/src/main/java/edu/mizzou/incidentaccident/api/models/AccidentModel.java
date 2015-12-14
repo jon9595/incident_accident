@@ -28,7 +28,7 @@ public class AccidentModel implements Serializable {
     private Integer specInjLocationId;
     private Integer specificLocationId;
 
-
+    private String errors;
 
 	private DemographicsModel demographics;
     private MembershipStatusModel membershipStatus;
@@ -209,6 +209,14 @@ public class AccidentModel implements Serializable {
 	}
 
 
+
+	public String getErrors() {
+		return errors;
+	}
+
+	public void setErrors(String errors) {
+		this.errors = errors;
+	}
 
 	public void setId(Integer id) {
 		this.id = id;

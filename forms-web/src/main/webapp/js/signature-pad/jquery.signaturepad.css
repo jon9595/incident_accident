@@ -9,6 +9,10 @@
   font-style: normal;
 }
 
+.sigClear {
+	cursor: pointer;	
+}
+
 .sigPad {
   margin: 0;
   padding: 0;

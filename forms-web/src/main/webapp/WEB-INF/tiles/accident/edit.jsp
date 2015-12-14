@@ -42,6 +42,7 @@
     </div>
     <div class="row">
         <div class="col-md-12 col-lg-12">
+			<span style="color: red;">${errMsg}</span>
               <html:form method="post" modelAttribute="accidentForm" action="${pageContext.request.contextPath}/accident/edit" class="form-horizontal" >
               <html:hidden path="id"/>
 			  <html:hidden path="demographicsId"/>
