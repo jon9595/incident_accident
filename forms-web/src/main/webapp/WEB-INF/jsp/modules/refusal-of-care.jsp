@@ -28,7 +28,8 @@
     	});
     });
   </script>
-  
+    <html:hidden path="refusalOfCare.memberSig"/>
+    <html:hidden path="refusalOfCare.staffSig"/>
     <div class="form-container padding-bottom-none">
         <fieldset><legend>Refusal of Care <small class="text-muted">(If guest refuses medical care)</small></legend>
         <p class="text-muted">The staff of MizzouRec has informed the injured party that they have a suspected medical injury.  At this time, 

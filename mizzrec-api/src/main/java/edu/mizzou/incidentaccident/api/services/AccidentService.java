@@ -29,6 +29,7 @@ import edu.mizzou.incidentaccident.api.dao.MembershipStatusDAO;
 import edu.mizzou.incidentaccident.api.dao.ProgramActivityInvolvedDAO;
 import edu.mizzou.incidentaccident.api.dao.ProperNotificationsDAO;
 import edu.mizzou.incidentaccident.api.dao.RefusalOfCareDAO;
+import edu.mizzou.incidentaccident.api.dao.SignaturesDAO;
 import edu.mizzou.incidentaccident.api.dao.SpecificInjuryDAO;
 import edu.mizzou.incidentaccident.api.dao.SpecificLocationDAO;
 import edu.mizzou.incidentaccident.api.dao.WitnessInfoDAO;
@@ -78,7 +79,9 @@ public class AccidentService {
     private LocationsDAO locationsDao;
     @Autowired
     private AccidentDetailsDAO accidentDetailsDao;
-	 
+    @Autowired
+	private SignaturesDAO signaturesDao;
+	
 
     public List<AccidentModel> getAccidentList() {
     	List<AccidentModel> accidents = accidentDao.getAccidentList();
@@ -140,8 +143,13 @@ public class AccidentService {
 		}
     	if (accident.getRefusalOfCare() != null && StringUtils.isNotBlank(accident.getRefusalOfCare().getMemberSignature())) {
     		SignaturesModel memberSig = new SignaturesModel();
+    		SignaturesModel staffSig = new SignaturesModel();
     		memberSig.setJsonData(accident.getRefusalOfCare().getMemberSignature());
-    		ss
+    		memberSig.setData(generateSignatureImage(memberSig.getJsonData()));
+    		accident.getRefusalOfCare().setMemberSig(signaturesDao.addSignatures(memberSig));
+    		staffSig.setJsonData(accident.getRefusalOfCare().getStaffSignature());
+    		staffSig.setData(generateSignatureImage(staffSig.getJsonData()));
+    		accident.getRefusalOfCare().setStaffSig(signaturesDao.addSignatures(staffSig));
     		accident.setRefusalOfCareId(refusalOfCareDao.addRefusalOfCare(accident.getRefusalOfCare()));
 		}
     	if (accident.getWitnessOne() != null) {
@@ -217,8 +225,28 @@ public class AccidentService {
 		}
     	if (accident.getRefusalOfCare() != null) {
     		if (accident.getRefusalOfCareId() == 0) {
+    			if (StringUtils.isNotBlank(accident.getRefusalOfCare().getMemberSignature())) {
+            		SignaturesModel memberSig = new SignaturesModel();
+            		SignaturesModel staffSig = new SignaturesModel();
+            		memberSig.setJsonData(accident.getRefusalOfCare().getMemberSignature());
+            		memberSig.setData(generateSignatureImage(memberSig.getJsonData()));
+            		accident.getRefusalOfCare().setMemberSig(signaturesDao.addSignatures(memberSig));
+            		staffSig.setJsonData(accident.getRefusalOfCare().getStaffSignature());
+            		staffSig.setData(generateSignatureImage(staffSig.getJsonData()));
+            		accident.getRefusalOfCare().setStaffSig(signaturesDao.addSignatures(staffSig));
+				}
     			accident.setRefusalOfCareId(refusalOfCareDao.addRefusalOfCare(accident.getRefusalOfCare()));
 			} else {
+				if (accident.getRefusalOfCare().getMemberSig() == 0 && StringUtils.isNotBlank(accident.getRefusalOfCare().getMemberSignature())) {
+            		SignaturesModel memberSig = new SignaturesModel();
+            		SignaturesModel staffSig = new SignaturesModel();
+            		memberSig.setJsonData(accident.getRefusalOfCare().getMemberSignature());
+            		memberSig.setData(generateSignatureImage(memberSig.getJsonData()));
+            		accident.getRefusalOfCare().setMemberSig(signaturesDao.addSignatures(memberSig));
+            		staffSig.setJsonData(accident.getRefusalOfCare().getStaffSignature());
+            		staffSig.setData(generateSignatureImage(staffSig.getJsonData()));
+            		accident.getRefusalOfCare().setStaffSig(signaturesDao.addSignatures(staffSig));
+				}
 				accident.getRefusalOfCare().setId(accident.getRefusalOfCareId());
 	    		refusalOfCareDao.updateRefusalOfCare(accident.getRefusalOfCare());
 			}
