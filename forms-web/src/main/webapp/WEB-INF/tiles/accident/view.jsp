@@ -82,6 +82,19 @@
 				</div>
 			</div>
         </fieldset>
+<c:if test="${accidentForm.refusalOfCare.memberSig != 0}">
+        <fieldset><legend>Refusal of Care</legend>
+              <div class="row margin-bottom-lg">
+				<div class="col-md-12 margin-bottom-sm account-description">
+					<p>Date: ${accident.refusalOfCare.dateStr}</p>
+					<img src="${pageContext.request.contextPath}/regenSignature/${accident.refusalOfCare.memberSig}" class="sigImg"/>
+					<p>Member Signature</p>
+					<img src="${pageContext.request.contextPath}/regenSignature/${accident.refusalOfCare.staffSig}" class="sigImg"/>
+					<p>Staff Signature</p>
+				</div>
+			</div>
+        </fieldset>
+</c:if>
 
         <fieldset><legend>MUPD</legend>
             <div class="row margin-bottom-lg">

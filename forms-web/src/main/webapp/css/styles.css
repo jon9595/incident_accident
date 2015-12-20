@@ -422,6 +422,12 @@ pre {
     margin-right: 15px;
     padding: 10px;
 }
+.sigImg {
+	border:1px solid #ccc;
+	-webkit-box-shadow: 1px 1px 5px 0px rgba(204,204,204,1);
+	-moz-box-shadow: 1px 1px 5px 0px rgba(204,204,204,1);
+	box-shadow: 1px 1px 5px 0px rgba(204,204,204,1);
+}
 .noscreen {
 	display: none;
 }

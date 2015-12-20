@@ -152,10 +152,18 @@ public class AccidentService {
     		accident.getRefusalOfCare().setStaffSig(signaturesDao.addSignatures(staffSig));
     		accident.setRefusalOfCareId(refusalOfCareDao.addRefusalOfCare(accident.getRefusalOfCare()));
 		}
-    	if (accident.getWitnessOne() != null) {
+    	if (accident.getWitnessOne() != null && StringUtils.isNotBlank(accident.getWitnessOne().getSignature())) {
+    		SignaturesModel witOneSig = new SignaturesModel();
+    		witOneSig.setJsonData(accident.getWitnessOne().getSignature());
+    		witOneSig.setData(generateSignatureImage(witOneSig.getJsonData()));
+    		accident.getWitnessOne().setSigId(signaturesDao.addSignatures(witOneSig));
     		accident.setWitnessOneId(witnessInfoDao.addWitnessInfo(accident.getWitnessOne()));
 		}
-    	if (accident.getWitnessTwo() != null) {
+    	if (accident.getWitnessTwo() != null && StringUtils.isNotBlank(accident.getWitnessTwo().getSignature())) {
+    		SignaturesModel witTwoSig = new SignaturesModel();
+    		witTwoSig.setJsonData(accident.getWitnessTwo().getSignature());
+    		witTwoSig.setData(generateSignatureImage(witTwoSig.getJsonData()));
+    		accident.getWitnessTwo().setSigId(signaturesDao.addSignatures(witTwoSig));
     		accident.setWitnessTwoId(witnessInfoDao.addWitnessInfo(accident.getWitnessTwo()));
 		}
     	if (accident.getProperNotifications() != null) {
@@ -166,12 +174,6 @@ public class AccidentService {
 		}
     	if (accident.getSpecificLocation() != null && (accident.getSpecificLocation().isSpecEquipPiece() || accident.getSpecificLocation().isOther())) {
     		accident.setSpecificLocationId(specificLocationDao.addSpecificLocation(accident.getSpecificLocation()));
-		}
-    	if (accident.getWitnessOne()!=null) {
-			accident.setWitnessOneId(witnessInfoDao.addWitnessInfo(accident.getWitnessOne()));
-		}
-    	if (accident.getWitnessTwo()!=null) {
-			accident.setWitnessTwoId(witnessInfoDao.addWitnessInfo(accident.getWitnessTwo()));
 		}
     	int id = accidentDao.addAccident(accident);
     	if (accident.getLocations() != null && accident.getLocations().length > 0) {
@@ -253,16 +255,40 @@ public class AccidentService {
 		}
     	if (accident.getWitnessOne() != null) {
     		if (accident.getWitnessOneId() == 0) {
+    			if (StringUtils.isNotBlank(accident.getWitnessOne().getSignature())) {
+    				SignaturesModel witOneSig = new SignaturesModel();
+    	    		witOneSig.setJsonData(accident.getWitnessOne().getSignature());
+    	    		witOneSig.setData(generateSignatureImage(witOneSig.getJsonData()));
+    	    		accident.getWitnessOne().setSigId(signaturesDao.addSignatures(witOneSig));
+				}
 				accident.setWitnessOneId(witnessInfoDao.addWitnessInfo(accident.getWitnessOne()));
 			} else {
+				if (accident.getWitnessOne().getSigId() == 0 && StringUtils.isNotBlank(accident.getWitnessOne().getSignature())) {
+    				SignaturesModel witOneSig = new SignaturesModel();
+    	    		witOneSig.setJsonData(accident.getWitnessOne().getSignature());
+    	    		witOneSig.setData(generateSignatureImage(witOneSig.getJsonData()));
+    	    		accident.getWitnessOne().setSigId(signaturesDao.addSignatures(witOneSig));
+				}
 				accident.getWitnessOne().setId(accident.getWitnessOneId());
 	    		witnessInfoDao.updateWitnessInfo(accident.getWitnessOne());
 			}
 		}
     	if (accident.getWitnessTwo() != null) {
     		if (accident.getWitnessTwoId() == 0) {
+    			if (StringUtils.isNotBlank(accident.getWitnessTwo().getSignature())) {
+    				SignaturesModel witTwoSig = new SignaturesModel();
+    	    		witTwoSig.setJsonData(accident.getWitnessTwo().getSignature());
+    	    		witTwoSig.setData(generateSignatureImage(witTwoSig.getJsonData()));
+    	    		accident.getWitnessTwo().setSigId(signaturesDao.addSignatures(witTwoSig));
+				}
 				accident.setWitnessTwoId(witnessInfoDao.addWitnessInfo(accident.getWitnessTwo()));
-			} else {
+ 			} else {
+				if (accident.getWitnessTwo().getSigId() == 0 && StringUtils.isNotBlank(accident.getWitnessTwo().getSignature())) {
+    				SignaturesModel witTwoSig = new SignaturesModel();
+    	    		witTwoSig.setJsonData(accident.getWitnessTwo().getSignature());
+    	    		witTwoSig.setData(generateSignatureImage(witTwoSig.getJsonData()));
+    	    		accident.getWitnessTwo().setSigId(signaturesDao.addSignatures(witTwoSig));
+				}
 				accident.getWitnessTwo().setId(accident.getWitnessTwoId());
 	    		witnessInfoDao.updateWitnessInfo(accident.getWitnessTwo());
 			}
@@ -334,12 +360,24 @@ public class AccidentService {
         		accountDescriptionDao.deleteAccountDescription(accident.getMemberAcctId());
     		}
         	if (accident.getRefusalOfCare() != null) {
+        		if (accident.getRefusalOfCare().getMemberSig() != 0) {
+					signaturesDao.deleteSignatures(accident.getRefusalOfCare().getMemberSig());
+				}
+        		if (accident.getRefusalOfCare().getStaffSig() != 0) {
+					signaturesDao.deleteSignatures(accident.getRefusalOfCare().getStaffSig());
+				}
         		refusalOfCareDao.deleteRefusalOfCare(accident.getRefusalOfCareId());
     		}
         	if (accident.getWitnessOne() != null) {
+        		if (accident.getWitnessOne().getSigId() != 0) {
+					signaturesDao.deleteSignatures(accident.getWitnessOne().getSigId());
+				}
         		witnessInfoDao.deleteWitnessInfo(accident.getWitnessOneId());
     		}
         	if (accident.getWitnessTwo() != null) {
+        		if (accident.getWitnessTwo().getSigId() != 0) {
+					signaturesDao.deleteSignatures(accident.getWitnessTwo().getSigId());
+				}
         		witnessInfoDao.deleteWitnessInfo(accident.getWitnessTwoId());
     		}
         	if (accident.getProperNotifications() != null) {
