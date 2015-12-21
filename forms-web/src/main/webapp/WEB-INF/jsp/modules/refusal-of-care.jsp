@@ -3,7 +3,7 @@
 
  <script>
     $(document).ready(function() {
-<c:if test="${accidentForm.refusalOfCare.memberSig == 0 || accidentForm.refusalOfCare.memberSig == ''}">
+<c:if test="${accidentForm.refusalOfCare.memberSig == 0 || accidentForm.refusalOfCare.memberSig == '' || accidentForm.refusalOfCare.memberSig == null}">
 		var mbrSig = $('#refusalOfCareMemberSignature').val();
 		var stfSig = $('#refusalOfCareStaffSignature').val();
 		var mbr = $('#memberCanvas').signaturePad({drawOnly:true, lineTop:80, validateFields:false});
@@ -40,7 +40,7 @@
           	<div class="form-group">
           		<div class="col-md-6 sigPad margin-right-xl" id="memberCanvas">
 <c:choose>
-<c:when test="${accidentForm.refusalOfCare.memberSig != 0}">
+<c:when test="${accidentForm.refusalOfCare.memberSig != 0 && accidentForm.refusalOfCare.memberSig != '' && accidentForm.refusalOfCare.memberSig != null}">
 				<label for="refusalCare">
 				Member Signature:  &nbsp;&nbsp;
 				</label>
@@ -59,7 +59,7 @@
           		</div>
 				<div class="col-md-6 sigPad" id="staffCanvas">
 <c:choose>
-<c:when test="${accidentForm.refusalOfCare.staffSig != 0}">
+<c:when test="${accidentForm.refusalOfCare.staffSig != 0 && accidentForm.refusalOfCare.staffSig != '' && accidentForm.refusalOfCare.staffSig != null}">
 					<label for="staffSig">
 					Staff Signature:   &nbsp;&nbsp;
 					</label>
@@ -85,7 +85,8 @@
 			Date:
 			</label>
 <c:choose>
-<c:when test="${accidentForm.refusalOfCare.memberSig != 0}">
+<c:when test="${accidentForm.refusalOfCare.memberSig != 0 && accidentForm.refusalOfCare.memberSig != '' && accidentForm.refusalOfCare.memberSig != null}">
+			<html:hidden path="refusalOfCare.dateStr"/>
 			<label>${accidentForm.refusalOfCare.dateStr}</label>
 </c:when>
 <c:otherwise>

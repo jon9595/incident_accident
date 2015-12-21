@@ -95,7 +95,29 @@
 			</div>
         </fieldset>
 </c:if>
-
+<c:if test="${accident.witnessOne.sigId != 0 || accident.witnessTwo.sigId != 0}">
+	<fieldset>
+	<legend>Witness Information</legend>
+<c:if test="${accident.witnessOne.sigId != 0 && accident.witnessOne.sigId != '' && accident.witnessOne.sigId != null}">
+      <div class="row margin-bottom-lg">
+		<div class="col-md-12 margin-bottom-sm account-description">
+			<p>Witness Name: ${accident.witnessOne.name}</p>
+			<p>Phone: ${accident.witnessOne.phone}</p>
+			<img alt="Witness Signature" class="sigImg" src="${pageContext.request.contextPath}/regenSignature/${accident.witnessOne.sigId}">
+		</div>
+	  </div>
+</c:if>
+<c:if test="${accident.witnessTwo.sigId != 0 && accident.witnessTwo.sigId != '' && accident.witnessTwo.sigId != null}">
+      <div class="row margin-bottom-lg">
+		<div class="col-md-12 margin-bottom-sm account-description">
+			<p>Witness Name: ${accident.witnessTwo.name}</p>
+			<p>Phone: ${accident.witnessTwo.phone}</p>
+			<img alt="Witness Signature" class="sigImg" src="${pageContext.request.contextPath}/regenSignature/${accident.witnessTwo.sigId}">
+		</div>
+	  </div>
+</c:if>
+	</fieldset>
+</c:if>
         <fieldset><legend>MUPD</legend>
             <div class="row margin-bottom-lg">
 				<div class="col-md-12">

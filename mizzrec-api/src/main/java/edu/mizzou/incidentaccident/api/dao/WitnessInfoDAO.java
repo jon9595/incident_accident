@@ -41,7 +41,7 @@ public class WitnessInfoDAO implements DBConstants {
         Object[] args = {
             bean.getName(), 
             bean.getPhone(), 
-            bean.getSignature()};
+            bean.getSigId()};
         int numRows = getTemplate().update(sInsertStmt.toString(), args);
         return getAutoIncrementKey();
     }
@@ -60,7 +60,7 @@ public class WitnessInfoDAO implements DBConstants {
         Object[] args = {
             bean.getName(), 
             bean.getPhone(), 
-            bean.getSignature(),
+            bean.getSigId(),
             bean.getId()};
         int numRows = getTemplate().update(sUpdateStmt.toString(), args);
         return numRows;

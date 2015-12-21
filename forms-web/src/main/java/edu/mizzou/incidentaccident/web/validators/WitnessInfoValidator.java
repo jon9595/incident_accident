@@ -17,10 +17,18 @@ public class WitnessInfoValidator implements Validator {
 	@Override
 	public void validate(Object target, Errors errors) {
 		WitnessInfoModel bean = (WitnessInfoModel)target;
+		String className = bean.getClassName();
 		if (StringUtils.isNotBlank(bean.getName())) {
-			String className = bean.getClassName();
 			ValidationUtils.rejectIfEmptyOrWhitespace(errors, className+".phone", "required", "Witness phone is required.");
 			ValidationUtils.rejectIfEmptyOrWhitespace(errors, className+".signature", "required", "Witness signature is required.");
+		}
+		if (StringUtils.isNotBlank(bean.getSignature())) {
+			ValidationUtils.rejectIfEmptyOrWhitespace(errors, className+".phone", "required", "Witness phone is required.");
+			ValidationUtils.rejectIfEmptyOrWhitespace(errors, className+".name", "required", "Witness name is required.");
+		}
+		if (StringUtils.isNotBlank(bean.getPhone())) {
+			ValidationUtils.rejectIfEmptyOrWhitespace(errors, className+".signature", "required", "Witness signature is required.");
+			ValidationUtils.rejectIfEmptyOrWhitespace(errors, className+".name", "required", "Witness name is required.");
 		}
 	}
 

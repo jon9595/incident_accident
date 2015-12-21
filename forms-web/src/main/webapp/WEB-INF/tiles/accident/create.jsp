@@ -6,6 +6,10 @@
 <script src="${pageContext.request.contextPath}/js/jquery.datetimepicker.full.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/mizrec.js"></script>
 <script src="${pageContext.request.contextPath}/js/mask/jquery.mask.js"></script>
+ <link href="${pageContext.request.contextPath}/js/signature-pad/jquery.signaturepad.css" rel="stylesheet">
+ <!--[if lt IE 9]><script src="${pageContext.request.contextPath}/js/signature-pad/flashcanvas.js"></script><![endif]-->
+ <script src="${pageContext.request.contextPath}/js/signature-pad/jquery.signaturepad.js" type="text/javascript"></script>
+ <script src="${pageContext.request.contextPath}/js/signature-pad/json2.min.js" type="text/javascript"></script>
 <script type="text/javascript">
   $(document).ready(function(){
     $('.date').datetimepicker({
