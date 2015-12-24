@@ -81,6 +81,10 @@ public class RefusalOfCareModel implements Serializable {
 		this.staffSignature = staffSignature;
 	}
 
+	public boolean isEmpty() {
+		return this.date == null && StringUtils.isBlank(this.memberSignature) && StringUtils.isBlank(this.staffSignature) && this.memberSig == null && this.staffSig == null;
+	}
+	
 	@Override
     public String toString() {
         StringBuffer sb = new StringBuffer();

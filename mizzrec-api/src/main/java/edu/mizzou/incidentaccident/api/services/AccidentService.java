@@ -225,7 +225,7 @@ public class AccidentService {
 	    		accountDescriptionDao.updateAccountDescription(accident.getMemberAcct());
 			}
 		}
-    	if (accident.getRefusalOfCare() != null) {
+    	if (accident.getRefusalOfCare() != null && !accident.getRefusalOfCare().isEmpty()) {
     		if (accident.getRefusalOfCareId() == 0) {
     			if (StringUtils.isNotBlank(accident.getRefusalOfCare().getMemberSignature())) {
             		SignaturesModel memberSig = new SignaturesModel();

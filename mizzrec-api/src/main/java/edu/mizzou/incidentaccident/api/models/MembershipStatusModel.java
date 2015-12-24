@@ -240,7 +240,7 @@ public class MembershipStatusModel implements Serializable {
     		if (!sb.toString().isEmpty()) {
 				sb.append(" ");
 			}
-			sb.append("Other");
+			sb.append("Other: " + this.otherExplain);
 		}		
 		return sb.toString();
 	}

@@ -13,6 +13,8 @@
     <div class="col-md-12 col-lg-12 noprint">
         <div class="display-container" style="padding-top:10px; padding-bottom:10px;">
         <button class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/accident/edit/${accident.id}';">Edit Report</button>
+        <button class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/accident/list';">View Accident Reports</button>
+        <button class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/incident/list';">View Incident Reports</button>
         </div>
     </div>
     <div class="col-md-12 col-lg-12">
@@ -82,7 +84,7 @@
 				</div>
 			</div>
         </fieldset>
-<c:if test="${accidentForm.refusalOfCare.memberSig != 0}">
+<c:if test="${accidentForm.refusalOfCare!=null && accidentForm.refusalOfCare.memberSig != 0 && accidentForm.refusalOfCare.memberSig != null && accidentForm.refusalOfCare.memberSig != ''}">
         <fieldset><legend>Refusal of Care</legend>
               <div class="row margin-bottom-lg">
 				<div class="col-md-12 margin-bottom-sm account-description">
@@ -95,7 +97,7 @@
 			</div>
         </fieldset>
 </c:if>
-<c:if test="${accident.witnessOne.sigId != 0 || accident.witnessTwo.sigId != 0}">
+<c:if test="${(accident.witnessOne!=null || accident.witnessTwo!=null) && (accident.witnessOne.sigId != 0 || accident.witnessTwo.sigId != 0)}">
 	<fieldset>
 	<legend>Witness Information</legend>
 <c:if test="${accident.witnessOne.sigId != 0 && accident.witnessOne.sigId != '' && accident.witnessOne.sigId != null}">
@@ -214,10 +216,10 @@
 			</div>
             <div class="row margin-bottom-lg">
 				<div class="col-md-12">
-					<div class="col-md-10">
+					<div class="col-md-5">
 					<label>Residential Life Email Sent: </label>&nbsp;${"Y"==accident.properNotifications.resLifeContEmailSent?"Yes":"No"}
 					</div>
-					<div class="col-md-2">
+					<div class="col-md-7">
 					<label>Date Email Sent: </label>&nbsp;<fmt:formatDate value="${accident.properNotifications.resLifeContDateSent}" pattern="MM/dd/yyyy"/> 
 					</div>
 				</div>

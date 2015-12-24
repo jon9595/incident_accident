@@ -432,6 +432,14 @@ pre {
 	display: none;
 }
 
+.error-page-header {
+	color: #d79b13 !important;
+}
+
+.error-page-form-container {
+	color: #266C8E; 
+}
+
 @media print {
 	.btn {display:none;}
 	.noscreen {
