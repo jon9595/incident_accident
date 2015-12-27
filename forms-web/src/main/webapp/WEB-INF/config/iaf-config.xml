@@ -38,6 +38,7 @@
            <list>
                    <value>/WEB-INF/error/tiles.xml</value>
                    <value>/WEB-INF/tiles/accident/tiles.xml</value>
+                   <value>/WEB-INF/tiles/incident/tiles.xml</value>
                    <value>/WEB-INF/tiles/index/tiles.xml</value>
                    <value>/WEB-INF/tiles/layout/tiles.xml</value>
            </list>

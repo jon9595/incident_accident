@@ -71,6 +71,7 @@
               <jsp:include page="/WEB-INF/jsp/modules/accident-witness.jsp"/>
               <jsp:include page="/WEB-INF/jsp/modules/proper-notifications.jsp"/>
               <jsp:include page="/WEB-INF/jsp/modules/report-completion.jsp"/>
+              <jsp:include page="/WEB-INF/jsp/modules/res-life-contacted.jsp"/>
 			    <div class="col-md-12 col-lg-12">
 			        <div class="display-container" style="padding-top:10px; padding-bottom:10px;">
 						<input type="submit" class="btn btn-large padding-left-xl padding-right-xl" value="Save Report">

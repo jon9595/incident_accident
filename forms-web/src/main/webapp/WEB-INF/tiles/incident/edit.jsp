@@ -42,33 +42,29 @@
 
 <div class="container-fluid" id="content">
     <div class="page-header padding-top-xl">
-      <h1>Accident Report</h1>
+      <h1>Incident Report</h1>
     </div>
     <div class="row">
         <div class="col-md-12 col-lg-12">
 			<span style="color: red;">${errMsg}</span>
-              <html:form method="post" modelAttribute="accidentForm" action="${pageContext.request.contextPath}/accident/edit" class="form-horizontal" >
+              <html:form method="post" modelAttribute="incidentForm" action="${pageContext.request.contextPath}/incident/edit" class="form-horizontal" >
               <html:hidden path="id"/>
 			  <html:hidden path="demographicsId"/>
 			  <html:hidden path="membershipStatusId"/>
 			  <html:hidden path="programActivityId"/>
 			  <html:hidden path="responderAcctId"/>
 			  <html:hidden path="memberAcctId"/>
-			  <html:hidden path="refusalOfCareId"/>
-			  <html:hidden path="witnessOneId"/>
-			  <html:hidden path="witnessTwoId"/>
+			  <html:hidden path="witnessAcctId"/>
+			  <html:hidden path="witnessInfoId"/>
 			  <html:hidden path="properNotificationsId"/>
-			  <html:hidden path="specInjLocationId"/>
 			  <html:hidden path="specificLocationId"/>
               <jsp:include page="/WEB-INF/jsp/modules/demographics.jsp"/>
               <jsp:include page="/WEB-INF/jsp/modules/membership-status.jsp"/>
               <jsp:include page="/WEB-INF/jsp/modules/program-activity.jsp"/>
               <jsp:include page="/WEB-INF/jsp/modules/locations.jsp"/>
-              <jsp:include page="/WEB-INF/jsp/modules/injury-locations.jsp"/>
-              <jsp:include page="/WEB-INF/jsp/modules/accident-details.jsp"/>
-              <jsp:include page="/WEB-INF/jsp/modules/accident-accounts.jsp"/>
-              <jsp:include page="/WEB-INF/jsp/modules/refusal-of-care.jsp"/>
-              <jsp:include page="/WEB-INF/jsp/modules/accident-witness.jsp"/>
+              <jsp:include page="/WEB-INF/jsp/modules/incident-details.jsp"/>
+              <jsp:include page="/WEB-INF/jsp/modules/incident-accounts.jsp"/>
+              <jsp:include page="/WEB-INF/jsp/modules/incident-witness.jsp"/>
               <jsp:include page="/WEB-INF/jsp/modules/proper-notifications.jsp"/>
               <jsp:include page="/WEB-INF/jsp/modules/report-completion.jsp"/>
 			    <div class="col-md-12 col-lg-12">

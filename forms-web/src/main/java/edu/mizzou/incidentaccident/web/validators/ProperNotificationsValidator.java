@@ -19,10 +19,6 @@ public class ProperNotificationsValidator implements Validator {
 		ProperNotificationsModel bean = (ProperNotificationsModel)target;
 		
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "properNotifications.profStaffContacted", "required", "Please specify if Prof Staff contacted.");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "properNotifications.resLifeContEmailSent", "required", "Please specify if Email was sent.");
-		if ("Y".equals(bean.getResLifeContEmailSent())) {
-			ValidationUtils.rejectIfEmptyOrWhitespace(errors, "properNotifications.resLifeContDateSentStr", "required", "Please specify a date.");
-		}
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "properNotifications.reportCompletedBy", "required", "Please enter Completed By.");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "properNotifications.rptCmpltPosition", "required", "Please enter Position.");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "properNotifications.rptCmpltDateStr", "required", "Please enter Date.");

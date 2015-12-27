@@ -1,11 +1,6 @@
 package edu.mizzou.incidentaccident.api.services;
  
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.util.List;
-
-import javax.imageio.ImageIO;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -15,7 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import edu.mizzou.incidentaccident.api.common.util.SignatureToImage;
+import edu.mizzou.incidentaccident.api.common.util.AppUtil;
 import edu.mizzou.incidentaccident.api.dao.AccidentDAO;
 import edu.mizzou.incidentaccident.api.dao.AccidentDetailDescriptionDAO;
 import edu.mizzou.incidentaccident.api.dao.AccidentDetailsDAO;
@@ -33,7 +28,6 @@ import edu.mizzou.incidentaccident.api.dao.SignaturesDAO;
 import edu.mizzou.incidentaccident.api.dao.SpecificInjuryDAO;
 import edu.mizzou.incidentaccident.api.dao.SpecificLocationDAO;
 import edu.mizzou.incidentaccident.api.dao.WitnessInfoDAO;
-import edu.mizzou.incidentaccident.api.models.AccidentDetailDescriptionModel;
 import edu.mizzou.incidentaccident.api.models.AccidentDetailsModel;
 import edu.mizzou.incidentaccident.api.models.AccidentInjuryLocationModel;
 import edu.mizzou.incidentaccident.api.models.AccidentLocationModel;
@@ -145,24 +139,24 @@ public class AccidentService {
     		SignaturesModel memberSig = new SignaturesModel();
     		SignaturesModel staffSig = new SignaturesModel();
     		memberSig.setJsonData(accident.getRefusalOfCare().getMemberSignature());
-    		memberSig.setData(generateSignatureImage(memberSig.getJsonData()));
+    		memberSig.setData(AppUtil.generateSignatureImage(memberSig.getJsonData()));
     		accident.getRefusalOfCare().setMemberSig(signaturesDao.addSignatures(memberSig));
     		staffSig.setJsonData(accident.getRefusalOfCare().getStaffSignature());
-    		staffSig.setData(generateSignatureImage(staffSig.getJsonData()));
+    		staffSig.setData(AppUtil.generateSignatureImage(staffSig.getJsonData()));
     		accident.getRefusalOfCare().setStaffSig(signaturesDao.addSignatures(staffSig));
     		accident.setRefusalOfCareId(refusalOfCareDao.addRefusalOfCare(accident.getRefusalOfCare()));
 		}
     	if (accident.getWitnessOne() != null && StringUtils.isNotBlank(accident.getWitnessOne().getSignature())) {
     		SignaturesModel witOneSig = new SignaturesModel();
     		witOneSig.setJsonData(accident.getWitnessOne().getSignature());
-    		witOneSig.setData(generateSignatureImage(witOneSig.getJsonData()));
+    		witOneSig.setData(AppUtil.generateSignatureImage(witOneSig.getJsonData()));
     		accident.getWitnessOne().setSigId(signaturesDao.addSignatures(witOneSig));
     		accident.setWitnessOneId(witnessInfoDao.addWitnessInfo(accident.getWitnessOne()));
 		}
     	if (accident.getWitnessTwo() != null && StringUtils.isNotBlank(accident.getWitnessTwo().getSignature())) {
     		SignaturesModel witTwoSig = new SignaturesModel();
     		witTwoSig.setJsonData(accident.getWitnessTwo().getSignature());
-    		witTwoSig.setData(generateSignatureImage(witTwoSig.getJsonData()));
+    		witTwoSig.setData(AppUtil.generateSignatureImage(witTwoSig.getJsonData()));
     		accident.getWitnessTwo().setSigId(signaturesDao.addSignatures(witTwoSig));
     		accident.setWitnessTwoId(witnessInfoDao.addWitnessInfo(accident.getWitnessTwo()));
 		}
@@ -231,10 +225,10 @@ public class AccidentService {
             		SignaturesModel memberSig = new SignaturesModel();
             		SignaturesModel staffSig = new SignaturesModel();
             		memberSig.setJsonData(accident.getRefusalOfCare().getMemberSignature());
-            		memberSig.setData(generateSignatureImage(memberSig.getJsonData()));
+            		memberSig.setData(AppUtil.generateSignatureImage(memberSig.getJsonData()));
             		accident.getRefusalOfCare().setMemberSig(signaturesDao.addSignatures(memberSig));
             		staffSig.setJsonData(accident.getRefusalOfCare().getStaffSignature());
-            		staffSig.setData(generateSignatureImage(staffSig.getJsonData()));
+            		staffSig.setData(AppUtil.generateSignatureImage(staffSig.getJsonData()));
             		accident.getRefusalOfCare().setStaffSig(signaturesDao.addSignatures(staffSig));
 				}
     			accident.setRefusalOfCareId(refusalOfCareDao.addRefusalOfCare(accident.getRefusalOfCare()));
@@ -243,10 +237,10 @@ public class AccidentService {
             		SignaturesModel memberSig = new SignaturesModel();
             		SignaturesModel staffSig = new SignaturesModel();
             		memberSig.setJsonData(accident.getRefusalOfCare().getMemberSignature());
-            		memberSig.setData(generateSignatureImage(memberSig.getJsonData()));
+            		memberSig.setData(AppUtil.generateSignatureImage(memberSig.getJsonData()));
             		accident.getRefusalOfCare().setMemberSig(signaturesDao.addSignatures(memberSig));
             		staffSig.setJsonData(accident.getRefusalOfCare().getStaffSignature());
-            		staffSig.setData(generateSignatureImage(staffSig.getJsonData()));
+            		staffSig.setData(AppUtil.generateSignatureImage(staffSig.getJsonData()));
             		accident.getRefusalOfCare().setStaffSig(signaturesDao.addSignatures(staffSig));
 				}
 				accident.getRefusalOfCare().setId(accident.getRefusalOfCareId());
@@ -258,7 +252,7 @@ public class AccidentService {
     			if (StringUtils.isNotBlank(accident.getWitnessOne().getSignature())) {
     				SignaturesModel witOneSig = new SignaturesModel();
     	    		witOneSig.setJsonData(accident.getWitnessOne().getSignature());
-    	    		witOneSig.setData(generateSignatureImage(witOneSig.getJsonData()));
+    	    		witOneSig.setData(AppUtil.generateSignatureImage(witOneSig.getJsonData()));
     	    		accident.getWitnessOne().setSigId(signaturesDao.addSignatures(witOneSig));
 				}
 				accident.setWitnessOneId(witnessInfoDao.addWitnessInfo(accident.getWitnessOne()));
@@ -266,11 +260,11 @@ public class AccidentService {
 				if (accident.getWitnessOne().getSigId() == 0 && StringUtils.isNotBlank(accident.getWitnessOne().getSignature())) {
     				SignaturesModel witOneSig = new SignaturesModel();
     	    		witOneSig.setJsonData(accident.getWitnessOne().getSignature());
-    	    		witOneSig.setData(generateSignatureImage(witOneSig.getJsonData()));
+    	    		witOneSig.setData(AppUtil.generateSignatureImage(witOneSig.getJsonData()));
     	    		accident.getWitnessOne().setSigId(signaturesDao.addSignatures(witOneSig));
+    				accident.getWitnessOne().setId(accident.getWitnessOneId());
+    	    		witnessInfoDao.updateWitnessInfo(accident.getWitnessOne());
 				}
-				accident.getWitnessOne().setId(accident.getWitnessOneId());
-	    		witnessInfoDao.updateWitnessInfo(accident.getWitnessOne());
 			}
 		}
     	if (accident.getWitnessTwo() != null) {
@@ -278,7 +272,7 @@ public class AccidentService {
     			if (StringUtils.isNotBlank(accident.getWitnessTwo().getSignature())) {
     				SignaturesModel witTwoSig = new SignaturesModel();
     	    		witTwoSig.setJsonData(accident.getWitnessTwo().getSignature());
-    	    		witTwoSig.setData(generateSignatureImage(witTwoSig.getJsonData()));
+    	    		witTwoSig.setData(AppUtil.generateSignatureImage(witTwoSig.getJsonData()));
     	    		accident.getWitnessTwo().setSigId(signaturesDao.addSignatures(witTwoSig));
 				}
 				accident.setWitnessTwoId(witnessInfoDao.addWitnessInfo(accident.getWitnessTwo()));
@@ -286,11 +280,11 @@ public class AccidentService {
 				if (accident.getWitnessTwo().getSigId() == 0 && StringUtils.isNotBlank(accident.getWitnessTwo().getSignature())) {
     				SignaturesModel witTwoSig = new SignaturesModel();
     	    		witTwoSig.setJsonData(accident.getWitnessTwo().getSignature());
-    	    		witTwoSig.setData(generateSignatureImage(witTwoSig.getJsonData()));
+    	    		witTwoSig.setData(AppUtil.generateSignatureImage(witTwoSig.getJsonData()));
     	    		accident.getWitnessTwo().setSigId(signaturesDao.addSignatures(witTwoSig));
+    				accident.getWitnessTwo().setId(accident.getWitnessTwoId());
+    	    		witnessInfoDao.updateWitnessInfo(accident.getWitnessTwo());
 				}
-				accident.getWitnessTwo().setId(accident.getWitnessTwoId());
-	    		witnessInfoDao.updateWitnessInfo(accident.getWitnessTwo());
 			}
 		}
     	if (accident.getProperNotifications() != null) {
@@ -397,24 +391,4 @@ public class AccidentService {
         return numrows;
     }
 
-    private byte[] generateSignatureImage(String jsonData) {
-    	byte[] binData = null;
-		ByteArrayOutputStream os = new ByteArrayOutputStream();
-    	try {
-        	BufferedImage bi = SignatureToImage.convertJsonToImage(jsonData);
-    		if (bi !=null) {
-    			ImageIO.write(bi, "jpg", os);
-    			binData = os.toByteArray();
-    		}
-		} catch (Exception e) {
-			log.error("Exception converting json data to image: " + e.getMessage(), e);
-		} finally {
-			try {
-				os.close();
-			} catch (IOException e) {
-			}
-		}
-		return binData;
-    }
-	 
 }

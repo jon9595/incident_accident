@@ -3,24 +3,20 @@
        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
-	<definition name="accident.create" extends="mainLayout">
-		<put-attribute name="content" value="/WEB-INF/tiles/accident/create.jsp"/>
+	<definition name="incident.create" extends="mainLayout">
+		<put-attribute name="content" value="/WEB-INF/tiles/incident/create.jsp"/>
 	</definition>
 
-	<definition name="accident.edit" extends="mainLayout">
-		<put-attribute name="content" value="/WEB-INF/tiles/accident/edit.jsp"/>
+	<definition name="incident.edit" extends="mainLayout">
+		<put-attribute name="content" value="/WEB-INF/tiles/incident/edit.jsp"/>
 	</definition>
 
-	<definition name="accident.list" extends="mainLayout">
-		<put-attribute name="content" value="/WEB-INF/tiles/accident/list.jsp"/>
+	<definition name="incident.list" extends="mainLayout">
+		<put-attribute name="content" value="/WEB-INF/tiles/incident/list.jsp"/>
 	</definition>
 
-	<definition name="accident.view" extends="mainLayout">
-		<put-attribute name="content" value="/WEB-INF/tiles/accident/view.jsp"/>
-	</definition>
-
-	<definition name="accident.signature" extends="mainLayout">
-		<put-attribute name="content" value="/WEB-INF/tiles/accident/signature2.jsp"/>
+	<definition name="incident.view" extends="mainLayout">
+		<put-attribute name="content" value="/WEB-INF/tiles/incident/view.jsp"/>
 	</definition>
 
 </tiles-definitions>

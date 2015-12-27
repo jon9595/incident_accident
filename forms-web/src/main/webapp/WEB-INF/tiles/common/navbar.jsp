@@ -20,7 +20,13 @@
           		<li><a href="${pageContext.request.contextPath}/accident/create"><i class="fa fa-file-text-o fa-fw"></i>&nbsp; Create New Report</a></li>
           	</ul>
           </li>
-          <li><a href="${pageContext.request.contextPath}/">Incident Reports</a></li>
+          <li><a href="#" class="dropdown-toggle" data-toggle="dropdown">Incident Reports <b class="caret"></b></a>
+          	<ul class="dropdown-menu">
+          	 	<li><a href="${pageContext.request.contextPath}/incident/list"><i class="fa fa-files-o fa-fw"></i>&nbsp;View Reports</a></li>
+	            <li class="divider"></li>
+          		<li><a href="${pageContext.request.contextPath}/incident/create"><i class="fa fa-file-text-o fa-fw"></i>&nbsp; Create New Report</a></li>
+          	</ul>
+          </li>
           <li><a href="${pageContext.request.contextPath}/logout">Logout</a></li>
         </ul>
       </div><!--/.nav-collapse -->

@@ -59,6 +59,7 @@
               <jsp:include page="/WEB-INF/jsp/modules/accident-witness.jsp"/>
               <jsp:include page="/WEB-INF/jsp/modules/proper-notifications.jsp"/>
               <jsp:include page="/WEB-INF/jsp/modules/report-completion.jsp"/>
+              <jsp:include page="/WEB-INF/jsp/modules/res-life-contacted.jsp"/>
 				<div class="form-container padding-bottom-none">
 	                <div class="form-group">
 	                  <div class="col-sm-11 col-md-5 col-lg-3 pull-right margin-bottom-lg">

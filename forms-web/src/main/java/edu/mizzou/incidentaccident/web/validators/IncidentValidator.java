@@ -6,49 +6,41 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 import edu.mizzou.incidentaccident.api.models.AccidentModel;
+import edu.mizzou.incidentaccident.api.models.IncidentModel;
 import edu.mizzou.incidentaccident.web.common.util.ValidationUtils;
 
 @Component
-public class AccidentValidator implements Validator {
+public class IncidentValidator implements Validator {
 
 	DemographicsValidator dv = new DemographicsValidator();
 	MembershipStatusValidator msv = new MembershipStatusValidator();
 	ProgramActivityValidator pav = new ProgramActivityValidator();
 	ProperNotificationsValidator pnv = new ProperNotificationsValidator();
 	WitnessInfoValidator wiv = new WitnessInfoValidator();
-	RefusalOfCareValidator rocv = new RefusalOfCareValidator();
-	ResLifeValidator rlv = new ResLifeValidator();
 	
 	@Override
 	public boolean supports(Class<?> clazz) {
-		return clazz.equals(AccidentModel.class);
+		return clazz.equals(IncidentModel.class);
 	}
 
 	@Override
 	public void validate(Object target, Errors errors) {
-		AccidentModel accident = (AccidentModel)target;
-		dv.validate(accident.getDemographics(), errors);
-		msv.validate(accident.getMembershipStatus(), errors);
-		pav.validate(accident.getProgramActivity(), errors);
-		pnv.validate(accident.getProperNotifications(), errors);
-		rlv.validate(accident.getProperNotifications(), errors);
-		accident.getWitnessOne().setClassName("witnessOne");
-		accident.getWitnessTwo().setClassName("witnessTwo");
-		if (accident.getLocations().length == 0) {
+		IncidentModel incident = (IncidentModel)target;
+		dv.validate(incident.getDemographics(), errors);
+		msv.validate(incident.getMembershipStatus(), errors);
+		pav.validate(incident.getProgramActivity(), errors);
+		pnv.validate(incident.getProperNotifications(), errors);
+		if (incident.getLocations().length == 0) {
 			errors.rejectValue("locations", "required", null, "Location is required.");
 		}
-		if (accident.getInjurylocations().length == 0 && StringUtils.isBlank(accident.getSpecInjLocation().getDescription())) {
-			errors.rejectValue("injurylocations", "required", null, "Injury Location is required.");
-		}
-		if (accident.getSpecificLocation().isSpecEquipPiece()) {
+		if (incident.getSpecificLocation().isSpecEquipPiece()) {
 			ValidationUtils.rejectIfEmptyOrWhitespace(errors, "specificLocation.specEquipPieceDesc", "required", "Please specify equipment piece.");
 		}
-		if (accident.getSpecificLocation().isOther()) {
+		if (incident.getSpecificLocation().isOther()) {
 			ValidationUtils.rejectIfEmptyOrWhitespace(errors, "specificLocation.otherDesc", "required", "Please specify other.");
 		}
-		wiv.validate(accident.getWitnessOne(), errors);
-		wiv.validate(accident.getWitnessTwo(), errors);
-		rocv.validate(accident.getRefusalOfCare(), errors);
+		incident.getWitnessInfo().setClassName("witnessInfo");
+		wiv.validate(incident.getWitnessInfo(), errors);
 		
 	}
 
