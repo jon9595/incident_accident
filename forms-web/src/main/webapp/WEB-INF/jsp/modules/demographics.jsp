@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 	            <div class="form-container padding-bottom-none">
 	                <fieldset><legend>Basic Information</legend>
+		  			  <span style="color: red;">${errMsg}</span>
 	                  <div class="col-md-12 col-sm-12 margin-bottom-lg">
 	                  <span class="text-muted">Accidents resulting from or directly related to the Department of Recreation Services' programs and premises are to be reported on this 
 	                  form.</span>

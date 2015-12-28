@@ -46,7 +46,6 @@
     </div>
     <div class="row">
         <div class="col-md-12 col-lg-12">
-			<span style="color: red;">${errMsg}</span>
               <html:form method="post" modelAttribute="accidentForm" action="${pageContext.request.contextPath}/accident/create" class="form-horizontal" >
               <jsp:include page="/WEB-INF/jsp/modules/demographics.jsp"/>
               <jsp:include page="/WEB-INF/jsp/modules/membership-status.jsp"/>
