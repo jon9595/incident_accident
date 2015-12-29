@@ -22,5 +22,7 @@ public interface DBConstants {
 	public static final String SIGNATURES = "signatures";
 	public static final String SPECIFIC_INJURY = "specific_injury";
 	public static final String SPECIFIC_LOCATION = "specific_location";
+	public static final String USERS = "users";
+	public static final String USER_ROLES = "user_roles";
 	public static final String WITNESS_INFO = "witness_info";
 }

@@ -17,6 +17,9 @@
  -->   
  	<context:component-scan base-package="edu.mizzou.incidentaccident.web"/>
  	<context:component-scan base-package="edu.mizzou.incidentaccident.api"/>
+ 	<mvc:interceptors>
+      <bean class="edu.mizzou.incidentaccident.web.interceptors.UserInterceptor" />
+    </mvc:interceptors>
 	<!-- Configures the @Controller programming model -->
 	<mvc:annotation-driven />
 

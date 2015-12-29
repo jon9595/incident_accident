@@ -1,3 +1,5 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
   <!-- Fixed navbar -->
   <div class="navbar navbar-default navbar-fixed-top noprint" role="navigation">
     <div class="container">
@@ -27,7 +29,10 @@
           		<li><a href="${pageContext.request.contextPath}/incident/create"><i class="fa fa-file-text-o fa-fw"></i>&nbsp; Create New Report</a></li>
           	</ul>
           </li>
-          <li><a href="${pageContext.request.contextPath}/logout">Logout</a></li>
+          <c:if test="${sessonScope.userProfile.admin}">
+          <li><a href="${pageContext.request.contextPath}/users">Users</a></li>
+          </c:if>
+          <li>is admin: <c:out value="${sessonScope.userProfile == null}"/><a href="${pageContext.request.contextPath}/logout">Logout</a></li>
         </ul>
       </div><!--/.nav-collapse -->
     </div>
