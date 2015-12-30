@@ -53,7 +53,7 @@ public class UsersService {
     @Transactional(propagation=Propagation.REQUIRED)
     public int adduser(UsersModel bean) {
     	int numRows = usersDao.addUsers(bean);
-    	userRolesDao.addUserRoles(bean.getUsername(), UsersModel.RoleList.USER.getValue());
+    	userRolesDao.addUserRoles(bean.getUsername(), UsersModel.RoleList.STAFF.getValue());
     	if (bean.isAdmin()) {
         	userRolesDao.addUserRoles(bean.getUsername(), UsersModel.RoleList.ADMIN.getValue());
 		}
@@ -64,9 +64,12 @@ public class UsersService {
     public int updateUsers(UsersModel bean) {
     	int numRows = usersDao.updateUsers(bean);
     	userRolesDao.deleteUserRoles(bean.getUsername());
-    	userRolesDao.addUserRoles(bean.getUsername(), UsersModel.RoleList.USER.getValue());
+    	userRolesDao.addUserRoles(bean.getUsername(), UsersModel.RoleList.STAFF.getValue());
     	if (bean.isAdmin()) {
         	userRolesDao.addUserRoles(bean.getUsername(), UsersModel.RoleList.ADMIN.getValue());
+		}
+    	if (bean.isManager()) {
+        	userRolesDao.addUserRoles(bean.getUsername(), UsersModel.RoleList.MANAGER.getValue());
 		}
         return numRows;
     }

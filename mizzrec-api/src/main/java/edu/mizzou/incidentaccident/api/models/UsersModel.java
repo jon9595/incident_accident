@@ -20,7 +20,8 @@ public class UsersModel implements Serializable {
     private String firstName;
     private String lastName;
     private String password;
-    private String email;
+    private String password2;
+	private String email;
     private boolean activated;
     private String newPasswordKey;
     private Date newPasswordRequested;
@@ -28,10 +29,12 @@ public class UsersModel implements Serializable {
     private Date lastLogin;
     private Date created;
     private Date modified;
+    private String createdBy;
+    private String modifiedBy;
     private TreeSet<String> userRoles;
     
     public static enum RoleList {
-    	ADMIN("admin"), USER("user");
+    	ADMIN("admin"), STAFF("staff"), MANAGER("manager");
 
     	private String value;
     	
@@ -88,6 +91,14 @@ public class UsersModel implements Serializable {
         this.password = password;
     }
 
+
+    public String getPassword2() {
+		return password2;
+	}
+
+	public void setPassword2(String password2) {
+		this.password2 = password2;
+	}
 
     public String getEmail() {
         return this.email;
@@ -160,9 +171,38 @@ public class UsersModel implements Serializable {
         this.modified = modified;
     }
 
-    public boolean isAdmin() {
-    	System.out.println("role list admin: " + RoleList.ADMIN.getValue());
-    	System.out.println("contains admin: " + (this.userRoles!=null && !this.userRoles.isEmpty() && this.userRoles.contains(RoleList.ADMIN.getValue())));
+    public String getCreatedBy() {
+		return createdBy;
+	}
+
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	public String getModifiedBy() {
+		return modifiedBy;
+	}
+
+	public void setModifiedBy(String modifiedBy) {
+		this.modifiedBy = modifiedBy;
+	}
+
+	public boolean isManager() {
+    	return this.userRoles!=null && !this.userRoles.isEmpty() && this.userRoles.contains(RoleList.MANAGER.getValue());
+	}
+	
+	public void setManager(boolean managerFlag) {
+		if (this.userRoles == null ) {
+			this.userRoles = new TreeSet<String>();
+		}
+    	if (managerFlag) {
+			this.userRoles.add(RoleList.MANAGER.getValue());
+		} else {
+			this.userRoles.remove(RoleList.MANAGER.getValue());
+		}
+	}
+	
+	public boolean isAdmin() {
     	return this.userRoles!=null && !this.userRoles.isEmpty() && this.userRoles.contains(RoleList.ADMIN.getValue());
     }
     

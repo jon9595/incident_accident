@@ -38,11 +38,11 @@ public class UserInterceptor extends HandlerInterceptorAdapter {
 		// User is logged in
 		if (request.getUserPrincipal()!=null && StringUtils.isNotBlank(request.getUserPrincipal().getName())) {
 			user = (UsersModel)session.getAttribute(AppConstants.USER_PROFILE);
-			System.out.println("admin: " + (user!=null?user.isAdmin():"null "));
 			// User is either not in the session or is the wrong user
 			if (user==null || !request.getUserPrincipal().getName().equals(user.getUsername())) {
 				// Set the new user attribute into the session
 				session.setAttribute(AppConstants.USER_PROFILE, usersService.getUserByUsername(request.getUserPrincipal().getName()));
+				user = (UsersModel)session.getAttribute(AppConstants.USER_PROFILE);
 			}
 			if (prevUser == null && user != null) {
 				usersService.setLastLoggedIn(request.getUserPrincipal().getName());

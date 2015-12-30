@@ -4,18 +4,18 @@
        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
 	<definition name="users.create" extends="mainLayout">
-		<put-attribute name="content" value="/WEB-INF/tiles/user/create.jsp"/>
+		<put-attribute name="content" value="/WEB-INF/tiles/users/create.jsp"/>
 	</definition>
 
 	<definition name="users.edit" extends="mainLayout">
-		<put-attribute name="content" value="/WEB-INF/tiles/user/edit.jsp"/>
+		<put-attribute name="content" value="/WEB-INF/tiles/users/edit.jsp"/>
 	</definition>
 
 	<definition name="users.list" extends="mainLayout">
-		<put-attribute name="content" value="/WEB-INF/tiles/user/list.jsp"/>
+		<put-attribute name="content" value="/WEB-INF/tiles/users/list.jsp"/>
 	</definition>
 
 	<definition name="users.view" extends="mainLayout">
-		<put-attribute name="content" value="/WEB-INF/tiles/user/view.jsp"/>
+		<put-attribute name="content" value="/WEB-INF/tiles/users/view.jsp"/>
 	</definition>
 </tiles-definitions>

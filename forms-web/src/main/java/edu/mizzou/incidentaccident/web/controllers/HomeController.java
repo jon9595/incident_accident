@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import edu.mizzou.incidentaccident.api.common.util.SignatureToImage;
+import edu.mizzou.incidentaccident.api.constants.AppConstants;
 import edu.mizzou.incidentaccident.api.models.SignaturesModel;
+import edu.mizzou.incidentaccident.api.models.UsersModel;
 import edu.mizzou.incidentaccident.api.services.SignaturesService;
 
 @Controller

@@ -40,8 +40,10 @@ public class UsersDAO implements DBConstants {
             .append(", activated " )
             .append(", position " )
             .append(", created " )
+            .append(", created_by " )
             .append(") VALUES ( ")
             .append(" ?")
+            .append(", ?")
             .append(", ?")
             .append(", ?")
             .append(", ?")
@@ -60,7 +62,8 @@ public class UsersDAO implements DBConstants {
             bean.getEmail(), 
             bean.isActivated(), 
             bean.getPosition(), 
-            bean.getCreated()};
+            bean.getCreated(),
+            bean.getCreatedBy()};
         int numRows = getTemplate().update(sInsertStmt.toString(), args);
         return getAutoIncrementKey();
     }
@@ -70,26 +73,24 @@ public class UsersDAO implements DBConstants {
         StringBuffer sUpdateStmt = new StringBuffer(200);
         sUpdateStmt.append("UPDATE " + USERS)
         .append(" SET ")
-        .append(" username = ? " )
-        .append(", first_name = ? " )
+        .append(" first_name = ? " )
         .append(", last_name = ? " )
-        .append(", password = ? " )
         .append(", email = ? " )
         .append(", activated = ? " )
         .append(", position = ? " )
-        .append(", modified = ? " ); 
+        .append(", modified = ? " )
+        .append(", modified_by = ? " ); 
         StringBuffer sWhereStmt = new StringBuffer(100);
         sWhereStmt.append(" WHERE id = ?");
         sUpdateStmt.append( sWhereStmt );
         Object[] args = {
-            bean.getUsername(), 
             bean.getFirstName(), 
             bean.getLastName(), 
-            bean.getPassword(), 
             bean.getEmail(), 
             bean.isActivated(), 
             bean.getPosition(), 
             bean.getModified(),
+            bean.getModifiedBy(),
             bean.getId()};
         int numRows = getTemplate().update(sUpdateStmt.toString(), args);
         return numRows;
@@ -102,12 +103,14 @@ public class UsersDAO implements DBConstants {
         ", username" +
         ", first_name" +
         ", last_name" +
-        ", password" +
         ", email" +
         ", activated" +
+        ", last_login" +
         ", position" +
         ", created" +
         ", modified" +
+        ", created_by" +
+        ", modified_by" +
         " from " + USERS + " where id = ?";
         Object[] args = {id};
         List<UsersModel> matches = getTemplate().query(sqlString, args, new RowMapper<UsersModel>() {
@@ -117,12 +120,14 @@ public class UsersDAO implements DBConstants {
                     model.setUsername(rs.getString("username"));
                     model.setFirstName(rs.getString("first_name"));
                     model.setLastName(rs.getString("last_name"));
-                    model.setPassword(rs.getString("password"));
                     model.setEmail(rs.getString("email"));
                     model.setActivated(rs.getBoolean("activated"));
+                    model.setLastLogin(rs.getTimestamp("last_login")!=null?new java.util.Date(rs.getTimestamp("last_login").getTime()):null);
                     model.setPosition(rs.getString("position"));
                     model.setCreated(rs.getTimestamp("created")!=null?new java.util.Date(rs.getTimestamp("created").getTime()):null);
                     model.setModified(rs.getTimestamp("modified")!=null?new java.util.Date(rs.getTimestamp("modified").getTime()):null);
+                    model.setCreatedBy(rs.getString("created_by"));
+                    model.setModifiedBy(rs.getString("modified_by"));
                 return model;
             }
         });
@@ -135,12 +140,14 @@ public class UsersDAO implements DBConstants {
         ", username" +
         ", first_name" +
         ", last_name" +
-        ", password" +
         ", email" +
         ", activated" +
+        ", last_login" +
         ", position" +
         ", created" +
         ", modified" +
+        ", created_by" +
+        ", modified_by" +
         " from " + USERS + " where username = ?";
         Object[] args = {username};
         List<UsersModel> matches = getTemplate().query(sqlString, args, new RowMapper<UsersModel>() {
@@ -150,12 +157,14 @@ public class UsersDAO implements DBConstants {
                     model.setUsername(rs.getString("username"));
                     model.setFirstName(rs.getString("first_name"));
                     model.setLastName(rs.getString("last_name"));
-                    model.setPassword(rs.getString("password"));
                     model.setEmail(rs.getString("email"));
                     model.setActivated(rs.getBoolean("activated"));
+                    model.setLastLogin(rs.getTimestamp("last_login")!=null?new java.util.Date(rs.getTimestamp("last_login").getTime()):null);
                     model.setPosition(rs.getString("position"));
                     model.setCreated(rs.getTimestamp("created")!=null?new java.util.Date(rs.getTimestamp("created").getTime()):null);
                     model.setModified(rs.getTimestamp("modified")!=null?new java.util.Date(rs.getTimestamp("modified").getTime()):null);
+                    model.setCreatedBy(rs.getString("created_by"));
+                    model.setModifiedBy(rs.getString("modified_by"));
                 return model;
             }
         });
@@ -168,12 +177,14 @@ public class UsersDAO implements DBConstants {
         ", username" +
         ", first_name" +
         ", last_name" +
-        ", password" +
         ", email" +
         ", activated" +
+        ", last_login" +
         ", position" +
         ", created" +
         ", modified" +
+        ", created_by" +
+        ", modified_by" +
         " from " + USERS;
         return getTemplate().query(sqlString, new RowMapper<UsersModel>() {
             public UsersModel mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -182,12 +193,14 @@ public class UsersDAO implements DBConstants {
                     model.setUsername(rs.getString("username"));
                     model.setFirstName(rs.getString("first_name"));
                     model.setLastName(rs.getString("last_name"));
-                    model.setPassword(rs.getString("password"));
                     model.setEmail(rs.getString("email"));
                     model.setActivated(rs.getBoolean("activated"));
+                    model.setLastLogin(rs.getTimestamp("last_login")!=null?new java.util.Date(rs.getTimestamp("last_login").getTime()):null);
                     model.setPosition(rs.getString("position"));
                     model.setCreated(rs.getTimestamp("created")!=null?new java.util.Date(rs.getTimestamp("created").getTime()):null);
                     model.setModified(rs.getTimestamp("modified")!=null?new java.util.Date(rs.getTimestamp("modified").getTime()):null);
+                    model.setCreatedBy(rs.getString("created_by"));
+                    model.setModifiedBy(rs.getString("modified_by"));
                 return model;
             }
         });

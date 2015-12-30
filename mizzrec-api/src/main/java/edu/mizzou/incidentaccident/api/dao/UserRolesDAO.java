@@ -58,7 +58,6 @@ public class UserRolesDAO implements DBConstants {
         for (String match : matches) {
 			list.add(match);
 		}
-        System.out.println("list: " + list);
         return list;
     }
 

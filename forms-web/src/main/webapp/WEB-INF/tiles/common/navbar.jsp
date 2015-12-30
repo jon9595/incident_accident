@@ -29,10 +29,16 @@
           		<li><a href="${pageContext.request.contextPath}/incident/create"><i class="fa fa-file-text-o fa-fw"></i>&nbsp; Create New Report</a></li>
           	</ul>
           </li>
-          <c:if test="${sessonScope.userProfile.admin}">
-          <li><a href="${pageContext.request.contextPath}/users">Users</a></li>
+          <c:if test="${sessionScope.userProfile.admin}">
+          <li><a href="#" class="dropdown-toggle" data-toggle="dropdown">Users <b class="caret"></b></a>
+          	<ul class="dropdown-menu">
+          	 	<li><a href="${pageContext.request.contextPath}/users/list"><i class="fa fa-users fa-fw"></i>&nbsp;View Users</a></li>
+	            <li class="divider"></li>
+          		<li><a href="${pageContext.request.contextPath}/users/create"><i class="fa fa-user-plus fa-fw"></i>&nbsp; Create New User</a></li>
+          	</ul>
+          </li>
           </c:if>
-          <li>is admin: <c:out value="${sessonScope.userProfile == null}"/><a href="${pageContext.request.contextPath}/logout">Logout</a></li>
+          <li><a href="${pageContext.request.contextPath}/logout">Logout</a></li>
         </ul>
       </div><!--/.nav-collapse -->
     </div>

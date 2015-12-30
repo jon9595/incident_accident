@@ -1,11 +1,13 @@
 package edu.mizzou.incidentaccident.web.validators;
 
+import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 import edu.mizzou.incidentaccident.api.models.ProperNotificationsModel;
 import edu.mizzou.incidentaccident.web.common.util.ValidationUtils;
 
+@Component
 public class ResLifeValidator implements Validator {
 
 	@Override
