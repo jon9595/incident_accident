@@ -6,6 +6,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -33,6 +34,9 @@ public class AppUtil {
 		return binData;
     }
 	 
-    
+    public static String encodeSHA(String sha) {
+		return DigestUtils.sha256Hex(sha);
+	}
+	
     
 }

@@ -12,6 +12,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import edu.mizzou.incidentaccident.api.common.util.AppUtil;
 import edu.mizzou.incidentaccident.api.constants.DBConstants;
 import edu.mizzou.incidentaccident.api.models.UsersModel;
 
@@ -31,8 +32,7 @@ public class UsersDAO implements DBConstants {
     public int addUsers(UsersModel bean) {
         StringBuffer sInsertStmt = new StringBuffer(200);
         sInsertStmt.append( "INSERT INTO " + USERS + " (")
-            .append(" id " )
-            .append(", username " )
+            .append(" username " )
             .append(", first_name " )
             .append(", last_name " )
             .append(", password " )
@@ -51,14 +51,12 @@ public class UsersDAO implements DBConstants {
             .append(", ?")
             .append(", ?")
             .append(", ?")
-            .append(", ?")
             .append(")");
         Object[] args = {
-            bean.getId(), 
             bean.getUsername(), 
             bean.getFirstName(), 
             bean.getLastName(), 
-            bean.getPassword(), 
+            AppUtil.encodeSHA(bean.getPassword()),
             bean.getEmail(), 
             bean.isActivated(), 
             bean.getPosition(), 
