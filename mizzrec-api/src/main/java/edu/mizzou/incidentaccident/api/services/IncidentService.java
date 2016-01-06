@@ -61,24 +61,37 @@ public class IncidentService {
     @Autowired
     private IncidentNatureDAO incidentNatureDao;
     
-    public List<IncidentModel> getIncidentList() {
-    	List<IncidentModel> incidents = incidentDao.getIncidentList();
+    public List<IncidentModel> getIncidentListFromPastMonth() {
+    	List<IncidentModel> incidents = incidentDao.getIncidentListFromPastMonth();
     	for (IncidentModel incident : incidents) {
-			incident.setDemographics(demographicsDao.getDemographics(incident.getDemographicsId()));
-			incident.setMembershipStatus(membershipStatusDao.getMembershipStatus(incident.getMembershipStatusId()));
-			incident.setProgramActivity(programActivityInvolvedDao.getProgramActivityInvolved(incident.getProgramActivityId()));
-			incident.setResponderAcct(accountDescriptionDao.getAccountDescription(incident.getResponderAcctId()));
-			incident.setMemberAcct(accountDescriptionDao.getAccountDescription(incident.getMemberAcctId()));
-			incident.setWitnessAcct(accountDescriptionDao.getAccountDescription(incident.getWitnessAcctId()));
-			incident.setWitnessInfo(witnessInfoDao.getWitnessInfo(incident.getWitnessInfoId()));
-			incident.setProperNotifications(properNotificationsDao.getProperNotifications(incident.getProperNotificationsId()));
-			incident.setSpecificLocation(specificLocationDao.getSpecificLocation(incident.getSpecificLocationId()));
-			incident.setIncidentLocations(locationsDao.getLocationsListForIncident(incident.getId()));
-			incident.setIncidentNatures(incidentNatureDao.getIncidentDetailDescriptionListForIncident(incident.getId()));
+    		incident = getIncidentIncidentals(incident);
 		}
         return incidents;
     }
 
+    public List<IncidentModel> getIncidentList() {
+    	List<IncidentModel> incidents = incidentDao.getIncidentList();
+    	for (IncidentModel incident : incidents) {
+    		incident = getIncidentIncidentals(incident);
+		}
+        return incidents;
+    }
+
+    private IncidentModel getIncidentIncidentals(IncidentModel incident) {
+		incident.setDemographics(demographicsDao.getDemographics(incident.getDemographicsId()));
+		incident.setMembershipStatus(membershipStatusDao.getMembershipStatus(incident.getMembershipStatusId()));
+		incident.setProgramActivity(programActivityInvolvedDao.getProgramActivityInvolved(incident.getProgramActivityId()));
+		incident.setResponderAcct(accountDescriptionDao.getAccountDescription(incident.getResponderAcctId()));
+		incident.setMemberAcct(accountDescriptionDao.getAccountDescription(incident.getMemberAcctId()));
+		incident.setWitnessAcct(accountDescriptionDao.getAccountDescription(incident.getWitnessAcctId()));
+		incident.setWitnessInfo(witnessInfoDao.getWitnessInfo(incident.getWitnessInfoId()));
+		incident.setProperNotifications(properNotificationsDao.getProperNotifications(incident.getProperNotificationsId()));
+		incident.setSpecificLocation(specificLocationDao.getSpecificLocation(incident.getSpecificLocationId()));
+		incident.setIncidentLocations(locationsDao.getLocationsListForIncident(incident.getId()));
+		incident.setIncidentNatures(incidentNatureDao.getIncidentDetailDescriptionListForIncident(incident.getId()));
+		return incident;
+    }
+    
     public IncidentModel getIncident(Integer id) {
     	IncidentModel incident = incidentDao.getIncident(id);
 		incident.setDemographics(demographicsDao.getDemographics(incident.getDemographicsId()));

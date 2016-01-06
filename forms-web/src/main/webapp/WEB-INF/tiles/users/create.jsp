@@ -1,7 +1,7 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="html" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<html:form method="post" modelAttribute="usersForm" action="${pageContext.request.contextPath}/users/create" class="form" >
+<html:form method="post" modelAttribute="usersForm" action="${pageContext.request.contextPath}/users/create" class="form-horizontal" >
 <div class="form-container padding-bottom-none">
     <fieldset><legend>Create New User</legend>
           <div class="row margin-left-sm margin-right-sm">

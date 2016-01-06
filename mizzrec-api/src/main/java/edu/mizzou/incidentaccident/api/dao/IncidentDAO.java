@@ -176,6 +176,39 @@ public class IncidentDAO implements DBConstants {
         });
     }
 
+    public List<IncidentModel> getIncidentListFromPastMonth() {
+    String sqlString = "select " +
+        "id" +
+        ", demographics" +
+        ", membership_status" +
+        ", program_activity" +
+        ", responder_acct" +
+        ", member_acct" +
+        ", witness_acct" +
+        ", witness_info" +
+        ", proper_notifications" +
+        ", specific_location" +
+        ", other_inc_nature_desc" +
+        " from " + INCIDENT +
+    	" where created > (NOW() - INTERVAL 1 MONTH)";
+        return getTemplate().query(sqlString, new RowMapper<IncidentModel>() {
+            public IncidentModel mapRow(ResultSet rs, int rowNum) throws SQLException {
+                IncidentModel model = new IncidentModel();
+                    model.setId(rs.getInt("id"));
+                    model.setDemographicsId(rs.getInt("demographics"));
+                    model.setMembershipStatusId(rs.getInt("membership_status"));
+                    model.setProgramActivityId(rs.getInt("program_activity"));
+                    model.setResponderAcctId(rs.getInt("responder_acct"));
+                    model.setMemberAcctId(rs.getInt("member_acct"));
+                    model.setWitnessAcctId(rs.getInt("witness_acct"));
+                    model.setWitnessInfoId(rs.getInt("witness_info"));
+                    model.setProperNotificationsId(rs.getInt("proper_notifications"));
+                    model.setSpecificLocationId(rs.getInt("specific_location"));
+                    model.setOtherIncNatureDesc(rs.getString("other_inc_nature_desc"));
+                return model;
+            }
+        });
+    }
 
     public int deleteIncident(Integer id) {
         StringBuffer sDeleteStmt = new StringBuffer(200);

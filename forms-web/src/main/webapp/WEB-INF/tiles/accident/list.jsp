@@ -46,5 +46,8 @@
         </div>
     </div>
     </div>
+    <div class="form-container col-md-12 col-lg-12 noprint padding-md">
+        <button class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/accident/create';">Create New Accident Report</button>
+    </div>
 
 

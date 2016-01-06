@@ -194,6 +194,43 @@ public class AccidentDAO implements DBConstants {
         });
     }
 
+    public List<AccidentModel> getAccidentListFromPastMonth() {
+    String sqlString = "select " +
+        "id" +
+        ", demographics" +
+        ", membership_status" +
+        ", program_activity" +
+        ", responder_acct" +
+        ", member_acct" +
+        ", refusal_of_care" +
+        ", witness_one" +
+        ", witness_two" +
+        ", proper_notifications" +
+        ", other_inj_desc" +
+        ", spec_inj_location" +
+        ", specific_location" +
+        " from " + ACCIDENT +
+        " where created > (NOW() - INTERVAL 1 MONTH)";
+        return getTemplate().query(sqlString, new RowMapper<AccidentModel>() {
+            public AccidentModel mapRow(ResultSet rs, int rowNum) throws SQLException {
+                AccidentModel model = new AccidentModel();
+                    model.setId(rs.getInt("id"));
+                    model.setDemographicsId(rs.getInt("demographics"));
+                    model.setMembershipStatusId(rs.getInt("membership_status"));
+                    model.setProgramActivityId(rs.getInt("program_activity"));
+                    model.setResponderAcctId(rs.getInt("responder_acct"));
+                    model.setMemberAcctId(rs.getInt("member_acct"));
+                    model.setRefusalOfCareId(rs.getInt("refusal_of_care"));
+                    model.setWitnessOneId(rs.getInt("witness_one"));
+                    model.setWitnessTwoId(rs.getInt("witness_two"));
+                    model.setProperNotificationsId(rs.getInt("proper_notifications"));
+                    model.setOtherInjDesc(rs.getString("other_inj_desc"));
+                    model.setSpecInjLocationId(rs.getInt("spec_inj_location"));
+                    model.setSpecificLocationId(rs.getInt("specific_location"));
+                return model;
+            }
+        });
+    }
 
     public int deleteAccident(Integer id) {
         StringBuffer sDeleteStmt = new StringBuffer(200);

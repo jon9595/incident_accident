@@ -77,27 +77,39 @@ public class AccidentService {
 	private SignaturesDAO signaturesDao;
 	
 
-    public List<AccidentModel> getAccidentList() {
-    	List<AccidentModel> accidents = accidentDao.getAccidentList();
+    public List<AccidentModel> getAccidentListFromPastMonth() {
+    	List<AccidentModel> accidents = accidentDao.getAccidentListFromPastMonth();
     	for (AccidentModel accident : accidents) {
-			accident.setDemographics(demographicsDao.getDemographics(accident.getDemographicsId()));
-			accident.setMembershipStatus(membershipStatusDao.getMembershipStatus(accident.getMembershipStatusId()));
-			accident.setProgramActivity(programActivityInvolvedDao.getProgramActivityInvolved(accident.getProgramActivityId()));
-			accident.setResponderAcct(accountDescriptionDao.getAccountDescription(accident.getResponderAcctId()));
-			accident.setMemberAcct(accountDescriptionDao.getAccountDescription(accident.getMemberAcctId()));
-			accident.setRefusalOfCare(refusalOfCareDao.getRefusalOfCare(accident.getRefusalOfCareId()));
-			accident.setWitnessOne(witnessInfoDao.getWitnessInfo(accident.getWitnessOneId()));
-			accident.setWitnessTwo(witnessInfoDao.getWitnessInfo(accident.getWitnessTwoId()));
-			accident.setProperNotifications(properNotificationsDao.getProperNotifications(accident.getProperNotificationsId()));
-			accident.setSpecInjLocation(specificInjuryDao.getSpecificInjury(accident.getSpecInjLocationId()));
-			accident.setSpecificLocation(specificLocationDao.getSpecificLocation(accident.getSpecificLocationId()));
-			accident.setAccidentLocations(locationsDao.getLocationsListForAccident(accident.getId()));
-			accident.setInjuryAccidentLocations(injuryLocationsDao.getInjuryLocationsForAccident(accident.getId()));
-			accident.setAccidentDetailDescriptions(accidentDetailDescriptionDao.getAccidentDetailDescriptionListForAccident(accident.getId()));
+    		accident = getAccidentIncidentals(accident);
 		}
         return accidents;
     }
 
+    public List<AccidentModel> getAccidentList() {
+    	List<AccidentModel> accidents = accidentDao.getAccidentList();
+    	for (AccidentModel accident : accidents) {
+    		accident = getAccidentIncidentals(accident);
+		}
+        return accidents;
+    }
+
+    private AccidentModel getAccidentIncidentals(AccidentModel accident) {
+		accident.setDemographics(demographicsDao.getDemographics(accident.getDemographicsId()));
+		accident.setMembershipStatus(membershipStatusDao.getMembershipStatus(accident.getMembershipStatusId()));
+		accident.setProgramActivity(programActivityInvolvedDao.getProgramActivityInvolved(accident.getProgramActivityId()));
+		accident.setResponderAcct(accountDescriptionDao.getAccountDescription(accident.getResponderAcctId()));
+		accident.setMemberAcct(accountDescriptionDao.getAccountDescription(accident.getMemberAcctId()));
+		accident.setRefusalOfCare(refusalOfCareDao.getRefusalOfCare(accident.getRefusalOfCareId()));
+		accident.setWitnessOne(witnessInfoDao.getWitnessInfo(accident.getWitnessOneId()));
+		accident.setWitnessTwo(witnessInfoDao.getWitnessInfo(accident.getWitnessTwoId()));
+		accident.setProperNotifications(properNotificationsDao.getProperNotifications(accident.getProperNotificationsId()));
+		accident.setSpecInjLocation(specificInjuryDao.getSpecificInjury(accident.getSpecInjLocationId()));
+		accident.setSpecificLocation(specificLocationDao.getSpecificLocation(accident.getSpecificLocationId()));
+		accident.setAccidentLocations(locationsDao.getLocationsListForAccident(accident.getId()));
+		accident.setInjuryAccidentLocations(injuryLocationsDao.getInjuryLocationsForAccident(accident.getId()));
+		accident.setAccidentDetailDescriptions(accidentDetailDescriptionDao.getAccidentDetailDescriptionListForAccident(accident.getId()));
+		return accident;
+    }
 
     public AccidentModel getAccident(Integer id) {
     	AccidentModel accident = accidentDao.getAccident(id);

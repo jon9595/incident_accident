@@ -18,6 +18,8 @@ import edu.mizzou.incidentaccident.api.common.util.SignatureToImage;
 import edu.mizzou.incidentaccident.api.constants.AppConstants;
 import edu.mizzou.incidentaccident.api.models.SignaturesModel;
 import edu.mizzou.incidentaccident.api.models.UsersModel;
+import edu.mizzou.incidentaccident.api.services.AccidentService;
+import edu.mizzou.incidentaccident.api.services.IncidentService;
 import edu.mizzou.incidentaccident.api.services.SignaturesService;
 
 @Controller
@@ -25,6 +27,11 @@ public class HomeController {
 
 	@Autowired
 	private SignaturesService signaturesService;
+	@Autowired
+	private AccidentService accidentService;
+	@Autowired
+	private IncidentService incidentService;
+
 	
 	@RequestMapping(value="/logout")
 	public String logoff(ModelMap map, HttpServletRequest request) {
@@ -34,6 +41,8 @@ public class HomeController {
 	
 	@RequestMapping(value="/",method = RequestMethod.GET)
 	public String index(ModelMap map, HttpServletRequest request) {
+		map.addAttribute("accidents", accidentService.getAccidentListFromPastMonth());
+		map.addAttribute("incidents", incidentService.getIncidentListFromPastMonth());
 		return "main.index";
 	}
 
