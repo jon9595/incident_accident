@@ -3,7 +3,11 @@ package edu.mizzou.incidentaccident.api.models;
 import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.Collections;
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.StringTokenizer;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -77,6 +81,25 @@ public class DemographicsModel implements Serializable {
 	public String getName() {
         return this.name;
     }
+	
+	public String getRevName() {
+		StringTokenizer st = new StringTokenizer(this.name);
+		String str = "";
+		if (st.countTokens() >= 2) {
+			List<String> list1 = new LinkedList<String>();
+			while (st.hasMoreElements()) {
+				String word = (String) st.nextElement();
+				list1.add(word);
+			}
+			Collections.reverse(list1);
+			for (String word : list1) {
+				str += word + " ";
+			}
+		} else {
+			str = this.name;
+		}
+		return str;
+	}
 
     public void setName(String name) {
         this.name = name;

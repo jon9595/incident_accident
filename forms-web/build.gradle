@@ -25,6 +25,7 @@ dependencies {
 		[group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: jacksonVersion],
 		[group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: jacksonVersion],
 		[group: 'org.imgscalr', name: 'imgscalr-lib', version: '4.2'],
+		[group: 'displaytag', name: 'displaytag', version: displayTagVersion],
 		
 	)
 	providedCompile (

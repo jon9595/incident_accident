@@ -1,6 +1,8 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="html" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://displaytag.sf.net" prefix="display" %>
+<link href="${pageContext.request.contextPath}/css/displaytag.css" rel="stylesheet">
 <script>
 	$(document).ready(function(){
 		$('#content').removeClass("container");
@@ -17,30 +19,31 @@
     <div class="form-container padding-bottom-none">
     <div class="row">
         <div class="col-md-12 col-lg-12 table-responsive">
-        <table class="table table-hover table-striped">
-	        <thead>
-	        	<th class="hidden"></th>
-	        	<th>Date/Time</th>
-	        	<th>Name/Address</th>
-	        	<th>Membership Status</th>
-	        	<th>Incident Details</th>
-	        	<th>Location</th>
-	        	<th>Program Involved</th>
-	        </thead>
-	        <tbody>
-<c:forEach items="${incidents}" var="incident">
-				<tr>
-					<td class="hidden">${incident.id}</td>
-					<td align="left"><fmt:formatDate value="${incident.demographics.date}" pattern="MM/dd/yyyy"/><br/><fmt:formatDate value="${incident.demographics.time}" pattern="hh:mm a"/></td>
-					<td>${incident.demographics.name}<br/>${incident.demographics.address}</td>
-					<td>${incident.membershipStatus.membershipStatus}</td>
-					<td><pre>${incident.incidentDetailsDesc}</pre></td>
-					<td><pre>${incident.incidentLocationDesc}</pre></td>
-					<td><pre>${incident.programActivity.programActivityDesc}</pre></td>
-				</tr>
-</c:forEach>	        
-	        </tbody>
-        </table>
+			<display:table 
+			name="${incidents}"
+			id="incident"
+			pagesize="25"
+			sort="list"
+			requestURI=""
+			class="table table-hover table-striped">
+			<display:column property="id" headerClass="hidden" class="hidden"></display:column>
+			<display:column title="Date/Time" sortable="true" sortProperty="demographics.date">
+				<fmt:formatDate value="${incident.demographics.date}" pattern="MM/dd/yyyy"/><br/><fmt:formatDate value="${incident.demographics.time}" pattern="hh:mm a"/>
+			</display:column>
+			<display:column title="Name/Address" sortable="true" sortProperty="demographics.revName">
+				${incident.demographics.name}<br/>${incident.demographics.address}
+			</display:column>
+			<display:column title="Membership Status" property="membershipStatus.membershipStatus" sortable="true"/>
+			<display:column title="Incident Details" sortable="true">
+				<pre>${incident.incidentDetailsDesc}</pre>
+			</display:column>
+			<display:column title="Location" sortable="true">
+				<pre>${incident.incidentLocationDesc}</pre>
+			</display:column>
+			<display:column title="Program Involved">
+				<pre>${incident.programActivity.programActivityDesc}</pre>
+			</display:column>
+			</display:table>
         </div>
     </div>
     </div>

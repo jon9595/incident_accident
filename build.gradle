@@ -30,6 +30,7 @@ subprojects {
 		jstlVersion = '1.2'
 		jsonsimpleVersion = '1.1.1'
 		tilesVersion = '3.0.5'
+		displayTagVersion = '1.2'
 	}
 
     repositories {
