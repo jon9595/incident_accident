@@ -3,6 +3,7 @@ package edu.mizzou.incidentaccident.api.models;
 import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.Date;
 import java.util.List;
 import java.util.TreeSet;
 
@@ -53,8 +54,12 @@ public class AccidentModel implements Serializable {
     
     private int[] nonSubInj;
     private String otherInjDesc;
+    private Date created;
+    private Date modified;
     private String createdBy;
     private String modifiedBy;
+    
+    private UsersModel creator;
 
     public AccidentModel() {
     	demographics = new DemographicsModel();
@@ -384,6 +389,22 @@ public class AccidentModel implements Serializable {
 
 
 
+	public Date getCreated() {
+		return created;
+	}
+
+	public void setCreated(Date created) {
+		this.created = created;
+	}
+
+	public Date getModified() {
+		return modified;
+	}
+
+	public void setModified(Date modified) {
+		this.modified = modified;
+	}
+
 	public SpecificInjuryModel getSpecInjLocation() {
 		return specInjLocation;
 	}
@@ -534,6 +555,18 @@ public class AccidentModel implements Serializable {
 	}
 
 
+	public UsersModel getCreator() {
+		return creator;
+	}
+
+	public void setCreator(UsersModel creator) {
+		this.creator = creator;
+	}
+
+	public boolean isApproved() {
+		return this.getProperNotifications()!=null && StringUtils.isNotBlank(this.getProperNotifications().getRptReviewedBy());
+	}
+	
 	@Override
     public String toString() {
         StringBuffer sb = new StringBuffer();

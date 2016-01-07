@@ -132,6 +132,10 @@ public class AccidentDAO implements DBConstants {
         ", other_inj_desc" +
         ", spec_inj_location" +
         ", specific_location" +
+        ", created" +
+        ", created_by" +
+        ", modified" +
+        ", modified_by" +
         " from " + ACCIDENT + " where id = ?";
         Object[] args = {id};
         List<AccidentModel> matches = getTemplate().query(sqlString, args, new RowMapper<AccidentModel>() {
@@ -150,6 +154,10 @@ public class AccidentDAO implements DBConstants {
                     model.setOtherInjDesc(rs.getString("other_inj_desc"));
                     model.setSpecInjLocationId(rs.getInt("spec_inj_location"));
                     model.setSpecificLocationId(rs.getInt("specific_location"));
+                    model.setCreated(rs.getTimestamp("created")!=null?new java.util.Date(rs.getTimestamp("created").getTime()):null);
+                    model.setCreatedBy(rs.getString("created_by"));
+                    model.setModified(rs.getTimestamp("modified")!=null?new java.util.Date(rs.getTimestamp("modified").getTime()):null);
+                    model.setModifiedBy(rs.getString("modified_by"));
                 return model;
             }
         });
@@ -172,6 +180,10 @@ public class AccidentDAO implements DBConstants {
         ", other_inj_desc" +
         ", spec_inj_location" +
         ", specific_location" +
+        ", created" +
+        ", created_by" +
+        ", modified" +
+        ", modified_by" +
         " from " + ACCIDENT;
         return getTemplate().query(sqlString, new RowMapper<AccidentModel>() {
             public AccidentModel mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -189,6 +201,10 @@ public class AccidentDAO implements DBConstants {
                     model.setOtherInjDesc(rs.getString("other_inj_desc"));
                     model.setSpecInjLocationId(rs.getInt("spec_inj_location"));
                     model.setSpecificLocationId(rs.getInt("specific_location"));
+                    model.setCreated(rs.getTimestamp("created")!=null?new java.util.Date(rs.getTimestamp("created").getTime()):null);
+                    model.setCreatedBy(rs.getString("created_by"));
+                    model.setModified(rs.getTimestamp("modified")!=null?new java.util.Date(rs.getTimestamp("modified").getTime()):null);
+                    model.setModifiedBy(rs.getString("modified_by"));
                 return model;
             }
         });
@@ -209,6 +225,10 @@ public class AccidentDAO implements DBConstants {
         ", other_inj_desc" +
         ", spec_inj_location" +
         ", specific_location" +
+        ", created" +
+        ", created_by" +
+        ", modified" +
+        ", modified_by" +
         " from " + ACCIDENT +
         " where created > (NOW() - INTERVAL 1 MONTH)";
         return getTemplate().query(sqlString, new RowMapper<AccidentModel>() {
@@ -227,6 +247,10 @@ public class AccidentDAO implements DBConstants {
                     model.setOtherInjDesc(rs.getString("other_inj_desc"));
                     model.setSpecInjLocationId(rs.getInt("spec_inj_location"));
                     model.setSpecificLocationId(rs.getInt("specific_location"));
+                    model.setCreated(rs.getTimestamp("created")!=null?new java.util.Date(rs.getTimestamp("created").getTime()):null);
+                    model.setCreatedBy(rs.getString("created_by"));
+                    model.setModified(rs.getTimestamp("modified")!=null?new java.util.Date(rs.getTimestamp("modified").getTime()):null);
+                    model.setModifiedBy(rs.getString("modified_by"));
                 return model;
             }
         });

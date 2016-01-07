@@ -39,6 +39,7 @@ public class ProperNotificationsModel implements Serializable {
     private String resLifeContEmailSent;
     private Date resLifeContDateSent;
 
+    private UsersModel reviewer;
 	
     public Integer getId() {
         return this.id;
@@ -295,7 +296,15 @@ public class ProperNotificationsModel implements Serializable {
 
 
 	
-    @Override
+    public UsersModel getReviewer() {
+		return reviewer;
+	}
+
+	public void setReviewer(UsersModel reviewer) {
+		this.reviewer = reviewer;
+	}
+
+	@Override
     public String toString() {
         StringBuffer sb = new StringBuffer();
         Field[] fields = this.getClass().getDeclaredFields();

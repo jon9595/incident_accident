@@ -23,6 +23,7 @@ import edu.mizzou.incidentaccident.api.dao.ProgramActivityInvolvedDAO;
 import edu.mizzou.incidentaccident.api.dao.ProperNotificationsDAO;
 import edu.mizzou.incidentaccident.api.dao.SignaturesDAO;
 import edu.mizzou.incidentaccident.api.dao.SpecificLocationDAO;
+import edu.mizzou.incidentaccident.api.dao.UsersDAO;
 import edu.mizzou.incidentaccident.api.dao.WitnessInfoDAO;
 import edu.mizzou.incidentaccident.api.models.IncidentIncidentNatureModel;
 import edu.mizzou.incidentaccident.api.models.IncidentLocationModel;
@@ -60,6 +61,8 @@ public class IncidentService {
     private IncidentIncidentNatureDAO incidentIncidentNatureDao;
     @Autowired
     private IncidentNatureDAO incidentNatureDao;
+    @Autowired
+    private UsersDAO usersDao;
     
     public List<IncidentModel> getIncidentListFromPastMonth() {
     	List<IncidentModel> incidents = incidentDao.getIncidentListFromPastMonth();
@@ -78,6 +81,9 @@ public class IncidentService {
     }
 
     private IncidentModel getIncidentIncidentals(IncidentModel incident) {
+		if (StringUtils.isNotBlank(incident.getCreatedBy())) {
+			incident.setCreator(usersDao.getUserByUsername(incident.getCreatedBy()));
+		}
 		incident.setDemographics(demographicsDao.getDemographics(incident.getDemographicsId()));
 		incident.setMembershipStatus(membershipStatusDao.getMembershipStatus(incident.getMembershipStatusId()));
 		incident.setProgramActivity(programActivityInvolvedDao.getProgramActivityInvolved(incident.getProgramActivityId()));
@@ -86,6 +92,9 @@ public class IncidentService {
 		incident.setWitnessAcct(accountDescriptionDao.getAccountDescription(incident.getWitnessAcctId()));
 		incident.setWitnessInfo(witnessInfoDao.getWitnessInfo(incident.getWitnessInfoId()));
 		incident.setProperNotifications(properNotificationsDao.getProperNotifications(incident.getProperNotificationsId()));
+		if (incident.getProperNotifications()!=null && StringUtils.isNotBlank(incident.getProperNotifications().getRptReviewedBy())) {
+			incident.getProperNotifications().setReviewer(usersDao.getUserByUsername(incident.getProperNotifications().getRptReviewedBy()));
+		}
 		incident.setSpecificLocation(specificLocationDao.getSpecificLocation(incident.getSpecificLocationId()));
 		incident.setIncidentLocations(locationsDao.getLocationsListForIncident(incident.getId()));
 		incident.setIncidentNatures(incidentNatureDao.getIncidentDetailDescriptionListForIncident(incident.getId()));
@@ -94,17 +103,7 @@ public class IncidentService {
     
     public IncidentModel getIncident(Integer id) {
     	IncidentModel incident = incidentDao.getIncident(id);
-		incident.setDemographics(demographicsDao.getDemographics(incident.getDemographicsId()));
-		incident.setMembershipStatus(membershipStatusDao.getMembershipStatus(incident.getMembershipStatusId()));
-		incident.setProgramActivity(programActivityInvolvedDao.getProgramActivityInvolved(incident.getProgramActivityId()));
-		incident.setResponderAcct(accountDescriptionDao.getAccountDescription(incident.getResponderAcctId()));
-		incident.setMemberAcct(accountDescriptionDao.getAccountDescription(incident.getMemberAcctId()));
-		incident.setWitnessAcct(accountDescriptionDao.getAccountDescription(incident.getWitnessAcctId()));
-		incident.setWitnessInfo(witnessInfoDao.getWitnessInfo(incident.getWitnessInfoId()));
-		incident.setProperNotifications(properNotificationsDao.getProperNotifications(incident.getProperNotificationsId()));
-		incident.setSpecificLocation(specificLocationDao.getSpecificLocation(incident.getSpecificLocationId()));
-		incident.setIncidentLocations(locationsDao.getLocationsListForIncident(incident.getId()));
-		incident.setIncidentNatures(incidentNatureDao.getIncidentDetailDescriptionListForIncident(incident.getId()));
+		incident = getIncidentIncidentals(incident);
     	return incident;
     }
 
@@ -248,6 +247,11 @@ public class IncidentService {
         return numrows;
     }
     
+    @Transactional(propagation=Propagation.REQUIRED)
+    public int approveAccidentReport(Integer id, String username) {
+    	return properNotificationsDao.approveReport(id, username);
+    }
+
     @Transactional(propagation=Propagation.REQUIRED)
     public int deleteAccident(Integer id) {
     	IncidentModel incident = incidentDao.getIncident(id);

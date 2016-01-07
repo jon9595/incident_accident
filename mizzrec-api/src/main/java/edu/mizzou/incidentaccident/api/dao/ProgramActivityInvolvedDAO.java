@@ -35,6 +35,8 @@ public class ProgramActivityInvolvedDAO implements DBConstants {
             .append(", inf_act_desc " )
             .append(", club_rec_sports " )
             .append(", club_rec_team_name " )
+            .append(", rec_sports " )
+            .append(", rec_team_name " )
             .append(", swim_team_practice " )
             .append(", swim_team_name " )
             .append(", inter_athletics " )
@@ -57,6 +59,8 @@ public class ProgramActivityInvolvedDAO implements DBConstants {
             .append(", ?")
             .append(", ?")
             .append(", ?")
+            .append(", ?")
+            .append(", ?")
             .append(")");
         Object[] args = {
             bean.getTime(), 
@@ -64,6 +68,8 @@ public class ProgramActivityInvolvedDAO implements DBConstants {
             bean.getInfActDesc(), 
             bean.isClubRecSports()?"Y":"N", 
             bean.getClubRecTeamName(), 
+            bean.isRecSports()?"Y":"N", 
+            bean.getRecTeamName(), 
             bean.isSwimTeamPractice()?"Y":"N", 
             bean.getSwimTeamName(), 
             bean.isInterAthletics()?"Y":"N", 
@@ -86,6 +92,8 @@ public class ProgramActivityInvolvedDAO implements DBConstants {
         .append(", inf_act_desc = ? " )
         .append(", club_rec_sports = ? " )
         .append(", club_rec_team_name = ? " )
+        .append(", rec_sports = ? " )
+        .append(", rec_team_name = ? " )
         .append(", swim_team_practice = ? " )
         .append(", swim_team_name = ? " )
         .append(", inter_athletics = ? " )
@@ -103,6 +111,8 @@ public class ProgramActivityInvolvedDAO implements DBConstants {
             bean.getInfActDesc(), 
             bean.isClubRecSports()?"Y":"N", 
             bean.getClubRecTeamName(), 
+            bean.isRecSports()?"Y":"N", 
+            bean.getRecTeamName(), 
             bean.isSwimTeamPractice()?"Y":"N", 
             bean.getSwimTeamName(), 
             bean.isInterAthletics()?"Y":"N", 
@@ -125,6 +135,8 @@ public class ProgramActivityInvolvedDAO implements DBConstants {
         ", inf_act_desc" +
         ", club_rec_sports" +
         ", club_rec_team_name" +
+        ", rec_sports" +
+        ", rec_team_name" +
         ", swim_team_practice" +
         ", swim_team_name" +
         ", inter_athletics" +
@@ -144,6 +156,8 @@ public class ProgramActivityInvolvedDAO implements DBConstants {
                     model.setInfActDesc(rs.getString("inf_act_desc"));
                     model.setClubRecSports("Y".equals(rs.getString("club_rec_sports"))?true:false);
                     model.setClubRecTeamName(rs.getString("club_rec_team_name"));
+                    model.setRecSports("Y".equals(rs.getString("rec_sports"))?true:false);
+                    model.setRecTeamName(rs.getString("rec_team_name"));
                     model.setSwimTeamPractice("Y".equals(rs.getString("swim_team_practice"))?true:false);
                     model.setSwimTeamName(rs.getString("swim_team_name"));
                     model.setInterAthletics("Y".equals(rs.getString("inter_athletics"))?true:false);
@@ -167,6 +181,8 @@ public class ProgramActivityInvolvedDAO implements DBConstants {
         ", inf_act_desc" +
         ", club_rec_sports" +
         ", club_rec_team_name" +
+        ", rec_sports" +
+        ", rec_team_name" +
         ", swim_team_practice" +
         ", swim_team_name" +
         ", inter_athletics" +
@@ -185,6 +201,8 @@ public class ProgramActivityInvolvedDAO implements DBConstants {
                     model.setInfActDesc(rs.getString("inf_act_desc"));
                     model.setClubRecSports("Y".equals(rs.getString("club_rec_sports"))?true:false);
                     model.setClubRecTeamName(rs.getString("club_rec_team_name"));
+                    model.setRecSports("Y".equals(rs.getString("rec_sports"))?true:false);
+                    model.setRecTeamName(rs.getString("rec_team_name"));
                     model.setSwimTeamPractice("Y".equals(rs.getString("swim_team_practice"))?true:false);
                     model.setSwimTeamName(rs.getString("swim_team_name"));
                     model.setInterAthletics("Y".equals(rs.getString("inter_athletics"))?true:false);

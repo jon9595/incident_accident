@@ -43,8 +43,12 @@ public class IncidentModel implements Serializable {
     private String[] locations;
     private String[] incidentDetails;
 
+    private Date created;
+    private Date modified;
     private String createdBy;
     private String modifiedBy;
+
+    private UsersModel creator;
 
     public IncidentModel() {
     	demographics = new DemographicsModel();
@@ -306,6 +310,22 @@ public class IncidentModel implements Serializable {
 	}
 	
 
+	public Date getCreated() {
+		return created;
+	}
+
+	public void setCreated(Date created) {
+		this.created = created;
+	}
+
+	public Date getModified() {
+		return modified;
+	}
+
+	public void setModified(Date modified) {
+		this.modified = modified;
+	}
+
 	public String getCreatedBy() {
         return this.createdBy;
     }
@@ -323,7 +343,19 @@ public class IncidentModel implements Serializable {
         this.modifiedBy = modifiedBy;
     }
 
-    @Override
+    public UsersModel getCreator() {
+		return creator;
+	}
+
+	public void setCreator(UsersModel creator) {
+		this.creator = creator;
+	}
+
+	public boolean isApproved() {
+		return this.getProperNotifications()!=null && StringUtils.isNotBlank(this.getProperNotifications().getRptReviewedBy());
+	}
+
+	@Override
     public String toString() {
         StringBuffer sb = new StringBuffer();
         Field[] fields = this.getClass().getDeclaredFields();

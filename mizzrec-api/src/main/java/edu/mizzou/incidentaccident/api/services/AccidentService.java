@@ -27,6 +27,7 @@ import edu.mizzou.incidentaccident.api.dao.RefusalOfCareDAO;
 import edu.mizzou.incidentaccident.api.dao.SignaturesDAO;
 import edu.mizzou.incidentaccident.api.dao.SpecificInjuryDAO;
 import edu.mizzou.incidentaccident.api.dao.SpecificLocationDAO;
+import edu.mizzou.incidentaccident.api.dao.UsersDAO;
 import edu.mizzou.incidentaccident.api.dao.WitnessInfoDAO;
 import edu.mizzou.incidentaccident.api.models.AccidentDetailsModel;
 import edu.mizzou.incidentaccident.api.models.AccidentInjuryLocationModel;
@@ -75,6 +76,8 @@ public class AccidentService {
     private AccidentDetailsDAO accidentDetailsDao;
     @Autowired
 	private SignaturesDAO signaturesDao;
+    @Autowired
+    private UsersDAO usersDao;
 	
 
     public List<AccidentModel> getAccidentListFromPastMonth() {
@@ -94,6 +97,9 @@ public class AccidentService {
     }
 
     private AccidentModel getAccidentIncidentals(AccidentModel accident) {
+		if (StringUtils.isNotBlank(accident.getCreatedBy())) {
+			accident.setCreator(usersDao.getUserByUsername(accident.getCreatedBy()));
+		}
 		accident.setDemographics(demographicsDao.getDemographics(accident.getDemographicsId()));
 		accident.setMembershipStatus(membershipStatusDao.getMembershipStatus(accident.getMembershipStatusId()));
 		accident.setProgramActivity(programActivityInvolvedDao.getProgramActivityInvolved(accident.getProgramActivityId()));
@@ -103,6 +109,9 @@ public class AccidentService {
 		accident.setWitnessOne(witnessInfoDao.getWitnessInfo(accident.getWitnessOneId()));
 		accident.setWitnessTwo(witnessInfoDao.getWitnessInfo(accident.getWitnessTwoId()));
 		accident.setProperNotifications(properNotificationsDao.getProperNotifications(accident.getProperNotificationsId()));
+		if (accident.getProperNotifications()!=null && StringUtils.isNotBlank(accident.getProperNotifications().getRptReviewedBy())) {
+			accident.getProperNotifications().setReviewer(usersDao.getUserByUsername(accident.getProperNotifications().getRptReviewedBy()));
+		}
 		accident.setSpecInjLocation(specificInjuryDao.getSpecificInjury(accident.getSpecInjLocationId()));
 		accident.setSpecificLocation(specificLocationDao.getSpecificLocation(accident.getSpecificLocationId()));
 		accident.setAccidentLocations(locationsDao.getLocationsListForAccident(accident.getId()));
@@ -113,20 +122,7 @@ public class AccidentService {
 
     public AccidentModel getAccident(Integer id) {
     	AccidentModel accident = accidentDao.getAccident(id);
-		accident.setDemographics(demographicsDao.getDemographics(accident.getDemographicsId()));
-		accident.setMembershipStatus(membershipStatusDao.getMembershipStatus(accident.getMembershipStatusId()));
-		accident.setProgramActivity(programActivityInvolvedDao.getProgramActivityInvolved(accident.getProgramActivityId()));
-		accident.setResponderAcct(accountDescriptionDao.getAccountDescription(accident.getResponderAcctId()));
-		accident.setMemberAcct(accountDescriptionDao.getAccountDescription(accident.getMemberAcctId()));
-		accident.setRefusalOfCare(refusalOfCareDao.getRefusalOfCare(accident.getRefusalOfCareId()));
-		accident.setWitnessOne(witnessInfoDao.getWitnessInfo(accident.getWitnessOneId()));
-		accident.setWitnessTwo(witnessInfoDao.getWitnessInfo(accident.getWitnessTwoId()));
-		accident.setProperNotifications(properNotificationsDao.getProperNotifications(accident.getProperNotificationsId()));
-		accident.setSpecInjLocation(specificInjuryDao.getSpecificInjury(accident.getSpecInjLocationId()));
-		accident.setSpecificLocation(specificLocationDao.getSpecificLocation(accident.getSpecificLocationId()));
-		accident.setAccidentLocations(locationsDao.getLocationsListForAccident(accident.getId()));
-		accident.setInjuryAccidentLocations(injuryLocationsDao.getInjuryLocationsForAccident(accident.getId()));
-		accident.setAccidentDetailDescriptions(accidentDetailDescriptionDao.getAccidentDetailDescriptionListForAccident(accident.getId()));
+    	accident = getAccidentIncidentals(accident);
     	return accident;
     }
     
@@ -345,6 +341,10 @@ public class AccidentService {
         return numrows;
     }
 
+    @Transactional(propagation=Propagation.REQUIRED)
+    public int approveAccidentReport(Integer id, String username) {
+    	return properNotificationsDao.approveReport(id, username);
+    }
 	 
     @Transactional(propagation=Propagation.REQUIRED)
     public int deleteAccident(Integer id) {

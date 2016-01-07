@@ -95,6 +95,13 @@ public class IncidentController {
 		}
 	}
 
+	@RequestMapping(value="/approve/{id}", method=RequestMethod.GET)
+	public String approveIncidentForm(@PathVariable String id, ModelMap map, HttpServletRequest request) {
+		IncidentModel incident = incidentService.getIncident(new Integer(id));
+		incidentService.approveAccidentReport(incident.getProperNotificationsId(), request.getUserPrincipal().getName());
+		return "redirect:/incident/view/"+id;
+	}
+
 	@RequestMapping(value="/list")
 	public String getIncidentList(ModelMap map) {
 		map.addAttribute("incidents", incidentService.getIncidentList());

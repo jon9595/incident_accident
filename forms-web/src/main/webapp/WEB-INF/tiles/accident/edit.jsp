@@ -69,13 +69,14 @@
               <jsp:include page="/WEB-INF/jsp/modules/refusal-of-care.jsp"/>
               <jsp:include page="/WEB-INF/jsp/modules/accident-witness.jsp"/>
               <jsp:include page="/WEB-INF/jsp/modules/proper-notifications.jsp"/>
-              <jsp:include page="/WEB-INF/jsp/modules/report-completion.jsp"/>
               <jsp:include page="/WEB-INF/jsp/modules/res-life-contacted.jsp"/>
-			    <div class="col-md-12 col-lg-12">
-			        <div class="display-container" style="padding-top:10px; padding-bottom:10px;">
-						<input type="submit" class="btn btn-large padding-left-xl padding-right-xl" value="Save Report">
-			        </div>
-			    </div>
+				<div class="form-container padding-bottom-none">
+	                <div class="form-group">
+	                  <div class="col-sm-11 col-md-5 col-lg-3 pull-right margin-bottom-lg">
+	                    <input type="submit" class="btn btn-large btn-primary padding-left-xl padding-right-xl" value="Save Report">
+	                  </div>
+					</div>
+				</div>              
               </html:form>
         </div>
     </div>

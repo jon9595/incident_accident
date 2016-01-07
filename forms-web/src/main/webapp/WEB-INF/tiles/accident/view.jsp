@@ -12,7 +12,12 @@
 <div class="row">
     <div class="col-md-12 col-lg-12 noprint">
         <div class="display-container" style="padding-top:10px; padding-bottom:10px;">
+        <c:if test="${sessionScope.userProfile.admin}">
         <button class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/accident/edit/${accident.id}';">Edit Report</button>
+        </c:if>
+        <c:if test="${(sessionScope.userProfile.admin || sessionScope.userProfile.manager) && !accident.approved}">
+        <button class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/accident/approve/${accident.id}';">Approve Report</button>
+        </c:if>
         <button class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/accident/list';">View Accident Reports</button>
         <button class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/incident/list';">View Incident Reports</button>
         </div>
@@ -84,7 +89,7 @@
 				</div>
 			</div>
         </fieldset>
-<c:if test="${accidentForm.refusalOfCare!=null && accidentForm.refusalOfCare.memberSig != 0 && accidentForm.refusalOfCare.memberSig != null && accidentForm.refusalOfCare.memberSig != ''}">
+<c:if test="${accident.refusalOfCare!=null && accident.refusalOfCare.memberSig != 0 && accident.refusalOfCare.memberSig != null && accident.refusalOfCare.memberSig != ''}">
         <fieldset><legend>Refusal of Care</legend>
               <div class="row margin-bottom-lg">
 				<div class="col-md-12 margin-bottom-sm account-description">
@@ -191,23 +196,23 @@
             <div class="row margin-bottom-lg">
 				<div class="col-md-12">
 					<div class="col-md-5">
-					<label>Report Completed By: </label>&nbsp;${accident.properNotifications.reportCompletedBy}
+					<label>Report Completed By: </label>&nbsp;${accident.creator.name}
 					</div>
 					<div class="col-md-5">
-					<label>Position: </label>&nbsp;${accident.properNotifications.rptCmpltPosition}
+					<label>Position: </label>&nbsp;${accident.creator.position}
 					</div>
 					<div class="col-md-2">
-					<label>Date: </label>&nbsp;<fmt:formatDate value="${accident.properNotifications.rptCmpltDate}" pattern="MM/dd/yyyy"/> 
+					<label>Date: </label>&nbsp;<fmt:formatDate value="${accident.created}" pattern="MM/dd/yyyy"/> 
 					</div>
 				</div>
 			</div>
             <div class="row margin-bottom-lg">
 				<div class="col-md-12">
 					<div class="col-md-5">
-					<label>Report Reviewed By: </label>&nbsp;${accident.properNotifications.rptReviewedBy}
+					<label>Report Reviewed By: </label>&nbsp;${accident.properNotifications.reviewer!=null?accident.properNotifications.reviewer.name:""}
 					</div>
 					<div class="col-md-5">
-					<label>Position: </label>&nbsp;${accident.properNotifications.rptReviewerPosition}
+					<label>Position: </label>&nbsp;${accident.properNotifications.reviewer!=null?accident.properNotifications.reviewer.position:""}
 					</div>
 					<div class="col-md-2">
 					<label>Date: </label>&nbsp;<fmt:formatDate value="${accident.properNotifications.rptReviewerDate}" pattern="MM/dd/yyyy"/> 
@@ -227,9 +232,11 @@
         </fieldset>
 		</div>
      </div>
+	<c:if test="${sessionScope.userProfile.admin}">
     <div class="col-md-12 col-lg-12 noprint">
         <div class="display-container" style="padding-top:10px; padding-bottom:10px;">
         <button class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/accident/edit/${accident.id}';">Edit Report</button>
         </div>
     </div>
+    </c:if>
  </div>

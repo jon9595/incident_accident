@@ -2,6 +2,7 @@ package edu.mizzou.incidentaccident.api.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -42,22 +43,10 @@ public class ProperNotificationsDAO implements DBConstants {
             .append(", prof_staff_name " )
             .append(", prof_staff_called " )
             .append(", prof_staff_arrived " )
-            .append(", report_completed_by " )
-            .append(", rpt_cmplt_position " )
-            .append(", rpt_cmplt_date " )
-            .append(", rpt_reviewed_by " )
-            .append(", rpt_reviewer_position " )
-            .append(", rpt_reviewer_date " )
             .append(", res_life_cont_email_sent " )
             .append(", res_life_cont_date_sent " )
             .append(") VALUES ( ")
             .append(" ?")
-            .append(", ?")
-            .append(", ?")
-            .append(", ?")
-            .append(", ?")
-            .append(", ?")
-            .append(", ?")
             .append(", ?")
             .append(", ?")
             .append(", ?")
@@ -85,12 +74,6 @@ public class ProperNotificationsDAO implements DBConstants {
             bean.getProfStaffName(),
             bean.getProfStaffCalled(), 
             bean.getProfStaffArrived(), 
-            bean.getReportCompletedBy(), 
-            bean.getRptCmpltPosition(), 
-            bean.getRptCmpltDate(), 
-            bean.getRptReviewedBy(), 
-            bean.getRptReviewerPosition(), 
-            bean.getRptReviewerDate(), 
             bean.getResLifeContEmailSent(), 
             bean.getResLifeContDateSent()};
         int numRows = getTemplate().update(sInsertStmt.toString(), args);
@@ -114,11 +97,7 @@ public class ProperNotificationsDAO implements DBConstants {
         .append(", prof_staff_name = ? " )
         .append(", prof_staff_called = ? " )
         .append(", prof_staff_arrived = ? " )
-        .append(", report_completed_by = ? " )
-        .append(", rpt_cmplt_position = ? " )
-        .append(", rpt_cmplt_date = ? " )
         .append(", rpt_reviewed_by = ? " )
-        .append(", rpt_reviewer_position = ? " )
         .append(", rpt_reviewer_date = ? " )
         .append(", res_life_cont_email_sent = ? " )
         .append(", res_life_cont_date_sent = ? " ); 
@@ -138,11 +117,7 @@ public class ProperNotificationsDAO implements DBConstants {
             bean.getProfStaffName(),
             bean.getProfStaffCalled(), 
             bean.getProfStaffArrived(), 
-            bean.getReportCompletedBy(), 
-            bean.getRptCmpltPosition(), 
-            bean.getRptCmpltDate(), 
             bean.getRptReviewedBy(), 
-            bean.getRptReviewerPosition(), 
             bean.getRptReviewerDate(), 
             bean.getResLifeContEmailSent(), 
             bean.getResLifeContDateSent(),
@@ -151,6 +126,22 @@ public class ProperNotificationsDAO implements DBConstants {
         return numRows;
     }
 
+    public int approveReport(Integer id, String username) {
+        StringBuffer sUpdateStmt = new StringBuffer(200);
+        sUpdateStmt.append("UPDATE " + PROPER_NOTIFICATIONS)
+        .append(" SET ")
+        .append(" rpt_reviewed_by = ? " )
+        .append(", rpt_reviewer_date = ? " ); 
+        StringBuffer sWhereStmt = new StringBuffer(100);
+        sWhereStmt.append(" WHERE id = ?");
+        sUpdateStmt.append( sWhereStmt );
+        Object[] args = {
+            username, 
+            new Date(), 
+            id};
+        int numRows = getTemplate().update(sUpdateStmt.toString(), args);
+        return numRows;
+    }
 
     public ProperNotificationsModel getProperNotifications(Integer id) {
     String sqlString = "select " +
@@ -167,11 +158,7 @@ public class ProperNotificationsDAO implements DBConstants {
         ", prof_staff_name" +
         ", prof_staff_called" +
         ", prof_staff_arrived" +
-        ", report_completed_by" +
-        ", rpt_cmplt_position" +
-        ", rpt_cmplt_date" +
         ", rpt_reviewed_by" +
-        ", rpt_reviewer_position" +
         ", rpt_reviewer_date" +
         ", res_life_cont_email_sent" +
         ", res_life_cont_date_sent" +
@@ -193,11 +180,7 @@ public class ProperNotificationsDAO implements DBConstants {
                     model.setProfStaffName(rs.getString("prof_staff_name"));
                     model.setProfStaffCalled(rs.getTime("prof_staff_called"));
                     model.setProfStaffArrived(rs.getTime("prof_staff_arrived"));
-                    model.setReportCompletedBy(rs.getString("report_completed_by"));
-                    model.setRptCmpltPosition(rs.getString("rpt_cmplt_position"));
-                    model.setRptCmpltDate(rs.getDate("rpt_cmplt_date")!=null?new java.util.Date(rs.getDate("rpt_cmplt_date").getTime()):null);
                     model.setRptReviewedBy(rs.getString("rpt_reviewed_by"));
-                    model.setRptReviewerPosition(rs.getString("rpt_reviewer_position"));
                     model.setRptReviewerDate(rs.getDate("rpt_reviewer_date")!=null?new java.util.Date(rs.getDate("rpt_reviewer_date").getTime()):null);
                     model.setResLifeContEmailSent(rs.getString("res_life_cont_email_sent"));
                     model.setResLifeContDateSent(rs.getDate("res_life_cont_date_sent")!=null?new java.util.Date(rs.getDate("res_life_cont_date_sent").getTime()):null);
@@ -223,11 +206,7 @@ public class ProperNotificationsDAO implements DBConstants {
         ", prof_staff_name" +
         ", prof_staff_called" +
         ", prof_staff_arrived" +
-        ", report_completed_by" +
-        ", rpt_cmplt_position" +
-        ", rpt_cmplt_date" +
         ", rpt_reviewed_by" +
-        ", rpt_reviewer_position" +
         ", rpt_reviewer_date" +
         ", res_life_cont_email_sent" +
         ", res_life_cont_date_sent" +
@@ -248,11 +227,7 @@ public class ProperNotificationsDAO implements DBConstants {
                     model.setProfStaffName(rs.getString("prof_staff_name"));
                     model.setProfStaffCalled(rs.getTime("prof_staff_called"));
                     model.setProfStaffArrived(rs.getTime("prof_staff_arrived"));
-                    model.setReportCompletedBy(rs.getString("report_completed_by"));
-                    model.setRptCmpltPosition(rs.getString("rpt_cmplt_position"));
-                    model.setRptCmpltDate(rs.getDate("rpt_cmplt_date")!=null?new java.util.Date(rs.getDate("rpt_cmplt_date").getTime()):null);
                     model.setRptReviewedBy(rs.getString("rpt_reviewed_by"));
-                    model.setRptReviewerPosition(rs.getString("rpt_reviewer_position"));
                     model.setRptReviewerDate(rs.getDate("rpt_reviewer_date")!=null?new java.util.Date(rs.getDate("rpt_reviewer_date").getTime()):null);
                     model.setResLifeContEmailSent(rs.getString("res_life_cont_email_sent"));
                     model.setResLifeContDateSent(rs.getDate("res_life_cont_date_sent")!=null?new java.util.Date(rs.getDate("res_life_cont_date_sent").getTime()):null);

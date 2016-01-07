@@ -87,9 +87,7 @@
     </div>
     </div>
     <div class="form-container col-md-12 col-lg-12 noprint padding-md margin-top-xl">
-    <div class="pull-right">
         <button class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/accident/create';">Create New Accident Report</button>&nbsp;&nbsp;
         <button class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/incident/create';">Create New Incident Report</button>
-    </div>
     </div>
     

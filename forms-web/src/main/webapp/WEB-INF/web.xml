@@ -41,6 +41,30 @@
 	<security-constraint>
 	    <web-resource-collection>
 	      <web-resource-name>Some Resource</web-resource-name>
+	      <url-pattern>/accident/approve/*</url-pattern>
+	      <url-pattern>/incident/approve/*</url-pattern>
+	      <http-method>GET</http-method>
+	      <http-method>POST</http-method>
+	    </web-resource-collection>
+		<auth-constraint>
+	      <role-name>admin</role-name>
+	      <role-name>manager</role-name>
+	    </auth-constraint>
+	</security-constraint>
+	<security-constraint>
+	    <web-resource-collection>
+	      <web-resource-name>Some Resource</web-resource-name>
+	      <url-pattern>/users/*</url-pattern>
+	      <http-method>GET</http-method>
+	      <http-method>POST</http-method>
+	    </web-resource-collection>
+		<auth-constraint>
+	      <role-name>admin</role-name>
+	    </auth-constraint>
+	</security-constraint>
+	<security-constraint>
+	    <web-resource-collection>
+	      <web-resource-name>Some Resource</web-resource-name>
 	      <url-pattern>/</url-pattern>
 	      <http-method>GET</http-method>
 	      <http-method>POST</http-method>

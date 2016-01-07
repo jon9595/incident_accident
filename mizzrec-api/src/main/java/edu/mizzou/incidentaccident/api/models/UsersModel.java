@@ -82,6 +82,9 @@ public class UsersModel implements Serializable {
         this.lastName = lastName;
     }
 
+    public String getName() {
+    	return this.firstName + " " + this.lastName;
+    }
 
     public String getPassword() {
         return this.password;

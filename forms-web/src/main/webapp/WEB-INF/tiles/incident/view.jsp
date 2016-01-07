@@ -12,7 +12,12 @@
 <div class="row">
     <div class="col-md-12 col-lg-12 noprint">
         <div class="display-container" style="padding-top:10px; padding-bottom:10px;">
+        <c:if test="${sessionScope.userProfile.admin}">
         <button class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/incident/edit/${incident.id}';">Edit Report</button>
+        </c:if>
+        <c:if test="${(sessionScope.userProfile.admin || sessionScope.userProfile.manager) && !incident.approved}">
+        <button class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/incident/approve/${incident.id}';">Approve Report</button>
+        </c:if>
         <button class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/incident/list';">View Incident Reports</button>
         <button class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/accident/list';">View Accident Reports</button>
         </div>
@@ -171,23 +176,23 @@
             <div class="row margin-bottom-lg">
 				<div class="col-md-12">
 					<div class="col-md-5">
-					<label>Report Completed By: </label>&nbsp;${incident.properNotifications.reportCompletedBy}
+					<label>Report Completed By: </label>&nbsp;${incident.creator.name}
 					</div>
 					<div class="col-md-5">
-					<label>Position: </label>&nbsp;${incident.properNotifications.rptCmpltPosition}
+					<label>Position: </label>&nbsp;${incident.creator.position}
 					</div>
 					<div class="col-md-2">
-					<label>Date: </label>&nbsp;<fmt:formatDate value="${incident.properNotifications.rptCmpltDate}" pattern="MM/dd/yyyy"/> 
+					<label>Date: </label>&nbsp;<fmt:formatDate value="${incident.created}" pattern="MM/dd/yyyy"/> 
 					</div>
 				</div>
 			</div>
             <div class="row margin-bottom-lg">
 				<div class="col-md-12">
 					<div class="col-md-5">
-					<label>Report Reviewed By: </label>&nbsp;${incident.properNotifications.rptReviewedBy}
+					<label>Report Reviewed By: </label>&nbsp;${incident.properNotifications.reviewer!=null?incident.properNotifications.reviewer.name:""}
 					</div>
 					<div class="col-md-5">
-					<label>Position: </label>&nbsp;${incident.properNotifications.rptReviewerPosition}
+					<label>Position: </label>&nbsp;${incident.properNotifications.reviewer!=null?incident.properNotifications.reviewer.position:""}
 					</div>
 					<div class="col-md-2">
 					<label>Date: </label>&nbsp;<fmt:formatDate value="${incident.properNotifications.rptReviewerDate}" pattern="MM/dd/yyyy"/> 
@@ -197,9 +202,11 @@
         </fieldset>
 		</div>
      </div>
+     <c:if test="${sessionScope.userProfile.admin}">
     <div class="col-md-12 col-lg-12 noprint">
         <div class="display-container" style="padding-top:10px; padding-bottom:10px;">
         <button class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/incident/edit/${incident.id}';">Edit Report</button>
         </div>
     </div>
+     </c:if>
  </div>
