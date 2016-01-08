@@ -18,7 +18,9 @@ import edu.mizzou.incidentaccident.api.common.util.SignatureToImage;
 import edu.mizzou.incidentaccident.api.constants.AppConstants;
 import edu.mizzou.incidentaccident.api.models.SignaturesModel;
 import edu.mizzou.incidentaccident.api.models.UsersModel;
+import edu.mizzou.incidentaccident.api.services.AccidentDetailDescriptionService;
 import edu.mizzou.incidentaccident.api.services.AccidentService;
+import edu.mizzou.incidentaccident.api.services.IncidentNatureService;
 import edu.mizzou.incidentaccident.api.services.IncidentService;
 import edu.mizzou.incidentaccident.api.services.SignaturesService;
 
@@ -31,7 +33,10 @@ public class HomeController {
 	private AccidentService accidentService;
 	@Autowired
 	private IncidentService incidentService;
-
+	@Autowired
+	private IncidentNatureService incidentNatureService;
+	@Autowired
+	private AccidentDetailDescriptionService accidentDetailDescriptionService;
 	
 	@RequestMapping(value="/logout")
 	public String logoff(ModelMap map, HttpServletRequest request) {
@@ -41,8 +46,10 @@ public class HomeController {
 	
 	@RequestMapping(value="/",method = RequestMethod.GET)
 	public String index(ModelMap map, HttpServletRequest request) {
-		map.addAttribute("accidents", accidentService.getAccidentListFromPastMonth());
-		map.addAttribute("incidents", incidentService.getIncidentListFromPastMonth());
+		map.addAttribute("accidents", accidentService.getAccidentNeedingApproval());
+		map.addAttribute("incidents", incidentService.getIncidentsNeedingApproval());
+		map.addAttribute("incidentNatures", incidentNatureService.getIncidentNatureList());
+		map.addAttribute("accidentDescriptions", accidentDetailDescriptionService.getAccidentDetailDescriptionList());
 		return "main.index";
 	}
 

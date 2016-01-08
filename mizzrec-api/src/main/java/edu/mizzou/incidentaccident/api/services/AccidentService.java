@@ -80,6 +80,14 @@ public class AccidentService {
     private UsersDAO usersDao;
 	
 
+    public List<AccidentModel> getAccidentNeedingApproval() {
+    	List<AccidentModel> accidents = accidentDao.getAccidentsNeedingApproval();
+    	for (AccidentModel accident : accidents) {
+    		accident = getAccidentIncidentals(accident);
+		}
+        return accidents;
+    }
+
     public List<AccidentModel> getAccidentListFromPastMonth() {
     	List<AccidentModel> accidents = accidentDao.getAccidentListFromPastMonth();
     	for (AccidentModel accident : accidents) {

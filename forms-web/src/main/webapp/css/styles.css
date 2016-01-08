@@ -353,6 +353,10 @@ a.navbar-brand:hover {
   margin-left: 40px !important;
 }
 
+.color-black {
+	color: #555;
+}
+
 .form-container
 {
     margin: 20px auto 0;

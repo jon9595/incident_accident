@@ -182,7 +182,7 @@ public class MembershipStatusModel implements Serializable {
 				this.stopOutStudent = true;
 				break;
 			case "houseHoldAdult":
-				
+				this.houseHoldAdult = true;
 				break;
 			case "other":
 				this.other = true;

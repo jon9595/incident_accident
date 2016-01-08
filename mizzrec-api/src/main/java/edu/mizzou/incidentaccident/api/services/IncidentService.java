@@ -64,6 +64,14 @@ public class IncidentService {
     @Autowired
     private UsersDAO usersDao;
     
+    public List<IncidentModel> getIncidentsNeedingApproval() {
+    	List<IncidentModel> incidents = incidentDao.getIncidentsNeedingApproval();
+    	for (IncidentModel incident : incidents) {
+    		incident = getIncidentIncidentals(incident);
+		}
+        return incidents;
+    }
+
     public List<IncidentModel> getIncidentListFromPastMonth() {
     	List<IncidentModel> incidents = incidentDao.getIncidentListFromPastMonth();
     	for (IncidentModel incident : incidents) {

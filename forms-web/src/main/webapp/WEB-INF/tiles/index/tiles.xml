@@ -4,6 +4,6 @@
        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
 	<definition name="main.index" extends="mainLayout">
-		<put-attribute name="content" value="/WEB-INF/tiles/index/index.jsp"/>
+		<put-attribute name="content" value="/WEB-INF/tiles/index/index1.jsp"/>
 	</definition>
 </tiles-definitions>
