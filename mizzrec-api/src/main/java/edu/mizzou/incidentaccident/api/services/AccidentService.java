@@ -104,6 +104,14 @@ public class AccidentService {
         return accidents;
     }
 
+    public List<AccidentModel> getAccidentListFromSearch(String whereClause) {
+    	List<AccidentModel> accidents = accidentDao.getAccidentListFromSearch(whereClause);
+    	for (AccidentModel accident : accidents) {
+    		accident = getAccidentIncidentals(accident);
+		}
+        return accidents;
+    }
+
     private AccidentModel getAccidentIncidentals(AccidentModel accident) {
 		if (StringUtils.isNotBlank(accident.getCreatedBy())) {
 			accident.setCreator(usersDao.getUserByUsername(accident.getCreatedBy()));

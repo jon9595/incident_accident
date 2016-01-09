@@ -80,6 +80,14 @@ public class IncidentService {
         return incidents;
     }
 
+    public List<IncidentModel> getIncidentListFromSearch(String whereClause) {
+    	List<IncidentModel> incidents = incidentDao.getIncidentListFromSearch(whereClause);
+    	for (IncidentModel incident : incidents) {
+    		incident = getIncidentIncidentals(incident);
+		}
+        return incidents;
+    }
+
     public List<IncidentModel> getIncidentList() {
     	List<IncidentModel> incidents = incidentDao.getIncidentList();
     	for (IncidentModel incident : incidents) {
