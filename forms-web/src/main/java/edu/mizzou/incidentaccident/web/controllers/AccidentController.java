@@ -27,6 +27,7 @@ import edu.mizzou.incidentaccident.api.services.AccidentDetailDescriptionService
 import edu.mizzou.incidentaccident.api.services.AccidentService;
 import edu.mizzou.incidentaccident.api.services.InjuryLocationsService;
 import edu.mizzou.incidentaccident.api.services.LocationsService;
+import edu.mizzou.incidentaccident.web.models.AccidentSearchForm;
 import edu.mizzou.incidentaccident.web.validators.AccidentValidator;
 
 @Controller
@@ -117,6 +118,7 @@ public class AccidentController {
 	@RequestMapping(value="/list")
 	public String getAccidentList(ModelMap map) {
 		map.addAttribute("accidents", accidentService.getAccidentList());
+		map.addAttribute("accidentSearchForm", new AccidentSearchForm());
 		return "accident.list";
 	}
 

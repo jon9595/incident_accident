@@ -112,3 +112,24 @@ function setcurrenttime(dateObj, timeObj) {
     $('#'+dateObj).val(todayDt);
     $('#'+timeObj).val(todayTime);   
 }
+
+function setupStartEndDates(startId, endId) {
+	$('#'+startId).datetimepicker({
+		  format:'m/d/Y',
+		  onShow:function( ct ){
+		   this.setOptions({
+		    maxDate:$('#'+endId).val()?$('#'+endId).val():false
+		   })
+		  },
+		  timepicker:false
+		 });
+		 $('#'+endId).datetimepicker({
+		  format:'m/d/Y',
+		  onShow:function( ct ){
+		   this.setOptions({
+		    minDate:$('#'+startId).val()?$('#'+startId).val():false
+		   })
+		  },
+		  timepicker:false
+	 });	
+}

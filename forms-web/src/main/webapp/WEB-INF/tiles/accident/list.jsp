@@ -3,6 +3,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://displaytag.sf.net" prefix="display" %>
 <link href="${pageContext.request.contextPath}/css/displaytag.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/jquery.datetimepicker.css"/ >
+<script src="${pageContext.request.contextPath}/js/jquery.datetimepicker.full.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/mizrec.js"></script>
 <script>
 	$(document).ready(function(){
 		$('#content').removeClass("container");
@@ -11,14 +14,41 @@
 	    	var id = $(this).find('td:first').text();
 	    	location.href= '${pageContext.request.contextPath}/accident/view/'+id;
 	    });
+		$('#accordion').on('hidden.bs.collapse', toggleChevron);
+		$('#accordion').on('shown.bs.collapse', toggleChevron);	
+
 	});
+
+	function toggleChevron(e) {
+	    $(e.target)
+	        .prev('.panel-heading')
+	        .find('i.indicator')
+	        .toggleClass('glyphicon-chevron-down glyphicon-chevron-right');
+	}
 </script>
     <div class="page-header padding-top-xl">
       <h1>Accident Reports</h1>
     </div>
+    <div class="form-container margin-none padding-none">
+	    <div class="panel-group color-black" id="accordion">
+	        <div class="panel panel-default">
+	            <div class="panel-heading">
+	                <h4 class="panel-title">
+	                    <a data-toggle="collapse" data-parent="#accordion" href="#searchAccidentsAccordian" aria-expanded="false" class="collapsed"><i class="fa fa-search fa-fw"></i>&nbsp;Search Accident Forms</a>
+						<i class="indicator glyphicon  pull-right glyphicon-chevron-right"></i>
+	                </h4>
+	            </div>
+	            <div id="searchAccidentsAccordian" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
+	                <div class="panel-body">
+              <jsp:include page="/WEB-INF/jsp/modules/search-accidents.jsp"/>    
+	                </div>
+	            </div>
+	        </div>
+	    </div>    
+    </div>
     <div class="form-container padding-bottom-none">
     <div class="row">
-        <div class="col-md-12 col-lg-12 table-responsive">
+        <div class="col-md-12 col-lg-12 table-responsive color-black">
 			<display:table 
 			name="${accidents}"
 			id="accident"
