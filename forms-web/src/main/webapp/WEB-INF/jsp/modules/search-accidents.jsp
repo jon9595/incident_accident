@@ -15,13 +15,13 @@ $(document).ready(function(){
 			  <div class="panel-body">
 
 				<div class="row">
-				<div class="col-md-4">
+				<div class="col-md-4 margin-bottom-md">
 					<div class="form-group">
 						<div class="col-md-12 padding-left-none"><label for="accident_name">Name:</label></div>
 						<html:input type="text" cssClass="form-control" id="accident_name" placeholder="Enter name to search" path="name" />
 					</div>
 				</div>
-				<div class="col-md-4">
+				<div class="col-md-4 margin-bottom-md">
 					<div class="form-group">
 						<div class="col-md-12 padding-left-none"><label for="accident_member_status">Member Status:</label></div>
 						<html:select id="accident_member_status" cssClass="form-control" path="memberStatus">
@@ -50,7 +50,7 @@ $(document).ready(function(){
 				</div>
 				</div>
 				<div class="row margin-top-lg">
-				<div class="col-md-4">
+				<div class="col-md-4 margin-bottom-md">
 					<div class="form-group">
 						<div class="col-md-12 padding-left-none"><label for="accident_date_start">Start:</label></div>
 						<div class="input-group">
@@ -59,7 +59,7 @@ $(document).ready(function(){
 						</div>
 					</div>
 				</div>
-				<div class="col-md-4">
+				<div class="col-md-4 margin-bottom-md">
 					<div class="form-group">
 						<div class="col-md-12 padding-left-none"><label for="accident_date_end">End:</label></div>
 						<div class="input-group">

@@ -23,6 +23,11 @@
     	<put-attribute name="content" value="/WEB-INF/error/404.jsp"/>
     </definition>
 
+    <definition name="error.405" extends="mainLayout">
+        <put-attribute name="title" value="405: Request Method Not Allowed" />
+    	<put-attribute name="content" value="/WEB-INF/error/405.jsp"/>
+    </definition>
+
     <definition name="error.500" extends="mainLayout">
         <put-attribute name="title" value="500: Internal Server Error" />
     	<put-attribute name="content" value="/WEB-INF/error/500.jsp"/>

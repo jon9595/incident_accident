@@ -33,6 +33,11 @@ public class ErrorController {
 		return "error.404";
 	}
 
+	@RequestMapping(value="/405")
+	public String process405Error(Model map) {
+		return "error.405";
+	}
+
 	@RequestMapping(value="/500")
 	public String process500Error(Model map) {
 		return "error.500";

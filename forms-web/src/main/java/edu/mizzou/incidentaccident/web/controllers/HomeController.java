@@ -60,13 +60,13 @@ public class HomeController {
 		return "main.index";
 	}
 	
-	@RequestMapping(value="/searchAccidents", method=RequestMethod.POST) 
+	@RequestMapping(value="/searchAccidents") 
 	public String searchAccidents(@ModelAttribute("accidentSearchForm") AccidentSearchForm searchForm, BindingResult result, ModelMap map) {
 		map.addAttribute("accidents", accidentService.getAccidentListFromSearch(searchForm.generateWhereClause()));
 		return "accident.list";
 	}
 
-	@RequestMapping(value="/searchIncidents", method=RequestMethod.POST) 
+	@RequestMapping(value="/searchIncidents") 
 	public String searchIncidents(@ModelAttribute("incidentSearchForm") IncidentSearchForm searchForm, BindingResult result, ModelMap map) {
 		map.addAttribute("incidents", incidentService.getIncidentListFromSearch(searchForm.generateWhereClause()));
 		return "incident.list";

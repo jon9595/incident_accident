@@ -8,7 +8,7 @@
 <div class="page-header padding-top-xl error-page-header">
 <h1>Something's Wrong!</h1>
 </div>
-<div class="form-container padding-bottom-sm padding-top-sm error-page-form-container">
+<div class="form-container padding-bottom-sm padding-top-sm error-page-form-container color-black">
 <p>It looks as though we've broken something on our system.</p> 
 <p>Not to worry!  Our wonderful staff has been notified of this and will get 
 on fixing the problem real soon!</p>
