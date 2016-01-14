@@ -72,6 +72,7 @@
 	      <url-pattern>/</url-pattern>
 	      <url-pattern>/users/profile</url-pattern>
 	      <url-pattern>/users/editProfile</url-pattern>
+	      <url-pattern>/users/changePasswd/*</url-pattern>
 	      <http-method>GET</http-method>
 	      <http-method>POST</http-method>
 	    </web-resource-collection>

@@ -38,10 +38,15 @@
           	</ul>
           </li>
           </c:if>
-          <li><a href="${pageContext.request.contextPath}/logout">Logout</a></li>
         </ul>
         <ul class="nav navbar-nav pull-right">
-          <li><a href="${pageContext.request.contextPath}/users/profile" title="Manage Profile"><c:out value="${sessionScope.userProfile.name}"/></a></li>
+          <li><a href="#" class="dropdown-toggle" data-toggle="dropdown"><c:out value="${sessionScope.userProfile.name}"/>&nbsp;<i class="fa fa-cog fa-fw"></i></a>
+          	<ul class="dropdown-menu">
+	          <li><a href="${pageContext.request.contextPath}/users/profile" title="Manage Profile"><i class="fa fa-user fa-fw"></i>&nbsp;Edit Profile</a></li>
+	            <li class="divider"></li>
+              <li><a href="${pageContext.request.contextPath}/logout"><i class="fa fa-sign-out fa-fw"></i>&nbsp;Logout</a></li>
+          	</ul>
+          </li>
         </ul>
       </div><!--/.nav-collapse -->
     </div>
