@@ -52,12 +52,10 @@
         </fieldset>
         </div>
     </div>
-    <c:if test="${sessionScope.userProfile.admin}">
     <div class="col-md-12 col-lg-12 noprint">
         <div class="display-container" style="padding-top:10px; padding-bottom:10px;">
-        <button class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/users/edit/${user.id}';">Edit User</button>
+        <button class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/users/editProfile';">Edit Profile</button>
         <button class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/users/changePasswd/${user.username}';">Change Password</button>
         </div>
     </div>
-    </c:if>
 

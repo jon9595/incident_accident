@@ -55,11 +55,6 @@ public class IncidentController {
 	public String saveIncidentForm(@ModelAttribute("incidentForm") IncidentModel incident, BindingResult result, ModelMap map, HttpServletRequest request) {
 		incidentValidator.validate(incident, result);
 		if (result.hasErrors()) {
-			List<ObjectError> errors = result.getAllErrors();
-			for (ObjectError error : errors) {
-				System.err.println(error.toString());
-			}
-			System.err.println(result.getAllErrors());
 			map.addAttribute("errMsg", "Please fix belows errors before submitting.");
 			map.addAttribute("incidentForm", incident);
 			map.addAttribute("locationsMap", locationsService.getLocations());

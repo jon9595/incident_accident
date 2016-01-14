@@ -70,6 +70,8 @@
 	    <web-resource-collection>
 	      <web-resource-name>Some Resource</web-resource-name>
 	      <url-pattern>/</url-pattern>
+	      <url-pattern>/users/profile</url-pattern>
+	      <url-pattern>/users/editProfile</url-pattern>
 	      <http-method>GET</http-method>
 	      <http-method>POST</http-method>
 	    </web-resource-collection>

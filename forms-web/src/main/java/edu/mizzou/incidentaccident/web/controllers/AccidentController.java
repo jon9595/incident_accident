@@ -91,10 +91,6 @@ public class AccidentController {
 		setInjuryLocationsWithOutSubs(accident);
 		accidentValidator.validate(accident, result);
 		if (result.hasErrors()) {
-			List<ObjectError> errors = result.getAllErrors();
-			for (ObjectError error : errors) {
-				System.err.println(error.toString());
-			}
 			map.addAttribute("errMsg", "Please fix belows errors before submitting.");
 			map.addAttribute("accidentForm", accident);
 			map.addAttribute("locationsMap", locationsService.getLocations());

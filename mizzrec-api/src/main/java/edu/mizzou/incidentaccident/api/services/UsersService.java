@@ -74,6 +74,10 @@ public class UsersService {
         return numRows;
     }
 
+    @Transactional(propagation=Propagation.REQUIRED)
+    public int updateProfile(UsersModel bean) {
+    	return usersDao.updateUsers(bean);
+    }
 	 
     @Transactional(propagation=Propagation.REQUIRED)
     public int deleteUsers(Integer id) {
@@ -85,4 +89,13 @@ public class UsersService {
 	public int setLastLoggedIn(String username) {
     	return usersDao.setLastLoggedIn(username);
 	}
+    
+    @Transactional(propagation=Propagation.REQUIRED)
+	public int updatePassword(String username, String password, String modifiedUser) {
+    	return usersDao.updatePassword(username, password, modifiedUser);
+	}
+
+    public boolean validateUser(String username, String password) {
+    	return usersDao.validateUser(username, password);
+    }
 }

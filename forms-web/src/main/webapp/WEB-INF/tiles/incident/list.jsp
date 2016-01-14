@@ -16,6 +16,9 @@
 	    });
 		$('#accordion').on('hidden.bs.collapse', toggleChevron);
 		$('#accordion').on('shown.bs.collapse', toggleChevron);	
+		$('h4.panel-title').click(function(){
+			$('#searchIncidentsAccordian').collapse('toggle');
+		});
 	});
 	function toggleChevron(e) {
 	    $(e.target)
@@ -31,7 +34,7 @@
 	    <div class="panel-group color-black" id="accordion">
 	        <div class="panel panel-default">
 	            <div class="panel-heading">
-	                <h4 class="panel-title">
+	                <h4 class="panel-title" style="cursor:pointer;">
 	                    <a data-toggle="collapse" data-parent="#accordion" href="#searchIncidentsAccordian" aria-expanded="false" class="collapsed"><i class="fa fa-search fa-fw"></i>&nbsp;Search Incident Forms</a>
 						<i class="indicator glyphicon  pull-right glyphicon-chevron-right"></i>
 	                </h4>
@@ -50,7 +53,7 @@
 			<display:table 
 			name="${incidents}"
 			id="incident"
-			pagesize="25"
+			pagesize="5"
 			sort="list"
 			requestURI=""
 			class="table table-hover table-striped">

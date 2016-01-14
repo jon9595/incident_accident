@@ -19,6 +19,7 @@ public class UsersModel implements Serializable {
     private String username;
     private String firstName;
     private String lastName;
+    private String oldPassword;
     private String password;
     private String password2;
 	private String email;
@@ -86,7 +87,15 @@ public class UsersModel implements Serializable {
     	return this.firstName + " " + this.lastName;
     }
 
-    public String getPassword() {
+    public String getOldPassword() {
+		return oldPassword;
+	}
+
+	public void setOldPassword(String oldPassword) {
+		this.oldPassword = oldPassword;
+	}
+
+	public String getPassword() {
         return this.password;
     }
 

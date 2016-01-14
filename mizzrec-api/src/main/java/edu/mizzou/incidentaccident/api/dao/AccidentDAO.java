@@ -323,7 +323,7 @@ public class AccidentDAO implements DBConstants {
         " from " + ACCIDENT + 
         " where proper_notifications in (" +
         " SELECT pa.id FROM " + PROPER_NOTIFICATIONS + 
-        " pa where rpt_reviewed_by  = '')";
+        " pa where rpt_reviewed_by is null or rpt_reviewed_by  = '')";
         return getTemplate().query(sqlString, new RowMapper<AccidentModel>() {
             public AccidentModel mapRow(ResultSet rs, int rowNum) throws SQLException {
                 AccidentModel model = new AccidentModel();

@@ -40,6 +40,9 @@
           </c:if>
           <li><a href="${pageContext.request.contextPath}/logout">Logout</a></li>
         </ul>
+        <ul class="nav navbar-nav pull-right">
+          <li><a href="${pageContext.request.contextPath}/users/profile" title="Manage Profile"><c:out value="${sessionScope.userProfile.name}"/></a></li>
+        </ul>
       </div><!--/.nav-collapse -->
     </div>
   </div>

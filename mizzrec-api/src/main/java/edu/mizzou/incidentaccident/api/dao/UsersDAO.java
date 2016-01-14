@@ -39,11 +39,9 @@ public class UsersDAO implements DBConstants {
             .append(", email " )
             .append(", activated " )
             .append(", position " )
-            .append(", created " )
             .append(", created_by " )
             .append(") VALUES ( ")
             .append(" ?")
-            .append(", ?")
             .append(", ?")
             .append(", ?")
             .append(", ?")
@@ -60,7 +58,6 @@ public class UsersDAO implements DBConstants {
             bean.getEmail(), 
             bean.isActivated(), 
             bean.getPosition(), 
-            bean.getCreated(),
             bean.getCreatedBy()};
         int numRows = getTemplate().update(sInsertStmt.toString(), args);
         return getAutoIncrementKey();
@@ -76,7 +73,6 @@ public class UsersDAO implements DBConstants {
         .append(", email = ? " )
         .append(", activated = ? " )
         .append(", position = ? " )
-        .append(", modified = ? " )
         .append(", modified_by = ? " ); 
         StringBuffer sWhereStmt = new StringBuffer(100);
         sWhereStmt.append(" WHERE id = ?");
@@ -87,13 +83,28 @@ public class UsersDAO implements DBConstants {
             bean.getEmail(), 
             bean.isActivated(), 
             bean.getPosition(), 
-            bean.getModified(),
             bean.getModifiedBy(),
             bean.getId()};
         int numRows = getTemplate().update(sUpdateStmt.toString(), args);
         return numRows;
     }
 
+    public int updatePassword(String username, String password, String modifiedUser) {
+        StringBuffer sUpdateStmt = new StringBuffer(200);
+        sUpdateStmt.append("UPDATE " + USERS)
+        .append(" SET ")
+        .append(" password = ? " )
+        .append(", modified_by = ? " ); 
+        StringBuffer sWhereStmt = new StringBuffer(100);
+        sWhereStmt.append(" WHERE username = ?");
+        sUpdateStmt.append( sWhereStmt );
+        Object[] args = {
+            AppUtil.encodeSHA(password),
+            modifiedUser,
+            username};
+        int numRows = getTemplate().update(sUpdateStmt.toString(), args);
+        return numRows;
+    }
 
     public UsersModel getUsers(Integer id) {
     String sqlString = "select " +
@@ -202,6 +213,13 @@ public class UsersDAO implements DBConstants {
                 return model;
             }
         });
+    }
+    
+    public boolean validateUser(String username, String password) {
+    	String sql = "select 1 from " + USERS + " where username = ? and password = ?";
+        Object[] args = {username, AppUtil.encodeSHA(password)};
+        List<Integer> result = getTemplate().queryForList(sql, args, Integer.class);
+        return result != null && result.size() > 0;
     }
 
 

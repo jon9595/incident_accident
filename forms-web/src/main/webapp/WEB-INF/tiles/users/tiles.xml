@@ -18,4 +18,17 @@
 	<definition name="users.view" extends="mainLayout">
 		<put-attribute name="content" value="/WEB-INF/tiles/users/view.jsp"/>
 	</definition>
+
+	<definition name="users.profile" extends="mainLayout">
+		<put-attribute name="content" value="/WEB-INF/tiles/users/viewProfile.jsp"/>
+	</definition>
+
+	<definition name="users.profile.edit" extends="mainLayout">
+		<put-attribute name="content" value="/WEB-INF/tiles/users/editProfile.jsp"/>
+	</definition>
+
+	<definition name="users.changePasswd" extends="mainLayout">
+		<put-attribute name="content" value="/WEB-INF/tiles/users/changePasswd.jsp"/>
+	</definition>
+
 </tiles-definitions>

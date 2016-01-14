@@ -9,11 +9,11 @@ $(document).ready(function(){
 });
 </script>
 
-    <html:form method="post" modelAttribute="usersForm" action="${pageContext.request.contextPath}/users/edit" class="form-horizontal" >
+    <html:form method="post" modelAttribute="usersForm" action="${pageContext.request.contextPath}/users/editProfile" class="form-horizontal" >
     <html:hidden path="id"/>
     <html:hidden path="username"/>
 <div class="form-container padding-bottom-none">
-    <fieldset><legend>User Information</legend>
+    <fieldset><legend>Edit User Profile</legend>
           <div class="row margin-left-sm margin-right-sm">
 			  <div class="col-md-12 padding-top-md padding-bottom-lg padding-left-none">
 		        	<label class="input-control">Username: </label>
@@ -51,21 +51,6 @@ $(document).ready(function(){
 						</div>
         			</div>
 		      </div>
-			  <div class="col-md-12">
-			  <h4>Roles</h4>
-				  <div class="col-md-12 form-group">
-                        <label class="checkbox-inline" for="role-admin">
-                        <html:checkbox path="userRoles" id="role-admin" value="admin"/>
-                        Admin
-                        </label>
-				  </div>
-				  <div class="col-md-12 form-group">
-                        <label class="checkbox-inline" for="role-manager">
-                        <html:checkbox path="userRoles" id="role-manager" value="manager"/>
-                        Manager
-                        </label>
-				  </div>
-			  </div>
 		  </div>
 	</fieldset>
 </div>

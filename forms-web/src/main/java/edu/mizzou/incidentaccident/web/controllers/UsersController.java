@@ -1,22 +1,19 @@
 package edu.mizzou.incidentaccident.web.controllers;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import edu.mizzou.incidentaccident.api.models.IncidentModel;
 import edu.mizzou.incidentaccident.api.models.UsersModel;
 import edu.mizzou.incidentaccident.api.services.UsersService;
 import edu.mizzou.incidentaccident.web.validators.UsersValidator;
@@ -64,7 +61,60 @@ public class UsersController {
 			return "redirect:/users/list";
 		}
 	}
+	
+	@RequestMapping(value="/changePasswd/{username}", method=RequestMethod.GET)
+	public String changePassword(@PathVariable String username, ModelMap map) {
+		map.addAttribute("usersForm", usersService.getUserByUsername(username));
+		return "users.changePasswd";
+	}
+	
+	@RequestMapping(value="/changePasswd", method=RequestMethod.POST)
+	public String savePasswordChanges(@ModelAttribute("usersForm") UsersModel user, BindingResult result, ModelMap map, HttpServletRequest request) {
+		usersValidator.validatePasswordChange(user, result);
+		if (!usersService.validateUser(user.getUsername(), user.getOldPassword())) {
+			result.rejectValue("oldPassword", "required", null, "Invalid password.");
+		}
+		if (result.hasErrors()) {
+			map.addAttribute("errMsg", "Please fix belows errors before submitting.");
+			map.addAttribute("usersForm", user);
+			return "users.changePasswd";
+		} else {
+			usersService.updatePassword(user.getUsername(), user.getPassword(),request.getUserPrincipal().getName());
+			if (request.getUserPrincipal().getName().equals(user.getUsername())) {
+				return "redirect:/users/profile";
+			} else {
+				return "redirect:/users/view/"+user.getId();
+			}
+		}
+	}
 
+	
+	@RequestMapping(value="/profile")
+	public String getProfile(ModelMap map, HttpServletRequest request) {
+		map.addAttribute("user", usersService.getUserByUsername(request.getUserPrincipal().getName()));
+		return "users.profile";
+	}
+
+	@RequestMapping(value="/editProfile", method=RequestMethod.GET)
+	public String editProfile(ModelMap map, HttpServletRequest request) {
+		map.addAttribute("usersForm", usersService.getUserByUsername(request.getUserPrincipal().getName()));
+		return "users.profile.edit";
+	}
+
+	@RequestMapping(value="/editProfile", method=RequestMethod.POST)
+	public String saveProfileChanges(@ModelAttribute("usersForm") UsersModel user, BindingResult result, ModelMap map, HttpServletRequest request) {
+		usersValidator.validate(user, result);
+		if (result.hasErrors()) {
+			map.addAttribute("errMsg", "Please fix belows errors before submitting.");
+			map.addAttribute("usersForm", user);
+			return "users.profile.edit";
+		} else {
+			user.setModifiedBy(request.getUserPrincipal().getName());
+			usersService.updateProfile(user);
+			return "redirect:/users/profile";
+		}
+	}
+	
 	@RequestMapping(value="/create", method=RequestMethod.GET)
 	public String createUser(ModelMap map) {
 		map.addAttribute("usersForm", new UsersModel());
@@ -74,6 +124,9 @@ public class UsersController {
 	@RequestMapping(value="/create", method=RequestMethod.POST)
 	public String saveUsersForm(@ModelAttribute("usersForm") UsersModel user, BindingResult result, ModelMap map, HttpServletRequest request) {
 		usersValidator.validateCreation(user, result);
+		if(usersService.getUserByUsername(user.getUsername())!=null) {
+			result.rejectValue("username", "required", null, "This username is already taken.");
+		}
 		if (result.hasErrors()) {
 			map.addAttribute("errMsg", "Please fix belows errors before submitting.");
 			map.addAttribute("usersForm", user);
