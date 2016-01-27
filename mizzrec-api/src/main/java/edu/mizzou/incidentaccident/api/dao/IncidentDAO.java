@@ -120,6 +120,10 @@ public class IncidentDAO implements DBConstants {
         ", proper_notifications" +
         ", specific_location" +
         ", other_inc_nature_desc" +
+        ", created" +
+        ", created_by" +
+        ", modified" +
+        ", modified_by" +
         " from " + INCIDENT + " where id = ?";
         Object[] args = {id};
         List<IncidentModel> matches = getTemplate().query(sqlString, args, new RowMapper<IncidentModel>() {
@@ -136,6 +140,10 @@ public class IncidentDAO implements DBConstants {
                     model.setProperNotificationsId(rs.getInt("proper_notifications"));
                     model.setSpecificLocationId(rs.getInt("specific_location"));
                     model.setOtherIncNatureDesc(rs.getString("other_inc_nature_desc"));
+                    model.setCreated(rs.getTimestamp("created")!=null?new java.util.Date(rs.getTimestamp("created").getTime()):null);
+                    model.setCreatedBy(rs.getString("created_by"));
+                    model.setModified(rs.getTimestamp("modified")!=null?new java.util.Date(rs.getTimestamp("modified").getTime()):null);
+                    model.setModifiedBy(rs.getString("modified_by"));
                 return model;
             }
         });
@@ -156,6 +164,10 @@ public class IncidentDAO implements DBConstants {
         ", proper_notifications" +
         ", specific_location" +
         ", other_inc_nature_desc" +
+        ", created" +
+        ", created_by" +
+        ", modified" +
+        ", modified_by" +
         " from " + INCIDENT;
         return getTemplate().query(sqlString, new RowMapper<IncidentModel>() {
             public IncidentModel mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -171,6 +183,10 @@ public class IncidentDAO implements DBConstants {
                     model.setProperNotificationsId(rs.getInt("proper_notifications"));
                     model.setSpecificLocationId(rs.getInt("specific_location"));
                     model.setOtherIncNatureDesc(rs.getString("other_inc_nature_desc"));
+                    model.setCreated(rs.getTimestamp("created")!=null?new java.util.Date(rs.getTimestamp("created").getTime()):null);
+                    model.setCreatedBy(rs.getString("created_by"));
+                    model.setModified(rs.getTimestamp("modified")!=null?new java.util.Date(rs.getTimestamp("modified").getTime()):null);
+                    model.setModifiedBy(rs.getString("modified_by"));
                 return model;
             }
         });
@@ -189,6 +205,10 @@ public class IncidentDAO implements DBConstants {
         ", proper_notifications" +
         ", specific_location" +
         ", other_inc_nature_desc" +
+        ", created" +
+        ", created_by" +
+        ", modified" +
+        ", modified_by" +
         " from " + INCIDENT +
     	" where created > (NOW() - INTERVAL 1 MONTH)";
         return getTemplate().query(sqlString, new RowMapper<IncidentModel>() {
@@ -205,6 +225,10 @@ public class IncidentDAO implements DBConstants {
                     model.setProperNotificationsId(rs.getInt("proper_notifications"));
                     model.setSpecificLocationId(rs.getInt("specific_location"));
                     model.setOtherIncNatureDesc(rs.getString("other_inc_nature_desc"));
+                    model.setCreated(rs.getTimestamp("created")!=null?new java.util.Date(rs.getTimestamp("created").getTime()):null);
+                    model.setCreatedBy(rs.getString("created_by"));
+                    model.setModified(rs.getTimestamp("modified")!=null?new java.util.Date(rs.getTimestamp("modified").getTime()):null);
+                    model.setModifiedBy(rs.getString("modified_by"));
                 return model;
             }
         });
@@ -223,6 +247,10 @@ public class IncidentDAO implements DBConstants {
         ", proper_notifications" +
         ", specific_location" +
         ", other_inc_nature_desc" +
+        ", created" +
+        ", created_by" +
+        ", modified" +
+        ", modified_by" +
         " from " + INCIDENT + whereClause;
         return getTemplate().query(sqlString, new RowMapper<IncidentModel>() {
             public IncidentModel mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -238,6 +266,10 @@ public class IncidentDAO implements DBConstants {
                     model.setProperNotificationsId(rs.getInt("proper_notifications"));
                     model.setSpecificLocationId(rs.getInt("specific_location"));
                     model.setOtherIncNatureDesc(rs.getString("other_inc_nature_desc"));
+                    model.setCreated(rs.getTimestamp("created")!=null?new java.util.Date(rs.getTimestamp("created").getTime()):null);
+                    model.setCreatedBy(rs.getString("created_by"));
+                    model.setModified(rs.getTimestamp("modified")!=null?new java.util.Date(rs.getTimestamp("modified").getTime()):null);
+                    model.setModifiedBy(rs.getString("modified_by"));
                 return model;
             }
         });
@@ -256,6 +288,10 @@ public class IncidentDAO implements DBConstants {
         ", proper_notifications" +
         ", specific_location" +
         ", other_inc_nature_desc" +
+        ", created" +
+        ", created_by" +
+        ", modified" +
+        ", modified_by" +
         " from " + INCIDENT + 
         " where proper_notifications in (" +
         " SELECT pa.id FROM " + PROPER_NOTIFICATIONS + 
@@ -274,6 +310,10 @@ public class IncidentDAO implements DBConstants {
                     model.setProperNotificationsId(rs.getInt("proper_notifications"));
                     model.setSpecificLocationId(rs.getInt("specific_location"));
                     model.setOtherIncNatureDesc(rs.getString("other_inc_nature_desc"));
+                    model.setCreated(rs.getTimestamp("created")!=null?new java.util.Date(rs.getTimestamp("created").getTime()):null);
+                    model.setCreatedBy(rs.getString("created_by"));
+                    model.setModified(rs.getTimestamp("modified")!=null?new java.util.Date(rs.getTimestamp("modified").getTime()):null);
+                    model.setModifiedBy(rs.getString("modified_by"));
                 return model;
             }
         });
