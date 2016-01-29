@@ -12,7 +12,7 @@
 <div class="row">
     <div class="col-md-12 col-lg-12 noprint">
         <div class="display-container" style="padding-top:10px; padding-bottom:10px;">
-        <c:if test="${sessionScope.userProfile.admin}">
+        <c:if test="${(sessionScope.userProfile.admin || sessionScope.userProfile.manager) && !incident.approved}">
         <button class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/incident/edit/${incident.id}';">Edit Report</button>
         </c:if>
         <c:if test="${(sessionScope.userProfile.admin || sessionScope.userProfile.manager) && !incident.approved}">
