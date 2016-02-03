@@ -3,7 +3,11 @@ package edu.mizzou.incidentaccident.api.models;
 import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.Collections;
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.StringTokenizer;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -19,13 +23,14 @@ public class AccidentSearchModel implements Serializable {
 	private String address;
 	private String location;
 	private String injuryLocation;
+	private String emsContacted;
 
 	private MembershipStatusModel membershipStatus;
-	private ProgramActivityInvolvedModel programActivityInvolved;
+	private ProgramActivityInvolvedModel programActivity;
 	
 	public AccidentSearchModel() {
 		membershipStatus = new MembershipStatusModel();
-		programActivityInvolved = new ProgramActivityInvolvedModel();
+		programActivity = new ProgramActivityInvolvedModel();
 	}
 
 	public Integer getId() {
@@ -52,6 +57,25 @@ public class AccidentSearchModel implements Serializable {
 		this.name = name;
 	}
 
+	public String getRevName() {
+		StringTokenizer st = new StringTokenizer(this.name);
+		String str = "";
+		if (st.countTokens() >= 2) {
+			List<String> list1 = new LinkedList<String>();
+			while (st.hasMoreElements()) {
+				String word = (String) st.nextElement();
+				list1.add(word);
+			}
+			Collections.reverse(list1);
+			for (String word : list1) {
+				str += word + " ";
+			}
+		} else {
+			str = this.name;
+		}
+		return str;
+	}
+	
 	public String getAddress() {
 		return address;
 	}
@@ -65,7 +89,7 @@ public class AccidentSearchModel implements Serializable {
 	}
 
 	public void setLocation(String location) {
-		this.location = location;
+		this.location = StringUtils.replace(location, ",", "\n");
 	}
 
 	public String getInjuryLocation() {
@@ -73,7 +97,15 @@ public class AccidentSearchModel implements Serializable {
 	}
 
 	public void setInjuryLocation(String injuryLocation) {
-		this.injuryLocation = injuryLocation;
+		this.injuryLocation = StringUtils.replace(injuryLocation, ",", "\n");
+	}
+
+	public String getEmsContacted() {
+		return emsContacted;
+	}
+
+	public void setEmsContacted(String emsContacted) {
+		this.emsContacted = emsContacted;
 	}
 
 	public MembershipStatusModel getMembershipStatus() {
@@ -84,13 +116,13 @@ public class AccidentSearchModel implements Serializable {
 		this.membershipStatus = membershipStatus;
 	}
 
-	public ProgramActivityInvolvedModel getProgramActivityInvolved() {
-		return programActivityInvolved;
+	public ProgramActivityInvolvedModel getProgramActivity() {
+		return programActivity;
 	}
 
-	public void setProgramActivityInvolved(
+	public void setProgramActivity(
 			ProgramActivityInvolvedModel programActivityInvolved) {
-		this.programActivityInvolved = programActivityInvolved;
+		this.programActivity = programActivityInvolved;
 	}
 	
 	@Override

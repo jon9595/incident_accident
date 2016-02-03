@@ -33,6 +33,7 @@ import edu.mizzou.incidentaccident.api.models.AccidentDetailsModel;
 import edu.mizzou.incidentaccident.api.models.AccidentInjuryLocationModel;
 import edu.mizzou.incidentaccident.api.models.AccidentLocationModel;
 import edu.mizzou.incidentaccident.api.models.AccidentModel;
+import edu.mizzou.incidentaccident.api.models.AccidentSearchModel;
 import edu.mizzou.incidentaccident.api.models.SignaturesModel;
  
  
@@ -96,12 +97,8 @@ public class AccidentService {
         return accidents;
     }
 
-    public List<AccidentModel> getAccidentList() {
-    	List<AccidentModel> accidents = accidentDao.getAccidentList();
-    	for (AccidentModel accident : accidents) {
-    		accident = getAccidentIncidentals(accident);
-		}
-        return accidents;
+    public List<AccidentSearchModel> getAccidentList() {
+    	return accidentDao.getAccidentList();
     }
 
     public List<AccidentModel> getAccidentListFromSearch(String whereClause) {

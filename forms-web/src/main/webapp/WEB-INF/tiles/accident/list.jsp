@@ -58,23 +58,25 @@
 			pagesize="5"
 			sort="list"
 			requestURI=""
+			defaultsort="1"
+			defaultorder="descending"
 			class="table table-hover table-striped">
 			<display:column property="id" headerClass="hidden" class="hidden"></display:column>
-			<display:column sortable="true" sortProperty="demographics.date" title="Date/Time">
-			<fmt:formatDate value="${accident.demographics.date}" pattern="MM/dd/yyyy"/><br/><fmt:formatDate value="${accident.demographics.time}" pattern="hh:mm a"/>
+			<display:column sortable="true" sortProperty="accidentDate" title="Date/Time">
+			<fmt:formatDate value="${accident.accidentDate}" pattern="MM/dd/yyyy"/><br/><fmt:formatDate value="${accident.accidentDate}" pattern="hh:mm a"/>
 			</display:column>
-			<display:column title="Name/Address" sortable="true" sortProperty="demographics.revName">
-			${accident.demographics.name}<br/>${accident.demographics.address}
+			<display:column title="Name/Address" sortable="true" sortProperty="revName">
+			${accident.name}<br/>${accident.address}
 			</display:column>
 			<display:column property="membershipStatus.membershipStatus" title="Membership Status" sortable="true"></display:column>
 			<display:column title="Location">
-			<pre>${accident.accidentLocationDesc}</pre>
+			<pre>${accident.location}</pre>
 			</display:column>
 			<display:column title="Program Involved">
 			<pre>${accident.programActivity.programActivityDesc}</pre>
 			</display:column>
 			<display:column title="Injury Location">
-			<pre>${accident.injuryLocationsDesc}</pre>
+			<pre>${accident.injuryLocation}</pre>
 			</display:column>
 			<display:column property="emsContacted" title="EMS Contacted"></display:column>
 			</display:table>

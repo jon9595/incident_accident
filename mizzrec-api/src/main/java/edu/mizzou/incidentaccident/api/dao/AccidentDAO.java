@@ -14,6 +14,8 @@ import org.springframework.stereotype.Repository;
 import edu.mizzou.incidentaccident.api.constants.DBConstants;
 import edu.mizzou.incidentaccident.api.models.AccidentModel;
 import edu.mizzou.incidentaccident.api.models.AccidentSearchModel;
+import edu.mizzou.incidentaccident.api.models.MembershipStatusModel;
+import edu.mizzou.incidentaccident.api.models.ProgramActivityInvolvedModel;
 
 @Repository("accidentDao")
 public class AccidentDAO implements DBConstants {
@@ -167,7 +169,56 @@ public class AccidentDAO implements DBConstants {
 
 
     public List<AccidentSearchModel> getAccidentList() {
-    	String sqlString = "select acc.id, dem.date, dem.name, dem.address, ms.student, ms.faculty_staff, ms.alumni, ms.guest, ms.tiger_xpress, ms.stop_out_student, ms.house_hold_adult, ms.other,  (select group_concat(concat(location,if(sub_location != '',\" - \",\"\"), sub_location)) from locations where id in (	select location_id from accident_location where accident_id = acc.id)) as location,pai.*, (select group_concat(concat(location, if(sub_location is not null,\" - \", \"\"), if(sub_location is not null and sub_location = 'R',\"Right\",(if (sub_location is not null and sub_location = 'L',\"Left\",\"\"))))) from injury_locations where id in (select injury_locations_id from accident_injury_location where accident_id = acc.id)) as injury_location from accident acc join demographics dem on (dem.id = acc.demographics) join membership_status ms on (ms.id = acc.membership_status) join program_activity_involved pai on (pai.id = acc.program_activity);"
+    	String sqlString = "select acc.id, dem.date, dem.name, dem.address, ms.*, "
+    			+ "(select group_concat(concat(location,if(sub_location != '',\" - \",\"\"), sub_location)) from locations where id in (select location_id from accident_location where accident_id = acc.id)) as location"
+    			+ ",pai.*, (select group_concat(concat(location, if(sub_location is not null,\" - \", \"\"), if(sub_location is not null and sub_location = 'R',\"Right\",(if (sub_location is not null and sub_location = 'L',\"Left\",\"\"))))) from injury_locations where id in (select injury_locations_id from accident_injury_location where accident_id = acc.id)) as injury_location "
+    			+ ", pn.ems_contacted "
+    			+ "from accident acc join demographics dem on (dem.id = acc.demographics) "
+    			+ "join membership_status ms on (ms.id = acc.membership_status) "
+    			+ "join program_activity_involved pai on (pai.id = acc.program_activity)"
+    			+ "join proper_notifications pn on (pn.id = acc.proper_notifications)";
+        return getTemplate().query(sqlString, new RowMapper<AccidentSearchModel>() {
+            public AccidentSearchModel mapRow(ResultSet rs, int rowNum) throws SQLException {
+            	AccidentSearchModel model = new AccidentSearchModel();
+                model.setId(rs.getInt("id"));
+                model.setAccidentDate(rs.getTimestamp("date")!=null?new java.util.Date(rs.getTimestamp("date").getTime()):null);
+                model.setName(rs.getString("dem.name"));
+                model.setAddress(rs.getString("dem.address"));
+                model.setLocation(rs.getString("location"));
+                model.setInjuryLocation(rs.getString("injury_location"));
+                model.setEmsContacted(rs.getString("ems_contacted"));
+                MembershipStatusModel msModel = model.getMembershipStatus();
+                msModel.setId(rs.getInt("ms.id"));
+                msModel.setStudent("Y".equals(rs.getString("ms.student"))?true:false);
+                msModel.setStudentId(rs.getString("ms.student_id"));
+                msModel.setFacultyStaff("Y".equals(rs.getString("ms.faculty_staff"))?true:false);
+                msModel.setAlumni("Y".equals(rs.getString("ms.alumni"))?true:false);
+                msModel.setGuest("Y".equals(rs.getString("ms.guest"))?true:false);
+                msModel.setTigerXpress("Y".equals(rs.getString("ms.tiger_xpress"))?true:false);
+                msModel.setStopOutStudent("Y".equals(rs.getString("ms.stop_out_student"))?true:false);
+                msModel.setHouseHoldAdult("Y".equals(rs.getString("ms.house_hold_adult"))?true:false);
+                msModel.setOther("Y".equals(rs.getString("ms.other"))?true:false);
+                msModel.setOtherExplain(rs.getString("ms.other_explain"));
+            	ProgramActivityInvolvedModel paiModel = model.getProgramActivity();
+            	paiModel.setId(rs.getInt("pai.id"));
+            	paiModel.setTime(rs.getTime("pai.time"));
+                paiModel.setInformalActivity("Y".equals(rs.getString("pai.informal_activity"))?true:false);
+                paiModel.setInfActDesc(rs.getString("pai.inf_act_desc"));
+                paiModel.setClubRecSports("Y".equals(rs.getString("pai.club_rec_sports"))?true:false);
+                paiModel.setClubRecTeamName(rs.getString("pai.club_rec_team_name"));
+                paiModel.setRecSports("Y".equals(rs.getString("pai.rec_sports"))?true:false);
+                paiModel.setRecTeamName(rs.getString("pai.rec_team_name"));
+                paiModel.setSwimTeamPractice("Y".equals(rs.getString("pai.swim_team_practice"))?true:false);
+                paiModel.setSwimTeamName(rs.getString("pai.swim_team_name"));
+                paiModel.setInterAthletics("Y".equals(rs.getString("pai.inter_athletics"))?true:false);
+                paiModel.setTigerxPt("Y".equals(rs.getString("pai.tigerx_pt"))?true:false);
+                paiModel.setTigerxPrgName(rs.getString("pai.tigerx_prg_name"));
+                paiModel.setTigerxPtInstructor(rs.getString("pai.tigerx_pt_instructor"));
+                paiModel.setSpecEvt("Y".equals(rs.getString("pai.spec_evt"))?true:false);
+                paiModel.setSpecEvtGroup(rs.getString("pai.spec_evt_group"));
+                return model;
+            }
+        });
     }
     
 //    public List<AccidentModel> getAccidentList() {
