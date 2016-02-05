@@ -15,14 +15,14 @@
         <ul class="nav navbar-nav">
           <li><a href="${pageContext.request.contextPath}/">Home</a></li>
           <li class="dropdown">
-          	<a href="#" class="dropdown-toggle" data-toggle="dropdown">Accident Reports <b class="caret"></b></a>
+          	<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-ambulance"></i> Accident Reports <b class="caret"></b></a>
           	<ul class="dropdown-menu">
           	 	<li><a href="${pageContext.request.contextPath}/accident/list"><i class="fa fa-files-o fa-fw"></i>&nbsp;View Reports</a></li>
 	            <li class="divider"></li>
           		<li><a href="${pageContext.request.contextPath}/accident/create"><i class="fa fa-file-text-o fa-fw"></i>&nbsp; Create New Report</a></li>
           	</ul>
           </li>
-          <li><a href="#" class="dropdown-toggle" data-toggle="dropdown">Incident Reports <b class="caret"></b></a>
+          <li><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-exclamation-triangle"></i> Incident Reports <b class="caret"></b></a>
           	<ul class="dropdown-menu">
           	 	<li><a href="${pageContext.request.contextPath}/incident/list"><i class="fa fa-files-o fa-fw"></i>&nbsp;View Reports</a></li>
 	            <li class="divider"></li>
@@ -30,7 +30,7 @@
           	</ul>
           </li>
           <c:if test="${sessionScope.userProfile.admin}">
-          <li><a href="#" class="dropdown-toggle" data-toggle="dropdown">Users <b class="caret"></b></a>
+          <li><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-users"></i> Users <b class="caret"></b></a>
           	<ul class="dropdown-menu">
           	 	<li><a href="${pageContext.request.contextPath}/users/list"><i class="fa fa-users fa-fw"></i>&nbsp;View Users</a></li>
 	            <li class="divider"></li>
@@ -39,7 +39,7 @@
           </li>
           </c:if>
         </ul>
-        <ul class="nav navbar-nav pull-right">
+        <ul class="nav navbar-nav navbar-right">
           <li><a href="#" class="dropdown-toggle" data-toggle="dropdown"><c:out value="${sessionScope.userProfile.name}"/>&nbsp;<i class="fa fa-cog fa-fw"></i></a>
           	<ul class="dropdown-menu">
 	          <li><a href="${pageContext.request.contextPath}/users/profile" title="Manage Profile"><i class="fa fa-user fa-fw"></i>&nbsp;Edit Profile</a></li>

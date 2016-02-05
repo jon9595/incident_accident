@@ -16,9 +16,36 @@ $(document).ready(function(){
 	    	 $('#accident_name').focus();
 	     }
 	 })				 
+    $('#accidentList.table-hover > tbody > tr').click(function(){
+    	var id = $(this).find('td:first').text();
+    	location.href= '${pageContext.request.contextPath}/accident/view/'+id;
+    });
+    $('#incidentList.table-hover > tbody > tr').click(function(){
+    	var id = $(this).find('td:first').text();
+    	location.href= '${pageContext.request.contextPath}/incident/view/'+id;
+    });
+    $('.btn-accident').click(function(){
+    	location.href= '${pageContext.request.contextPath}/accident/create';
+    });
+    $('.btn-incident').click(function(){
+    	location.href= '${pageContext.request.contextPath}/incident/create';
+    });
 				 
 });
 </script>
+    <div class="form-container color-black margin-top-xl">
+	    <div class="row">
+	    <div class="col-md-6">
+	    <button class="btn btn-primary btn-incident btn-large padding-left-xl padding-right-xl margin-bottom-lg center-block visible-xs"><i class="fa fa-exclamation-triangle"></i> &nbsp;&nbsp;<h6>New Incident Report</h8></button>
+	    <button class="btn btn-primary btn-incident btn-large padding-left-xl padding-right-xl margin-bottom-lg center-block hidden-xs"><i class="fa fa-exclamation-triangle fa-2x"></i> &nbsp;&nbsp;<h4>Create New Incident Report</h4></button>
+	    </div>
+	    <div class="col-md-6">
+	    <button class="btn btn-golden btn-accident btn-large padding-left-xl padding-right-xl center-block visible-xs"><i class="fa fa-ambulance"></i> &nbsp;&nbsp;<h6>New Accident Report</h6></button>
+	    <button class="btn btn-golden btn-accident btn-large padding-left-xl padding-right-xl center-block hidden-xs"><i class="fa fa-ambulance fa-2x"></i> &nbsp;&nbsp;<h4>Create New Accident Report</h4></button>
+	    </div>
+	    </div>
+    </div>
+
           <c:if test="${sessionScope.userProfile.admin || sessionScope.userProfile.manager}">
     <div class="form-container color-black">
     	<fieldset>
@@ -51,6 +78,79 @@ $(document).ready(function(){
     	</fieldset>
     </div>
     </c:if>
+    <c:if test="${!(empty incidentList)}">
+    <div class="form-container color-black">
+    	<fieldset>
+    	<legend>Most Recent Incident Reports (past month)</legend>
+    	<div class="row">
+    		<div class="col-md-12 col-lg-12 table-responsive">
+			<table class="table table-hover table-striped" id="incidentList">
+		        <thead>
+		        	<th class="hidden"></th>
+		        	<th>Date/Time</th>
+		        	<th>Name/Address</th>
+		        	<th>Membership Status</th>
+		        	<th>Incident Details</th>
+		        	<th>Location</th>
+		        	<th>Program Involved</th>
+		        </thead>
+		        <tbody>
+			<c:forEach items="${incidentList}" var="incident">
+				<tr>
+					<td class="hidden">${incident.id}</td>
+					<td align="left"><fmt:formatDate value="${incident.demographics.date}" pattern="MM/dd/yyyy"/><br/><fmt:formatDate value="${incident.demographics.time}" pattern="hh:mm a"/></td>
+					<td>${incident.demographics.name}<br/>${incident.demographics.address}</td>
+					<td>${incident.membershipStatus.membershipStatus}</td>
+					<td><pre>${incident.incidentDetailsDesc}</pre></td>
+					<td><pre>${incident.incidentLocationDesc}</pre></td>
+					<td><pre>${incident.programActivity.programActivityDesc}</pre></td>
+				</tr>
+			</c:forEach>	        
+		        </tbody>
+	        </table>
+    		</div>
+    	</div>
+    	</fieldset>
+    </div>
+    </c:if>
+    <c:if test="${!(empty accidentList)}">
+    <div class="form-container color-black">
+    	<fieldset>
+    	<legend>Most Recent Accident Reports (past month)</legend>
+    	<div class="row">
+    		<div class="col-md-12 col-lg-12 table-responsive">
+	        <table class="table table-hover table-striped" id="accidentList">
+		        <thead>
+		        	<th class="hidden"></th>
+		        	<th>Date/Time</th>
+		        	<th>Name/Address</th>
+		        	<th>Membership Status</th>
+		        	<th>Location</th>
+		        	<th>Program Involved</th>
+		        	<th>Injury Location</th>
+		        	<th>EMS Contacted</th>
+		        </thead>
+		        <tbody>
+	<c:forEach items="${accidentList}" var="accident">
+					<tr>
+						<td class="hidden">${accident.id}</td>
+						<td align="left"><fmt:formatDate value="${accident.accidentDate}" pattern="MM/dd/yyyy"/><br/><fmt:formatDate value="${accident.accidentDate}" pattern="hh:mm a"/></td>
+						<td>${accident.name}<br/>${accident.address}</td>
+						<td>${accident.membershipStatus.membershipStatus}</td>
+						<td><pre>${accident.location}</pre></td>
+						<td><pre>${accident.programActivity.programActivityDesc}</pre></td>
+						<td><pre>${accident.injuryLocation}</pre></td>
+						<td>${accident.emsContacted}</td>
+					</tr>
+	</c:forEach>	        
+		        </tbody>
+	        </table>
+    		</div>
+    	</div>
+    	</fieldset>
+    </div>
+    </c:if>
+    
     <div class="form-container color-black">
  	<ul class="nav nav-tabs" role="tablist">
 	    <li role="presentation" class="active"><a href="#searchIncidentTab" aria-controls="searchIncidentTab" role="tab" data-toggle="tab">Search Incident Reports</a></li>

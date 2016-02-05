@@ -53,6 +53,8 @@ public class HomeController {
 	public String index(ModelMap map, HttpServletRequest request) {
 		map.addAttribute("accidents", accidentService.getAccidentNeedingApproval());
 		map.addAttribute("incidents", incidentService.getIncidentsNeedingApproval());
+		map.addAttribute("accidentList", accidentService.getAccidentListFromPastMonth());
+		map.addAttribute("incidentList", incidentService.getIncidentListFromPastMonth());
 		map.addAttribute("incidentNatures", incidentNatureService.getIncidentNatureList());
 		map.addAttribute("accidentDescriptions", accidentDetailDescriptionService.getAccidentDetailDescriptionList());
 		map.addAttribute("accidentSearchForm", new AccidentSearchForm());

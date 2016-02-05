@@ -168,6 +168,16 @@ a.navbar-brand:hover {
   border-color: #ccc;
 }
 
+button h4 {
+	display: inline;
+	vertical-align: super;
+}
+
+button h6 {
+	display: inline;
+	vertical-align: middle;
+}
+
 .form-horizontal {
   color: #555;
 }
@@ -258,6 +268,9 @@ a.navbar-brand:hover {
 }
 .padding-left-lg {
   padding-left: 22px !important;
+}
+.margin-auto {
+  margin: 0px auto !important;
 }
 .padding-left-xl {
   padding-left: 40px !important;
@@ -444,7 +457,7 @@ pre {
 	border: none;
 	background-color: transparent;
 	font-size: 14px;
-	padding: inherit;
+	padding: 0px;
 	margin: inherit;
 	color: #555;
 	line-height: inherit;

@@ -89,24 +89,16 @@ public class AccidentService {
         return accidents;
     }
 
-    public List<AccidentModel> getAccidentListFromPastMonth() {
-    	List<AccidentModel> accidents = accidentDao.getAccidentListFromPastMonth();
-    	for (AccidentModel accident : accidents) {
-    		accident = getAccidentIncidentals(accident);
-		}
-        return accidents;
+    public List<AccidentSearchModel> getAccidentListFromPastMonth() {
+    	return accidentDao.getAccidentListFromPastMonth();
     }
 
     public List<AccidentSearchModel> getAccidentList() {
     	return accidentDao.getAccidentList();
     }
 
-    public List<AccidentModel> getAccidentListFromSearch(String whereClause) {
-    	List<AccidentModel> accidents = accidentDao.getAccidentListFromSearch(whereClause);
-    	for (AccidentModel accident : accidents) {
-    		accident = getAccidentIncidentals(accident);
-		}
-        return accidents;
+    public List<AccidentSearchModel> getAccidentListFromSearch(String whereClause) {
+    	return accidentDao.getAccidentListFromSearch(whereClause);
     }
 
     private AccidentModel getAccidentIncidentals(AccidentModel accident) {

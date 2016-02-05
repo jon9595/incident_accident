@@ -25,6 +25,21 @@ public class AccidentDAO implements DBConstants {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
+    
+	private String accidentListSqlStr = "select acc.id, dem.date, dem.name, dem.address, ms.*, "
+			+ "(select group_concat(concat(location,if(sub_location != '',\" - \",\"\"), sub_location)) from  " + LOCATIONS
+			+ " where id in (select location_id from " + ACCIDENT_LOCATION + " where accident_id = acc.id)) as location"
+			+ ",pai.*, (select group_concat(concat(location, if(sub_location is not null,\" - \", \"\"), "
+			+ "if(sub_location is not null and sub_location = 'R',\"Right\","
+			+ "(if (sub_location is not null and sub_location = 'L',\"Left\",\"\"))))) "
+			+ " from "+ INJURY_LOCATIONS +" where id in (select injury_locations_id from " + ACCIDENT_INJURY_LOCATION + " where accident_id = acc.id)) as injury_location "
+			+ ", pn.ems_contacted "
+			+ "from  " + ACCIDENT + " acc "
+			+ "join " + DEMOGRAPHICS + " dem on (dem.id = acc.demographics) "
+			+ "join " + MEMBERSHIP_STATUS + " ms on (ms.id = acc.membership_status) "
+			+ "join " + PROGRAM_ACTIVITY_INVOLVED + " pai on (pai.id = acc.program_activity) "
+			+ "join " + PROPER_NOTIFICATIONS + " pn on (pn.id = acc.proper_notifications)";
+
 	
     public JdbcTemplate getTemplate() {
         return this.jdbcTemplate;
@@ -169,190 +184,29 @@ public class AccidentDAO implements DBConstants {
 
 
     public List<AccidentSearchModel> getAccidentList() {
-    	String sqlString = "select acc.id, dem.date, dem.name, dem.address, ms.*, "
-    			+ "(select group_concat(concat(location,if(sub_location != '',\" - \",\"\"), sub_location)) from locations where id in (select location_id from accident_location where accident_id = acc.id)) as location"
-    			+ ",pai.*, (select group_concat(concat(location, if(sub_location is not null,\" - \", \"\"), if(sub_location is not null and sub_location = 'R',\"Right\",(if (sub_location is not null and sub_location = 'L',\"Left\",\"\"))))) from injury_locations where id in (select injury_locations_id from accident_injury_location where accident_id = acc.id)) as injury_location "
-    			+ ", pn.ems_contacted "
-    			+ "from accident acc join demographics dem on (dem.id = acc.demographics) "
-    			+ "join membership_status ms on (ms.id = acc.membership_status) "
-    			+ "join program_activity_involved pai on (pai.id = acc.program_activity)"
-    			+ "join proper_notifications pn on (pn.id = acc.proper_notifications)";
+    	String sqlString = accidentListSqlStr;
         return getTemplate().query(sqlString, new RowMapper<AccidentSearchModel>() {
             public AccidentSearchModel mapRow(ResultSet rs, int rowNum) throws SQLException {
-            	AccidentSearchModel model = new AccidentSearchModel();
-                model.setId(rs.getInt("id"));
-                model.setAccidentDate(rs.getTimestamp("date")!=null?new java.util.Date(rs.getTimestamp("date").getTime()):null);
-                model.setName(rs.getString("dem.name"));
-                model.setAddress(rs.getString("dem.address"));
-                model.setLocation(rs.getString("location"));
-                model.setInjuryLocation(rs.getString("injury_location"));
-                model.setEmsContacted(rs.getString("ems_contacted"));
-                MembershipStatusModel msModel = model.getMembershipStatus();
-                msModel.setId(rs.getInt("ms.id"));
-                msModel.setStudent("Y".equals(rs.getString("ms.student"))?true:false);
-                msModel.setStudentId(rs.getString("ms.student_id"));
-                msModel.setFacultyStaff("Y".equals(rs.getString("ms.faculty_staff"))?true:false);
-                msModel.setAlumni("Y".equals(rs.getString("ms.alumni"))?true:false);
-                msModel.setGuest("Y".equals(rs.getString("ms.guest"))?true:false);
-                msModel.setTigerXpress("Y".equals(rs.getString("ms.tiger_xpress"))?true:false);
-                msModel.setStopOutStudent("Y".equals(rs.getString("ms.stop_out_student"))?true:false);
-                msModel.setHouseHoldAdult("Y".equals(rs.getString("ms.house_hold_adult"))?true:false);
-                msModel.setOther("Y".equals(rs.getString("ms.other"))?true:false);
-                msModel.setOtherExplain(rs.getString("ms.other_explain"));
-            	ProgramActivityInvolvedModel paiModel = model.getProgramActivity();
-            	paiModel.setId(rs.getInt("pai.id"));
-            	paiModel.setTime(rs.getTime("pai.time"));
-                paiModel.setInformalActivity("Y".equals(rs.getString("pai.informal_activity"))?true:false);
-                paiModel.setInfActDesc(rs.getString("pai.inf_act_desc"));
-                paiModel.setClubRecSports("Y".equals(rs.getString("pai.club_rec_sports"))?true:false);
-                paiModel.setClubRecTeamName(rs.getString("pai.club_rec_team_name"));
-                paiModel.setRecSports("Y".equals(rs.getString("pai.rec_sports"))?true:false);
-                paiModel.setRecTeamName(rs.getString("pai.rec_team_name"));
-                paiModel.setSwimTeamPractice("Y".equals(rs.getString("pai.swim_team_practice"))?true:false);
-                paiModel.setSwimTeamName(rs.getString("pai.swim_team_name"));
-                paiModel.setInterAthletics("Y".equals(rs.getString("pai.inter_athletics"))?true:false);
-                paiModel.setTigerxPt("Y".equals(rs.getString("pai.tigerx_pt"))?true:false);
-                paiModel.setTigerxPrgName(rs.getString("pai.tigerx_prg_name"));
-                paiModel.setTigerxPtInstructor(rs.getString("pai.tigerx_pt_instructor"));
-                paiModel.setSpecEvt("Y".equals(rs.getString("pai.spec_evt"))?true:false);
-                paiModel.setSpecEvtGroup(rs.getString("pai.spec_evt_group"));
-                return model;
+            	return populateSearchModel(rs);
             }
         });
     }
-    
-//    public List<AccidentModel> getAccidentList() {
-//    String sqlString = "select " +
-//        "id" +
-//        ", demographics" +
-//        ", membership_status" +
-//        ", program_activity" +
-//        ", responder_acct" +
-//        ", member_acct" +
-//        ", refusal_of_care" +
-//        ", witness_one" +
-//        ", witness_two" +
-//        ", proper_notifications" +
-//        ", other_inj_desc" +
-//        ", spec_inj_location" +
-//        ", specific_location" +
-//        ", created" +
-//        ", created_by" +
-//        ", modified" +
-//        ", modified_by" +
-//        " from " + ACCIDENT;
-//        return getTemplate().query(sqlString, new RowMapper<AccidentModel>() {
-//            public AccidentModel mapRow(ResultSet rs, int rowNum) throws SQLException {
-//                AccidentModel model = new AccidentModel();
-//                    model.setId(rs.getInt("id"));
-//                    model.setDemographicsId(rs.getInt("demographics"));
-//                    model.setMembershipStatusId(rs.getInt("membership_status"));
-//                    model.setProgramActivityId(rs.getInt("program_activity"));
-//                    model.setResponderAcctId(rs.getInt("responder_acct"));
-//                    model.setMemberAcctId(rs.getInt("member_acct"));
-//                    model.setRefusalOfCareId(rs.getInt("refusal_of_care"));
-//                    model.setWitnessOneId(rs.getInt("witness_one"));
-//                    model.setWitnessTwoId(rs.getInt("witness_two"));
-//                    model.setProperNotificationsId(rs.getInt("proper_notifications"));
-//                    model.setOtherInjDesc(rs.getString("other_inj_desc"));
-//                    model.setSpecInjLocationId(rs.getInt("spec_inj_location"));
-//                    model.setSpecificLocationId(rs.getInt("specific_location"));
-//                    model.setCreated(rs.getTimestamp("created")!=null?new java.util.Date(rs.getTimestamp("created").getTime()):null);
-//                    model.setCreatedBy(rs.getString("created_by"));
-//                    model.setModified(rs.getTimestamp("modified")!=null?new java.util.Date(rs.getTimestamp("modified").getTime()):null);
-//                    model.setModifiedBy(rs.getString("modified_by"));
-//                return model;
-//            }
-//        });
-//    }
 
-    public List<AccidentModel> getAccidentListFromPastMonth() {
-    String sqlString = "select " +
-        "id" +
-        ", demographics" +
-        ", membership_status" +
-        ", program_activity" +
-        ", responder_acct" +
-        ", member_acct" +
-        ", refusal_of_care" +
-        ", witness_one" +
-        ", witness_two" +
-        ", proper_notifications" +
-        ", other_inj_desc" +
-        ", spec_inj_location" +
-        ", specific_location" +
-        ", created" +
-        ", created_by" +
-        ", modified" +
-        ", modified_by" +
-        " from " + ACCIDENT +
+    public List<AccidentSearchModel> getAccidentListFromPastMonth() {
+    String sqlString = accidentListSqlStr +
         " where created > (NOW() - INTERVAL 1 MONTH)";
-        return getTemplate().query(sqlString, new RowMapper<AccidentModel>() {
-            public AccidentModel mapRow(ResultSet rs, int rowNum) throws SQLException {
-                AccidentModel model = new AccidentModel();
-                    model.setId(rs.getInt("id"));
-                    model.setDemographicsId(rs.getInt("demographics"));
-                    model.setMembershipStatusId(rs.getInt("membership_status"));
-                    model.setProgramActivityId(rs.getInt("program_activity"));
-                    model.setResponderAcctId(rs.getInt("responder_acct"));
-                    model.setMemberAcctId(rs.getInt("member_acct"));
-                    model.setRefusalOfCareId(rs.getInt("refusal_of_care"));
-                    model.setWitnessOneId(rs.getInt("witness_one"));
-                    model.setWitnessTwoId(rs.getInt("witness_two"));
-                    model.setProperNotificationsId(rs.getInt("proper_notifications"));
-                    model.setOtherInjDesc(rs.getString("other_inj_desc"));
-                    model.setSpecInjLocationId(rs.getInt("spec_inj_location"));
-                    model.setSpecificLocationId(rs.getInt("specific_location"));
-                    model.setCreated(rs.getTimestamp("created")!=null?new java.util.Date(rs.getTimestamp("created").getTime()):null);
-                    model.setCreatedBy(rs.getString("created_by"));
-                    model.setModified(rs.getTimestamp("modified")!=null?new java.util.Date(rs.getTimestamp("modified").getTime()):null);
-                    model.setModifiedBy(rs.getString("modified_by"));
-                return model;
+        return getTemplate().query(sqlString, new RowMapper<AccidentSearchModel>() {
+            public AccidentSearchModel mapRow(ResultSet rs, int rowNum) throws SQLException {
+            	return populateSearchModel(rs);
             }
         });
     }
         
-    public List<AccidentModel> getAccidentListFromSearch(String whereClause) {
-    String sqlString = "select " +
-        "id" +
-        ", demographics" +
-        ", membership_status" +
-        ", program_activity" +
-        ", responder_acct" +
-        ", member_acct" +
-        ", refusal_of_care" +
-        ", witness_one" +
-        ", witness_two" +
-        ", proper_notifications" +
-        ", other_inj_desc" +
-        ", spec_inj_location" +
-        ", specific_location" +
-        ", created" +
-        ", created_by" +
-        ", modified" +
-        ", modified_by" +
-        " from " + ACCIDENT + whereClause;
-        return getTemplate().query(sqlString, new RowMapper<AccidentModel>() {
-            public AccidentModel mapRow(ResultSet rs, int rowNum) throws SQLException {
-                AccidentModel model = new AccidentModel();
-                    model.setId(rs.getInt("id"));
-                    model.setDemographicsId(rs.getInt("demographics"));
-                    model.setMembershipStatusId(rs.getInt("membership_status"));
-                    model.setProgramActivityId(rs.getInt("program_activity"));
-                    model.setResponderAcctId(rs.getInt("responder_acct"));
-                    model.setMemberAcctId(rs.getInt("member_acct"));
-                    model.setRefusalOfCareId(rs.getInt("refusal_of_care"));
-                    model.setWitnessOneId(rs.getInt("witness_one"));
-                    model.setWitnessTwoId(rs.getInt("witness_two"));
-                    model.setProperNotificationsId(rs.getInt("proper_notifications"));
-                    model.setOtherInjDesc(rs.getString("other_inj_desc"));
-                    model.setSpecInjLocationId(rs.getInt("spec_inj_location"));
-                    model.setSpecificLocationId(rs.getInt("specific_location"));
-                    model.setCreated(rs.getTimestamp("created")!=null?new java.util.Date(rs.getTimestamp("created").getTime()):null);
-                    model.setCreatedBy(rs.getString("created_by"));
-                    model.setModified(rs.getTimestamp("modified")!=null?new java.util.Date(rs.getTimestamp("modified").getTime()):null);
-                    model.setModifiedBy(rs.getString("modified_by"));
-                return model;
+    public List<AccidentSearchModel> getAccidentListFromSearch(String whereClause) {
+    String sqlString = accidentListSqlStr + whereClause;
+        return getTemplate().query(sqlString, new RowMapper<AccidentSearchModel>() {
+            public AccidentSearchModel mapRow(ResultSet rs, int rowNum) throws SQLException {
+            	return populateSearchModel(rs);
             }
         });
     }
@@ -405,6 +259,47 @@ public class AccidentDAO implements DBConstants {
         });
     }
 
+    private AccidentSearchModel populateSearchModel(ResultSet rs) throws SQLException{
+    	AccidentSearchModel model = new AccidentSearchModel();
+        model.setId(rs.getInt("id"));
+        model.setAccidentDate(rs.getTimestamp("date")!=null?new java.util.Date(rs.getTimestamp("date").getTime()):null);
+        model.setName(rs.getString("dem.name"));
+        model.setAddress(rs.getString("dem.address"));
+        model.setLocation(rs.getString("location"));
+        model.setInjuryLocation(rs.getString("injury_location"));
+        model.setEmsContacted(rs.getString("ems_contacted"));
+        MembershipStatusModel msModel = model.getMembershipStatus();
+        msModel.setId(rs.getInt("ms.id"));
+        msModel.setStudent("Y".equals(rs.getString("ms.student"))?true:false);
+        msModel.setStudentId(rs.getString("ms.student_id"));
+        msModel.setFacultyStaff("Y".equals(rs.getString("ms.faculty_staff"))?true:false);
+        msModel.setAlumni("Y".equals(rs.getString("ms.alumni"))?true:false);
+        msModel.setGuest("Y".equals(rs.getString("ms.guest"))?true:false);
+        msModel.setTigerXpress("Y".equals(rs.getString("ms.tiger_xpress"))?true:false);
+        msModel.setStopOutStudent("Y".equals(rs.getString("ms.stop_out_student"))?true:false);
+        msModel.setHouseHoldAdult("Y".equals(rs.getString("ms.house_hold_adult"))?true:false);
+        msModel.setOther("Y".equals(rs.getString("ms.other"))?true:false);
+        msModel.setOtherExplain(rs.getString("ms.other_explain"));
+    	ProgramActivityInvolvedModel paiModel = model.getProgramActivity();
+    	paiModel.setId(rs.getInt("pai.id"));
+    	paiModel.setTime(rs.getTime("pai.time"));
+        paiModel.setInformalActivity("Y".equals(rs.getString("pai.informal_activity"))?true:false);
+        paiModel.setInfActDesc(rs.getString("pai.inf_act_desc"));
+        paiModel.setClubRecSports("Y".equals(rs.getString("pai.club_rec_sports"))?true:false);
+        paiModel.setClubRecTeamName(rs.getString("pai.club_rec_team_name"));
+        paiModel.setRecSports("Y".equals(rs.getString("pai.rec_sports"))?true:false);
+        paiModel.setRecTeamName(rs.getString("pai.rec_team_name"));
+        paiModel.setSwimTeamPractice("Y".equals(rs.getString("pai.swim_team_practice"))?true:false);
+        paiModel.setSwimTeamName(rs.getString("pai.swim_team_name"));
+        paiModel.setInterAthletics("Y".equals(rs.getString("pai.inter_athletics"))?true:false);
+        paiModel.setTigerxPt("Y".equals(rs.getString("pai.tigerx_pt"))?true:false);
+        paiModel.setTigerxPrgName(rs.getString("pai.tigerx_prg_name"));
+        paiModel.setTigerxPtInstructor(rs.getString("pai.tigerx_pt_instructor"));
+        paiModel.setSpecEvt("Y".equals(rs.getString("pai.spec_evt"))?true:false);
+        paiModel.setSpecEvtGroup(rs.getString("pai.spec_evt_group"));
+        return model;
+    }
+    
     public int deleteAccident(Integer id) {
         StringBuffer sDeleteStmt = new StringBuffer(200);
         sDeleteStmt.append("DELETE FROM " + ACCIDENT);
