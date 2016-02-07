@@ -25,7 +25,7 @@ public class IncidentSearchForm extends SearchForm {
 			} else {
 				isAnd = true;
 			}
-			sb.append("id in (SELECT incident_id FROM " + INCIDENT_INCIDENT_NATURE + " where incident_nature_id = " + this.incidentNature + ")");
+			sb.append("inc.id in (SELECT incident_id FROM " + INCIDENT_INCIDENT_NATURE + " where incident_nature_id = " + this.incidentNature + ")");
 		}
 		if (" where ".equals(sb.toString())) {
 			return "";

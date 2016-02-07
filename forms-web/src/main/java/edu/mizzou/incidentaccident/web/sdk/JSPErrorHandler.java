@@ -29,7 +29,7 @@ public class JSPErrorHandler {
 	
 	public static String error(HttpServletRequest request, Throwable e)
 	{
-		String dateTime = DateUtil.format(new Date(), AppConstants.DATE_FORMAT_PATTERN_YYYYMMDDHMS);
+		String dateTime = DateUtil.format(new Date(), AppConstants.DATE_FORMAT_PATTERN_YYYYMMDDHMSMS);
 		String errMsg = buildErrorMessage(dateTime, request, e);
 		String body = "There has been an error processing in the Mileage Tracker software:\n\n";
 		body += errMsg+"\n\n";
@@ -44,7 +44,7 @@ public class JSPErrorHandler {
 	
 	public static String debug(HttpServletRequest request, Throwable e)
 	{
-		String dateTime = DateUtil.format(new Date(), AppConstants.DATE_FORMAT_PATTERN_YYYYMMDDHMS);
+		String dateTime = DateUtil.format(new Date(), AppConstants.DATE_FORMAT_PATTERN_YYYYMMDDHMSMS);
 		String errMsg = buildErrorMessage(dateTime, request, e);
 		if(log.isDebugEnabled())
 			log.debug(errMsg);

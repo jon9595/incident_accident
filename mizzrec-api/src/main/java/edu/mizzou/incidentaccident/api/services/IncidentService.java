@@ -28,6 +28,7 @@ import edu.mizzou.incidentaccident.api.dao.WitnessInfoDAO;
 import edu.mizzou.incidentaccident.api.models.IncidentIncidentNatureModel;
 import edu.mizzou.incidentaccident.api.models.IncidentLocationModel;
 import edu.mizzou.incidentaccident.api.models.IncidentModel;
+import edu.mizzou.incidentaccident.api.models.IncidentSearchModel;
 import edu.mizzou.incidentaccident.api.models.SignaturesModel;
 
 @Service("incidentService")
@@ -64,36 +65,20 @@ public class IncidentService {
     @Autowired
     private UsersDAO usersDao;
     
-    public List<IncidentModel> getIncidentsNeedingApproval() {
-    	List<IncidentModel> incidents = incidentDao.getIncidentsNeedingApproval();
-    	for (IncidentModel incident : incidents) {
-    		incident = getIncidentIncidentals(incident);
-		}
-        return incidents;
+    public List<IncidentSearchModel> getIncidentsNeedingApproval() {
+    	return incidentDao.getIncidentsNeedingApproval();
     }
 
-    public List<IncidentModel> getIncidentListFromPastMonth() {
-    	List<IncidentModel> incidents = incidentDao.getIncidentListFromPastMonth();
-    	for (IncidentModel incident : incidents) {
-    		incident = getIncidentIncidentals(incident);
-		}
-        return incidents;
+    public List<IncidentSearchModel> getIncidentListFromPastMonth() {
+    	return incidentDao.getIncidentListFromPastMonth();
     }
 
-    public List<IncidentModel> getIncidentListFromSearch(String whereClause) {
-    	List<IncidentModel> incidents = incidentDao.getIncidentListFromSearch(whereClause);
-    	for (IncidentModel incident : incidents) {
-    		incident = getIncidentIncidentals(incident);
-		}
-        return incidents;
+    public List<IncidentSearchModel> getIncidentListFromSearch(String whereClause) {
+    	return incidentDao.getIncidentListFromSearch(whereClause);
     }
 
-    public List<IncidentModel> getIncidentList() {
-    	List<IncidentModel> incidents = incidentDao.getIncidentList();
-    	for (IncidentModel incident : incidents) {
-    		incident = getIncidentIncidentals(incident);
-		}
-        return incidents;
+    public List<IncidentSearchModel> getIncidentList() {
+    	return incidentDao.getIncidentList();
     }
 
     private IncidentModel getIncidentIncidentals(IncidentModel incident) {

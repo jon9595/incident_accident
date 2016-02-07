@@ -33,6 +33,7 @@ public class AccidentDAO implements DBConstants {
 			+ "if(sub_location is not null and sub_location = 'R',\"Right\","
 			+ "(if (sub_location is not null and sub_location = 'L',\"Left\",\"\"))))) "
 			+ " from "+ INJURY_LOCATIONS +" where id in (select injury_locations_id from " + ACCIDENT_INJURY_LOCATION + " where accident_id = acc.id)) as injury_location "
+			+ ",(select group_concat(description) from " + ACCIDENT_DETAIL_DESCRIPTION + " where id in (select acc_det_desc_id from " + ACCIDENT_DETAILS + " where accident_id = acc.id)) as accident_description"
 			+ ", pn.ems_contacted "
 			+ "from  " + ACCIDENT + " acc "
 			+ "join " + DEMOGRAPHICS + " dem on (dem.id = acc.demographics) "
@@ -194,7 +195,7 @@ public class AccidentDAO implements DBConstants {
 
     public List<AccidentSearchModel> getAccidentListFromPastMonth() {
     String sqlString = accidentListSqlStr +
-        " where created > (NOW() - INTERVAL 1 MONTH)";
+        " where dem.date > (NOW() - INTERVAL 1 MONTH)";
         return getTemplate().query(sqlString, new RowMapper<AccidentSearchModel>() {
             public AccidentSearchModel mapRow(ResultSet rs, int rowNum) throws SQLException {
             	return populateSearchModel(rs);
@@ -211,50 +212,14 @@ public class AccidentDAO implements DBConstants {
         });
     }
         
-    public List<AccidentModel> getAccidentsNeedingApproval() {
-        String sqlString = "select " +
-        "id" +
-        ", demographics" +
-        ", membership_status" +
-        ", program_activity" +
-        ", responder_acct" +
-        ", member_acct" +
-        ", refusal_of_care" +
-        ", witness_one" +
-        ", witness_two" +
-        ", proper_notifications" +
-        ", other_inj_desc" +
-        ", spec_inj_location" +
-        ", specific_location" +
-        ", created" +
-        ", created_by" +
-        ", modified" +
-        ", modified_by" +
-        " from " + ACCIDENT + 
+    public List<AccidentSearchModel> getAccidentsNeedingApproval() {
+        String sqlString = accidentListSqlStr +
         " where proper_notifications in (" +
         " SELECT pa.id FROM " + PROPER_NOTIFICATIONS + 
         " pa where rpt_reviewed_by is null or rpt_reviewed_by  = '')";
-        return getTemplate().query(sqlString, new RowMapper<AccidentModel>() {
-            public AccidentModel mapRow(ResultSet rs, int rowNum) throws SQLException {
-                AccidentModel model = new AccidentModel();
-                    model.setId(rs.getInt("id"));
-                    model.setDemographicsId(rs.getInt("demographics"));
-                    model.setMembershipStatusId(rs.getInt("membership_status"));
-                    model.setProgramActivityId(rs.getInt("program_activity"));
-                    model.setResponderAcctId(rs.getInt("responder_acct"));
-                    model.setMemberAcctId(rs.getInt("member_acct"));
-                    model.setRefusalOfCareId(rs.getInt("refusal_of_care"));
-                    model.setWitnessOneId(rs.getInt("witness_one"));
-                    model.setWitnessTwoId(rs.getInt("witness_two"));
-                    model.setProperNotificationsId(rs.getInt("proper_notifications"));
-                    model.setOtherInjDesc(rs.getString("other_inj_desc"));
-                    model.setSpecInjLocationId(rs.getInt("spec_inj_location"));
-                    model.setSpecificLocationId(rs.getInt("specific_location"));
-                    model.setCreated(rs.getTimestamp("created")!=null?new java.util.Date(rs.getTimestamp("created").getTime()):null);
-                    model.setCreatedBy(rs.getString("created_by"));
-                    model.setModified(rs.getTimestamp("modified")!=null?new java.util.Date(rs.getTimestamp("modified").getTime()):null);
-                    model.setModifiedBy(rs.getString("modified_by"));
-                return model;
+        return getTemplate().query(sqlString, new RowMapper<AccidentSearchModel>() {
+            public AccidentSearchModel mapRow(ResultSet rs, int rowNum) throws SQLException {
+            	return populateSearchModel(rs);
             }
         });
     }
@@ -267,6 +232,7 @@ public class AccidentDAO implements DBConstants {
         model.setAddress(rs.getString("dem.address"));
         model.setLocation(rs.getString("location"));
         model.setInjuryLocation(rs.getString("injury_location"));
+        model.setAccidentDescription(rs.getString("accident_description"));
         model.setEmsContacted(rs.getString("ems_contacted"));
         MembershipStatusModel msModel = model.getMembershipStatus();
         msModel.setId(rs.getInt("ms.id"));

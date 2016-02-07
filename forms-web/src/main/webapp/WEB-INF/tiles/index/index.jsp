@@ -60,7 +60,7 @@ $(document).ready(function(){
 	    	</c:when>
 	    	<c:otherwise>
 	    <c:forEach items="${incidents}" var="incident">
-	    	<li><a href="${pageContext.request.contextPath}/incident/view/${incident.id}"><fmt:formatDate value="${incident.demographics.date}" pattern="MM/dd/yyyy"/> - ${incident.demographics.name} - ${incident.incidentDetailsDesc}</a></li>
+	    	<li><a href="${pageContext.request.contextPath}/incident/view/${incident.id}"><fmt:formatDate value="${incident.incidentDate}" pattern="MM/dd/yyyy"/> - ${incident.name} - ${incident.incidentDetails}</a></li>
 	    </c:forEach>
 	    	</c:otherwise> 
 	    </c:choose>
@@ -70,7 +70,7 @@ $(document).ready(function(){
 	    <h3>Accident Reports</h3>
 	    <ul>
 	    <c:forEach items="${accidents}" var="accident">
-	    	<li><a href="${pageContext.request.contextPath}/accident/view/${accident.id}"><fmt:formatDate value="${accident.demographics.date}" pattern="MM/dd/yyyy"/> - ${accident.demographics.name} - ${accident.accidentDetailsDesc}</a></li>
+	    	<li><a href="${pageContext.request.contextPath}/accident/view/${accident.id}"><fmt:formatDate value="${accident.accidentDate}" pattern="MM/dd/yyyy"/> - ${accident.name} - ${accident.accidentDescription}</a></li>
 	    </c:forEach>
 	    </ul>
 	    </div>
@@ -92,18 +92,16 @@ $(document).ready(function(){
 		        	<th>Membership Status</th>
 		        	<th>Incident Details</th>
 		        	<th>Location</th>
-		        	<th>Program Involved</th>
 		        </thead>
 		        <tbody>
 			<c:forEach items="${incidentList}" var="incident">
 				<tr>
 					<td class="hidden">${incident.id}</td>
-					<td align="left"><fmt:formatDate value="${incident.demographics.date}" pattern="MM/dd/yyyy"/><br/><fmt:formatDate value="${incident.demographics.time}" pattern="hh:mm a"/></td>
-					<td>${incident.demographics.name}<br/>${incident.demographics.address}</td>
+					<td align="left"><fmt:formatDate value="${incident.incidentDate}" pattern="MM/dd/yyyy"/><br/><fmt:formatDate value="${incident.incidentDate}" pattern="hh:mm a"/></td>
+					<td>${incident.name}<br/>${incident.address}</td>
 					<td>${incident.membershipStatus.membershipStatus}</td>
-					<td><pre>${incident.incidentDetailsDesc}</pre></td>
-					<td><pre>${incident.incidentLocationDesc}</pre></td>
-					<td><pre>${incident.programActivity.programActivityDesc}</pre></td>
+					<td><pre>${incident.incidentDetails}</pre></td>
+					<td><pre>${incident.location}</pre></td>
 				</tr>
 			</c:forEach>	        
 		        </tbody>
@@ -126,9 +124,8 @@ $(document).ready(function(){
 		        	<th>Name/Address</th>
 		        	<th>Membership Status</th>
 		        	<th>Location</th>
-		        	<th>Program Involved</th>
 		        	<th>Injury Location</th>
-		        	<th>EMS Contacted</th>
+		        	<th>EMS</th>
 		        </thead>
 		        <tbody>
 	<c:forEach items="${accidentList}" var="accident">
@@ -138,7 +135,6 @@ $(document).ready(function(){
 						<td>${accident.name}<br/>${accident.address}</td>
 						<td>${accident.membershipStatus.membershipStatus}</td>
 						<td><pre>${accident.location}</pre></td>
-						<td><pre>${accident.programActivity.programActivityDesc}</pre></td>
 						<td><pre>${accident.injuryLocation}</pre></td>
 						<td>${accident.emsContacted}</td>
 					</tr>

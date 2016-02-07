@@ -81,12 +81,8 @@ public class AccidentService {
     private UsersDAO usersDao;
 	
 
-    public List<AccidentModel> getAccidentNeedingApproval() {
-    	List<AccidentModel> accidents = accidentDao.getAccidentsNeedingApproval();
-    	for (AccidentModel accident : accidents) {
-    		accident = getAccidentIncidentals(accident);
-		}
-        return accidents;
+    public List<AccidentSearchModel> getAccidentNeedingApproval() {
+    	return accidentDao.getAccidentsNeedingApproval();
     }
 
     public List<AccidentSearchModel> getAccidentListFromPastMonth() {

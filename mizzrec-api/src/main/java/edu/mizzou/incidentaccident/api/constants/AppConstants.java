@@ -18,7 +18,9 @@ public class AppConstants {
 	/** HH:mm */
 	public static final String DATE_FORMAT_PATTERN_HM = "HH:mm";
 	/** yyyy-MM-dd HH:mm:ss,SSS*/
-	public static final String DATE_FORMAT_PATTERN_YYYYMMDDHMS = "yyyy-MM-dd HH:mm:ss,SSS";
+	public static final String DATE_FORMAT_PATTERN_YYYYMMDDHMSMS = "yyyy-MM-dd HH:mm:ss,SSS";
+	/** yyyy-MM-dd HH:mm:ss*/
+	public static final String DATE_FORMAT_PATTERN_YYYYMMDDHMS = "yyyy-MM-dd HH:mm:ss";
 	
 	public static final String USER_PROFILE = "userProfile";
 	

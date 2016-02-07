@@ -102,6 +102,7 @@ public class IncidentController {
 	public String getIncidentList(ModelMap map) {
 		map.addAttribute("incidents", incidentService.getIncidentList());
 		map.addAttribute("incidentSearchForm", new IncidentSearchForm());
+		map.addAttribute("incidentNatures", incidentNatureService.getIncidentNatureList());
 		return "incident.list";
 	}
 

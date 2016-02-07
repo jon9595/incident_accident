@@ -75,11 +75,11 @@ public abstract class SearchForm implements Serializable, DBConstants {
 				isAnd = true;
 			}
 			if (this.startDate != null && this.endDate != null) {
-				sb.append("created between '" + DateUtil.format(this.startDate, AppConstants.DATE_FORMAT_PATTERN_SQL) + "' and '" + DateUtil.format(this.endDate, AppConstants.DATE_FORMAT_PATTERN_SQL) + "'");
+				sb.append("dem.date between '" + DateUtil.format(this.startDate, AppConstants.DATE_FORMAT_PATTERN_SQL) + " 00:00:00' and '" + DateUtil.format(this.endDate, AppConstants.DATE_FORMAT_PATTERN_SQL) + " 23:59:59'");
 			} else if (this.startDate != null) {
-				sb.append("created >= " + DateUtil.format(this.startDate, AppConstants.DATE_FORMAT_PATTERN_SQL));
+				sb.append("dem.date >= '" + DateUtil.format(this.startDate, AppConstants.DATE_FORMAT_PATTERN_SQL) +" 00:00:00'");
 			} else {
-				sb.append("created <= " + DateUtil.format(this.endDate, AppConstants.DATE_FORMAT_PATTERN_SQL));
+				sb.append("dem.date <= '" + DateUtil.format(this.endDate, AppConstants.DATE_FORMAT_PATTERN_SQL) +" 23:59:59'");
 			}
 		}
 		return sb.toString();

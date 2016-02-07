@@ -3,11 +3,13 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://displaytag.sf.net" prefix="display" %>
 <link href="${pageContext.request.contextPath}/css/displaytag.css" rel="stylesheet">
+<script src="${pageContext.request.contextPath}/js/mask/jquery.mask.js"></script>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/jquery.datetimepicker.css"/ >
 <script src="${pageContext.request.contextPath}/js/jquery.datetimepicker.full.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/mizrec.js"></script>
 <script>
 	$(document).ready(function(){
+		$('.date').mask('00/00/0000');
 		$('#content').removeClass("container");
 		$('#content').addClass("container-fluid");
 	    $('.table-hover > tbody > tr').click(function(){
@@ -56,20 +58,22 @@
 			pagesize="5"
 			sort="list"
 			requestURI=""
+			defaultsort="1"
+			defaultorder="descending"
 			class="table table-hover table-striped">
 			<display:column property="id" headerClass="hidden" class="hidden"></display:column>
-			<display:column title="Date/Time" sortable="true" sortProperty="demographics.date">
-				<fmt:formatDate value="${incident.demographics.date}" pattern="MM/dd/yyyy"/><br/><fmt:formatDate value="${incident.demographics.time}" pattern="hh:mm a"/>
+			<display:column title="Date/Time" sortable="true" sortProperty="incidentDate">
+				<fmt:formatDate value="${incident.incidentDate}" pattern="MM/dd/yyyy"/><br/><fmt:formatDate value="${incident.incidentDate}" pattern="hh:mm a"/>
 			</display:column>
-			<display:column title="Name/Address" sortable="true" sortProperty="demographics.revName">
-				${incident.demographics.name}<br/>${incident.demographics.address}
+			<display:column title="Name/Address" sortable="true" sortProperty="revName">
+				${incident.name}<br/>${incident.address}
 			</display:column>
 			<display:column title="Membership Status" property="membershipStatus.membershipStatus" sortable="true"/>
 			<display:column title="Incident Details" sortable="true">
-				<pre>${incident.incidentDetailsDesc}</pre>
+				<pre>${incident.incidentDetails}</pre>
 			</display:column>
 			<display:column title="Location" sortable="true">
-				<pre>${incident.incidentLocationDesc}</pre>
+				<pre>${incident.location}</pre>
 			</display:column>
 			<display:column title="Program Involved">
 				<pre>${incident.programActivity.programActivityDesc}</pre>

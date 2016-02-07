@@ -30,7 +30,7 @@ public class AccidentSearchForm extends SearchForm {
 			} else {
 				isAnd = true;
 			}
-			sb.append("id in (SELECT accident_id FROM " + ACCIDENT_DETAILS + " where acc_det_desc_id = " + this.accidentDetail + ")");
+			sb.append("acc.id in (SELECT accident_id FROM " + ACCIDENT_DETAILS + " where acc_det_desc_id = " + this.accidentDetail + ")");
 		}
 		if (StringUtils.isNotBlank(this.emsContacted)) {
 			if (isAnd) {

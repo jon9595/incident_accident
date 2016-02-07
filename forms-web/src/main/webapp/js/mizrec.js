@@ -116,6 +116,7 @@ function setcurrenttime(dateObj, timeObj) {
 function setupStartEndDates(startId, endId) {
 	$('#'+startId).datetimepicker({
 		  format:'m/d/Y',
+		  formatDate: 'm/d/Y',
 		  onShow:function( ct ){
 		   this.setOptions({
 		    maxDate:$('#'+endId).val()?$('#'+endId).val():false
@@ -125,6 +126,7 @@ function setupStartEndDates(startId, endId) {
 		 });
 		 $('#'+endId).datetimepicker({
 		  format:'m/d/Y',
+		  formatDate: 'm/d/Y',
 		  onShow:function( ct ){
 		   this.setOptions({
 		    minDate:$('#'+startId).val()?$('#'+startId).val():false
