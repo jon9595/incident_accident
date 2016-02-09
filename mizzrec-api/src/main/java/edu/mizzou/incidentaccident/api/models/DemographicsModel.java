@@ -58,11 +58,11 @@ public class DemographicsModel implements Serializable {
     }
 
     public String getTimeStr() {
-		return DateUtil.format(this.time, AppConstants.DATE_FORMAT_PATTERN_HM);
+		return DateUtil.format(this.time, AppConstants.DATE_FORMAT_PATTERN_HMA);
 	}
 
 	public void setTimeStr(String time) {
-		this.time = DateUtil.parse(time, AppConstants.DATE_FORMAT_PATTERN_HM);
+		this.time = DateUtil.parse(time, AppConstants.DATE_FORMAT_PATTERN_HMA);
 	}
 
     public Date getTime() {

@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
             <div class="form-container padding-bottom-none">
+	  			  <span style="color: red;">${errMsg}</span>
                 <fieldset><legend>Membership Status</legend>
 	              <span style="color: red;"><html:errors path="membershipStatus.membership" cssClass="err" /></span>                
 						<div class="form-group">

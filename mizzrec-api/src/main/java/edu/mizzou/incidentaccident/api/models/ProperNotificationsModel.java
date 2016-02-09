@@ -77,20 +77,20 @@ public class ProperNotificationsModel implements Serializable {
     }
 
     public String getMupdOfficerCalledStr() {
-        return DateUtil.format(this.mupdOfficerCalled, AppConstants.DATE_FORMAT_PATTERN_HM);
+        return DateUtil.format(this.mupdOfficerCalled, AppConstants.DATE_FORMAT_PATTERN_HMA);
     }
 
     public void setMupdOfficerCalledStr(String mupdOfficerCalled) {
-        this.mupdOfficerCalled = DateUtil.parse(mupdOfficerCalled, AppConstants.DATE_FORMAT_PATTERN_HM);
+        this.mupdOfficerCalled = DateUtil.parse(mupdOfficerCalled, AppConstants.DATE_FORMAT_PATTERN_HMA);
     }
 
 
     public String getMupdOfficerArrivedStr() {
-        return DateUtil.format(this.mupdOfficerArrived, AppConstants.DATE_FORMAT_PATTERN_HM);
+        return DateUtil.format(this.mupdOfficerArrived, AppConstants.DATE_FORMAT_PATTERN_HMA);
     }
 
     public void setMupdOfficerArrivedStr(String mupdOfficerArrived) {
-        this.mupdOfficerArrived = DateUtil.parse(mupdOfficerArrived, AppConstants.DATE_FORMAT_PATTERN_HM);
+        this.mupdOfficerArrived = DateUtil.parse(mupdOfficerArrived, AppConstants.DATE_FORMAT_PATTERN_HMA);
     }
 
     public String getMupdOfficerCaseNbr() {
@@ -129,11 +129,11 @@ public class ProperNotificationsModel implements Serializable {
     }
 
     public String getEmsCalledStr() {
-        return DateUtil.format(this.emsCalled, AppConstants.DATE_FORMAT_PATTERN_HM);
+        return DateUtil.format(this.emsCalled, AppConstants.DATE_FORMAT_PATTERN_HMA);
     }
 
     public void setEmsCalledStr(String emsCalled) {
-        this.emsCalled = DateUtil.parse(emsCalled, AppConstants.DATE_FORMAT_PATTERN_HM);
+        this.emsCalled = DateUtil.parse(emsCalled, AppConstants.DATE_FORMAT_PATTERN_HMA);
     }
 
     public Date getEmsArrived() {
@@ -145,11 +145,11 @@ public class ProperNotificationsModel implements Serializable {
     }
 
     public String getEmsArrivedStr() {
-        return DateUtil.format(this.emsArrived, AppConstants.DATE_FORMAT_PATTERN_HM);
+        return DateUtil.format(this.emsArrived, AppConstants.DATE_FORMAT_PATTERN_HMA);
     }
 
     public void setEmsArrivedStr(String emsArrived) {
-        this.emsArrived = DateUtil.parse(emsArrived, AppConstants.DATE_FORMAT_PATTERN_HM);
+        this.emsArrived = DateUtil.parse(emsArrived, AppConstants.DATE_FORMAT_PATTERN_HMA);
     }
 
     public String getProfStaffContacted() {
@@ -178,11 +178,11 @@ public class ProperNotificationsModel implements Serializable {
     }
 
 	public String getProfStaffCalledStr() {
-        return DateUtil.format(this.profStaffCalled, AppConstants.DATE_FORMAT_PATTERN_HM);
+        return DateUtil.format(this.profStaffCalled, AppConstants.DATE_FORMAT_PATTERN_HMA);
     }
 
     public void setProfStaffCalledStr(String profStaffCalled) {
-        this.profStaffCalled = DateUtil.parse(profStaffCalled, AppConstants.DATE_FORMAT_PATTERN_HM);
+        this.profStaffCalled = DateUtil.parse(profStaffCalled, AppConstants.DATE_FORMAT_PATTERN_HMA);
     }
 
     public Date getProfStaffArrived() {
@@ -194,11 +194,11 @@ public class ProperNotificationsModel implements Serializable {
     }
 
     public String getProfStaffArrivedStr() {
-        return DateUtil.format(this.profStaffArrived, AppConstants.DATE_FORMAT_PATTERN_HM);
+        return DateUtil.format(this.profStaffArrived, AppConstants.DATE_FORMAT_PATTERN_HMA);
     }
 
     public void setProfStaffArrivedStr(String profStaffArrived) {
-        this.profStaffArrived = DateUtil.parse(profStaffArrived, AppConstants.DATE_FORMAT_PATTERN_HM);
+        this.profStaffArrived = DateUtil.parse(profStaffArrived, AppConstants.DATE_FORMAT_PATTERN_HMA);
     }
 
     public String getReportCompletedBy() {

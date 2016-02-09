@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <script>
 $(document).ready(function(){
+    setupDateTimeObjects();
     setupStartEndDates('accident_date_start', 'accident_date_end');
 });
 </script>

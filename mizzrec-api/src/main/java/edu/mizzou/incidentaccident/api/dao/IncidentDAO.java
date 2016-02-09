@@ -163,7 +163,7 @@ public class IncidentDAO implements DBConstants {
 
 
     public List<IncidentSearchModel> getIncidentList() {
-    String sqlString = incidentSqlString;
+    String sqlString = incidentSqlString + " order by dem.date desc";
         return getTemplate().query(sqlString, new RowMapper<IncidentSearchModel>() {
             public IncidentSearchModel mapRow(ResultSet rs, int rowNum) throws SQLException {
             	return populateSearchModel(rs);
@@ -173,7 +173,8 @@ public class IncidentDAO implements DBConstants {
 
     public List<IncidentSearchModel> getIncidentListFromPastMonth() {
     String sqlString = incidentSqlString + 
-    	" where dem.date > (NOW() - INTERVAL 1 MONTH)";
+    	" where dem.date > (NOW() - INTERVAL 1 MONTH)" 
+    	+ " order by dem.date desc";
         return getTemplate().query(sqlString, new RowMapper<IncidentSearchModel>() {
             public IncidentSearchModel mapRow(ResultSet rs, int rowNum) throws SQLException {
             	return populateSearchModel(rs);
@@ -182,7 +183,7 @@ public class IncidentDAO implements DBConstants {
     }
     
     public List<IncidentSearchModel> getIncidentListFromSearch(String whereClause) {
-        String sqlString = incidentSqlString + whereClause;
+        String sqlString = incidentSqlString + whereClause + " order by dem.date desc";
         return getTemplate().query(sqlString, new RowMapper<IncidentSearchModel>() {
             public IncidentSearchModel mapRow(ResultSet rs, int rowNum) throws SQLException {
             	return populateSearchModel(rs);
@@ -193,7 +194,8 @@ public class IncidentDAO implements DBConstants {
     public List<IncidentSearchModel> getIncidentsNeedingApproval() {
         String sqlString = incidentSqlString + " where proper_notifications in (" +
         " SELECT pa.id FROM " + PROPER_NOTIFICATIONS + 
-        " pa where rpt_reviewed_by is null or rpt_reviewed_by  = '')";
+        " pa where rpt_reviewed_by is null or rpt_reviewed_by  = '')"
+         + " order by dem.date desc";
         return getTemplate().query(sqlString, new RowMapper<IncidentSearchModel>() {
             public IncidentSearchModel mapRow(ResultSet rs, int rowNum) throws SQLException {
             	return populateSearchModel(rs);

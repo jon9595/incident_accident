@@ -185,7 +185,7 @@ public class AccidentDAO implements DBConstants {
 
 
     public List<AccidentSearchModel> getAccidentList() {
-    	String sqlString = accidentListSqlStr;
+    	String sqlString = accidentListSqlStr + " order by dem.date desc";
         return getTemplate().query(sqlString, new RowMapper<AccidentSearchModel>() {
             public AccidentSearchModel mapRow(ResultSet rs, int rowNum) throws SQLException {
             	return populateSearchModel(rs);
@@ -195,7 +195,8 @@ public class AccidentDAO implements DBConstants {
 
     public List<AccidentSearchModel> getAccidentListFromPastMonth() {
     String sqlString = accidentListSqlStr +
-        " where dem.date > (NOW() - INTERVAL 1 MONTH)";
+        " where dem.date > (NOW() - INTERVAL 1 MONTH)"
+        + " order by dem.date desc";
         return getTemplate().query(sqlString, new RowMapper<AccidentSearchModel>() {
             public AccidentSearchModel mapRow(ResultSet rs, int rowNum) throws SQLException {
             	return populateSearchModel(rs);
@@ -204,7 +205,7 @@ public class AccidentDAO implements DBConstants {
     }
         
     public List<AccidentSearchModel> getAccidentListFromSearch(String whereClause) {
-    String sqlString = accidentListSqlStr + whereClause;
+    String sqlString = accidentListSqlStr + whereClause + " order by dem.date desc";
         return getTemplate().query(sqlString, new RowMapper<AccidentSearchModel>() {
             public AccidentSearchModel mapRow(ResultSet rs, int rowNum) throws SQLException {
             	return populateSearchModel(rs);
@@ -216,7 +217,8 @@ public class AccidentDAO implements DBConstants {
         String sqlString = accidentListSqlStr +
         " where proper_notifications in (" +
         " SELECT pa.id FROM " + PROPER_NOTIFICATIONS + 
-        " pa where rpt_reviewed_by is null or rpt_reviewed_by  = '')";
+        " pa where rpt_reviewed_by is null or rpt_reviewed_by  = '')"
+         + " order by dem.date desc";
         return getTemplate().query(sqlString, new RowMapper<AccidentSearchModel>() {
             public AccidentSearchModel mapRow(ResultSet rs, int rowNum) throws SQLException {
             	return populateSearchModel(rs);

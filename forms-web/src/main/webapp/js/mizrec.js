@@ -101,14 +101,17 @@ function setcurrenttime(dateObj, timeObj) {
 	var year = now.getFullYear();
 	var hour   = now.getHours();
 	var minute = now.getMinutes();
+	var ampm = " am";
 
 	if (month < 10) month = "0" + month;
 	if (day < 10) day = "0" + day;
+    if (hour >= 12) ampm = " pm";  
+	if (hour > 12) hour = hour - 12;
 	if (hour   < 10) { hour   = "0" + hour;   }
     if (minute < 10) { minute = "0" + minute; }
 	
     var todayDt = month + "/" + day + "/" + year;
-    var todayTime = hour + ":" + minute;
+    var todayTime = hour + ":" + minute + ampm;
     $('#'+dateObj).val(todayDt);
     $('#'+timeObj).val(todayTime);   
 }
@@ -134,4 +137,28 @@ function setupStartEndDates(startId, endId) {
 		  },
 		  timepicker:false
 	 });	
+}
+
+function setupDateTimeObjects() {
+    $('.date').datetimepicker({
+        timepicker:false,
+        scrollInput:false,
+        format:'m/d/Y',
+        formatDate:'m/d/Y'
+      });
+
+    $('.date').mask('00/00/0000');
+	$('.time').mask('Hh:Ii am', {'translation':{
+		  H : {pattern: /[0-1]/},
+		  h : {pattern: /[0-9]/},
+		  I : {pattern: /[0-5]/},
+		  i : {pattern: /[0-9]/},
+		  a : {pattern: /[A|a|P|p]/},
+		  m : {pattern: /[M|m]/}
+	  	}
+	});
+	  
+    $('.date').attr('autocomplete', 'off');
+    $('.time').attr('autocomplete', 'off');
+
 }

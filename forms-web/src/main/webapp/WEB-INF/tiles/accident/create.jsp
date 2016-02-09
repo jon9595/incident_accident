@@ -12,24 +12,11 @@
  <script src="${pageContext.request.contextPath}/js/signature-pad/json2.min.js" type="text/javascript"></script>
 <script type="text/javascript">
   $(document).ready(function(){
-    $('.date').datetimepicker({
-      timepicker:false,
-      scrollInput:false,
-      format:'m/d/Y'
-    });
-
-    $('.time').datetimepicker({
-        datepicker:false,
-        format:'H:i'
-      }); 
-    
+	  
     setcheckboxes();
     setcheckboxstate();
+    setupDateTimeObjects();
     $('.phone').mask('000-000-0000');
-    $('.date').mask('00/00/0000');
-    $('.time').mask('00:00');
-    $('.date').attr('autocomplete', 'off');
-    $('.time').attr('autocomplete', 'off');
     $('.injury-chkbox').click(function(){
     	if($(this).is(':checked')){
     		$(this).next().removeClass('hidden');
@@ -47,8 +34,8 @@
     <div class="row">
         <div class="col-md-12 col-lg-12">
               <html:form method="post" modelAttribute="accidentForm" action="${pageContext.request.contextPath}/accident/create" class="form-horizontal" >
-              <jsp:include page="/WEB-INF/jsp/modules/demographics.jsp"/>
               <jsp:include page="/WEB-INF/jsp/modules/membership-status.jsp"/>
+              <jsp:include page="/WEB-INF/jsp/modules/demographics.jsp"/>
               <jsp:include page="/WEB-INF/jsp/modules/program-activity.jsp"/>
               <jsp:include page="/WEB-INF/jsp/modules/locations.jsp"/>
               <jsp:include page="/WEB-INF/jsp/modules/injury-locations.jsp"/>

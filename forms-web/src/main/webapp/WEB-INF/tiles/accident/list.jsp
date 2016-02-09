@@ -58,8 +58,6 @@
 			pagesize="5"
 			sort="list"
 			requestURI=""
-			defaultsort="1"
-			defaultorder="descending"
 			class="table table-hover table-striped">
 			<display:column property="id" headerClass="hidden" class="hidden"></display:column>
 			<display:column sortable="true" sortProperty="accidentDate" title="Date/Time">

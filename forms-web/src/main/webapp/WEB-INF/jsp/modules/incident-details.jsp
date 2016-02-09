@@ -3,6 +3,7 @@
 
             <div class="form-container padding-bottom-none">
                 <fieldset><legend>Incident Details</legend>
+	              <span style="color: red;"><html:errors path="incidentDetails" cssClass="err" /></span>                
 						<div class="form-group">
 							<div class="col-md-12 columns">
 <c:forEach items="${incidentDetailDesc}" var="detail">

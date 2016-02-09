@@ -30,6 +30,9 @@ public class IncidentValidator implements Validator {
 		msv.validate(incident.getMembershipStatus(), errors);
 		pav.validate(incident.getProgramActivity(), errors);
 		pnv.validate(incident.getProperNotifications(), errors);
+		if (incident.getIncidentNatures() == null || incident.getIncidentNatures().size() == 0) {
+			errors.rejectValue("incidentDetails", "required", null, "Please specify incident detail.");
+		}
 		if (incident.getLocations().length == 0) {
 			errors.rejectValue("locations", "required", null, "Location is required.");
 		}
