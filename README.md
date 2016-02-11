@@ -13,7 +13,14 @@ a WAR file.  The mizzrec-api project contains the business layer and data layer.
 other dependencies.  The deploy folder contains the libraries, artifacts, and scripts necessary to install the application onto a fresh server install.
 
 ## Vagrant ##
-To assist with getting a development environment up quickly, this project uses Vagrant to create a virtual machine to house the database server. 
+To assist with getting a development environment up quickly, this project uses [Vagrant](https://www.vagrantup.com) to create a virtual machine to house the database server. 
 
 Vagrant provides easy to configure, reproducible, and portable work environments built on top of industry-standard technology and controlled by a 
 single consistent workflow to help maximize the productivity and flexibility of you and your team.
+
+### Getting started with Vagrant ###
+Download and install the latest version of Vagrant: (apt-get versions can be out of date)
+[https://www.vagrantup.com/downloads.html]
+
+Also download and install the latest version of VirtualBox for your OS: (Note: As of this writing, version 5.0 wasn't fully compatible. Use the latest version 4)
+[https://www.virtualbox.org/]
