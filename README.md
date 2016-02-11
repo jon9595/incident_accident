@@ -20,7 +20,7 @@ single consistent workflow to help maximize the productivity and flexibility of 
 
 ### Getting started with Vagrant ###
 Download and install the latest version of Vagrant: (apt-get versions can be out of date)
-[https://www.vagrantup.com/downloads.html]
+[https://www.vagrantup.com/downloads.html](https://www.vagrantup.com/downloads.html)
 
 Also download and install the latest version of VirtualBox for your OS: (Note: As of this writing, version 5.0 wasn't fully compatible. Use the latest version 4)
-[https://www.virtualbox.org/]
+[https://www.virtualbox.org/](https://www.virtualbox.org/)
