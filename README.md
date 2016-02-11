@@ -12,6 +12,17 @@ is one project.  It uses forms-web and mizzrec-api as children.  The forms-web p
 a WAR file.  The mizzrec-api project contains the business layer and data layer.  This project is built as a JAR and included in the WAR with all of the
 other dependencies.  The deploy folder contains the libraries, artifacts, and scripts necessary to install the application onto a fresh server install.
 
+### Developer Tools ###
+The Vagrant tool sets up a database server that is accessible from MySQL Workbench or through PhpMyAdmin using the root username and password provided in 
+the ```bootstrap.sh``` file. 
+Development of the code was performed using the [Spring Tool Suite](https://spring.io/tools) and the Gradle Plugin in STS. To get started simply clone
+this project into your workstation, start STS, import the project through Gradle, and start coding.  I installed a local tomcat7 instance on my development
+machine and pointed the datasource to the IP Address of the database (which in this case is found in the vagrantfile). 
+
+### Database connection configuration ###
+Configuration information for the database and security access is found in the context.xml file in the META-INF folder of the forms-web project. 
+It is suggested to change the password prior to deploying to the production environment.
+
 ## Vagrant ##
 To assist with getting a development environment up quickly, this project uses [Vagrant](https://www.vagrantup.com) to create a virtual machine to house the database server. 
 
@@ -35,3 +46,30 @@ vagrant up
 ```
 
 This may take awhile, but when the command finishes, you should have a working database server.
+
+You can also input
+
+```
+vagrant ssh
+```
+to ssh into the virtual machine.
+
+Make sure you already have the ubuntu/trusty32 loaded.  If not do
+```
+vagrant box add ubuntu/trusty32
+```
+before starting the virtual machine.
+
+To safely stop the box simply run the command:
+```vagrant halt```
+
+To destroy the box run:
+```vagrant destroy```
+
+If you modify ```bootstrap.sh``` you can reprovision the box by running:
+```vagrant provision```
+
+More information about setting up Vagrant can be found at the Vagrant website: [https://www.vagrantup.com/docs/getting-started/](https://www.vagrantup.com/docs/getting-started/)
+
+Resources
+-----------------
