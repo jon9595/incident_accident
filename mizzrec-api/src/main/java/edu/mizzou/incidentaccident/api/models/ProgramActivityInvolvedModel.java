@@ -16,7 +16,6 @@ public class ProgramActivityInvolvedModel implements Serializable {
 
     private static Logger log = LoggerFactory.getLogger(ProgramActivityInvolvedModel.class);
     private Integer id;
-    private Time time;
     private boolean informalActivity;
     private String infActDesc;
     private boolean clubRecSports;
@@ -40,15 +39,6 @@ public class ProgramActivityInvolvedModel implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-
-    public Time getTime() {
-        return this.time;
-    }
-
-    public void setTime(Time time) {
-        this.time = time;
     }
 
 

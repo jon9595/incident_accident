@@ -30,8 +30,7 @@ public class ProgramActivityInvolvedDAO implements DBConstants {
     public int addProgramActivityInvolved(ProgramActivityInvolvedModel bean) {
         StringBuffer sInsertStmt = new StringBuffer(200);
         sInsertStmt.append( "INSERT INTO " + PROGRAM_ACTIVITY_INVOLVED + " (")
-            .append(" time " )
-            .append(", informal_activity " )
+            .append(" informal_activity " )
             .append(", inf_act_desc " )
             .append(", club_rec_sports " )
             .append(", club_rec_team_name " )
@@ -60,10 +59,8 @@ public class ProgramActivityInvolvedDAO implements DBConstants {
             .append(", ?")
             .append(", ?")
             .append(", ?")
-            .append(", ?")
             .append(")");
         Object[] args = {
-            bean.getTime(), 
             bean.isInformalActivity()?"Y":"N", 
             bean.getInfActDesc(), 
             bean.isClubRecSports()?"Y":"N", 
@@ -87,8 +84,7 @@ public class ProgramActivityInvolvedDAO implements DBConstants {
         StringBuffer sUpdateStmt = new StringBuffer(200);
         sUpdateStmt.append("UPDATE " + PROGRAM_ACTIVITY_INVOLVED)
         .append(" SET ")
-        .append(" time = ? " )
-        .append(", informal_activity = ? " )
+        .append(" informal_activity = ? " )
         .append(", inf_act_desc = ? " )
         .append(", club_rec_sports = ? " )
         .append(", club_rec_team_name = ? " )
@@ -106,7 +102,6 @@ public class ProgramActivityInvolvedDAO implements DBConstants {
         sWhereStmt.append(" WHERE id = ?");
         sUpdateStmt.append( sWhereStmt );
         Object[] args = {
-            bean.getTime(), 
             bean.isInformalActivity()?"Y":"N", 
             bean.getInfActDesc(), 
             bean.isClubRecSports()?"Y":"N", 
@@ -130,7 +125,6 @@ public class ProgramActivityInvolvedDAO implements DBConstants {
     public ProgramActivityInvolvedModel getProgramActivityInvolved(Integer id) {
     String sqlString = "select " +
         "id" +
-        ", time" +
         ", informal_activity" +
         ", inf_act_desc" +
         ", club_rec_sports" +
@@ -151,7 +145,6 @@ public class ProgramActivityInvolvedDAO implements DBConstants {
             public ProgramActivityInvolvedModel mapRow(ResultSet rs, int rowNum) throws SQLException {
                 ProgramActivityInvolvedModel model = new ProgramActivityInvolvedModel();
                     model.setId(rs.getInt("id"));
-                    model.setTime(rs.getTime("time"));
                     model.setInformalActivity("Y".equals(rs.getString("informal_activity"))?true:false);
                     model.setInfActDesc(rs.getString("inf_act_desc"));
                     model.setClubRecSports("Y".equals(rs.getString("club_rec_sports"))?true:false);
@@ -176,7 +169,6 @@ public class ProgramActivityInvolvedDAO implements DBConstants {
     public List<ProgramActivityInvolvedModel> getProgramActivityInvolvedList() {
     String sqlString = "select " +
         "id" +
-        ", time" +
         ", informal_activity" +
         ", inf_act_desc" +
         ", club_rec_sports" +
@@ -196,7 +188,6 @@ public class ProgramActivityInvolvedDAO implements DBConstants {
             public ProgramActivityInvolvedModel mapRow(ResultSet rs, int rowNum) throws SQLException {
                 ProgramActivityInvolvedModel model = new ProgramActivityInvolvedModel();
                     model.setId(rs.getInt("id"));
-                    model.setTime(rs.getTime("time"));
                     model.setInformalActivity("Y".equals(rs.getString("informal_activity"))?true:false);
                     model.setInfActDesc(rs.getString("inf_act_desc"));
                     model.setClubRecSports("Y".equals(rs.getString("club_rec_sports"))?true:false);
