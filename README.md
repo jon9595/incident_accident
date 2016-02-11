@@ -11,3 +11,9 @@ The framework uses [Gradle](http://www.gradle.org) for it's build platform.  It 
 is one project.  It uses forms-web and mizzrec-api as children.  The forms-web project is the dynamic web project that gets deployed to the server as
 a WAR file.  The mizzrec-api project contains the business layer and data layer.  This project is built as a JAR and included in the WAR with all of the
 other dependencies.  The deploy folder contains the libraries, artifacts, and scripts necessary to install the application onto a fresh server install.
+
+## Vagrant ##
+To assist with getting a development environment up quickly, this project uses Vagrant to create a virtual machine to house the database server. 
+
+Vagrant provides easy to configure, reproducible, and portable work environments built on top of industry-standard technology and controlled by a 
+single consistent workflow to help maximize the productivity and flexibility of you and your team.
