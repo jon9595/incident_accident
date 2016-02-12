@@ -1,5 +1,7 @@
 #Incident Accident Report Server
 
+![alt text](screenshots/mizzrec-screenshot.png "Description goes here")
+
 
 This project creates a J2EE web application written in Spring MVC that records and maintains incidents and accidents that occur
 in an institution.  This application is specifically designed for MizzouRec.  
