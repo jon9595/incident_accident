@@ -71,24 +71,24 @@ If you modify ```bootstrap.sh``` you can reprovision the box by running:
 
 More information about setting up Vagrant can be found at the Vagrant website: [https://www.vagrantup.com/docs/getting-started/](https://www.vagrantup.com/docs/getting-started/)
 
-Resources
------------------
-**Apache:** [http://httpd.apache.org](http://httpd.apache.org)
+##Resources##
 
-**Git:** [http://git-scm.com](http://git-scm.com)
+* **Apache:** [http://httpd.apache.org](http://httpd.apache.org)
 
-**Gradle** [http://gradle.org/](http://gradle.org/)
+* **Git:** [http://git-scm.com](http://git-scm.com)
 
-**Maven:** [https://maven.apache.org](https://maven.apache.org)
+* **Gradle** [http://gradle.org/](http://gradle.org/)
 
-**MySQL:** [https://www.mysql.com](https://www.mysql.com)
+* **Maven:** [https://maven.apache.org](https://maven.apache.org)
 
-**PHP MyAdmin:** [https://www.phpmyadmin.net](https://www.phpmyadmin.net)
+* **MySQL:** [https://www.mysql.com](https://www.mysql.com)
 
-**Spring Tool Suite:** [http://spring.io/tools/sts](http://spring.io/tools/sts)
+* **PHP MyAdmin:** [https://www.phpmyadmin.net](https://www.phpmyadmin.net)
 
-**Spring MVC:** [http://docs.spring.io/spring/docs/current/spring-framework-reference/html/mvc.html](http://docs.spring.io/spring/docs/current/spring-framework-reference/html/mvc.html)
+* **Spring Tool Suite:** [http://spring.io/tools/sts](http://spring.io/tools/sts)
 
-**Tomcat:** [http://tomcat.apache.org](http://tomcat.apache.org)
+* **Spring MVC:** [http://docs.spring.io/spring/docs/current/spring-framework-reference/html/mvc.html](http://docs.spring.io/spring/docs/current/spring-framework-reference/html/mvc.html)
 
-**Vagrant:** [https://www.vagrantup.com](https://www.vagrantup.com)
+* **Tomcat:** [http://tomcat.apache.org](http://tomcat.apache.org)
+
+* **Vagrant:** [https://www.vagrantup.com](https://www.vagrantup.com)
