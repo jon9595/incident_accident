@@ -1,4 +1,4 @@
-Incident Accident Report Server
+#Incident Accident Report Server
 ===============================
 
 This project creates a J2EE web application written in Spring MVC that records and maintains incidents and accidents that occur
@@ -12,14 +12,14 @@ is one project.  It uses forms-web and mizzrec-api as children.  The forms-web p
 a WAR file.  The mizzrec-api project contains the business layer and data layer.  This project is built as a JAR and included in the WAR with all of the
 other dependencies.  The deploy folder contains the libraries, artifacts, and scripts necessary to install the application onto a fresh server install.
 
-### Developer Tools ###
+## Developer Tools ##
 The Vagrant tool sets up a database server that is accessible from MySQL Workbench or through PhpMyAdmin using the root username and password provided in 
 the ```bootstrap.sh``` file. 
 Development of the code was performed using the [Spring Tool Suite](https://spring.io/tools) and the Gradle Plugin in STS. To get started simply clone
 this project into your workstation, start STS, import the project through Gradle, and start coding.  I installed a local tomcat7 instance on my development
 machine and pointed the datasource to the IP Address of the database (which in this case is found in the vagrantfile). 
 
-### Database connection configuration ###
+## Database connection configuration ##
 Configuration information for the database and security access is found in the context.xml file in the META-INF folder of the forms-web project. 
 It is suggested to change the password prior to deploying to the production environment.
 
@@ -29,7 +29,7 @@ To assist with getting a development environment up quickly, this project uses [
 Vagrant provides easy to configure, reproducible, and portable work environments built on top of industry-standard technology and controlled by a 
 single consistent workflow to help maximize the productivity and flexibility of you and your team.
 
-### Getting started with Vagrant ###
+## Getting started with Vagrant ##
 Download and install the latest version of Vagrant: (apt-get versions can be out of date)
 
 [https://www.vagrantup.com/downloads.html](https://www.vagrantup.com/downloads.html)
