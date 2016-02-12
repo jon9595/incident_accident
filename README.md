@@ -1,7 +1,5 @@
 #Incident Accident Report Server
 
-![alt text](screenshots/mizzrec-screenshot.png "Description goes here")
-
 
 This project creates a J2EE web application written in Spring MVC that records and maintains incidents and accidents that occur
 in an institution.  This application is specifically designed for MizzouRec.  
@@ -94,3 +92,7 @@ More information about setting up Vagrant can be found at the Vagrant website: [
 * **Tomcat:** [http://tomcat.apache.org](http://tomcat.apache.org)
 
 * **Vagrant:** [https://www.vagrantup.com](https://www.vagrantup.com)
+
+##Screenshot##
+
+![alt text](screenshots/mizzrec-screenshot.png "Incident Accident Report Server Home Page")
