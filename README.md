@@ -73,7 +73,8 @@ More information about setting up Vagrant can be found at the Vagrant website: [
 
 Resources
 -----------------
-Apache: [http://httpd.apache.org](http://httpd.apache.org)
+###Apache:### [http://httpd.apache.org](http://httpd.apache.org)
+
 Git: [http://git-scm.com](http://git-scm.com)
 Gradle [http://gradle.org/](http://gradle.org/)
 Maven: [https://maven.apache.org](https://maven.apache.org)
