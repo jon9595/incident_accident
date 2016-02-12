@@ -73,3 +73,13 @@ More information about setting up Vagrant can be found at the Vagrant website: [
 
 Resources
 -----------------
+Apache: [http://httpd.apache.org](http://httpd.apache.org)
+Git: [http://git-scm.com](http://git-scm.com)
+Gradle [http://gradle.org/](http://gradle.org/)
+Maven: [https://maven.apache.org](https://maven.apache.org)
+MySQL: [https://www.mysql.com](https://www.mysql.com)
+PHP MyAdmin: [https://www.phpmyadmin.net](https://www.phpmyadmin.net)
+Spring Tool Suite: [http://spring.io/tools/sts](http://spring.io/tools/sts)
+Spring MVC: [http://docs.spring.io/spring/docs/current/spring-framework-reference/html/mvc.html](http://docs.spring.io/spring/docs/current/spring-framework-reference/html/mvc.html)
+Tomcat: [http://tomcat.apache.org](http://tomcat.apache.org)
+Vagrant: [https://www.vagrantup.com](https://www.vagrantup.com)
