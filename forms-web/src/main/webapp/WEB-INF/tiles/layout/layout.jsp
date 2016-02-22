@@ -19,6 +19,7 @@
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
 		<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 	    <link href="${pageContext.request.contextPath}/fa/css/font-awesome.min.css" rel="stylesheet">
+		<script src="${pageContext.request.contextPath}/js/mask/jquery.mask.js"></script>
 	</head>
 	<body>
 		<!-- Wrap all page content here -->

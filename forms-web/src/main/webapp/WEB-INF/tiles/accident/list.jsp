@@ -19,8 +19,42 @@
 		$('h4.panel-title').click(function(){
 			$('#searchAccidentsAccordian').collapse('toggle');
 		});
+		
+		$('.chkbox > input[type="checkbox"]').each(function(){
+			$(this).change(function(){
+				if($(this).prop('checked')) {
+					$(this).parent().parent().addClass('row-hover');
+				} else {
+					$(this).parent().parent().removeClass('row-hover');
+				}
+			});			
+		});
 
 	});
+	
+	function check(ischecked) {
+		$('.chkbox > input[type="checkbox"]').each(function(){
+			$(this).prop('checked', ischecked);
+			$(this).change();
+		});
+	}
+	
+	function selectRows() {
+		$('.allbox').removeClass('hidden');
+		$('.chkbox').each(function(){
+			$(this).removeClass('hidden');
+		});
+		$('.table-hover > tbody > tr').unbind('click');
+		$('.table-hover > tbody > tr').click(function(){
+			if(!$(this).find('input:checkbox:first').prop('checked')) {
+				$(this).find('input:checkbox:first').prop('checked', true);
+				$(this).find('input:checkbox:first').change();
+			} else {
+				$(this).find('input:checkbox:first').prop('checked', false);
+				$(this).find('input:checkbox:first').change();
+			}
+	    });
+	}
 
 	function toggleChevron(e) {
 	    $(e.target)
@@ -60,6 +94,9 @@
 			requestURI=""
 			class="table table-hover table-striped">
 			<display:column property="id" headerClass="hidden" class="hidden"></display:column>
+			<display:column headerClass="hidden allbox" class="hidden chkbox" title="${checkAll}">
+			<input type="checkbox" />
+			</display:column>
 			<display:column sortable="true" sortProperty="accidentDate" title="Date/Time">
 			<fmt:formatDate value="${accident.accidentDate}" pattern="MM/dd/yyyy"/><br/><fmt:formatDate value="${accident.accidentDate}" pattern="hh:mm a"/>
 			</display:column>
@@ -83,6 +120,7 @@
     </div>
     <div class="form-container col-md-12 col-lg-12 noprint padding-md">
         <button class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/accident/create';">Create New Accident Report</button>
+        <button class="btn btn-primary" onclick="selectRows();">Select Multiple</button>
     </div>
 
 

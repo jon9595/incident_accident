@@ -349,7 +349,7 @@ public class AccidentService {
 	 
     @Transactional(propagation=Propagation.REQUIRED)
     public int deleteAccident(Integer id) {
-    	AccidentModel accident = accidentDao.getAccident(id);
+    	AccidentModel accident = getAccident(id);
     	if (accident != null) {
         	if (accident.getDemographics()!=null) {
             	demographicsDao.deleteDemographics(accident.getDemographicsId());

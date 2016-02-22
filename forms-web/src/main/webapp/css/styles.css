@@ -452,6 +452,16 @@ h4.panel-title a {
 	color: #fff;
 }
 
+.row-hover {
+    background-color: #266C8E !important;
+    color: #fff;
+    cursor: pointer;
+}
+
+tr.row-hover > td > pre {
+    color: #fff;
+}
+
 pre {
 	font-family: Helvetica, Arial, sans-serif;
 	border: none;

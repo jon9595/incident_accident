@@ -86,6 +86,12 @@ public class AccidentController {
 		return "accident.edit";
 	}
 
+	@RequestMapping(value="/delete/{id}", method=RequestMethod.GET)
+	public String deleteAccident(@PathVariable String id, ModelMap map) {
+		accidentService.deleteAccident(new Integer(id));
+		return "redirect:/accident/list";
+	}
+
 	@RequestMapping(value="/edit", method=RequestMethod.POST)
 	public String changeAccidentForm(@ModelAttribute("accidentForm") AccidentModel accident, BindingResult result, ModelMap map, HttpServletRequest request) {
 		setInjuryLocationsWithOutSubs(accident);
@@ -115,6 +121,7 @@ public class AccidentController {
 	public String getAccidentList(ModelMap map) {
 		map.addAttribute("accidents", accidentService.getAccidentList());
 		map.addAttribute("accidentSearchForm", new AccidentSearchForm());
+		map.addAttribute("checkAll","<input type=\"checkbox\" class=\"noPrint\" name=\"allbox\" onclick=\"check(this.checked);\" title=\"Select all\"/>");
 		return "accident.list";
 	}
 
