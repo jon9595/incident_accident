@@ -1,2 +1,2 @@
 
-include ":mizzrec-api", ":forms-web"
+include "mizzrec-api", "forms-web"
