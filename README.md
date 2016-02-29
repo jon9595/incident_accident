@@ -98,4 +98,4 @@ More information about setting up Vagrant can be found at the Vagrant website: [
 
 ##Screenshot##
 
-![alt text](screenshots/mizzrec-screenshot.png "Incident Accident Report Server Home Page")
+![alt text](screenshots/mizzrec-screenshot.png "Incident Accident Report Server Home Page") 
