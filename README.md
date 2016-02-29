@@ -32,7 +32,7 @@ Vagrant provides easy to configure, reproducible, and portable work environments
 single consistent workflow to help maximize the productivity and flexibility of you and your team.
 
 ## Getting started with Vagrant ##
-Download and install the latest version of Vagrant: (apt-get versions can be out of date) 
+Download and install the latest version of Vagrant: (apt-get versions can be out of date)
 
 [https://www.vagrantup.com/downloads.html](https://www.vagrantup.com/downloads.html)
 
