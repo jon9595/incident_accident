@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import edu.mizzou.incidentaccident.api.common.util.SigGen;
 import edu.mizzou.incidentaccident.api.common.util.SignatureToImage;
@@ -89,6 +90,14 @@ public class AccidentController {
 	@RequestMapping(value="/delete/{id}", method=RequestMethod.GET)
 	public String deleteAccident(@PathVariable String id, ModelMap map) {
 		accidentService.deleteAccident(new Integer(id));
+		return "redirect:/accident/list";
+	}
+
+	@RequestMapping(value="/deleteMult", method=RequestMethod.GET)
+	public String deleteAccidents(@RequestParam("id") String[] ids, ModelMap map) {
+		for (int i = 0; i < ids.length; i++) {
+			accidentService.deleteAccident(new Integer(ids[i]));
+		}
 		return "redirect:/accident/list";
 	}
 

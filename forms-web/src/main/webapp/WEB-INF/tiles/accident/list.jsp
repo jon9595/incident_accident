@@ -19,7 +19,20 @@
 		$('h4.panel-title').click(function(){
 			$('#searchAccidentsAccordian').collapse('toggle');
 		});
-		
+		$('#btnDelSel').click(function(){
+			var sel = getSelected();
+			if(sel.length == 0) {
+				alert("You must select at least one to delete.");
+			} else {
+				if(confirm('Are you sure you want to delete the selected reports?')){
+					var str = "";
+					for(var i = 0; i < sel.length; i++) {
+						str += "&id="+sel[i];
+					}
+					location.href= '${pageContext.request.contextPath}/accident/deleteMult?'+str;
+				}
+			}
+		});		
 		$('.chkbox > input[type="checkbox"]').each(function(){
 			$(this).change(function(){
 				if($(this).prop('checked')) {
@@ -31,6 +44,18 @@
 		});
 
 	});
+	
+	function getSelected(){
+		var sel = [];
+		$('.chkbox > input[type="checkbox"]').each(function(){
+			if($(this).prop('checked')) {
+				sel.push($(this).parent().parent().find('td:first').text());
+			}
+		});
+		return sel;
+	}
+	
+	
 	
 	function check(ischecked) {
 		$('.chkbox > input[type="checkbox"]').each(function(){
@@ -54,8 +79,27 @@
 				$(this).find('input:checkbox:first').change();
 			}
 	    });
+		$('#btnDelSel').removeClass('hidden');
+		$('#btnSelMult').addClass('hidden');
+		$('#btnSelSingle').removeClass('hidden');
 	}
 
+	function selectSingle() {
+		check(false);
+		$('.allbox').addClass('hidden');
+		$('.chkbox').each(function(){
+			$(this).addClass('hidden');
+		});
+		$('.table-hover > tbody > tr').unbind('click');
+	    $('.table-hover > tbody > tr').click(function(){
+	    	var id = $(this).find('td:first').text();
+	    	location.href= '${pageContext.request.contextPath}/accident/view/'+id;
+	    });
+		$('#btnSelSingle').addClass('hidden');
+		$('#btnSelMult').removeClass('hidden');
+		$('#btnDelSel').addClass('hidden');
+	}
+	
 	function toggleChevron(e) {
 	    $(e.target)
 	        .prev('.panel-heading')
@@ -120,7 +164,9 @@
     </div>
     <div class="form-container col-md-12 col-lg-12 noprint padding-md">
         <button class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/accident/create';">Create New Accident Report</button>
-        <button class="btn btn-primary" onclick="selectRows();">Select Multiple</button>
+        <button class="btn btn-primary" onclick="selectRows();" id="btnSelMult">Select Multiple</button>
+        <button class="btn btn-primary hidden" onclick="selectSingle();" id="btnSelSingle">Select Single</button>
+        <button class="btn btn-primary hidden pull-right" id="btnDelSel">Delete Selected</button>
     </div>
 
 
