@@ -254,7 +254,7 @@ public class IncidentService {
     }
 
     @Transactional(propagation=Propagation.REQUIRED)
-    public int deleteAccident(Integer id) {
+    public int deleteIncident(Integer id) {
     	IncidentModel incident = incidentDao.getIncident(id);
     	if (incident != null) {
         	if (incident.getDemographics()!=null) {

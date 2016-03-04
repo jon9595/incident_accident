@@ -1,22 +1,18 @@
 package edu.mizzou.incidentaccident.web.controllers;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import edu.mizzou.incidentaccident.api.models.AccidentModel;
 import edu.mizzou.incidentaccident.api.models.IncidentModel;
-import edu.mizzou.incidentaccident.api.services.AccidentService;
 import edu.mizzou.incidentaccident.api.services.IncidentIncidentNatureService;
 import edu.mizzou.incidentaccident.api.services.IncidentNatureService;
 import edu.mizzou.incidentaccident.api.services.IncidentService;
@@ -89,6 +85,20 @@ public class IncidentController {
 			incidentService.updateIncident(incident);
 			return "redirect:/incident/list";
 		}
+	}
+
+	@RequestMapping(value="/delete/{id}", method=RequestMethod.GET)
+	public String deleteAccident(@PathVariable String id, ModelMap map) {
+		incidentService.deleteIncident(new Integer(id));
+		return "redirect:/incident/list";
+	}
+
+	@RequestMapping(value="/deleteMult", method=RequestMethod.GET)
+	public String deleteAccidents(@RequestParam("id") String[] ids, ModelMap map) {
+		for (int i = 0; i < ids.length; i++) {
+			incidentService.deleteIncident(new Integer(ids[i]));
+		}
+		return "redirect:/incident/list";
 	}
 
 	@RequestMapping(value="/approve/{id}", method=RequestMethod.GET)
