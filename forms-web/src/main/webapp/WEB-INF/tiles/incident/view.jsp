@@ -1,6 +1,14 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="html" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<script type="text/javascript">
+function deleteReport() {
+	if(confirm("Are you sure you want to delete this report?")) {
+		location.href='${pageContext.request.contextPath}/incident/delete/${incident.id}';
+	}	
+}
+
+</script>
 
 
 <div class="page-header padding-top-md noprint">
@@ -14,6 +22,7 @@
         <div class="display-container" style="padding-top:10px; padding-bottom:10px;">
         <c:if test="${(sessionScope.userProfile.admin || sessionScope.userProfile.manager) && !incident.approved}">
         <button class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/incident/edit/${incident.id}';">Edit Report</button>
+		<button class="btn btn-primary" onclick="deleteReport();">Delete Report</button>
         </c:if>
         <c:if test="${(sessionScope.userProfile.admin || sessionScope.userProfile.manager) && !incident.approved}">
         <button class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/incident/approve/${incident.id}';">Approve Report</button>
@@ -206,6 +215,7 @@
     <div class="col-md-12 col-lg-12 noprint">
         <div class="display-container" style="padding-top:10px; padding-bottom:10px;">
         <button class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/incident/edit/${incident.id}';">Edit Report</button>
+		<button class="btn btn-primary" onclick="deleteReport();">Delete Report</button>
         </div>
     </div>
      </c:if>
