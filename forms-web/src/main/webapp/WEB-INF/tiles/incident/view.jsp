@@ -185,7 +185,7 @@ function deleteReport() {
             <div class="row margin-bottom-lg">
 				<div class="col-md-12">
 					<div class="col-md-5">
-					<label>Report Completed By: </label>&nbsp;${incident.creator.name}
+					<label>Report Completed By: </label>&nbsp;${incident.creator!=null?incident.creator.name:incident.createdBy}
 					</div>
 					<div class="col-md-5">
 					<label>Position: </label>&nbsp;${incident.creator.position}

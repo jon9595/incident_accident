@@ -204,7 +204,7 @@ function deleteReport() {
             <div class="row margin-bottom-lg">
 				<div class="col-md-12">
 					<div class="col-md-5">
-					<label>Report Completed By: </label>&nbsp;${accident.creator.name}
+					<label>Report Completed By: </label>&nbsp;${accident.creator!=null?accident.creator.name:accident.createdBy}
 					</div>
 					<div class="col-md-5">
 					<label>Position: </label>&nbsp;${accident.creator.position}
