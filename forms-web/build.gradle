@@ -45,6 +45,7 @@ eclipse {
 }
 
 war {
+	check
 	version = project.version
 	archiveName "ROOT.war"
 	doFirst {
