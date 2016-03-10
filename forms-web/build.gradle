@@ -1,6 +1,9 @@
 apply plugin: 'war'
 apply plugin: 'eclipse-wtp'
 apply plugin: 'eclipse'
+apply plugin: 'checkstyle'
+apply plugin: 'findbugs'
+apply plugin: 'pmd'
 
 dependencies {
 	compile project(':mizzrec-api')
