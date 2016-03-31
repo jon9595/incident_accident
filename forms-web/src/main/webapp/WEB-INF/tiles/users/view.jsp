@@ -1,6 +1,14 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="html" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<script type="text/javascript">
+function deleteUser() {
+	if(confirm("Are you sure you want to delete this user?")) {
+		location.href='${pageContext.request.contextPath}/users/remove/${user.id}';
+	}	
+}
+
+</script>
 
 <div class="page-header padding-top-md noprint">
   <h1>User Profile - ${user.firstName}&nbsp;${user.lastName}</h1>
@@ -57,6 +65,9 @@
         <div class="display-container" style="padding-top:10px; padding-bottom:10px;">
         <button class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/users/edit/${user.id}';">Edit User</button>
         <button class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/users/changePasswd/${user.username}';">Change Password</button>
+    <c:if test="${sessionScope.userProfile.username != user.username}">
+        <button class="btn btn-primary" onclick="javascript:deleteUser();">Delete User</button>
+    </c:if>    
         </div>
     </div>
     </c:if>

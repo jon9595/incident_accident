@@ -137,4 +137,10 @@ public class UsersController {
 			return "redirect:/users/list";
 		}
 	}
+	
+	@RequestMapping(value="/remove/{id}")
+	public String removeUser(@PathVariable String id) {
+		usersService.deleteUsers(new Integer(id));
+		return "redirect:/users/list";
+	}
 }

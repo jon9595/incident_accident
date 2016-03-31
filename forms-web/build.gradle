@@ -34,6 +34,7 @@ dependencies {
 	providedCompile (
 		fileTree(dir: appserver7Lib, includes: ['mysql*.jar','servlet-api*.jar','javax.mail.jar']),
 	)
+	testCompile "junit:junit:4.11" 
 }
 
 eclipse {
