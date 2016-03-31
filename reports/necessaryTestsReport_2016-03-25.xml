@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns2:RepProject id="incident_accident" xmlns:ns2="http://www.junit-tools.org/ntrml/ntrml.xsd">
+    <statistics>
+        <necessaryTestClassesCounter>0</necessaryTestClassesCounter>
+        <availableTestClassesCounter>0</availableTestClassesCounter>
+        <necessaryTestMethodsCounter>0</necessaryTestMethodsCounter>
+        <availableTestMethodsCounter>0</availableTestMethodsCounter>
+        <classCoverage>100.0</classCoverage>
+        <methodCoverage>100.0</methodCoverage>
+        <newMethodsCounter>0</newMethodsCounter>
+    </statistics>
+</ns2:RepProject>
