@@ -1,6 +1,7 @@
 function setcheckboxes() {
 	//When checkboxes/radios checked/unchecked, toggle background color
 	$('.form-group').on('click','input[type=radio]',function() {
+		alert('remove class');
 	  $(this).closest('.form-group').find('.radio-inline, .radio').removeClass('checked');
 	  $(this).closest('.radio-inline, .radio').addClass('checked');
 	});
@@ -35,7 +36,12 @@ function setcheckboxes() {
 	  $(this).closest('.form-group').find('.additional-info-wrap .additional-info').addClass('hide').find('input,select').val('').attr('disabled','disabled');
 	  if($(this).closest('.additional-info-wrap').length > 0) {
 	      $(this).closest('.additional-info-wrap').find('.additional-info').removeClass('hide').find('input,select').removeAttr('disabled');
-	  }        
+	  }
+	  if($(this).is(':checked')) {
+		  $(this).closest('.radio-inline, .radio').addClass('checked');
+		  $(this).closest('.radio-inline, .radio').siblings().removeClass('checked');
+	  }
+
 	});
 }
 
@@ -77,6 +83,7 @@ function setcheckboxstate() {
 */	
 	$('input[type=radio]').each(function() {
 		  if($(this).is(':checked')) {
+			  alert('checked');
 			  $(this).closest('.radio-inline, .radio').addClass('checked');
 		  } else {
 			  $(this).closest('.radio-inline, .radio').removeClass('checked');
