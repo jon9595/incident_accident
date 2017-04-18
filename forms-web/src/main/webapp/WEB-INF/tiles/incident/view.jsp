@@ -51,7 +51,7 @@ function deleteReport() {
 					</div>
 					<div class="col-md-6 margin-bottom-sm">
 						<label class="margin-bottom-sm">Birth Date: </label>&nbsp;<fmt:formatDate value="${incident.demographics.birthDate}" pattern="MM/dd/yyyy"/><br/>
-						<label class="margin-bottom-sm">Gender:</label>&nbsp;${"M"==incident.demographics.gender?"Male":"Female"}<br/>
+						<label class="margin-bottom-sm">Gender:</label>&nbsp;${"M"==incident.demographics.gender?"Male":("O"==incident.demographics.gender?"Other":"Female")}<br/>
 						<label class="margin-bottom-sm">Res Life Student:</label>&nbsp;${"Y"==incident.demographics.resLifeStudent?"Yes":"No"}<br/>
 					</div>
 				</div>

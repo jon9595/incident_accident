@@ -1,7 +1,7 @@
 function setcheckboxes() {
 	//When checkboxes/radios checked/unchecked, toggle background color
 	$('.form-group').on('click','input[type=radio]',function() {
-		alert('remove class');
+		//alert('remove class');
 	  $(this).closest('.form-group').find('.radio-inline, .radio').removeClass('checked');
 	  $(this).closest('.radio-inline, .radio').addClass('checked');
 	});
@@ -83,7 +83,7 @@ function setcheckboxstate() {
 */	
 	$('input[type=radio]').each(function() {
 		  if($(this).is(':checked')) {
-			  alert('checked');
+			  //alert('checked');
 			  $(this).closest('.radio-inline, .radio').addClass('checked');
 		  } else {
 			  $(this).closest('.radio-inline, .radio').removeClass('checked');

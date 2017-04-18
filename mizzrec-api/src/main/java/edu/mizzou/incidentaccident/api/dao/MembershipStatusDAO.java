@@ -40,8 +40,12 @@ public class MembershipStatusDAO implements DBConstants {
             .append(", house_hold_adult " )
             .append(", other " )
             .append(", other_explain " )
+            .append(", non_student_member ")
+            .append(", guest_explain")
             .append(") VALUES ( ")
             .append(" ?")
+            .append(", ?")
+            .append(", ?")
             .append(", ?")
             .append(", ?")
             .append(", ?")
@@ -55,14 +59,16 @@ public class MembershipStatusDAO implements DBConstants {
         Object[] args = {
             bean.isStudent()?"Y":"N", 
             bean.getStudentId(), 
-            bean.isFacultyStaff()?"Y":"N", 
-            bean.isAlumni()?"Y":"N", 
+            bean.isFacultyStaff()?"N":"N", 
+            bean.isAlumni()?"N":"N", 
             bean.isGuest()?"Y":"N", 
-            bean.isTigerXpress()?"Y":"N", 
-            bean.isStopOutStudent()?"Y":"N", 
-            bean.isHouseHoldAdult()?"Y":"N", 
-            bean.isOther()?"Y":"N", 
-            bean.getOtherExplain()};
+            bean.isTigerXpress()?"N":"N", 
+            bean.isStopOutStudent()?"N":"N", 
+            bean.isHouseHoldAdult()?"N":"N", 
+            bean.isOther()?"N":"N", 
+            bean.getOtherExplain(),
+            bean.isNonStudentMember()?"Y":"N",
+            bean.getGuestExplain()};
         int numRows = getTemplate().update(sInsertStmt.toString(), args);
         return getAutoIncrementKey();
     }
@@ -81,7 +87,9 @@ public class MembershipStatusDAO implements DBConstants {
         .append(", stop_out_student = ? " )
         .append(", house_hold_adult = ? " )
         .append(", other = ? " )
-        .append(", other_explain = ? " ); 
+        .append(", other_explain = ? " )
+        .append(", non_student_member = ?")
+        .append(", guest_explain = ?"); 
         StringBuffer sWhereStmt = new StringBuffer(100);
         sWhereStmt.append(" WHERE id = ?");
         sUpdateStmt.append( sWhereStmt );
@@ -96,6 +104,8 @@ public class MembershipStatusDAO implements DBConstants {
             bean.isHouseHoldAdult()?"Y":"N", 
             bean.isOther()?"Y":"N", 
             bean.getOtherExplain(),
+            bean.isNonStudentMember()?"Y":"N",
+            bean.getGuestExplain(),
             bean.getId()};
         int numRows = getTemplate().update(sUpdateStmt.toString(), args);
         return numRows;
@@ -115,6 +125,8 @@ public class MembershipStatusDAO implements DBConstants {
         ", house_hold_adult" +
         ", other" +
         ", other_explain" +
+        ", non_student_member" +
+        ", guest_explain" +
         " from " + MEMBERSHIP_STATUS + " where id = ?";
         Object[] args = {id};
         List<MembershipStatusModel> matches = getTemplate().query(sqlString, args, new RowMapper<MembershipStatusModel>() {
@@ -131,6 +143,8 @@ public class MembershipStatusDAO implements DBConstants {
                     model.setHouseHoldAdult("Y".equals(rs.getString("house_hold_adult"))?true:false);
                     model.setOther("Y".equals(rs.getString("other"))?true:false);
                     model.setOtherExplain(rs.getString("other_explain"));
+                    model.setNonStudentMember("Y".equals(rs.getString("non_student_member"))?true:false);
+                    model.setGuestExplain(rs.getString("guest_explain"));
                 return model;
             }
         });
@@ -151,6 +165,8 @@ public class MembershipStatusDAO implements DBConstants {
         ", house_hold_adult" +
         ", other" +
         ", other_explain" +
+        ", non_student_member" +
+        ", guest_explain" +
         " from " + MEMBERSHIP_STATUS;
         return getTemplate().query(sqlString, new RowMapper<MembershipStatusModel>() {
             public MembershipStatusModel mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -166,6 +182,8 @@ public class MembershipStatusDAO implements DBConstants {
                     model.setHouseHoldAdult("Y".equals(rs.getString("house_hold_adult"))?true:false);
                     model.setOther("Y".equals(rs.getString("other"))?true:false);
                     model.setOtherExplain(rs.getString("other_explain"));
+                    model.setNonStudentMember("Y".equals(rs.getString("non_student_member"))?true:false);
+                    model.setGuestExplain(rs.getString("guest_explain"));
                 return model;
             }
         });

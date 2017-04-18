@@ -45,8 +45,12 @@ public class ProperNotificationsDAO implements DBConstants {
             .append(", prof_staff_arrived " )
             .append(", res_life_cont_email_sent " )
             .append(", res_life_cont_date_sent " )
+            .append(", mupd_contacted ")
+            .append(", rpt_filed_by")
             .append(") VALUES ( ")
             .append(" ?")
+            .append(", ?")
+            .append(", ?")
             .append(", ?")
             .append(", ?")
             .append(", ?")
@@ -75,7 +79,9 @@ public class ProperNotificationsDAO implements DBConstants {
             bean.getProfStaffCalled(), 
             bean.getProfStaffArrived(), 
             bean.getResLifeContEmailSent(), 
-            bean.getResLifeContDateSent()};
+            bean.getResLifeContDateSent(),
+            bean.getMupdContacted(),
+            bean.getReportFiledBy()};
         int numRows = getTemplate().update(sInsertStmt.toString(), args);
         return getAutoIncrementKey();
     }
@@ -100,7 +106,9 @@ public class ProperNotificationsDAO implements DBConstants {
         .append(", rpt_reviewed_by = ? " )
         .append(", rpt_reviewer_date = ? " )
         .append(", res_life_cont_email_sent = ? " )
-        .append(", res_life_cont_date_sent = ? " ); 
+        .append(", res_life_cont_date_sent = ? " )
+        .append(", mupd_contacted = ? ")
+        .append(", rpt_filed_by = ? "); 
         StringBuffer sWhereStmt = new StringBuffer(100);
         sWhereStmt.append(" WHERE id = ?");
         sUpdateStmt.append( sWhereStmt );
@@ -121,6 +129,8 @@ public class ProperNotificationsDAO implements DBConstants {
             bean.getRptReviewerDate(), 
             bean.getResLifeContEmailSent(), 
             bean.getResLifeContDateSent(),
+            bean.getMupdContacted(),
+            bean.getReportFiledBy(),
             bean.getId()};
         int numRows = getTemplate().update(sUpdateStmt.toString(), args);
         return numRows;
@@ -162,6 +172,8 @@ public class ProperNotificationsDAO implements DBConstants {
         ", rpt_reviewer_date" +
         ", res_life_cont_email_sent" +
         ", res_life_cont_date_sent" +
+        ", mupd_contacted" +
+        ", rpt_filed_by" +
         " from " + PROPER_NOTIFICATIONS + " where id = ?";
         Object[] args = {id};
         List<ProperNotificationsModel> matches = getTemplate().query(sqlString, args, new RowMapper<ProperNotificationsModel>() {
@@ -184,6 +196,8 @@ public class ProperNotificationsDAO implements DBConstants {
                     model.setRptReviewerDate(rs.getDate("rpt_reviewer_date")!=null?new java.util.Date(rs.getDate("rpt_reviewer_date").getTime()):null);
                     model.setResLifeContEmailSent(rs.getString("res_life_cont_email_sent"));
                     model.setResLifeContDateSent(rs.getDate("res_life_cont_date_sent")!=null?new java.util.Date(rs.getDate("res_life_cont_date_sent").getTime()):null);
+                    model.setMupdContacted(rs.getString("mupd_contacted"));
+                    model.setReportFiledBy(rs.getString("rpt_filed_by"));
                 return model;
             }
         });
@@ -210,6 +224,8 @@ public class ProperNotificationsDAO implements DBConstants {
         ", rpt_reviewer_date" +
         ", res_life_cont_email_sent" +
         ", res_life_cont_date_sent" +
+        ", mupd_contacted" +
+        ", rpt_filed_by" +
         " from " + PROPER_NOTIFICATIONS;
         return getTemplate().query(sqlString, new RowMapper<ProperNotificationsModel>() {
             public ProperNotificationsModel mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -231,6 +247,8 @@ public class ProperNotificationsDAO implements DBConstants {
                     model.setRptReviewerDate(rs.getDate("rpt_reviewer_date")!=null?new java.util.Date(rs.getDate("rpt_reviewer_date").getTime()):null);
                     model.setResLifeContEmailSent(rs.getString("res_life_cont_email_sent"));
                     model.setResLifeContDateSent(rs.getDate("res_life_cont_date_sent")!=null?new java.util.Date(rs.getDate("res_life_cont_date_sent").getTime()):null);
+                    model.setMupdContacted(rs.getString("mupd_contacted"));
+                    model.setReportFiledBy(rs.getString("rpt_filed_by"));
                 return model;
             }
         });

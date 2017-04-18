@@ -36,6 +36,8 @@ public class ProperNotificationsValidator implements Validator {
 			ValidationUtils.rejectIfEmptyOrWhitespace(errors, "properNotifications.profStaffName", "required", "Please specify staff member called.");
 		}
 		
+		//ValidationUtils.rejectIfEmptyOrWhitespace(errors, "properNotificatons.reportFiledBy", "required", "Please specify who filed this report");
+		
 		if (StringUtils.isNotBlank(bean.getMupdOfficerName())) {
 			ValidationUtils.rejectIfEmptyOrWhitespace(errors, "properNotifications.mupdOfficerCalledStr", "required", "Please provide a time.");
 			ValidationUtils.rejectIfEmptyOrWhitespace(errors, "properNotifications.mupdOfficerArrivedStr", "required", "Please provide a time.");

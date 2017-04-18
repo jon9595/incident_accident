@@ -1,6 +1,7 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="html" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 	            <div class="form-container padding-bottom-none">
+	            <span style="color: red;">${errMsg}</span>
 	                <fieldset><legend>Basic Information</legend>
 						<div class="row">
 						<div class="col-md-12 col-sm-12 margin-bottom-lg">
@@ -38,11 +39,11 @@
 							         <html:input type="text" class="form-control margin-bottom-md" id="name" placeholder="Name" path="demographics.name"/>
 							         <span style="color: red;"><html:errors path="demographics.name" cssClass="err" /></span>
 								  </div>
-							       <label for="address" class="col-sm-1 col-md-1 control-label">Address:</label>
+							       <label for="email" class="col-sm-1 col-md-1 control-label">Email:</label>
 						          <div class="col-sm-11 col-md-5">
-							         <html:input type="text" class="form-control" id="address" placeholder="Address" path="demographics.address"/>
-							         <span style="color: red;"><html:errors path="demographics.address" cssClass="err" /></span>
-								  </div>
+						            <span style="color: red;"><html:errors path="demographics.email" cssClass="err" /></span>
+						            <html:input type="email" class="form-control margin-bottom-md" id="email" placeholder="Email" path="demographics.email"/>
+						          </div>
 								</div>
 							</div>
 						</div>
@@ -50,14 +51,7 @@
 						<div class="row">
 							<div class="col-md-12">
 						
-						        <div class="form-group">
-						
-						          <label for="email" class="col-sm-1 col-md-1 control-label">Email:</label>
-						          <div class="col-sm-11 col-md-5">
-						            <span style="color: red;"><html:errors path="demographics.email" cssClass="err" /></span>
-						            <html:input type="email" class="form-control margin-bottom-md" id="email" placeholder="Email" path="demographics.email"/>
-						          </div>
-						
+						        <div class="form-group">						
 						          <label for="phone" class="col-sm-1 col-md-1 control-label">Phone:</label>
 						          <div class="col-sm-11 col-md-5">
 						            <span style="color: red;"><html:errors path="demographics.phone" cssClass="err" /></span>
@@ -81,21 +75,35 @@
 						              <label class="radio-inline" for="female">
 						              <html:radiobutton id="female" value="F" path="demographics.gender"/>
 						               Female
+						               </label>
+						               <label class="radio-inline" for="other_gender">
+						               <html:radiobutton id="other_gender" value="O" path="demographics.gender"/>
+						               Other/Prefer Not To Identify
 						               </label> 
 									  <span style="color: red;"><html:errors path="demographics.gender" cssClass="err" /></span>
 						            </div>
 							</div>
 							<div class="col-md-4 col-sm-12">
 							       <label class="col-md-4 col-sm-3 control-label" for="res-life">Res Life Student</label> 
-							         <div class="col-sm-2 col-md-2 col-lg-2 columns"> 
+							         <div class="col-sm-2 col-md-2 col-lg-2 columns">
+							         <span class="additional-info-wrap"> 
 							         <label class="radio-inline" for="res-life-y">
 							         <html:radiobutton id="res-life-y" value="Y" path="demographics.resLifeStudent"/>
 							         Yes
-							         </label> 
+							         </label>
+							         <div class="additional-info hide">
+							         	<html:input type="text" class="form-control" id="address-dorm" placeholder="Dorm" path="demographics.address" disabled=""/>
+							         </div>
+							         </span>
+							         <span class="additional-info-wrap"> 
 							         <label class="radio-inline" for="res-life-n">
 							         <html:radiobutton id="res-life-n" value="N" path="demographics.resLifeStudent"/>
-							               No
-							               </label> 
+							         No
+							         </label>
+							         <div class="additional-info hide">
+							         	<html:input type="text" class="form-control" id="address" placeholder="Address" path="demographics.address" disabled=""/>
+							         </div>
+							         </span> 
 									 <span style="color: red;"><html:errors path="demographics.resLifeStudent" cssClass="err" /></span>
 							       </div>
 							</div>

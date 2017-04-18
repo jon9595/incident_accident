@@ -10,7 +10,6 @@ import org.slf4j.LoggerFactory;
 
 import edu.mizzou.incidentaccident.api.common.util.DateUtil;
 import edu.mizzou.incidentaccident.api.constants.AppConstants;
-import edu.mizzou.incidentaccident.web.common.util.MailUtils;
 
 /**
  * Class: 		JSPErrorHandler.java
@@ -26,21 +25,6 @@ public class JSPErrorHandler {
 	private static String TO = "mdirks@leewardassociates.com";
 	private static String SUBJECT = "500 Error in Incident Accident Form Application";
 	
-	
-	public static String error(HttpServletRequest request, Throwable e)
-	{
-		String dateTime = DateUtil.format(new Date(), AppConstants.DATE_FORMAT_PATTERN_YYYYMMDDHMSMS);
-		String errMsg = buildErrorMessage(dateTime, request, e);
-		String body = "There has been an error processing in the Mileage Tracker software:\n\n";
-		body += errMsg+"\n\n";
-		log.error(errMsg, e);
-		try {
-			MailUtils.sendMail(TO, "noreply@mizzrec.org", SUBJECT, body, body);
-		} catch (Exception e2) {
-			log.error("Expeption sending mail from error handler: "+e2.getMessage()); 
-		}
-		return dateTime;	
-	}
 	
 	public static String debug(HttpServletRequest request, Throwable e)
 	{

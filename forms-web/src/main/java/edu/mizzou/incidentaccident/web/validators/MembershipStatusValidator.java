@@ -22,6 +22,8 @@ public class MembershipStatusValidator implements Validator {
 			errors.rejectValue("membershipStatus.membership", "required", null, "Membership Status is required.");
 		} else if (bean.isOther()) {
 			ValidationUtils.rejectIfEmptyOrWhitespace(errors, "membershipStatus.otherExplain", "required", "Please explain Other.");
+		} else if (bean.isGuest()) {
+			ValidationUtils.rejectIfEmptyOrWhitespace(errors, "membershipStatus.guestExplain", "required", "Please explain Guest Details.");
 		}
 
 	}

@@ -32,8 +32,8 @@
     <div class="row">
         <div class="col-md-12 col-lg-12">
               <html:form method="post" modelAttribute="incidentForm" action="${pageContext.request.contextPath}/incident/create" class="form-horizontal" >
-              <jsp:include page="/WEB-INF/jsp/modules/membership-status.jsp"/>
               <jsp:include page="/WEB-INF/jsp/modules/demographics.jsp"/>
+              <jsp:include page="/WEB-INF/jsp/modules/membership-status.jsp"/>
               <jsp:include page="/WEB-INF/jsp/modules/program-activity.jsp"/>
               <jsp:include page="/WEB-INF/jsp/modules/locations.jsp"/>
               <jsp:include page="/WEB-INF/jsp/modules/incident-details.jsp"/>

@@ -18,6 +18,7 @@ public class ProperNotificationsModel implements Serializable {
 
     private static Logger log = LoggerFactory.getLogger(ProperNotificationsModel.class);
     private Integer id;
+    private String mupdContacted;
     private String mupdOfficerName;
     private Date mupdOfficerCalled;
     private Date mupdOfficerArrived;
@@ -38,6 +39,7 @@ public class ProperNotificationsModel implements Serializable {
     private Date rptReviewerDate;
     private String resLifeContEmailSent;
     private Date resLifeContDateSent;
+    private String reportFiledBy;
 
     private UsersModel reviewer;
 	
@@ -48,7 +50,14 @@ public class ProperNotificationsModel implements Serializable {
     public void setId(Integer id) {
         this.id = id;
     }
-
+    
+    public String getMupdContacted() {
+    	return this.mupdContacted;
+    }
+    
+    public void setMupdContacted(String mupdContacted) {
+    	this.mupdContacted = mupdContacted;
+    }
 
     public String getMupdOfficerName() {
         return this.mupdOfficerName;
@@ -293,8 +302,15 @@ public class ProperNotificationsModel implements Serializable {
     public void setResLifeContDateSentStr(String resLifeContDateSent) {
         this.resLifeContDateSent = DateUtil.parse(resLifeContDateSent, AppConstants.DATE_FORMAT_PATTERN_MDY);
     }
-
-
+    
+    public String getReportFiledBy()
+    {
+    	return this.reportFiledBy;
+    }
+    
+    public void setReportFiledBy(String reportFiledBy) {
+    	this.reportFiledBy = reportFiledBy;
+    }
 	
     public UsersModel getReviewer() {
 		return reviewer;

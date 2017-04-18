@@ -16,6 +16,7 @@ public class MembershipStatusModel implements Serializable {
     private Integer id;
     private boolean student;
     private String studentId;
+    private boolean nonStudentMember;
     private boolean facultyStaff;
     private boolean alumni;
     private boolean guest;
@@ -24,6 +25,7 @@ public class MembershipStatusModel implements Serializable {
     private boolean houseHoldAdult;
     private boolean other;
     private String otherExplain;
+    private String guestExplain;
     private String[] membership;
 
 	
@@ -51,6 +53,14 @@ public class MembershipStatusModel implements Serializable {
 	public void setStudent(boolean student) {
 		this.student = student;
 	}
+	
+	public boolean isNonStudentMember() {
+    	return nonStudentMember;
+    }
+	
+	public void setNonStudentMember(boolean nonStudentMember) {
+		this.nonStudentMember = nonStudentMember;
+	}
 
 	public boolean isFacultyStaff() {
 		return facultyStaff;
@@ -74,6 +84,14 @@ public class MembershipStatusModel implements Serializable {
 
 	public void setGuest(boolean guest) {
 		this.guest = guest;
+	}
+	
+	public void setGuestExplain(String guestExplain) {
+		this.guestExplain = guestExplain;
+	}
+	
+	public String getGuestExplain() {
+		return this.guestExplain;
 	}
 
 	public boolean isTigerXpress() {
@@ -184,6 +202,9 @@ public class MembershipStatusModel implements Serializable {
 			case "houseHoldAdult":
 				this.houseHoldAdult = true;
 				break;
+			case "nonStudentMember":
+				this.nonStudentMember = true;
+				break;
 			case "other":
 				this.other = true;
 				break;
@@ -198,7 +219,7 @@ public class MembershipStatusModel implements Serializable {
 	public String getMembershipStatus() {
 		StringBuffer sb = new StringBuffer();
     	if (this.student) {
-			sb.append("Student");
+			sb.append("Student: " + this.studentId);
 		}
     	if (this.facultyStaff) {
     		if (!sb.toString().isEmpty()) {
@@ -216,7 +237,7 @@ public class MembershipStatusModel implements Serializable {
     		if (!sb.toString().isEmpty()) {
 				sb.append(" ");
 			}
-			sb.append("Guest");
+			sb.append("Guest: " + this.guestExplain);
 		}
     	if (this.tigerXpress) {
     		if (!sb.toString().isEmpty()) {
@@ -236,6 +257,12 @@ public class MembershipStatusModel implements Serializable {
 			}
 			sb.append("Household Adult");
 		}
+    	if (this.nonStudentMember) {
+    		if(!sb.toString().isEmpty()) {
+    			sb.append(" ");
+    		}
+    		sb.append("Non Student Member");
+    	}
     	if (this.other) {
     		if (!sb.toString().isEmpty()) {
 				sb.append(" ");

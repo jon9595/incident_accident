@@ -3,5 +3,9 @@
 /build/
 /forms-web/bin/
 /forms-web/build/
+/forms-web/src/main/webapp/META-INF/context.xml
 /mizzrec-api/bin/
 /mizzrec-api/build/
+/deploy
+vagrant.exe.lnk
+

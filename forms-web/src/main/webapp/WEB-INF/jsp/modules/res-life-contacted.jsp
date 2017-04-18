@@ -3,6 +3,7 @@
 
     <div class="form-container padding-bottom-none">
           <div class="row margin-left-sm margin-right-sm">
+          	  <legend>Professional Staff Only</legend>
  	          <div class="col-md-12">
 		          	<div class="form-group">
 			          	<div class="col-md-5 padding-top-lg padding-left-xl">
