@@ -1,6 +1,6 @@
 ![alt text](screenshots/mizzourec_logo.png "Incident Accident Report Server Home Page")
  
-#Incident Accident Report Server
+## Incident Accident Report Server ##
 
 
 This project creates a J2EE web application written in Spring MVC that records and maintains incidents and accidents that occur
