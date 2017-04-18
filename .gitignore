@@ -10,3 +10,5 @@
 vagrant.exe.lnk
 /sql
 /reports
+/deploy/install.sh
+/deploy/install2.sh
