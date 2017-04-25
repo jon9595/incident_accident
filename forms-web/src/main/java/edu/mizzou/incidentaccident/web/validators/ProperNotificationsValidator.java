@@ -22,6 +22,13 @@ public class ProperNotificationsValidator implements Validator {
 		
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "properNotifications.profStaffContacted", "required", "Please specify if Prof Staff contacted.");
 		
+		if ("Y".equals(bean.getEmsContacted())) {
+			if("N".equals(bean.getMupdContacted())) {
+				errors.rejectValue("properNotifications.mupdContacted", "required", null, "MUPD must be contacted.");
+			}
+			ValidationUtils.rejectIfEmptyOrWhitespace(errors, "properNotifications.mupdContacted", "required", "If EMS was contacted, MUPD information needs to be supplied.");
+		}
+		
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "properNotifications.emsContacted", "required", "Please specify if EMS was contacted.");
 		if ("Y".equals(bean.getEmsContacted())) {
 			ValidationUtils.rejectIfEmptyOrWhitespace(errors, "properNotifications.mupdOfficerName", "required", "Please specify the officer that responded.");
@@ -36,7 +43,7 @@ public class ProperNotificationsValidator implements Validator {
 			ValidationUtils.rejectIfEmptyOrWhitespace(errors, "properNotifications.profStaffName", "required", "Please specify staff member called.");
 		}
 		
-		//ValidationUtils.rejectIfEmptyOrWhitespace(errors, "properNotificatons.reportFiledBy", "required", "Please specify who filed this report");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "properNotifications.reportFiledBy", "required", "Please specify who filed this report");
 		
 		if (StringUtils.isNotBlank(bean.getMupdOfficerName())) {
 			ValidationUtils.rejectIfEmptyOrWhitespace(errors, "properNotifications.mupdOfficerCalledStr", "required", "Please provide a time.");
