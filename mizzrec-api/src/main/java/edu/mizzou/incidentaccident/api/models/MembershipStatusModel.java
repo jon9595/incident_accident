@@ -143,6 +143,7 @@ public class MembershipStatusModel implements Serializable {
         tigerXpress = false;
         stopOutStudent = false;
         houseHoldAdult = false;
+        nonStudentMember = false;
         other = false;
     }
 	
@@ -172,6 +173,9 @@ public class MembershipStatusModel implements Serializable {
     	if (other) {
 			list.add("other");
 		}
+    	if (nonStudentMember) {
+    		list.add("nonStudentMember");
+    	}
     	membership = list.toArray(new String[list.size()]);
 		return membership;
 	}

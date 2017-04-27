@@ -21,7 +21,7 @@ function setcheckboxes() {
 
 	$('.additional-checked-info-wrap input[type=checkbox]').click(function() {
 	  if($(this).is(':checked')) {
-	      $(this).closest('.additional-checked-info-wrap').find('.additional-checked-info').removeClass('hide').find('input,select').removeAttr('disabled');
+	      $(this).closest('.additional-checked-info-wrap').find('.additional-checked-info').removeClass('hide').find('input,select');
 	  }
 	  else {
 	  	if(!$(this).hasClass('yes-no')) {
