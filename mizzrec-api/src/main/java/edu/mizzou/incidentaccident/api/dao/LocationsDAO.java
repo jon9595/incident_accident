@@ -85,7 +85,6 @@ public class LocationsDAO implements DBConstants {
         return matches!=null&&matches.size()>0?matches.get(0):null;
     }
 
-
     public List<LocationsModel> getLocationsList() {
     String sqlString = "select " +
         "id" +
