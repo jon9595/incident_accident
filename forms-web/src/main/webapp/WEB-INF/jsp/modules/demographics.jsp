@@ -50,16 +50,18 @@
 						
 						<div class="row">
 							<div class="col-md-12">
-						
-						        <div class="form-group">						
+								<div class="form-group">						
+						          <label for="address" class="col-sm-1 col-md-1 control-label">Address:</label>
+						          <div class="col-sm-11 col-md-5">
+						          	<html:input type="text" class="form-control address" id="address" placeholder="Address/Dorm" path="demographics.address"/>
+						            <span style="color: red;"><html:errors path="demographics.address" cssClass="err" /></span>
+						          </div>				
 						          <label for="phone" class="col-sm-1 col-md-1 control-label">Phone:</label>
 						          <div class="col-sm-11 col-md-5">
 						            <span style="color: red;"><html:errors path="demographics.phone" cssClass="err" /></span>
 						            <html:input type="text" class="form-control phone" id="phone" placeholder="Phone" path="demographics.phone"/>
 						          </div>
-						
 						        </div>
-						
 							</div>
 						</div>
 						
@@ -86,24 +88,14 @@
 							<div class="col-md-4 col-sm-12">
 							       <label class="col-md-4 col-sm-3 control-label" for="res-life">Res Life Student</label> 
 							         <div class="col-sm-2 col-md-2 col-lg-2 columns">
-							         <span class="additional-info-wrap"> 
 							         <label class="radio-inline" for="res-life-y">
 							         <html:radiobutton id="res-life-y" value="Y" path="demographics.resLifeStudent"/>
 							         Yes
 							         </label>
-							         <div class="additional-info hide">
-							         	<html:input type="text" class="form-control" id="address-dorm" placeholder="Dorm" path="demographics.address" disabled=""/>
-							         </div>
-							         </span>
-							         <span class="additional-info-wrap"> 
 							         <label class="radio-inline" for="res-life-n">
 							         <html:radiobutton id="res-life-n" value="N" path="demographics.resLifeStudent"/>
 							         No
 							         </label>
-							         <div class="additional-info hide">
-							         	<html:input type="text" class="form-control" id="address" placeholder="Address" path="demographics.address" disabled=""/>
-							         </div>
-							         </span> 
 									 <span style="color: red;"><html:errors path="demographics.resLifeStudent" cssClass="err" /></span>
 							       </div>
 							</div>

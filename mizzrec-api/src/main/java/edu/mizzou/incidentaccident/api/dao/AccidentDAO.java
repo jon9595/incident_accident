@@ -243,11 +243,13 @@ public class AccidentDAO implements DBConstants {
         msModel.setFacultyStaff("Y".equals(rs.getString("ms.faculty_staff"))?true:false);
         msModel.setAlumni("Y".equals(rs.getString("ms.alumni"))?true:false);
         msModel.setGuest("Y".equals(rs.getString("ms.guest"))?true:false);
+        msModel.setGuestExplain(rs.getString("ms.guest_explain"));
         msModel.setTigerXpress("Y".equals(rs.getString("ms.tiger_xpress"))?true:false);
         msModel.setStopOutStudent("Y".equals(rs.getString("ms.stop_out_student"))?true:false);
         msModel.setHouseHoldAdult("Y".equals(rs.getString("ms.house_hold_adult"))?true:false);
         msModel.setOther("Y".equals(rs.getString("ms.other"))?true:false);
         msModel.setOtherExplain(rs.getString("ms.other_explain"));
+        msModel.setNonStudentMember("Y".equals(rs.getString("non_student_member"))?true:false);
     	ProgramActivityInvolvedModel paiModel = model.getProgramActivity();
     	paiModel.setId(rs.getInt("pai.id"));
         paiModel.setInformalActivity("Y".equals(rs.getString("pai.informal_activity"))?true:false);
