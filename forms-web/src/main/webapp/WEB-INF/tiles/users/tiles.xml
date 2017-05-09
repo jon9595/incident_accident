@@ -30,5 +30,7 @@
 	<definition name="users.changePasswd" extends="mainLayout">
 		<put-attribute name="content" value="/WEB-INF/tiles/users/changePasswd.jsp"/>
 	</definition>
+	<definition name="users.updateEmail" extends="mainLayout">
+		<put-attribute name="content" value="/WEB-INF/tiles/users/updateEmail.jsp"></put-attribute></definition>
 
 </tiles-definitions>

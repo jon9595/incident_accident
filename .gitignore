@@ -12,3 +12,5 @@ vagrant.exe.lnk
 /reports
 /deploy/install.sh
 /deploy/install2.sh
+/mizzrec-api/src/main/java/edu/mizzou/incidentaccident/api/common/util/EmailUtil.java
+

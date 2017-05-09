@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import edu.mizzou.incidentaccident.api.common.util.AppUtil;
+import edu.mizzou.incidentaccident.api.common.util.EmailUtil;
 import edu.mizzou.incidentaccident.api.dao.AccidentDAO;
 import edu.mizzou.incidentaccident.api.dao.AccidentDetailDescriptionDAO;
 import edu.mizzou.incidentaccident.api.dao.AccidentDetailsDAO;
@@ -124,6 +125,8 @@ public class AccidentService {
     public AccidentModel getAccident(Integer id) {
     	AccidentModel accident = accidentDao.getAccident(id);
     	accident = getAccidentIncidentals(accident);
+    	EmailUtil email = new EmailUtil();
+    	email.sendEmail("TEST");
     	return accident;
     }
     
