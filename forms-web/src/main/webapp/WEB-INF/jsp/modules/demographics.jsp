@@ -53,7 +53,7 @@
 								<div class="form-group">						
 						          <label for="address" class="col-sm-1 col-md-1 control-label">Address:</label>
 						          <div class="col-sm-11 col-md-5">
-						          	<html:input type="text" class="form-control address" id="address" placeholder="Address/Dorm" path="demographics.address"/>
+						          	<html:input type="text" class="form-control address" id="address" placeholder="Address/Residence Hall" path="demographics.address"/>
 						            <span style="color: red;"><html:errors path="demographics.address" cssClass="err" /></span>
 						          </div>				
 						          <label for="phone" class="col-sm-1 col-md-1 control-label">Phone:</label>
@@ -80,7 +80,7 @@
 						               </label>
 						               <label class="radio-inline" for="other_gender">
 						               <html:radiobutton id="other_gender" value="O" path="demographics.gender"/>
-						               Other/Prefer Not To Identify
+						               Preferred
 						               </label> 
 									  <span style="color: red;"><html:errors path="demographics.gender" cssClass="err" /></span>
 						            </div>

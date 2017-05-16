@@ -17,7 +17,7 @@
 
     </div>
     <div class="form-container padding-bottom-none">
-        <fieldset><legend>Team Mizzou Member Care Description</legend>
+        <fieldset><legend>MizzouRec Staff Member Care Description</legend>
           <div class="row margin-left-sm margin-right-sm">
 		  <div class="col-md-12">
           	<div class="form-group">

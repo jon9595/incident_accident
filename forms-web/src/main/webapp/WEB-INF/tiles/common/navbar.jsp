@@ -35,6 +35,8 @@
           	 	<li><a href="${pageContext.request.contextPath}/users/list"><i class="fa fa-users fa-fw"></i>&nbsp;View Users</a></li>
 	            <li class="divider"></li>
           		<li><a href="${pageContext.request.contextPath}/users/create"><i class="fa fa-user-plus fa-fw"></i>&nbsp; Create New User</a></li>
+          		<li class="divider"></li>
+          		<li><a href="${pageContext.request.contextPath}/users/updateEmail"><i class="fa fa-user-plus fa-fw"></i>&nbsp; Update Email List</a></li>
           	</ul>
           </li>
           </c:if>

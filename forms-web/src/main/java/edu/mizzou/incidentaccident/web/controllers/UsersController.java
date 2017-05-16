@@ -120,6 +120,12 @@ public class UsersController {
 		map.addAttribute("usersForm", new UsersModel());
 		return "users.create";
 	}
+	
+	@RequestMapping(value="/updateEmail", method=RequestMethod.GET)
+	public String updateEmailList(ModelMap map) {
+		map.addAttribute("usersForm", new UsersModel());
+		return "users.create";
+	}
 
 	@RequestMapping(value="/create", method=RequestMethod.POST)
 	public String saveUsersForm(@ModelAttribute("usersForm") UsersModel user, BindingResult result, ModelMap map, HttpServletRequest request) {

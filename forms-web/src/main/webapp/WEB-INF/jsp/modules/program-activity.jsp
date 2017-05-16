@@ -35,7 +35,7 @@
                          Special Event
                         </label>
                        <div class="additional-info hide">
-                        <html:input type="text" id="specEvtGroup" path="programActivity.specEvtGroup" placeholder="Group Name" class="form-control" disabled=""/>
+                        <html:input type="text" id="specEvtGroup" path="programActivity.specEvtGroup" placeholder="Event Name" class="form-control" disabled=""/>
                        </div>
                      </span> 
 
@@ -43,7 +43,7 @@
 						<span style="color: red;"><html:errors path="programActivity.clubRecTeamName" cssClass="err" /></span>
                         <label class="checkbox-inline" for="clubRecSports">
                          <html:checkbox path="programActivity.programActivity" id="clubRecSports" value="clubRecSports"/>
-                         Club
+                         Club Sports
                         </label>
                        <div class="additional-info hide">
                         <html:input type="text" id="clubRecTeamName" path="programActivity.clubRecTeamName" placeholder="Club Team Name" class="form-control" disabled=""/>
@@ -55,7 +55,7 @@
 						<span style="color: red;"><html:errors path="programActivity.tigerxPtInstructor" cssClass="err" /></span>
                        <label class="checkbox-inline" for="tigerxPt">
                          <html:checkbox path="programActivity.programActivity" id="tigerxPt" value="tigerxPt"/>
-                         Tiger X
+                         Tiger X/Personal Training/LHP
                        </label> 
                        <div class="additional-info hide">
                          <html:input type="text" id="tigerxPrgName" path="programActivity.tigerxPrgName" placeholder="Program Name" class="form-control" disabled=""/>
@@ -67,17 +67,17 @@
 
                       <label class="checkbox-inline" for="interAthletics">
                        <html:checkbox path="programActivity.programActivity" id="interAthletics" value="interAthletics"/>
-                       Intercollegiate Athletics
+                       Mizzou Swim & Dive
                       </label>
 
                       <span class="additional-info-wrap margin-bottom-sm">
 						<span style="color: red;"><html:errors path="programActivity.recTeamName" cssClass="err" /></span>
                         <label class="checkbox-inline" for="recSports">
                          <html:checkbox path="programActivity.programActivity" id="recSports" value="recSports"/>
-                         Rec Sports
+                         RecSports
                         </label>
                        <div class="additional-info hide">
-                        <html:input type="text" id="recTeamName" path="programActivity.recTeamName" placeholder="Rec Team Name" class="form-control" disabled=""/>
+                        <html:input type="text" id="recTeamName" path="programActivity.recTeamName" placeholder="RecSports Team Name" class="form-control" disabled=""/>
                        </div>
                      </span> 
 
