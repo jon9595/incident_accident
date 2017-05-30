@@ -4,6 +4,7 @@ import java.awt.image.BufferedImage;
 import java.util.List;
 
 import javax.imageio.ImageIO;
+import javax.mail.internet.InternetAddress;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import edu.mizzou.incidentaccident.api.common.util.SigGen;
 import edu.mizzou.incidentaccident.api.common.util.SignatureToImage;
 import edu.mizzou.incidentaccident.api.models.AccidentModel;
+import edu.mizzou.incidentaccident.api.models.EmailModel;
 import edu.mizzou.incidentaccident.api.models.InjuryLocationsModel;
 import edu.mizzou.incidentaccident.api.models.SignatureModel;
 import edu.mizzou.incidentaccident.api.services.AccidentDetailDescriptionService;
@@ -30,6 +32,9 @@ import edu.mizzou.incidentaccident.api.services.InjuryLocationsService;
 import edu.mizzou.incidentaccident.api.services.LocationsService;
 import edu.mizzou.incidentaccident.web.models.AccidentSearchForm;
 import edu.mizzou.incidentaccident.web.validators.AccidentValidator;
+import edu.mizzou.incidentaccident.api.common.util.EmailUtil;
+import edu.mizzou.incidentaccident.api.services.EmailService;
+import edu.mizzou.incidentaccident.api.services.UsersService;
 
 @Controller
 @RequestMapping(value="/accident")
@@ -37,6 +42,12 @@ public class AccidentController {
 
 	@Autowired
 	AccidentService accidentService;
+	
+	@Autowired
+	UsersService usersService;
+	
+	@Autowired
+	EmailService emailService;
 	
 	@Autowired
 	LocationsService locationsService;
@@ -74,6 +85,31 @@ public class AccidentController {
 		} else {
 			accident.setCreatedBy(request.getUserPrincipal().getName());
 			accidentService.addAccident(accident);
+			EmailUtil emailer = new EmailUtil();
+			if(accident.getProgramActivity().isClubRecSports()) {
+				List<EmailModel> list = emailService.getEmailList("clubsports");
+				String emailList = "";
+				for(int i = 0; i < list.size() - 1; i++) {
+					emailList += usersService.getUserEmailAddress(list.get(i).getUserId());
+					emailList += ",";
+				}
+				emailList += usersService.getUserEmailAddress(list.get(list.size() - 1).getUserId());
+				
+				emailer.sendEmail(emailList);
+				
+			}
+			if(accident.getProgramActivity().isInformalActivity()) {
+				List<EmailModel> list = emailService.getEmailList("facilities");
+				String emailList = "";
+				for(int i = 0; i < list.size() - 1; i++) {
+					emailList += usersService.getUserEmailAddress(list.get(i).getUserId());
+					emailList += ",";
+				}
+				emailList += usersService.getUserEmailAddress(list.get(list.size() - 1).getUserId());
+				
+				emailer.sendEmail(emailList);
+				
+			}
 			return "redirect:/accident/list";
 		}
 	}

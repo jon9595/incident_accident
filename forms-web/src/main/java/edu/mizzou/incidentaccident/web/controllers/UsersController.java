@@ -1,5 +1,6 @@
 package edu.mizzou.incidentaccident.web.controllers;
 
+import javax.mail.Address;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
@@ -18,6 +19,9 @@ import edu.mizzou.incidentaccident.api.models.UsersModel;
 import edu.mizzou.incidentaccident.api.services.UsersService;
 import edu.mizzou.incidentaccident.web.validators.UsersValidator;
 
+import edu.mizzou.incidentaccident.api.models.EmailModel;
+import edu.mizzou.incidentaccident.api.services.EmailService;
+
 @Controller
 @RequestMapping(value="/users")
 public class UsersController {
@@ -29,6 +33,9 @@ public class UsersController {
 	
 	@Autowired
 	private UsersValidator usersValidator;
+	
+	@Autowired
+	private EmailService emailService;
 	
 	@RequestMapping(value="/list")
 	public String getUserList(ModelMap map) {
@@ -140,14 +147,17 @@ public class UsersController {
 	
 	@RequestMapping(value="/updateEmail", method=RequestMethod.GET)
 	public String getEmailList(ModelMap map) {
-		map.addAttribute("usersForm", new UsersModel());
+		map.addAttribute("users", usersService.getUsersList());
+		map.addAttribute("emails", emailService.getEmailList());
 		return "users.updateEmail";
 	}
 	
-	//@RequestMapping(value="/updateEmail", method=RequestMethod.POST)
-	//public String updateEmailList(@ModelAttribute("emailForm") UsersModel user, BindingResult result, ModelMap map, HttpServletRequest request) {
-	//	
-	//}
+	@RequestMapping(value="/updateEmail", method=RequestMethod.POST)
+	public String updateEmailList(@ModelAttribute("emailForm") EmailModel email, BindingResult result, ModelMap map, HttpServletRequest request) {
+		emailService.addEmail(email);
+		
+		return "redirect:/users/updateEmail";
+	}
 	
 	@RequestMapping(value="/remove/{id}")
 	public String removeUser(@PathVariable String id) {

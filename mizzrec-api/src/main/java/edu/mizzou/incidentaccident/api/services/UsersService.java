@@ -50,6 +50,12 @@ public class UsersService {
     	return user;
     }
     
+    public String getUserEmailAddress(Integer id) {
+    	UsersModel user = usersDao.getUsers(id);
+    	
+    	return user.getEmail();
+    }
+    
     @Transactional(propagation=Propagation.REQUIRED)
     public int adduser(UsersModel bean) {
     	int numRows = usersDao.addUsers(bean);

@@ -25,4 +25,5 @@ public interface DBConstants {
 	public static final String USERS = "users";
 	public static final String USER_ROLES = "user_roles";
 	public static final String WITNESS_INFO = "witness_info";
+	public static final String EMAIL_LIST = "email_list";
 }
