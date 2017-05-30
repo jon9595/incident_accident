@@ -199,6 +199,20 @@ function deleteReport() {
 				</c:if>
 			</div>
         </fieldset>
+        <fieldset><legend>Athletic Trainer</legend>
+            <div class="row margin-bottom-lg">
+				<div class="col-md-12 margin-left-md">
+					<label>Athletic Trainer Contacted: </label>&nbsp;${"Y"==accident.properNotifications.athleticTrainerContacted?"Yes":"No"}
+				</div>
+				<c:if test="${'Y'==accident.properNotifications.athleticTrainerContacted}">
+					<div class="col-md-12">
+						<div class="col-md-6">
+						<label>Did the athletic trainer provide care?: </label>&nbsp;${"Y"==accident.properNotifications.athleticTrainerContacted?"Yes":"No"}
+						</div>
+					</div>
+				</c:if>
+			</div>
+        </fieldset>
         <br/>
         <fieldset><legend>Report Completion</legend>
             <div class="row margin-bottom-lg">
