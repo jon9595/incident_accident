@@ -6,15 +6,10 @@
 	              <span style="color: red;"><html:errors path="membershipStatus.membership" cssClass="err" /></span>                
 						<div class="form-group">
 							<div class="col-md-12 columns">
-								<span class="additional-info-wrap">
-									<label class="checkbox-inline" for="student">
-							            <html:checkbox path="membershipStatus.membership" id="student" value="student"/>
-							            Student
-							         </label>
-							         <div class="additional-info hide">
-							         	<html:input type="text" id="studentId" path="membershipStatus.studentId" placeholder="Provide Student ID (if available)" class="form-control" disabled=""/>
-							         </div>
-							     </span>
+								<label class="checkbox-inline" for="student">
+							    	<html:checkbox path="membershipStatus.membership" id="student" value="student"/>
+							        Student
+							        </label>
 						         <label class="checkbox-inline" for="nonStudentMember">
 						            <html:checkbox path="membershipStatus.membership" id="nonStudentMember" value="nonStudentMember " />
 						            Non-Student Member
