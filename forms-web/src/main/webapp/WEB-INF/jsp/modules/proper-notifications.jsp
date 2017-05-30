@@ -168,6 +168,40 @@
           		</div>
           		</fieldset>
           		<fieldset>
+          			<legend>Athletic Trainer&nbsp;&nbsp;</legend>
+          			<div class="row margin-left-sm">
+          			<div class="form-group">
+          			<div class="col-md-12">
+		                 <label class="control-label margin-right-lg">Athletic Trainer Contacted?</label> 
+						 <span style="color: red;"><html:errors path="properNotifications.athleticTrainerContacted" cssClass="err" /></span>
+						 <span class="additional-info-wrap">
+						 	<label class="radio-inline" for="atc-y">
+	                     	<html:radiobutton id="atc-y" value="Y" path="properNotifications.athleticTrainerContacted"/>
+	                     	Yes
+	                     	</label> 
+							<div class="additional-info hide">
+								<div class="row">
+									<label class="control-label margin-right-lg">&nbsp;&nbsp;Did the trainer provide care?</label> 
+		          					<label for="atc-care-y" class="radio-inline">
+		          					<html:radiobutton id="atc-care-y" value="Y" path="properNotifications.athleticTrainerCare" />
+		          					Yes
+		          					</label>
+		          					<label for="atc-care-n" class="radio-inline">
+		          					<html:radiobutton id="atc-care-n" value="N" path="properNotifications.athleticTrainerCare" />
+		          					No
+		          					</label>
+			          			</div>
+			          		</div>
+		          		</span>
+		          		<label class="radio-inline" for="atc-n">
+	                     <html:radiobutton id="atc-n" value="N" path="properNotifications.athleticTrainerContacted"/>
+	                     No
+	                     </label> 
+          			</div>
+          			</div>
+          		</div>
+          		</fieldset>
+          		<fieldset>
           			<legend>Report Filed By</legend>
           				<div class="row margin-left-sm">
           					<div class="form-group">

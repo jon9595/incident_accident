@@ -120,12 +120,6 @@ public class UsersController {
 		map.addAttribute("usersForm", new UsersModel());
 		return "users.create";
 	}
-	
-	@RequestMapping(value="/updateEmail", method=RequestMethod.GET)
-	public String updateEmailList(ModelMap map) {
-		map.addAttribute("usersForm", new UsersModel());
-		return "users.create";
-	}
 
 	@RequestMapping(value="/create", method=RequestMethod.POST)
 	public String saveUsersForm(@ModelAttribute("usersForm") UsersModel user, BindingResult result, ModelMap map, HttpServletRequest request) {
@@ -143,6 +137,17 @@ public class UsersController {
 			return "redirect:/users/list";
 		}
 	}
+	
+	@RequestMapping(value="/updateEmail", method=RequestMethod.GET)
+	public String getEmailList(ModelMap map) {
+		map.addAttribute("usersForm", new UsersModel());
+		return "users.updateEmail";
+	}
+	
+	//@RequestMapping(value="/updateEmail", method=RequestMethod.POST)
+	//public String updateEmailList(@ModelAttribute("emailForm") UsersModel user, BindingResult result, ModelMap map, HttpServletRequest request) {
+	//	
+	//}
 	
 	@RequestMapping(value="/remove/{id}")
 	public String removeUser(@PathVariable String id) {

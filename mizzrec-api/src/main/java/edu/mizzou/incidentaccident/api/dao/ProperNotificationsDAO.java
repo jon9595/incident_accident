@@ -46,9 +46,13 @@ public class ProperNotificationsDAO implements DBConstants {
             .append(", res_life_cont_email_sent " )
             .append(", res_life_cont_date_sent " )
             .append(", mupd_contacted ")
-            .append(", rpt_filed_by")
+            .append(", rpt_filed_by ")
+            .append(", athletic_trainer_contacted ")
+            .append(", athletic_trainer_care ")
             .append(") VALUES ( ")
             .append(" ?")
+            .append(", ?")
+            .append(", ?")
             .append(", ?")
             .append(", ?")
             .append(", ?")
@@ -81,7 +85,9 @@ public class ProperNotificationsDAO implements DBConstants {
             bean.getResLifeContEmailSent(), 
             bean.getResLifeContDateSent(),
             bean.getMupdContacted(),
-            bean.getReportFiledBy()};
+            bean.getReportFiledBy(),
+            bean.getAthleticTrainerContacted(),
+            bean.getAthleticTrainerCare()};
         int numRows = getTemplate().update(sInsertStmt.toString(), args);
         return getAutoIncrementKey();
     }
@@ -108,7 +114,9 @@ public class ProperNotificationsDAO implements DBConstants {
         .append(", res_life_cont_email_sent = ? " )
         .append(", res_life_cont_date_sent = ? " )
         .append(", mupd_contacted = ? ")
-        .append(", rpt_filed_by = ? "); 
+        .append(", rpt_filed_by = ? ")
+        .append(", athletic_trainer_contacted = ? ")
+        .append(", athletic_trainer_care = ? "); 
         StringBuffer sWhereStmt = new StringBuffer(100);
         sWhereStmt.append(" WHERE id = ?");
         sUpdateStmt.append( sWhereStmt );
@@ -131,6 +139,8 @@ public class ProperNotificationsDAO implements DBConstants {
             bean.getResLifeContDateSent(),
             bean.getMupdContacted(),
             bean.getReportFiledBy(),
+            bean.getAthleticTrainerContacted(),
+            bean.getAthleticTrainerCare(),
             bean.getId()};
         int numRows = getTemplate().update(sUpdateStmt.toString(), args);
         return numRows;
@@ -174,6 +184,8 @@ public class ProperNotificationsDAO implements DBConstants {
         ", res_life_cont_date_sent" +
         ", mupd_contacted" +
         ", rpt_filed_by" +
+        ", athletic_trainer_contacted" +
+        ", athletic_trainer_care" +
         " from " + PROPER_NOTIFICATIONS + " where id = ?";
         Object[] args = {id};
         List<ProperNotificationsModel> matches = getTemplate().query(sqlString, args, new RowMapper<ProperNotificationsModel>() {
@@ -198,6 +210,8 @@ public class ProperNotificationsDAO implements DBConstants {
                     model.setResLifeContDateSent(rs.getDate("res_life_cont_date_sent")!=null?new java.util.Date(rs.getDate("res_life_cont_date_sent").getTime()):null);
                     model.setMupdContacted(rs.getString("mupd_contacted"));
                     model.setReportFiledBy(rs.getString("rpt_filed_by"));
+                    model.setAthleticTrainerContacted(rs.getString("athletic_trainer_contacted"));
+                    model.setAthleticTrainerCare(rs.getString("athletic_trainer_care"));
                 return model;
             }
         });
@@ -226,6 +240,8 @@ public class ProperNotificationsDAO implements DBConstants {
         ", res_life_cont_date_sent" +
         ", mupd_contacted" +
         ", rpt_filed_by" +
+        ", athletic_trainer_contacted" +
+        ", athletic_trainer_care" +
         " from " + PROPER_NOTIFICATIONS;
         return getTemplate().query(sqlString, new RowMapper<ProperNotificationsModel>() {
             public ProperNotificationsModel mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -249,6 +265,8 @@ public class ProperNotificationsDAO implements DBConstants {
                     model.setResLifeContDateSent(rs.getDate("res_life_cont_date_sent")!=null?new java.util.Date(rs.getDate("res_life_cont_date_sent").getTime()):null);
                     model.setMupdContacted(rs.getString("mupd_contacted"));
                     model.setReportFiledBy(rs.getString("rpt_filed_by"));
+                    model.setAthleticTrainerContacted(rs.getString("athletic_trainer_contacted"));
+                    model.setAthleticTrainerCare(rs.getString("athletic_trainer_care"));
                 return model;
             }
         });

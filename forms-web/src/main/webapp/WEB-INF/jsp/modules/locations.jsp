@@ -10,7 +10,7 @@
 	                    <div class="form-group">
 	                      <div class="col-md-12 columns"> 
 <c:forEach items="${locations.value}" var="location">
-					<c:if test="${(location.id <= 8 || location.id >= 13) && (location.id < 19 || location.id > 23) && (location.id < 25 || location.id > 31) && (location.id < 39 || location.id > 46) && (location.id < 33 || location.id > 35) && (location.id < 51)}">
+					<c:if test="${(location.id <= 8 || location.id >= 13) && (location.id < 19 || location.id > 23) && (location.id < 25 || location.id > 31) && (location.id < 39 || location.id > 46) && (location.id < 33 || location.id > 35) && (location.id < 51 || location.id > 54)}">
                         <label class="checkbox-inline" for="location-${location.id}">
                         <html:checkbox path="locations" id="location-${location.id}" value="${location.id}"/>
                         ${location.subLocation}

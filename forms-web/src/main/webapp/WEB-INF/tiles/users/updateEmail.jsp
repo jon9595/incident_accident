@@ -6,9 +6,9 @@ $(document).ready(function(){
 });
 </script>
 
-<html:form method="post" modelAttribute="usersForm" action="${pageContext.request.contextPath}/users/create" class="form-vertical color-black" >
+<html:form method="post" modelAttribute="emailForm" action="${pageContext.request.contextPath}/users/create" class="form-vertical color-black" >
 <div class="form-container padding-bottom-none">
-    <fieldset><legend>Create New User</legend>
+    <fieldset><legend>Update Email Notifications</legend>
           <div class="row margin-left-sm margin-right-sm">
 			  <div class="col-md-12">
 			        <div class="margin-bottom-sm">

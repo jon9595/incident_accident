@@ -40,6 +40,8 @@ public class ProperNotificationsModel implements Serializable {
     private String resLifeContEmailSent;
     private Date resLifeContDateSent;
     private String reportFiledBy;
+    private String athleticTrainerContacted;
+    private String athleticTrainerCare;
 
     private UsersModel reviewer;
 	
@@ -227,7 +229,22 @@ public class ProperNotificationsModel implements Serializable {
         this.rptCmpltPosition = rptCmpltPosition;
     }
 
-
+    public String getAthleticTrainerContacted() {
+    	return athleticTrainerContacted;
+    }
+    
+    public void setAthleticTrainerContacted(String athleticTrainerContacted) {
+    	this.athleticTrainerContacted = athleticTrainerContacted;
+    }
+    
+    public String getAthleticTrainerCare() {
+    	return athleticTrainerCare;
+    }
+    
+    public void setAthleticTrainerCare(String athleticTrainerCare) {
+    	this.athleticTrainerCare = athleticTrainerCare;
+    }
+    
     public Date getRptCmpltDate() {
         return this.rptCmpltDate;
     }
