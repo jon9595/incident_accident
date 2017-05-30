@@ -32,7 +32,7 @@ function setcheckboxes() {
 
 	//Show additional info text box when relevant radio checked
 	$('input[type=radio]').click(function() {
-	  $(this).closest('.form-group').find('.additional-info-wrap .additional-info').addClass('hide').find('input,select').val('').attr('disabled','disabled');
+	  $(this).closest('.form-group').find('.additional-info-wrap .additional-info').addClass('hide').find('input,select').attr('disabled','disabled');
 	  if($(this).closest('.additional-info-wrap').length > 0) {
 	      $(this).closest('.additional-info-wrap').find('.additional-info').removeClass('hide').find('input,select').removeAttr('disabled');
 	  }        
