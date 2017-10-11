@@ -86,6 +86,7 @@ public class AccidentController {
 			accident.setCreatedBy(request.getUserPrincipal().getName());
 			accidentService.addAccident(accident);
 			EmailUtil emailer = new EmailUtil();
+			
 			if(accident.getProgramActivity().isClubRecSports()) {
 				List<EmailModel> list = emailService.getEmailList("clubsports");
 				String emailList = "";
@@ -98,7 +99,7 @@ public class AccidentController {
 				emailer.sendEmail(emailList);
 				
 			}
-			if(accident.getProgramActivity().isInformalActivity()) {
+			if(accident.getProgramActivity().isInformalActivity() || accident.getProgramActivity().isTigerxPt()) {
 				List<EmailModel> list = emailService.getEmailList("facilities");
 				String emailList = "";
 				for(int i = 0; i < list.size() - 1; i++) {
@@ -109,6 +110,42 @@ public class AccidentController {
 				
 				emailer.sendEmail(emailList);
 				
+			}
+			
+			if(accident.getProgramActivity().isRecSports()){
+				List<EmailModel> list = emailService.getEmailList("recsports");
+				String emailList = "";
+				for(int i = 0; i < list.size() - 1; i++) {
+					emailList += usersService.getUserEmailAddress(list.get(i).getUserId());
+					emailList += ",";
+				}
+				emailList += usersService.getUserEmailAddress(list.get(list.size() - 1).getUserId());
+				
+				emailer.sendEmail(emailList);
+			}
+			
+			if(accident.getProgramActivity().isSwimTeamPractice() || accident.getProgramActivity().isInterAthletics()){
+				List<EmailModel> list = emailService.getEmailList("aquatics");
+				String emailList = "";
+				for(int i = 0; i < list.size() - 1; i++) {
+					emailList += usersService.getUserEmailAddress(list.get(i).getUserId());
+					emailList += ",";
+				}
+				emailList += usersService.getUserEmailAddress(list.get(list.size() - 1).getUserId());
+				
+				emailer.sendEmail(emailList);
+			}
+			
+			if(accident.getProgramActivity().isSpecEvt()){
+				List<EmailModel> list = emailService.getEmailList("recsports");
+				String emailList = "";
+				for(int i = 0; i < list.size() - 1; i++) {
+					emailList += usersService.getUserEmailAddress(list.get(i).getUserId());
+					emailList += ",";
+				}
+				emailList += usersService.getUserEmailAddress(list.get(list.size() - 1).getUserId());
+				
+				emailer.sendEmail(emailList);
 			}
 			return "redirect:/accident/list";
 		}

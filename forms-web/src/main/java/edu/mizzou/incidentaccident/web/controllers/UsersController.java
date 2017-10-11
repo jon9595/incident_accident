@@ -159,6 +159,13 @@ public class UsersController {
 		return "redirect:/users/updateEmail";
 	}
 	
+	@RequestMapping(value="/removeEmail", method=RequestMethod.POST)
+	public String removeEmail(@ModelAttribute("emailForm") EmailModel email, BindingResult result, ModelMap map, HttpServletRequest request) {
+		emailService.deleteEmail(email.getId());
+		
+		return "redirect:/users/updateEmail";
+	}
+	
 	@RequestMapping(value="/remove/{id}")
 	public String removeUser(@PathVariable String id) {
 		usersService.deleteUsers(new Integer(id));
